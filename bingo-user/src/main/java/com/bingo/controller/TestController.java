@@ -1,6 +1,7 @@
 package com.bingo.controller;
 
 import com.bingo.utils.FileUploadUtil;
+import com.bingo.utils.VideoUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,8 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/test")
 public class TestController {
     @RequestMapping("/upload")
-    public String test(MultipartFile file, String type) {
-        String s = FileUploadUtil.uploadFile(file, type);
+    public String test(MultipartFile file) {
+        String s = VideoUtil.uploadVideo(file);
         return s;
     }
 }
