@@ -1,6 +1,5 @@
 package com.bingo.controller;
 
-import com.bingo.utils.FileUploadUtil;
 import com.bingo.utils.VideoUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

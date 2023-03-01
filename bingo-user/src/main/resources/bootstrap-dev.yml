@@ -22,8 +22,8 @@ spring:
         namespace: 993d6d11-4ad2-4a81-97c0-03db20ee88b7
         file-extension: yml
         shared-configs:
-          - data-id: ikun_mysql.yml
-          - data-id: ikun_redis.yml
+          - data-id: bingo_mysql.yml
+          - data-id: bingo_redis.yml
 
 # MyBatis-Plus
 mybatis-plus:
