@@ -19,16 +19,11 @@ public class R<T> extends AbstractMappingJacksonValue<T> implements IResult<T> {
         this.setValue(this.value);
     }
 
-
-    public static <T> R<T> succeed(T data) {
-        return succeed(data, "");
-    }
-
     public static <T> R<T> succeed(T data, String msg) {
         return new R<>(data, 200, msg);
     }
 
-    public static <T> R<T> failed(String msg) {
-        return new R<>(null, 500, msg);
+    public static <T> R<T> failed(T data, String msg) {
+        return new R<>(data, 500, msg);
     }
 }
