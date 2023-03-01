@@ -1,6 +1,32 @@
 server:
   port: 8080
+  servlet:
+    context-path: /bingo
 
 spring:
   application:
     name: bingo-user
+  # 上传video需要该配置
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+
+  cloud:
+    # Nacos
+    nacos:
+      discovery:
+        server-addr: 120.53.242.235:8848
+      config:
+        server-addr: 120.53.242.235:8848
+        namespace: 993d6d11-4ad2-4a81-97c0-03db20ee88b7
+        file-extension: yml
+        shared-configs:
+          - data-id: ikun_mysql.yml
+          - data-id: ikun_redis.yml
+
+# MyBatis-Plus
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true

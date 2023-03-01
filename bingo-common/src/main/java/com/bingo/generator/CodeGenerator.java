@@ -10,6 +10,9 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+/**
+ * 代码生成器
+ */
 @SpringBootTest
 public class CodeGenerator {
     @Test
@@ -20,7 +23,7 @@ public class CodeGenerator {
         AutoGenerator autoGenerator = new AutoGenerator();
         DataSourceConfig dataSource = new DataSourceConfig();
         dataSource.setDriverName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://120.53.242.235:3306/ikun_chicken?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false");
+        dataSource.setUrl("jdbc:mysql://120.53.242.235:3306/bingo?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false");
         dataSource.setUsername("root");
         dataSource.setPassword("root");
         autoGenerator.setDataSource(dataSource);
@@ -49,7 +52,7 @@ public class CodeGenerator {
          * 第四步：   策略设置
          */
         StrategyConfig strategyConfig = new StrategyConfig();
-        strategyConfig.setInclude("ikun_user_statistics");
+        strategyConfig.setInclude("");
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setEntityLombokModel(true);
