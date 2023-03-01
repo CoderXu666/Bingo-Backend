@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @description:
  * @Version: 1.0
  */
-@ComponentScan(basePackages = "com.bingo.*")
+@ComponentScan("com.bingo.*")
 @SpringBootApplication
 public class BingoUserApplication {
     public static void main(String[] args) {
