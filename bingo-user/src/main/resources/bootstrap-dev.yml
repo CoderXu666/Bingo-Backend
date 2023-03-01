@@ -13,10 +13,11 @@ spring:
       max-request-size: 1024MB
 
   cloud:
-    # Nacos
+    # Nacos注册、配置
     nacos:
       discovery:
         server-addr: 120.53.242.235:8848
+        namespace: 993d6d11-4ad2-4a81-97c0-03db20ee88b7
       config:
         server-addr: 120.53.242.235:8848
         namespace: 993d6d11-4ad2-4a81-97c0-03db20ee88b7
