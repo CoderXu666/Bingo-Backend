@@ -6,11 +6,11 @@ import lombok.ToString;
 import java.util.Map;
 
 @ToString
-public class Bingo<T> extends AbstractMappingJacksonValue<T> implements IResult<T> {
+public class R<T> extends AbstractMappingJacksonValue<T> implements IResult<T> {
 
     private Map<String, Object> value;
 
-    public Bingo(T data, long code, String msg) {
+    public R(T data, long code, String msg) {
         super(data);
         this.value = Maps.newHashMap();
         this.value.put(RESP_CODE, code);
@@ -20,15 +20,15 @@ public class Bingo<T> extends AbstractMappingJacksonValue<T> implements IResult<
     }
 
 
-    public static <T> Bingo<T> succeed(T data) {
+    public static <T> R<T> succeed(T data) {
         return succeed(data, "");
     }
 
-    public static <T> Bingo<T> succeed(T data, String msg) {
-        return new Bingo<>(data, 200, msg);
+    public static <T> R<T> succeed(T data, String msg) {
+        return new R<>(data, 200, msg);
     }
 
-    public static <T> Bingo<T> failed(String msg) {
-        return new Bingo<>(null, 500, msg);
+    public static <T> R<T> failed(String msg) {
+        return new R<>(null, 500, msg);
     }
 }
