@@ -19,9 +19,9 @@
     </modules>
 
     <groupId>com.bingo</groupId>
-    <artifactId>bingo-parent</artifactId>
+    <artifactId>Bingo-Backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>bingo-parent</name>
+    <name>Bingo-Backend</name>
     <packaging>pom</packaging>
 
     <properties>
