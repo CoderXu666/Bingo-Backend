@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @description:
  * @Version: 1.0
  */
+
 @SpringBootApplication
 public class BingoUserApplication {
     public static void main(String[] args) {
