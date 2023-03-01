@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bingo-chat" />
+        <module name="bingo-user" />
+        <module name="bingo-common" />
+        <module name="bingo-community" />
+        <module name="bingo-shop" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bingo-chat" target="1.8" />
+      <module name="bingo-common" target="1.8" />
+      <module name="bingo-community" target="1.8" />
+      <module name="bingo-parent" target="1.8" />
+      <module name="bingo-shop" target="1.8" />
+      <module name="bingo-user" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="bingo-chat" options="-parameters" />
+      <module name="bingo-common" options="-parameters" />
+      <module name="bingo-community" options="-parameters" />
+      <module name="bingo-parent" options="-parameters" />
+      <module name="bingo-shop" options="-parameters" />
+      <module name="bingo-user" options="-parameters" />
+    </option>
+  </component>
+</project>

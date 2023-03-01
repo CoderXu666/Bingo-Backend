@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bingo-chat/bingo-chat.iml" filepath="$PROJECT_DIR$/bingo-chat/bingo-chat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bingo-common/bingo-common.iml" filepath="$PROJECT_DIR$/bingo-common/bingo-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bingo-community/bingo-community.iml" filepath="$PROJECT_DIR$/bingo-community/bingo-community.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bingo-parent.iml" filepath="$PROJECT_DIR$/bingo-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bingo-shop/bingo-shop.iml" filepath="$PROJECT_DIR$/bingo-shop/bingo-shop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bingo-user/bingo-user.iml" filepath="$PROJECT_DIR$/bingo-user/bingo-user.iml" />
+    </modules>
+  </component>
+</project>
