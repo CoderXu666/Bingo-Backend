@@ -3,9 +3,11 @@ package com.bingo.store.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bingo.constant.CachePartition;
 import com.bingo.mapper.BingoUserMapper;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.store.BingoUserStore;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,11 +23,9 @@ public class BingoUserStoreImpl extends ServiceImpl<BingoUserMapper, BingoUser> 
 
     /**
      * 根据userName查询用户信息
-     *
-     * @param userName
-     * @return
      */
     @Override
+    @Cacheable(value = CachePartition.BINGO_USER, key = "#userName")
     public BingoUser findUserInfo(String userName) {
         QueryWrapper<BingoUser> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name", userName);

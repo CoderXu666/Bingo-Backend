@@ -23,10 +23,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser> implements BingoUserService {
-
     @Autowired
     private BingoUserStatisticsStore bingoUserStatisticsStore;
-
     @Autowired
     private BingoUserStore bingoUserStore;
 

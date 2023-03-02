@@ -2,14 +2,16 @@ package com.bingo.store.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bingo.constant.CachePartition;
 import com.bingo.mapper.BingoUserStatisticsMapper;
 import com.bingo.pojo.po.BingoUserStatistics;
 import com.bingo.store.BingoUserStatisticsStore;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author 徐志斌
@@ -20,14 +22,12 @@ public class BingoUserStatisticsStoreImpl extends ServiceImpl<BingoUserStatistic
 
     /**
      * 根据userName查询用户信息
-     *
-     * @param userName
-     * @return
      */
     @Override
+    @Cacheable(value = CachePartition.BINGO_USER_STATISTICS, key = "#userName")
     public BingoUserStatistics findUserSta(String userName) {
         QueryWrapper<BingoUserStatistics> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_name",userName);
+        queryWrapper.eq("user_name", userName);
         BingoUserStatistics bingoUserStatistics = this.getOne(queryWrapper);
         return bingoUserStatistics;
     }
