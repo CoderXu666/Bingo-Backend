@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * Caffeine配置类
  */
 @Configuration
-public class CacheConfig {
+public class CaffeineConfig {
     @Bean
     public Cache<String, Object> caffeineCache() {
         return Caffeine.newBuilder()
