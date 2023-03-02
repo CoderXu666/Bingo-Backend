@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
@@ -29,8 +30,10 @@ import java.util.concurrent.TimeUnit;
 @Component
 @AllArgsConstructor
 public class CacheAspect {
-    private final Cache cache;
-    private final RedisTemplate redisTemplate;
+    @Autowired
+    private Cache cache;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 切入点：注解
@@ -46,7 +49,6 @@ public class CacheAspect {
     public Object doAround(ProceedingJoinPoint point) throws Throwable {
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();
-
         String[] paramNames = signature.getParameterNames();
         Object[] args = point.getArgs();
         TreeMap<String, Object> treeMap = new TreeMap<>();

@@ -12,11 +12,23 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface DoubleCache {
+    /**
+     * 缓存分区名
+     */
     String cacheName();
 
+    /**
+     * 缓存的key
+     */
     String key();
 
+    /**
+     * 缓存过期时间
+     */
     long l2TimeOut() default 120;
 
+    /**
+     * 操作类型：具体参考CacheType
+     */
     CacheType type() default CacheType.FULL;
 }
