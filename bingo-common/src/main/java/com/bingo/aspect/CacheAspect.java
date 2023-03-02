@@ -47,7 +47,6 @@ public class CacheAspect {
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();
 
-        // 拼接解析springEl表达式的map
         String[] paramNames = signature.getParameterNames();
         Object[] args = point.getArgs();
         TreeMap<String, Object> treeMap = new TreeMap<>();
@@ -55,10 +54,12 @@ public class CacheAspect {
             treeMap.put(paramNames[i], args[i]);
         }
 
+        // 通过反射，拿到方法上的DoubleCache注解
         DoubleCache annotation = method.getAnnotation(DoubleCache.class);
+        // 解析出 key
         String elResult = parse(annotation.key(), treeMap);
-        // TODO + CacheConstant.COLON
-        String realKey = annotation.cacheName() + elResult;
+        // realKey = 缓存分区名 + key
+        String realKey = annotation.cacheName() + ":" + elResult;
 
         // 如果是删除操作，那就删除；如果不是删除，那就是查询咯！
         if (annotation.type() == CacheType.DELETE) {
