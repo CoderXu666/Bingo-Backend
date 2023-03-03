@@ -33,4 +33,12 @@ public class BingoUserStoreImpl extends ServiceImpl<BingoUserMapper, BingoUser> 
         BingoUser bingoUser = this.getOne(queryWrapper);
         return bingoUser;
     }
+
+    /**
+     * 修改用户信息
+     */
+    @Override
+    public Boolean updateUser(BingoUser user) {
+        return null;
+    }
 }
