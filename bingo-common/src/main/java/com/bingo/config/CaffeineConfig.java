@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * @Author 徐志斌
  * Caffeine配置类
  */
 @Configuration

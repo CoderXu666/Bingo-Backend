@@ -3,6 +3,7 @@ package com.bingo.constant;
 import lombok.Data;
 
 /**
+ * @Author 徐志斌
  * SpringCache注解对应的缓存分区
  * <p>
  * 注意：优先作用于Redis，其次才是Caffeine

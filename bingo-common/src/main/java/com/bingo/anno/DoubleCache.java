@@ -6,6 +6,7 @@ import com.bingo.enums.CacheType;
 import java.lang.annotation.*;
 
 /**
+ * @Author 徐志斌
  * 自定义的SpringCache注解：可以统一完成二级缓存的操作
  */
 @Target(ElementType.METHOD)

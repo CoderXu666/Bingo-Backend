@@ -1,6 +1,7 @@
 package com.bingo.enums;
 
 /**
+ * @Author 徐志斌
  * DoubleCache操作类型
  */
 public enum CacheType {

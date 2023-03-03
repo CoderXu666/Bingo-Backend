@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 /**
+ * @Author 徐志斌
  * 代码生成器
  */
 public class CodeGenerator {
