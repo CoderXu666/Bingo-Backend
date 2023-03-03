@@ -14,6 +14,7 @@
         <module>bingo-common</module>
         <module>bingo-user</module>
         <module>bingo-community</module>
+        <module>bingo-party</module>
         <module>bingo-shop</module>
         <module>bingo-chat</module>
     </modules>
