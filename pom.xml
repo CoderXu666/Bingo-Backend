@@ -11,12 +11,13 @@
     </parent>
 
     <modules>
+        <module>bingo-chat</module>
         <module>bingo-common</module>
-        <module>bingo-user</module>
         <module>bingo-community</module>
         <module>bingo-party</module>
+        <module>bingo-recharge</module>
         <module>bingo-shop</module>
-        <module>bingo-chat</module>
+        <module>bingo-user</module>
     </modules>
 
     <groupId>com.bingo</groupId>
