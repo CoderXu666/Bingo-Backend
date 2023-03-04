@@ -13,13 +13,19 @@
 	<artifactId>bingo-community</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>bingo-community</name>
-	<description>Demo project for Spring Boot</description>
 
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
+		<!--bingo-common-->
+		<dependency>
+			<groupId>com.bingo</groupId>
+			<artifactId>bingo-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -29,6 +35,55 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<!--ShardingSphere-->
+		<dependency>
+			<groupId>org.apache.shardingsphere</groupId>
+			<artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+		</dependency>
+
+		<!--lombok-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+
+		<!--Mybatis-Plus-->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+		</dependency>
+
+		<!--MySQL-->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<!--Nacos-->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.boot</groupId>
+			<artifactId>nacos-discovery-spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.boot</groupId>
+			<artifactId>nacos-config-spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+		</dependency>
+
+		<!--Druid-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>1.1.20</version>
 		</dependency>
 	</dependencies>
 

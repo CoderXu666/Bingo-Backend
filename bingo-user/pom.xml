@@ -18,6 +18,7 @@
 	</properties>
 
 	<dependencies>
+		<!--bingo-common-->
 		<dependency>
 			<groupId>com.bingo</groupId>
 			<artifactId>bingo-common</artifactId>
