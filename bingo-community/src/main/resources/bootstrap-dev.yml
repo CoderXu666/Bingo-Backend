@@ -43,7 +43,11 @@ spring:
           table-strategy:
             inline:
               sharding-column: id
-              algorithm-expression: bingo_post_${id.longValue() % 2}
+              algorithm-expression: bingo_post_${id.longValue() % 3}
+    # 打印SQL日志
+    props:
+      sql:
+        show: true
 
 
 # MyBatis-Plus
