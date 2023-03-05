@@ -4,18 +4,20 @@ server:
     context-path: /bingo
 
 spring:
+  # 应用名称
   application:
     name: bingo-community
-  # 后来发现的bean会覆盖之前相同名称的bean
-  # A bean with that name has already been defined in class path resource [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class] and overriding is disabled.
+  # 允许数据源覆盖
   main:
     allow-bean-definition-overriding: true
-  # Nacos注册、配置
   cloud:
+    # Nacos
     nacos:
+      # 1.注册中心
       discovery:
         server-addr: 120.53.242.235:8848
         namespace: 993d6d11-4ad2-4a81-97c0-03db20ee88b7
+      # 2.配置中心
       config:
         server-addr: 120.53.242.235:8848
         namespace: 993d6d11-4ad2-4a81-97c0-03db20ee88b7
@@ -24,9 +26,8 @@ spring:
           - data-id: bingo_mysql.yml
           - data-id: bingo_redis.yml
 
-  # sharding-jdbc
   shardingsphere:
-    # 数据源
+    # 1.数据源（数据库）
     datasource:
       names: bingo
       bingo:
@@ -35,16 +36,22 @@ spring:
         url: jdbc:mysql://120.53.242.235:3306/bingo?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false
         username: root
         password: root
-    # 配置
+    # 2.配置
     sharding:
       tables:
+        # 逻辑表名
         bingo_post:
-          actual-data-nodes: bingo.bingo_post_${0..2}
+          actual-data-nodes: bingo.bingo_post_$->{0..2}
+          # 配置策略
           table-strategy:
             inline:
               sharding-column: id
-              algorithm-expression: bingo_post_${id.longValue() % 3}
-    # 打印SQL日志
+              algorithm-expression: bingo_post_$->{Long.valueOf(id) % 3}
+          # 主键生成策略
+          key-generate-strategy:
+            column: id
+            key-generator-name: snowflake  # 策略算法名称(推荐使用雪花算法)
+    # 3.打印SQL日志
     props:
       sql:
         show: true

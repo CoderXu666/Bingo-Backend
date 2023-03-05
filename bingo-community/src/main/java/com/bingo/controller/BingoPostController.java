@@ -5,9 +5,12 @@ import com.bingo.pojo.po.BingoPost;
 import com.bingo.resp.R;
 import com.bingo.service.BingoPostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -26,12 +29,19 @@ public class BingoPostController {
     @PostMapping("/save")
     public R save() {
         BingoPost bingoPost = new BingoPost();
+//        bingoPost.setId("fjoidsfjoisdfjosdoi");
         bingoPost.setPostFont("fjoidsjfdsifojs");
         bingoPost.setLikeCount(1111);
         bingoPost.setPostUrl("hdiofihodsfodsiofio");
         bingoPost.setUserName("徐志斌");
         boolean save = postService.saveInfo(bingoPost);
         return R.succeed(null, "操作成功");
+    }
+
+    @GetMapping("list")
+    public R list() {
+        List<BingoPost> list = postService.list();
+        return R.succeed(list, "null");
     }
 }
 
