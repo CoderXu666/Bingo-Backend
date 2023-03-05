@@ -39,6 +39,12 @@
             <version>1.18.26</version>
         </dependency>
 
+        <!--Kafka-->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
         <!--Mybatis-Plus-->
         <dependency>
             <groupId>com.baomidou</groupId>
