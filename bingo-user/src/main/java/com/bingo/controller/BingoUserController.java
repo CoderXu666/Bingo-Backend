@@ -37,7 +37,7 @@ public class BingoUserController {
             BingoUserVO bingoUserVO = bingoUserService.findUserInfo(userName);
             return R.succeed(bingoUserVO, "操作成功");
         } catch (Exception e) {
-            return R.failed("", "操作失败");
+            return R.failed(e, "操作失败");
         }
     }
 

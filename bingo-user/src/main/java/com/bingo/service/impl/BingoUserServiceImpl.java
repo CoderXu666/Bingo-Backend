@@ -9,6 +9,7 @@ import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoUserService;
 import com.bingo.store.BingoUserStatisticsStore;
 import com.bingo.store.BingoUserStore;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,8 +40,12 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         BingoUserVO bingoUserVO = new BingoUserVO();
         BingoUser bingoUser = bingoUserStore.findUserInfo(userName);
         BingoUserStatistics bingoUserStatistics = bingoUserStatisticsStore.findUserSta(userName);
-        BeanUtils.copyProperties(bingoUser, bingoUserVO);
-        BeanUtils.copyProperties(bingoUserStatistics, bingoUserVO);
+        if (ObjectUtils.isNotEmpty(bingoUser)) {
+            BeanUtils.copyProperties(bingoUser, bingoUserVO);
+        }
+        if (ObjectUtils.isNotEmpty(bingoUserStatistics)) {
+            BeanUtils.copyProperties(bingoUserStatistics, bingoUserVO);
+        }
         return bingoUserVO;
     }
 }

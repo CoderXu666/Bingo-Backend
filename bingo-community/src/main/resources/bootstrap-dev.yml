@@ -25,37 +25,7 @@ spring:
         shared-configs:
           - data-id: bingo_mysql.yml
           - data-id: bingo_redis.yml
-
-  shardingsphere:
-    # 1.数据源（数据库）
-    datasource:
-      names: bingo
-      bingo:
-        type: com.alibaba.druid.pool.DruidDataSource
-        driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://120.53.242.235:3306/bingo?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false
-        username: root
-        password: root
-    # 2.配置
-    sharding:
-      tables:
-        # 逻辑表名
-        bingo_post:
-          actual-data-nodes: bingo.bingo_post_$->{0..2}
-          # 配置策略
-          table-strategy:
-            inline:
-              sharding-column: id
-              algorithm-expression: bingo_post_$->{Long.valueOf(id) % 3}
-          # 主键生成策略
-          key-generate-strategy:
-            column: id
-            key-generator-name: snowflake  # 策略算法名称(推荐使用雪花算法)
-    # 3.打印SQL日志
-    props:
-      sql:
-        show: true
-
+          - data-id: bingo-sharding-jdbc.yml
 
 # MyBatis-Plus
 mybatis-plus:
