@@ -16,11 +16,11 @@ spring:
     # Nacos注册、配置
     nacos:
       discovery:
-        server-addr: 120.53.242.235:8848
-        namespace: 993d6d11-4ad2-4a81-97c0-03db20ee88b7
+        server-addr: 101.42.13.186:8848
+        namespace: ac6195e1-df2e-4f9f-a978-0702f35a9df6
       config:
-        server-addr: 120.53.242.235:8848
-        namespace: 993d6d11-4ad2-4a81-97c0-03db20ee88b7
+        server-addr: 101.42.13.186:8848
+        namespace: ac6195e1-df2e-4f9f-a978-0702f35a9df6
         file-extension: yml
         shared-configs:
           - data-id: bingo_mysql.yml
