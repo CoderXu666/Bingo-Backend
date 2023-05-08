@@ -1,6 +1,7 @@
 package com.bingo.controller;
 
 
+import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.po.BingoPost;
 import com.bingo.resp.R;
 import com.bingo.service.BingoPostService;
@@ -35,13 +36,13 @@ public class BingoPostController {
         bingoPost.setPostUrl("hdiofihodsfodsiofio");
         bingoPost.setUserName("徐志斌");
         boolean save = postService.saveInfo(bingoPost);
-        return R.succeed(null, "操作成功");
+        return R.out(RespCodeEnum.SUCCESS, "操作成功");
     }
 
     @GetMapping("list")
     public R list() {
         List<BingoPost> list = postService.list();
-        return R.succeed(list, "null");
+        return R.out(RespCodeEnum.SUCCESS, list);
     }
 }
 

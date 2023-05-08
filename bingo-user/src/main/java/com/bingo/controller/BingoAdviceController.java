@@ -1,17 +1,15 @@
 package com.bingo.controller;
 
 
+import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.dto.BingoAdviceDTO;
 import com.bingo.resp.R;
 import com.bingo.service.BingoAdviceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
 
 /**
  * <p>
@@ -30,15 +28,16 @@ public class BingoAdviceController {
 
     /**
      * 保存建议和评价
+     *
      * @return
      */
     @PostMapping("save")
     public R saveAdvice(@RequestBody BingoAdviceDTO adviceDTO) {
         try {
             bingoAdviceService.saveAdvice(adviceDTO);
-            return R.succeed("", "保存成功");
+            return R.out(RespCodeEnum.SUCCESS, "保存成功");
         } catch (Exception e) {
-            return R.failed(e, "操作失败");
+            return R.out(RespCodeEnum.FAIL, "操作失败");
         }
     }
 }

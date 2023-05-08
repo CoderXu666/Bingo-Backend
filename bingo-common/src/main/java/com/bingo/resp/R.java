@@ -1,29 +1,34 @@
 package com.bingo.resp;
 
-import com.google.common.collect.Maps;
-import lombok.ToString;
+import com.bingo.enums.RespCodeEnum;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Map;
+/**
+ * @Author 徐志斌
+ * @Date: 2023/5/8 21:59
+ * @Version 1.0
+ * @Description: R
+ */
+@Getter
+@Setter
+public class R<T> extends BaseResponse {
+    private T data;
 
-@ToString
-public class R<T> extends AbstractMappingJacksonValue<T> implements IResult<T> {
-
-    private Map<String, Object> value;
-
-    public R(T data, long code, String msg) {
-        super(data);
-        this.value = Maps.newHashMap();
-        this.value.put(RESP_CODE, code);
-        this.value.put(RESP_MSG, msg);
-        this.value.put(DATA, data);
-        this.setValue(this.value);
+    private R(RespCodeEnum code) {
+        super(code);
     }
 
-    public static <T> R<T> succeed(T data, String msg) {
-        return new R<>(data, 200, msg);
+    private R(RespCodeEnum code, T data) {
+        super(code);
+        this.data = data;
     }
 
-    public static <T> R<T> failed(T data, String msg) {
-        return new R<>(data, 500, msg);
+    public static BaseResponse out(RespCodeEnum code) {
+        return new BaseResponse(code);
+    }
+
+    public static <T> R<T> out(RespCodeEnum code, T data) {
+        return new R<>(code, data);
     }
 }

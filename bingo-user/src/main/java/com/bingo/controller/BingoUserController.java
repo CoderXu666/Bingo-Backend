@@ -1,6 +1,7 @@
 package com.bingo.controller;
 
 
+import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.resp.R;
@@ -35,9 +36,9 @@ public class BingoUserController {
     public R findUserInfo(String userName) {
         try {
             BingoUserVO bingoUserVO = bingoUserService.findUserInfo(userName);
-            return R.succeed(bingoUserVO, "操作成功");
+            return R.out(RespCodeEnum.SUCCESS, bingoUserVO);
         } catch (Exception e) {
-            return R.failed(e, "操作失败");
+            return R.out(RespCodeEnum.FAIL, "操作失败");
         }
     }
 
@@ -51,9 +52,9 @@ public class BingoUserController {
     public R updateUserInfo(@RequestBody BingoUser user) {
         try {
             bingoUserStore.updateUser(user);
-            return R.succeed("bingoUserVO", "操作成功");
+            return R.out(RespCodeEnum.SUCCESS, "操作成功");
         } catch (Exception e) {
-            return R.failed("", "操作失败");
+            return R.out(RespCodeEnum.FAIL, "操作失败");
         }
     }
 }
