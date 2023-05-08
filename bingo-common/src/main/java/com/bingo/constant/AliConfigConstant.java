@@ -18,10 +18,4 @@ public class AliConfigConstant {
      */
     public static final String END_POINT = "oss-cn-beijing.aliyuncs.com";
     public static final String BUCKET_NAME = "xuzhibin-bucket";
-
-    /**
-     * ----------------------------短信------------------------------
-     */
-    public static final String SIGN_NAME = "全民制作人";
-    public static final String TEMPLATE_CODE = "SMS_271485460";
 }
