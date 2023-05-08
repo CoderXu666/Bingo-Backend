@@ -39,6 +39,13 @@
             <version>1.18.26</version>
         </dependency>
 
+        <!--JJWT-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
         <!--Kafka-->
         <dependency>
             <groupId>org.springframework.kafka</groupId>
