@@ -1,13 +1,14 @@
 package com.bingo.config;
 
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.math.BigInteger;
@@ -19,6 +20,7 @@ import java.util.List;
  * 解决前后端跨域配置类
  */
 @Configuration
+@EnableWebMvc
 public class MyWebMvcConfig implements WebMvcConfigurer {
     /**
      * 解决前后端跨域问题

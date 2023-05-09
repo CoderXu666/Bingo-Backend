@@ -39,6 +39,13 @@
             <version>1.18.26</version>
         </dependency>
 
+        <!--XXL-JOB-->
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
         <!--JJWT-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

@@ -1,7 +1,7 @@
 server:
   port: 8080
   servlet:
-    context-path: /bingo
+    context-path: /api
 
 spring:
   application:
@@ -25,6 +25,20 @@ spring:
         shared-configs:
           - data-id: bingo_mysql.yml
           - data-id: bingo_redis.yml
+
+# XXL-JOB
+xxl:
+  job:
+    accessToken: Lpoms_xxljob_default_token
+    admin:
+      addresses: http://101.42.13.186:8800/xxl-job-admin/
+    executor:
+      address: http://pxydl.pingxingyun.cn:9998
+      appname: xxl-job-executor-sample
+      ip: ''
+      logpath: /data/xxl-job-admin/logs
+      logretentiondays: 30
+      port: 8800
 
 # MyBatis-Plus
 mybatis-plus:
