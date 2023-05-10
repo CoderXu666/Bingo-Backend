@@ -3,7 +3,7 @@
 //import com.aliyun.vod.upload.impl.UploadVideoImpl;
 //import com.aliyun.vod.upload.req.UploadStreamRequest;
 //import com.aliyun.vod.upload.resp.UploadStreamResponse;
-//import com.bingo.constant.AliConfigConstant;
+//import com.bingo.constant.ConfigConstant;
 //import org.springframework.web.multipart.MultipartFile;
 //
 //import java.io.InputStream;
@@ -28,8 +28,8 @@
 //            InputStream inputStream = file.getInputStream();
 //            UploadStreamRequest request =
 //                    new UploadStreamRequest(
-//                            AliConfigConstant.ACCESS_KEY_ID,
-//                            AliConfigConstant.ACCESS_KEY_SECRET,
+//                            ConfigConstant.ACCESS_KEY_ID,
+//                            ConfigConstant.ACCESS_KEY_SECRET,
 //                            title, fileName, inputStream);
 //            UploadVideoImpl uploader = new UploadVideoImpl();
 //            UploadStreamResponse response = uploader.uploadStream(request);

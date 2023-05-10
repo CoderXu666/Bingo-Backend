@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2023-03-01
  */
 @RestController
-@RequestMapping("/bingoUserStatistics")
+@RequestMapping("/statistics")
 public class BingoUserStatisticsController {
 
 }

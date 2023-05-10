@@ -6,16 +6,12 @@ package com.bingo.constant;
  * @description: 阿里Api配置信息常量类
  * @Version: 1.0
  */
-public class AliConfigConstant {
+public class ConfigConstant {
     /**
      * ----------------------------通用------------------------------
      */
     public static final String ACCESS_KEY_ID = "LTAI5tJcYJpsTAu8ZAiFxwfh";
     public static final String ACCESS_KEY_SECRET = "Q8KbPySLcUdXLUQdycqMJoUKpE31h1";
-
-    /**
-     * ----------------------------OSS------------------------------
-     */
     public static final String END_POINT = "oss-cn-beijing.aliyuncs.com";
     public static final String BUCKET_NAME = "xuzhibin-bucket";
 }

@@ -43,7 +43,7 @@ public class BingoUserController {
     }
 
     /**
-     * 根据userName查询用户信息
+     * 修改用户信息
      */
     @PostMapping("update")
     public R updateUserInfo(@RequestBody BingoUser user) {

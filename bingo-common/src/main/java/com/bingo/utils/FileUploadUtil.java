@@ -2,7 +2,7 @@ package com.bingo.utils;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
-import com.bingo.constant.AliConfigConstant;
+import com.bingo.constant.ConfigConstant;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
@@ -24,10 +24,10 @@ public class FileUploadUtil {
      */
     public static String uploadFile(MultipartFile file, String type) {
         // 初始化OSS参数
-        String endPoint = AliConfigConstant.END_POINT;
-        String accessKeyId = AliConfigConstant.ACCESS_KEY_ID;
-        String accessKeySecret = AliConfigConstant.ACCESS_KEY_SECRET;
-        String bucketName = AliConfigConstant.BUCKET_NAME;
+        String endPoint = ConfigConstant.END_POINT;
+        String accessKeyId = ConfigConstant.ACCESS_KEY_ID;
+        String accessKeySecret = ConfigConstant.ACCESS_KEY_SECRET;
+        String bucketName = ConfigConstant.BUCKET_NAME;
 
         try {
             // 创建OSSClient实例
