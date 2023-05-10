@@ -17,7 +17,6 @@ import java.util.List;
 
 /**
  * @Author 徐志斌
- * 解决前后端跨域配置类
  */
 @Configuration
 @EnableWebMvc

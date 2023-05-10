@@ -6,7 +6,6 @@ server:
 spring:
   application:
     name: bingo-user
-  # 上传video需要该配置
   servlet:
     multipart:
       max-file-size: 10MB
@@ -29,16 +28,16 @@ spring:
 # XXL-JOB https://blog.csdn.net/forever_xw_/article/details/120994744
 xxl:
   job:
-    accessToken: Lpoms_xxljob_default_token
     admin:
       addresses: http://101.42.13.186:8800/xxl-job-admin
     executor:
-      address:
+      address: http://101.42.13.186:8800
       appname: xxl-job-executor-sample
       ip: ''
       logpath: /data/xxl-job-admin/logs
       logretentiondays: -1
       port: 9999
+    accessToken: Lpoms_xxljob_default_token
 
 # MyBatis-Plus
 mybatis-plus:
