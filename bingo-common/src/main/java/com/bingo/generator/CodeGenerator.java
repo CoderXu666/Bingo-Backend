@@ -20,7 +20,7 @@ public class CodeGenerator {
         AutoGenerator autoGenerator = new AutoGenerator();
         DataSourceConfig dataSource = new DataSourceConfig();
         dataSource.setDriverName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://120.53.242.235:3306/bingo?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false");
+        dataSource.setUrl("jdbc:mysql://101.42.13.186:3306/bingo?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false");
         dataSource.setUsername("root");
         dataSource.setPassword("root");
         autoGenerator.setDataSource(dataSource);
