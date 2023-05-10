@@ -25,13 +25,13 @@ spring:
           - data-id: bingo_mysql.yml
           - data-id: bingo_redis.yml
 
-# XXL-JOB https://blog.csdn.net/forever_xw_/article/details/120994744
+# XXL-JOB
 xxl:
   job:
     admin:
       addresses: http://101.42.13.186:8800/xxl-job-admin
     executor:
-      address: http://101.42.13.186:8800
+      address:
       appname: xxl-job-executor-sample
       ip: ''
       logpath: /data/xxl-job-admin/logs

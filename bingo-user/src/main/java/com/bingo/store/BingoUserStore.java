@@ -4,7 +4,8 @@ package com.bingo.store;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bingo.pojo.po.BingoUser;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * <p>
@@ -28,4 +29,9 @@ public interface BingoUserStore extends IService<BingoUser> {
      * 修改
      */
     Boolean updateUser(BingoUser user);
+
+    /**
+     * 获取验证码图片
+     */
+    void generateCode(HttpServletRequest request, HttpServletResponse response);
 }

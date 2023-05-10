@@ -10,6 +10,9 @@ import com.bingo.store.BingoUserStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * <p>
  * 前端控制器
@@ -28,9 +31,6 @@ public class BingoUserController {
 
     /**
      * 根据userName查询用户信息
-     *
-     * @param userName
-     * @return
      */
     @GetMapping("find_by_username")
     public R findUserInfo(String userName) {
@@ -44,9 +44,6 @@ public class BingoUserController {
 
     /**
      * 根据userName查询用户信息
-     *
-     * @param
-     * @return
      */
     @PostMapping("update")
     public R updateUserInfo(@RequestBody BingoUser user) {
@@ -56,6 +53,14 @@ public class BingoUserController {
         } catch (Exception e) {
             return R.out(RespCodeEnum.FAIL, "操作失败");
         }
+    }
+
+    /**
+     * 获取验证码图片
+     */
+    @GetMapping("/captcha")
+    public void generateCode(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        bingoUserStore.generateCode(request, response);
     }
 }
 
