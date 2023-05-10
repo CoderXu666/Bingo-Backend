@@ -4,7 +4,7 @@ package com.bingo.store.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.anno.DoubleCache;
-import com.bingo.constant.CachePartition;
+import com.bingo.constant.CacheConstant;
 import com.bingo.enums.CacheType;
 import com.bingo.mapper.BingoUserMapper;
 import com.bingo.pojo.po.BingoUser;
@@ -41,7 +41,7 @@ public class BingoUserStoreImpl extends ServiceImpl<BingoUserMapper, BingoUser> 
      * 根据userName查询用户信息
      */
     @Override
-    @DoubleCache(cacheName = CachePartition.BINGO_USER, key = "#userName", type = CacheType.FULL)
+    @DoubleCache(cacheName = CacheConstant.BINGO_USER, key = "#userName", type = CacheType.FULL)
     public BingoUser findUserInfo(String userName) {
         QueryWrapper<BingoUser> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name", userName);

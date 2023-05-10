@@ -9,7 +9,7 @@ import lombok.Data;
  * 注意：优先作用于Redis，其次才是Caffeine
  */
 @Data
-public class CachePartition {
+public class CacheConstant {
     public static final String BINGO_USER = "bingo_user" ;
     public static final String BINGO_USER_STATISTICS = "bingo_user_statistics" ;
 }
