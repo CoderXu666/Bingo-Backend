@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/advice")
 public class BingoAdviceController {
-
     @Autowired
     private BingoAdviceService bingoAdviceService;
 

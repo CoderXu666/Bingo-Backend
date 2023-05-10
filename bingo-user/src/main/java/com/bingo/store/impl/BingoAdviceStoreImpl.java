@@ -23,7 +23,6 @@ public class BingoAdviceStoreImpl extends ServiceImpl<BingoAdviceMapper, BingoAd
      */
     @Override
     public Boolean saveAdvice(BingoAdvice bingoAdvice) {
-        boolean isSuccess = this.save(bingoAdvice);
-        return isSuccess;
+        return this.save(bingoAdvice);
     }
 }

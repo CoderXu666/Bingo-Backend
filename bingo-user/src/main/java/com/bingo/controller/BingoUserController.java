@@ -32,11 +32,35 @@ public class BingoUserController {
     /**
      * 根据userName查询用户信息
      */
-    @GetMapping("find_by_username")
+    @GetMapping("/find_by_username")
     public R findUserInfo(String userName) {
         try {
             BingoUserVO bingoUserVO = bingoUserService.findUserInfo(userName);
             return R.out(RespCodeEnum.SUCCESS, bingoUserVO);
+        } catch (Exception e) {
+            return R.out(RespCodeEnum.FAIL, "操作失败");
+        }
+    }
+
+    /**
+     * 注册
+     */
+    @PostMapping("/register")
+    public R register(@RequestBody BingoUser user) {
+        try {
+            return null;
+        } catch (Exception e) {
+            return R.out(RespCodeEnum.FAIL, "操作失败");
+        }
+    }
+
+    /**
+     * 登录
+     */
+    @PostMapping("/login")
+    public R login(@RequestBody BingoUser user) {
+        try {
+            return null;
         } catch (Exception e) {
             return R.out(RespCodeEnum.FAIL, "操作失败");
         }

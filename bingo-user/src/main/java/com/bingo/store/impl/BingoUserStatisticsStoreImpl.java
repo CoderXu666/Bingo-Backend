@@ -25,7 +25,7 @@ public class BingoUserStatisticsStoreImpl extends ServiceImpl<BingoUserStatistic
      * 根据userName查询用户信息
      */
     @Override
-    @DoubleCache(cacheName = CachePartition.BINGO_USER_STATISTICS, key = "#userName", type = CacheType.FULL)
+    @DoubleCache(cacheName = CachePartition.BINGO_USER_STATISTICS, key = "#p0", type = CacheType.FULL)
     public BingoUserStatistics findUserSta(String userName) {
         QueryWrapper<BingoUserStatistics> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name", userName);
