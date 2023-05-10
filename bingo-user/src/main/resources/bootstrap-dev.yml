@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 9090
   servlet:
     context-path: /api
 
@@ -10,9 +10,7 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
-
   cloud:
-    # Nacos注册、配置
     nacos:
       discovery:
         server-addr: 101.42.13.186:8848
@@ -25,7 +23,6 @@ spring:
           - data-id: bingo_mysql.yml
           - data-id: bingo_redis.yml
 
-# XXL-JOB
 xxl:
   job:
     admin:

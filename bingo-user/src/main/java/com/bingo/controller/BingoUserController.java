@@ -59,7 +59,7 @@ public class BingoUserController {
      * 获取验证码图片
      */
     @GetMapping("/captcha")
-    public void generateCode(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void generateCode(HttpServletRequest request, HttpServletResponse response) {
         bingoUserStore.generateCode(request, response);
     }
 }
