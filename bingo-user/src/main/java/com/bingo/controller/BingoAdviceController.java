@@ -30,7 +30,7 @@ public class BingoAdviceController {
      *
      * @return
      */
-    @PostMapping("save")
+    @PostMapping("/save")
     public R saveAdvice(@RequestBody BingoAdviceDTO adviceDTO) {
         try {
             bingoAdviceService.saveAdvice(adviceDTO);

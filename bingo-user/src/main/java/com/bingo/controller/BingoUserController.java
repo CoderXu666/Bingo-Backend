@@ -69,7 +69,7 @@ public class BingoUserController {
     /**
      * 修改用户信息
      */
-    @PostMapping("update")
+    @PostMapping("/update")
     public R updateUserInfo(@RequestBody BingoUser user) {
         try {
             bingoUserStore.updateUser(user);
