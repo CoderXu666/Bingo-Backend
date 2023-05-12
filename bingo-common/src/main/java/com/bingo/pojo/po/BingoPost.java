@@ -1,20 +1,15 @@
 package com.bingo.pojo.po;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
-import java.util.Date;
-
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author 徐志斌
@@ -31,16 +26,22 @@ public class BingoPost implements Serializable {
      * 主键id
      */
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private String id;
+    private Long id;
 
     /**
-     * 用户名
+     * 账号
      */
-    @TableField("user_name")
-    private String userName;
+    @TableField("user_id")
+    private String userId;
 
     /**
-     * 帖子文字
+     * 帖子评论id（关联评论表）
+     */
+    @TableField("comment_id")
+    private Long commentId;
+
+    /**
+     * 帖子文案
      */
     @TableField("post_font")
     private String postFont;
@@ -52,25 +53,31 @@ public class BingoPost implements Serializable {
     private String postUrl;
 
     /**
-     * 帖子评论id（关联评论表）
+     * 关联话题（#坤坤）
      */
-    @TableField("comment_id")
-    private String commentId;
+    @TableField("post_topic")
+    private String postTopic;
 
     /**
-     * 帖子点赞数
+     * 点赞数
      */
     @TableField("like_count")
-    private Integer likeCount;
+    private Long likeCount;
 
     /**
-     * 帖子评论数
+     * 评论数
      */
     @TableField("comment_count")
-    private Integer commentCount;
+    private Long commentCount;
 
     /**
      * 创建时间
+     */
+    @TableField("forward_count")
+    private Long forwardCount;
+
+    /**
+     * 修改时间
      */
     @TableField("create_time")
     private Date createTime;
@@ -87,6 +94,5 @@ public class BingoPost implements Serializable {
     @TableField("deleted")
     @TableLogic
     private Boolean deleted;
-
 
 }

@@ -1,20 +1,15 @@
 package com.bingo.pojo.po;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
-import java.util.Date;
-
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author 徐志斌
@@ -34,40 +29,10 @@ public class BingoUser implements Serializable {
     private String id;
 
     /**
-     * 昵称
+     * 账号
      */
-    @TableField("nick_name")
-    private String nickName;
-
-    /**
-     * 头像
-     */
-    @TableField("head_url")
-    private String headUrl;
-
-    /**
-     * 电话
-     */
-    @TableField("phone")
-    private String phone;
-
-    /**
-     * 地址
-     */
-    @TableField("address")
-    private String address;
-
-    /**
-     * 邮箱
-     */
-    @TableField("email")
-    private String email;
-
-    /**
-     * 性别(男:1 女:0)
-     */
-    @TableField("gender")
-    private Integer gender;
+    @TableField("user_id")
+    private String userId;
 
     /**
      * 用户名
@@ -80,6 +45,48 @@ public class BingoUser implements Serializable {
      */
     @TableField("pass_word")
     private String passWord;
+
+    /**
+     * 头像
+     */
+    @TableField("avatar_url")
+    private String avatarUrl;
+
+    /**
+     * 个性签名
+     */
+    @TableField("signature")
+    private String signature;
+
+    /**
+     * 生日
+     */
+    @TableField("birth_day")
+    private String birthDay;
+
+    /**
+     * 电话
+     */
+    @TableField("phone")
+    private String phone;
+
+    /**
+     * 性别(男:1 女:0)
+     */
+    @TableField("gender")
+    private Integer gender;
+
+    /**
+     * 地址
+     */
+    @TableField("address")
+    private String address;
+
+    /**
+     * 邮箱
+     */
+    @TableField("email")
+    private String email;
 
     /**
      * 创建时间
@@ -99,6 +106,5 @@ public class BingoUser implements Serializable {
     @TableField("deleted")
     @TableLogic
     private Boolean deleted;
-
 
 }
