@@ -10,6 +10,6 @@ import lombok.Data;
  */
 @Data
 public class CacheConstant {
-    public static final String BINGO_USER = "bingo_user" ;
-    public static final String BINGO_USER_STATISTICS = "bingo_user_statistics" ;
+    public static final String BINGO_USER = "BINGO_USER" ;
+    public static final String BINGO_USER_STATISTICS = "BINGO_USER_STATISTICS" ;
 }
