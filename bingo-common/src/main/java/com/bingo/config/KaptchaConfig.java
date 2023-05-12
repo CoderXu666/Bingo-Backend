@@ -12,7 +12,7 @@ import java.util.Properties;
  * @Author 徐志斌
  * @Date: 2023/5/10 21:57
  * @Version 1.0
- * @Description: KaptchaConfig
+ * @Description: 图片验证码Kaptcha配置类
  */
 @Configuration
 public class KaptchaConfig {
