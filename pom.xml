@@ -39,6 +39,7 @@
         <redis.version>2.5.4</redis.version>
         <redisson.version>3.16.6</redisson.version>
         <xxl.job.version>2.3.1</xxl.job.version>
+        <!--        <kafka.version>2.3.1</kafka.version>-->
     </properties>
 
     <!--依赖管理：子Module不需要指定Version-->
@@ -102,6 +103,13 @@
                 <groupId>com.alibaba.csp</groupId>
                 <artifactId>sentinel-annotation-aspectj</artifactId>
                 <version>${sentinel.version}</version>
+            </dependency>
+
+            <!--Kafka-->
+            <dependency>
+                <groupId>org.springframework.kafka</groupId>
+                <artifactId>spring-kafka</artifactId>
+                <version>3.0.3</version>
             </dependency>
 
             <!--XXL-JOB-->

@@ -1,23 +1,18 @@
 server:
-  port: 9091
+  port: 10001
   servlet:
     context-path: /api
 
 spring:
-  # 应用名称
   application:
     name: bingo-community
-  # 允许数据源覆盖
   main:
     allow-bean-definition-overriding: true
   cloud:
-    # Nacos
     nacos:
-      # 1.注册中心
       discovery:
         server-addr: 101.42.13.186:8848
         namespace: ac6195e1-df2e-4f9f-a978-0702f35a9df6
-      # 2.配置中心
       config:
         server-addr: 101.42.13.186:8848
         namespace: ac6195e1-df2e-4f9f-a978-0702f35a9df6
@@ -26,7 +21,23 @@ spring:
           - data-id: bingo_mysql.yml
           - data-id: bingo_redis.yml
 
-# MyBatis-Plus
+  kafka:
+    bootstrap-servers: 101.42.13.186:9092
+    producer:
+      retries: 0
+      acks: 1
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: bingo-group
+      enable-auto-commit: true
+      auto-commit-interval: 100
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
