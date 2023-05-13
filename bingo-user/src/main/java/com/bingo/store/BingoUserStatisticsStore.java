@@ -13,12 +13,8 @@ import com.bingo.pojo.po.BingoUserStatistics;
  * @since 2023-03-01
  */
 public interface BingoUserStatisticsStore extends IService<BingoUserStatistics> {
-
     /**
-     * 根据userName查询用户信息
-     *
-     * @param userName
-     * @return
+     * 根据userId查询用户信息
      */
-    BingoUserStatistics findUserSta(String userName);
+    BingoUserStatistics findUserSta(Long userId);
 }

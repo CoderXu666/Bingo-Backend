@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.vo.BingoUserVO;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * <p>
  * 服务类
@@ -16,10 +19,17 @@ import com.bingo.pojo.vo.BingoUserVO;
 public interface BingoUserService extends IService<BingoUser> {
 
     /**
-     * 根据userName查询用户信息
-     *
-     * @param userName
-     * @return
+     * 根据userId查询用户信息
      */
-    BingoUserVO findUserInfo(String userName);
+    BingoUserVO findByUserId(Long userId);
+
+    /**
+     * 生成验证码
+     */
+    void generateCode(HttpServletRequest request, HttpServletResponse response);
+
+    /**
+     * 修改用户信息
+     */
+    Boolean updateUser(BingoUser user);
 }

@@ -6,7 +6,6 @@ import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.resp.R;
 import com.bingo.service.BingoUserService;
-import com.bingo.store.BingoUserStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,18 +24,16 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/user")
 public class BingoUserController {
     @Autowired
-    private BingoUserService bingoUserService;
-    @Autowired
-    private BingoUserStore bingoUserStore;
+    private BingoUserService userService;
 
     /**
-     * 根据userName查询用户信息
+     * 根据userId查询用户信息
      */
-    @GetMapping("/find_by_username")
-    public R findUserInfo(String userName) {
+    @GetMapping("/find_by_id")
+    public R findByUserId(Long userId) {
         try {
-            BingoUserVO bingoUserVO = bingoUserService.findUserInfo(userName);
-            return R.out(RespCodeEnum.SUCCESS, bingoUserVO);
+            BingoUserVO userVO = userService.findByUserId(userId);
+            return R.out(RespCodeEnum.SUCCESS, userVO);
         } catch (Exception e) {
             return R.out(RespCodeEnum.FAIL, "操作失败");
         }
@@ -72,7 +69,7 @@ public class BingoUserController {
     @PostMapping("/update")
     public R updateUserInfo(@RequestBody BingoUser user) {
         try {
-            bingoUserStore.updateUser(user);
+            userService.updateUser(user);
             return R.out(RespCodeEnum.SUCCESS, "操作成功");
         } catch (Exception e) {
             return R.out(RespCodeEnum.FAIL, "操作失败");
@@ -84,7 +81,7 @@ public class BingoUserController {
      */
     @GetMapping("/captcha")
     public void generateCode(HttpServletRequest request, HttpServletResponse response) {
-        bingoUserStore.generateCode(request, response);
+        userService.generateCode(request, response);
     }
 }
 

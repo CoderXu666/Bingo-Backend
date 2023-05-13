@@ -4,9 +4,6 @@ package com.bingo.store;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bingo.pojo.po.BingoUser;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 /**
  * <p>
  * 服务类
@@ -18,20 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 public interface BingoUserStore extends IService<BingoUser> {
 
     /**
-     * 根据userName查询用户信息
-     *
-     * @param userName
-     * @return
+     * 根据userId查询用户信息
      */
-    BingoUser findUserInfo(String userName);
+    BingoUser findByUserId(Long userId);
 
     /**
      * 修改
      */
     Boolean updateUser(BingoUser user);
-
-    /**
-     * 获取验证码图片
-     */
-    void generateCode(HttpServletRequest request, HttpServletResponse response);
 }

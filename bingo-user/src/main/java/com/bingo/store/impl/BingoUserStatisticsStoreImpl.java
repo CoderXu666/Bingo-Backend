@@ -26,10 +26,9 @@ public class BingoUserStatisticsStoreImpl extends ServiceImpl<BingoUserStatistic
      */
     @Override
     @DoubleCache(cacheName = CacheConstant.BINGO_USER_STATISTICS, key = "#p0", type = CacheType.FULL)
-    public BingoUserStatistics findUserSta(String userName) {
+    public BingoUserStatistics findUserSta(Long userId) {
         QueryWrapper<BingoUserStatistics> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_name", userName);
-        BingoUserStatistics bingoUserStatistics = this.getOne(queryWrapper);
-        return bingoUserStatistics;
+        queryWrapper.eq("user_id", userId);
+        return this.getOne(queryWrapper);
     }
 }

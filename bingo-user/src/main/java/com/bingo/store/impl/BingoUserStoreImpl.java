@@ -3,24 +3,10 @@ package com.bingo.store.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bingo.anno.DoubleCache;
-import com.bingo.constant.CacheConstant;
-import com.bingo.enums.CacheType;
 import com.bingo.mapper.BingoUserMapper;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.store.BingoUserStore;
-import com.google.code.kaptcha.impl.DefaultKaptcha;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 /**
  * <p>
@@ -32,21 +18,14 @@ import java.io.IOException;
  */
 @Service
 public class BingoUserStoreImpl extends ServiceImpl<BingoUserMapper, BingoUser> implements BingoUserStore {
-    @Autowired
-    private DefaultKaptcha defaultKaptcha;
-    @Resource
-    private RedisTemplate<String, Object> redisTemplate;
-
     /**
-     * 根据userName查询用户信息
+     * 根据userId查询用户信息
      */
     @Override
-    @DoubleCache(cacheName = CacheConstant.BINGO_USER, key = "#userName", type = CacheType.FULL)
-    public BingoUser findUserInfo(String userName) {
-        QueryWrapper<BingoUser> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_name", userName);
-        BingoUser bingoUser = this.getOne(queryWrapper);
-        return bingoUser;
+    public BingoUser findByUserId(Long userId) {
+        QueryWrapper<BingoUser> wrapper = new QueryWrapper<>();
+        wrapper.eq("user_id", userId);
+        return this.getOne(wrapper);
     }
 
     /**
@@ -54,71 +33,6 @@ public class BingoUserStoreImpl extends ServiceImpl<BingoUserMapper, BingoUser> 
      */
     @Override
     public Boolean updateUser(BingoUser user) {
-        return null;
-    }
-
-    /**
-     * 获取验证码图片
-     */
-    @Override
-    public void generateCode(HttpServletRequest request, HttpServletResponse response) {
-        // 定义response输出类型为image/jpeg
-        response.setDateHeader("Expires", 0);
-        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
-        response.addHeader("Cache-Control", "post-check=0, pre-check=0");
-        response.setHeader("Pragma", "no-cache");
-        response.setContentType("image/jpeg");
-
-        // 生成验证码图片
-        String verifyCode = defaultKaptcha.createText();
-        BufferedImage image = defaultKaptcha.createImage(verifyCode);
-
-//        // Cookie不存在，那就重新生成Cookie，赋值Redis
-//        String captchaKey = "captcha_key";
-//        Cookie[] cookies = request.getCookies();
-//        if (ObjectUtils.isEmpty(cookies)) {
-//            String uuid = UUID.randomUUID().toString();
-//            Cookie cookie = new Cookie(captchaKey, uuid);
-//            cookie.setPath("/");
-//            response.addCookie(cookie);
-//            redisTemplate.opsForValue().set(uuid, verifyCode, 3, TimeUnit.MINUTES);
-//        }
-//
-//        // Cookie存在，不生成Cookie，重新生成验证码赋值Redis即可
-//        else {
-//            boolean hasCaptchaKeyFlag = false;
-//            for (Cookie cookie : cookies) {
-//                if (cookie.getName().equals(captchaKey)) {
-//                    redisTemplate.opsForValue().set(cookie.getValue(), verifyCode, 3, TimeUnit.MINUTES);
-//                    hasCaptchaKeyFlag = true;
-//                }
-//            }
-//            // 特殊情况，偶尔复现
-//            if (!hasCaptchaKeyFlag) {
-//                String uuid = UUID.randomUUID().toString();
-//                Cookie cookie = new Cookie(captchaKey, uuid);
-//                cookie.setPath("/");
-//                response.addCookie(cookie);
-//                redisTemplate.opsForValue().set(uuid, verifyCode, 3, TimeUnit.MINUTES);
-//            }
-//        }
-
-        // 将图片输出到页面
-        ServletOutputStream outputStream = null;
-        try {
-            outputStream = response.getOutputStream();
-            ImageIO.write(image, "jpg", outputStream);
-            outputStream.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (outputStream != null) {
-                try {
-                    outputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        return this.updateById(user);
     }
 }
