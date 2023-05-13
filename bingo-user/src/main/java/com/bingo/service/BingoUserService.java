@@ -21,7 +21,7 @@ public interface BingoUserService extends IService<BingoUser> {
     /**
      * 根据userId查询用户信息
      */
-    BingoUserVO findByUserId(Long userId);
+    BingoUserVO findById(Long id);
 
     /**
      * 生成验证码

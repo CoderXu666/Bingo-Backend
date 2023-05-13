@@ -44,21 +44,19 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     private RedisTemplate<String, Object> redisTemplate;
 
     /**
-     * 根据userName查询用户信息
-     *
-     * @return
+     * 根据Id查询用户信息
      */
     @Override
-    public BingoUserVO findByUserId(Long userId) {
+    public BingoUserVO findById(Long id) {
         BingoUserVO userVO = new BingoUserVO();
-        BingoUser userInfo = userStore.findByUserId(userId);
-        BingoUserStatistics userStatistics = userStatisticsStore.findUserSta(userId);
+        BingoUser userInfo = userStore.findById(id);
+//        BingoUserStatistics userStatistics = userStatisticsStore.findUserSta(id);
         if (ObjectUtils.isNotEmpty(userInfo)) {
             BeanUtils.copyProperties(userInfo, userVO);
         }
-        if (ObjectUtils.isNotEmpty(userStatistics)) {
-            BeanUtils.copyProperties(userStatistics, userVO);
-        }
+//        if (ObjectUtils.isNotEmpty(userStatistics)) {
+//            BeanUtils.copyProperties(userStatistics, userVO);
+//        }
         return userVO;
     }
 

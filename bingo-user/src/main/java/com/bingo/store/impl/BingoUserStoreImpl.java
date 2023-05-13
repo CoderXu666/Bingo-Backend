@@ -19,12 +19,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class BingoUserStoreImpl extends ServiceImpl<BingoUserMapper, BingoUser> implements BingoUserStore {
     /**
-     * 根据userId查询用户信息
+     * 根据Id查询用户信息
      */
     @Override
-    public BingoUser findByUserId(Long userId) {
+    public BingoUser findById(Long id) {
         QueryWrapper<BingoUser> wrapper = new QueryWrapper<>();
-        wrapper.eq("user_id", userId);
+        wrapper.eq("id", id);
         return this.getOne(wrapper);
     }
 

@@ -30,9 +30,9 @@ public class BingoUserController {
      * 根据userId查询用户信息
      */
     @GetMapping("/find_by_id")
-    public R findByUserId(Long userId) {
+    public R findByUserId(Long id) {
         try {
-            BingoUserVO userVO = userService.findByUserId(userId);
+            BingoUserVO userVO = userService.findById(id);
             return R.out(RespCodeEnum.SUCCESS, userVO);
         } catch (Exception e) {
             return R.out(RespCodeEnum.FAIL, "操作失败");

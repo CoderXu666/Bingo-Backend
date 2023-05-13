@@ -29,15 +29,16 @@
     <!--依赖版本-->
     <properties>
         <java.version>1.8</java.version>
+        <lombok.version>1.18.20</lombok.version>
         <springboot.version>2.2.4.RELEASE</springboot.version>
         <nacos.version>2.2.4.RELEASE</nacos.version>
-        <lombok.version>1.18.20</lombok.version>
+        <feign.version>2.2.4.RELEASE</feign.version>
+        <sentinel.version>1.8.0</sentinel.version>
         <mybatis.plus.version>3.0.5</mybatis.plus.version>
         <mysql.version>5.1.47</mysql.version>
         <redis.version>2.5.4</redis.version>
         <redisson.version>3.16.6</redisson.version>
         <xxl.job.version>2.3.1</xxl.job.version>
-        <sentinel.version>1.8.0</sentinel.version>
     </properties>
 
     <!--依赖管理：子Module不需要指定Version-->
@@ -79,6 +80,13 @@
                 <version>${nacos.version}</version>
             </dependency>
 
+            <!--OpenFeign-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+
             <!--sentinel-->
             <dependency>
                 <groupId>com.alibaba.csp</groupId>
@@ -102,7 +110,6 @@
                 <artifactId>xxl-job-core</artifactId>
                 <version>${xxl.job.version}</version>
             </dependency>
-
 
             <!--Lombok-->
             <dependency>

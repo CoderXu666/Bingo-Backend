@@ -15,9 +15,9 @@ import com.bingo.pojo.po.BingoUser;
 public interface BingoUserStore extends IService<BingoUser> {
 
     /**
-     * 根据userId查询用户信息
+     * 根据Id查询用户信息
      */
-    BingoUser findByUserId(Long userId);
+    BingoUser findById(Long id);
 
     /**
      * 修改
