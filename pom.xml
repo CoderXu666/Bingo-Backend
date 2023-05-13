@@ -39,6 +39,7 @@
         <redis.version>2.5.4</redis.version>
         <redisson.version>3.16.6</redisson.version>
         <xxl.job.version>2.3.1</xxl.job.version>
+        <spring-kafka.version>2.3.5.RELEASE</spring-kafka.version>
     </properties>
 
     <!--依赖管理：子Module不需要指定Version-->
@@ -66,6 +67,12 @@
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
                 <version>${redisson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.kafka</groupId>
+                <artifactId>spring-kafka</artifactId>
+                <version>${spring-kafka.version}</version>
             </dependency>
 
             <!--Nacos-->
