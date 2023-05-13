@@ -96,6 +96,8 @@
             <artifactId>caffeine</artifactId>
             <version>2.9.3</version>
         </dependency>
+
+        <!--SpringCache-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
@@ -126,7 +128,7 @@
             <artifactId>aliyun-sdk-oss</artifactId>
         </dependency>
 
-        <!--JSON-->
+        <!--fastjson-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
