@@ -23,20 +23,6 @@ spring:
           - data-id: bingo_mysql.yml
           - data-id: bingo_redis.yml
 
-#xxl:
-#  job:
-#    admin:
-#      addresses: http://101.42.13.186:8800/xxl-job-admin
-#    executor:
-#      address:
-#      appname: xxl-job-executor-sample
-#      ip: ''
-#      logpath: /data/xxl-job-admin/logs
-#      logretentiondays: -1
-#      port: 9999
-#    accessToken: Lpoms_xxljob_default_token
-
-# MyBatis-Plus
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Description: community 远程调用 user 模块
  */
 @Component
-@FeignClient(name = "bingo-user", url = "localhost:9090/api/user")
+@FeignClient(name = "bingo-user", url = "localhost:10000/api/user")
 public interface CommunityUserFeign {
     /**
      * 根据id查询用户信息

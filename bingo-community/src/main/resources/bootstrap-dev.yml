@@ -21,23 +21,6 @@ spring:
           - data-id: bingo_mysql.yml
           - data-id: bingo_redis.yml
 
-  kafka:
-    bootstrap-servers: 101.42.13.186:9092
-    producer:
-      retries: 0
-      acks: 1
-      batch-size: 16384
-      buffer-memory: 33554432
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    consumer:
-      group-id: bingo-group
-      enable-auto-commit: true
-      auto-commit-interval: 100
-      auto-offset-reset: latest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
