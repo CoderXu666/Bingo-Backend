@@ -20,6 +20,16 @@ spring:
         shared-configs:
           - data-id: bingo_mysql.yml
           - data-id: bingo_redis.yml
+  kafka:
+    bootstrap-servers: 101.42.13.186:9092
+    consumer:
+      group-id: my-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 mybatis-plus:
   configuration:
