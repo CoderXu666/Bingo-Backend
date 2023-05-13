@@ -26,55 +26,110 @@
     <name>Bingo-Backend</name>
     <packaging>pom</packaging>
 
+    <!--依赖版本-->
     <properties>
         <java.version>1.8</java.version>
+        <springboot.version>2.2.4.RELEASE</springboot.version>
+        <nacos.version>2.2.4.RELEASE</nacos.version>
+        <lombok.version>1.18.20</lombok.version>
+        <mybatis.plus.version>3.0.5</mybatis.plus.version>
+        <mysql.version>5.1.47</mysql.version>
+        <redis.version>2.5.4</redis.version>
+        <redisson.version>3.16.6</redisson.version>
+        <xxl.job.version>2.3.1</xxl.job.version>
+        <sentinel.version>1.8.0</sentinel.version>
     </properties>
 
+    <!--依赖管理：子Module不需要指定Version-->
     <dependencyManagement>
         <dependencies>
             <!--SpringBoot-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
-                <version>2.2.4.RELEASE</version>
+                <version>${springboot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
-                <version>2.2.4.RELEASE</version>
+                <version>${springboot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
-                <version>2.2.4.RELEASE</version>
+                <version>${springboot.version}</version>
             </dependency>
+
+            <!--Redisson-->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
+            <!--Nacos-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${nacos.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${nacos.version}</version>
+            </dependency>
+
+            <!--sentinel-->
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-core</artifactId>
+                <version>${sentinel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-transport-simple-http</artifactId>
+                <version>${sentinel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-annotation-aspectj</artifactId>
+                <version>${sentinel.version}</version>
+            </dependency>
+
+            <!--XXL-JOB-->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl.job.version}</version>
+            </dependency>
+
 
             <!--Lombok-->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>1.18.20</version>
+                <version>${lombok.version}</version>
             </dependency>
 
             <!--MyBatis-Plus-->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>3.0.5</version>
+                <version>${mybatis.plus.version}</version>
             </dependency>
 
             <!--MySQL-->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.47</version>
+                <version>${mysql.version}</version>
             </dependency>
 
             <!--Redis-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
-                <version>2.5.4</version>
+                <version>${redis.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -82,16 +137,18 @@
                 <version>2.7.0</version>
             </dependency>
 
-            <!--Nacos-->
+            <!--ElasticSearch-->
             <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-                <version>2.2.4.RELEASE</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+                <version>2.3.7.RELEASE</version>
             </dependency>
+
+            <!--ShardingSphere-->
             <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-                <version>2.2.4.RELEASE</version>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+                <version>4.0.0-RC1</version>
             </dependency>
 
             <!--OSS-->
@@ -139,20 +196,6 @@
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
                 <version>2.8.2</version>
-            </dependency>
-
-            <!--ElasticSearch-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-                <version>2.3.7.RELEASE</version>
-            </dependency>
-
-            <!--ShardingSphere-->
-            <dependency>
-                <groupId>org.apache.shardingsphere</groupId>
-                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-                <version>4.0.0-RC1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
