@@ -1,19 +1,22 @@
 package com.bingo.pojo.po;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableField;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
-import java.util.Date;
-
 /**
  * <p>
- *
+ * 
  * </p>
  *
  * @author 徐志斌
- * @since 2023-03-04
+ * @since 2023-05-13
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -71,22 +74,22 @@ public class BingoPost implements Serializable {
     private Long commentCount;
 
     /**
-     * 创建时间
+     * 转发数
      */
     @TableField("forward_count")
     private Long forwardCount;
 
     /**
-     * 修改时间
+     * 创建时间
      */
     @TableField("create_time")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
      * 修改时间
      */
     @TableField("update_time")
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     /**
      * 删除标识（0未删除、1已删除）
@@ -94,5 +97,6 @@ public class BingoPost implements Serializable {
     @TableField("deleted")
     @TableLogic
     private Boolean deleted;
+
 
 }

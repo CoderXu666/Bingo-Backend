@@ -1,5 +1,6 @@
 package com.bingo.config;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
@@ -11,6 +12,7 @@ import java.util.concurrent.Executor;
  * @Version 1.0
  * @Description: @Async异步配置类
  */
+@Configuration
 public class AsyncConfig implements AsyncConfigurer {
     @Override
     public Executor getAsyncExecutor() {

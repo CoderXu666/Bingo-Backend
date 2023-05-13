@@ -65,5 +65,4 @@ public class BingoAdvice implements Serializable {
     @TableLogic
     private Boolean deleted;
 
-
 }

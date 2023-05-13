@@ -33,6 +33,7 @@ public class CodeGenerator {
         globalConfig.setAuthor("徐志斌");
         globalConfig.setFileOverride(true);
         globalConfig.setMapperName("%sMapper");
+        globalConfig.setServiceName("%sService");
         globalConfig.setIdType(IdType.ASSIGN_ID);
         autoGenerator.setGlobalConfig(globalConfig);
 
@@ -49,7 +50,7 @@ public class CodeGenerator {
          * 第四步：   策略设置
          */
         StrategyConfig strategyConfig = new StrategyConfig();
-        strategyConfig.setInclude("bingo_advice");
+        strategyConfig.setInclude("bingo_post");
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setEntityLombokModel(true);
