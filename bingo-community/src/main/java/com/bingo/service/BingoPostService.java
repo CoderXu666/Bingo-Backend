@@ -9,9 +9,8 @@ import com.bingo.pojo.po.BingoPost;
  * </p>
  *
  * @author 徐志斌
- * @since 2023-03-04
+ * @since 2023-05-13
  */
 public interface BingoPostService extends IService<BingoPost> {
 
-    boolean saveInfo(BingoPost bingoPost);
 }
