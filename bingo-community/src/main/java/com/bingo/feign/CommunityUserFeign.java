@@ -1,6 +1,7 @@
 package com.bingo.feign;
 
-import com.bingo.resp.R;
+import com.bingo.pojo.vo.BingoUserVO;
+import com.bingo.resp.FeignResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "bingo-user", url = "localhost:9090/api/user")
 public interface CommunityUserFeign {
     /**
-     * 根据userId查询用户信息
+     * 根据id查询用户信息
      */
     @GetMapping("/find_by_id")
-    R findByUserId(@RequestParam("userId") Long userId);
+    FeignResult<BingoUserVO> findByUserId(@RequestParam("id") Long id);
 }

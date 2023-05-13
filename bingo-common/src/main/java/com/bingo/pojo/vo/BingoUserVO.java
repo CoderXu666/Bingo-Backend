@@ -1,24 +1,50 @@
 package com.bingo.pojo.vo;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
+
+import java.util.Date;
 
 @Data
 public class BingoUserVO {
     /**
-     * 昵称
+     * 主键Id
      */
-    private String nickName;
+    private Long id;
+
+    /**
+     * 账号
+     */
+    private String userId;
+
+    /**
+     * 用户名
+     */
+    private String userName;
 
     /**
      * 头像
      */
-    private String headUrl;
+    private String avatarUrl;
+
+    /**
+     * 个性签名
+     */
+    private String signature;
+
+    /**
+     * 生日
+     */
+    private Date birthDay;
 
     /**
      * 电话
      */
     private String phone;
+
+    /**
+     * 性别(男:1 女:0)
+     */
+    private Integer gender;
 
     /**
      * 地址
@@ -31,24 +57,7 @@ public class BingoUserVO {
     private String email;
 
     /**
-     * 性别(男:1 女:0)
+     * 创建时间
      */
-    private Integer gender;
-
-    /**
-     * 粉丝人数
-     */
-    private Long fanCount;
-
-    /**
-     * 关注人数
-     */
-    private Long followCount;
-
-    /**
-     * 点赞人数
-     */
-    private Long likeCount;
-
-
+    private Date createTime;
 }

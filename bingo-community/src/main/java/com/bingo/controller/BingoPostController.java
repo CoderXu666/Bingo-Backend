@@ -2,7 +2,8 @@ package com.bingo.controller;
 
 
 import com.bingo.feign.CommunityUserFeign;
-import com.bingo.resp.R;
+import com.bingo.pojo.vo.BingoUserVO;
+import com.bingo.resp.FeignResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +25,9 @@ public class BingoPostController {
 
     @GetMapping("/test")
     public void test() {
-        R userInfo = userFeign.findByUserId(10086L);
-        System.out.println(userInfo);
+        FeignResult<BingoUserVO> userInfo = userFeign.findByUserId(10086L);
+        BingoUserVO userVO = userInfo.getData();
+        System.out.println(userVO);
     }
 }
 

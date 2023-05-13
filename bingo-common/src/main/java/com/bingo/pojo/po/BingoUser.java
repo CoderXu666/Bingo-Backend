@@ -26,7 +26,7 @@ public class BingoUser implements Serializable {
      * 主键Id
      */
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private String id;
+    private Long id;
 
     /**
      * 账号
@@ -62,7 +62,7 @@ public class BingoUser implements Serializable {
      * 生日
      */
     @TableField("birth_day")
-    private String birthDay;
+    private Date birthDay;
 
     /**
      * 电话
