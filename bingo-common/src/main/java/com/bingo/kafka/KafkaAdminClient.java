@@ -1,4 +1,4 @@
-package com.bingo.utils;
+package com.bingo.kafka;
 
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.AdminClientConfig;
@@ -15,21 +15,23 @@ import java.util.concurrent.ExecutionException;
  * @Version 1.0
  * @Description: Kafka工具类
  */
-public class KafkaUtil {
+public class KafkaAdminClient {
     private static String url = "101.42.13.186:9092";
 
     public static void main(String[] args) throws Exception {
-        getTopic();
+//        createTopic("");
+//        getTopic();
+//        deleteTopic("");
     }
 
     /**
      * 创建Topic
      */
-    public static void createTopic() {
+    public static void createTopic(String topicName) {
         Properties props = new Properties();
         props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, url);
         try (AdminClient adminClient = AdminClient.create(props)) {
-            NewTopic newTopic = new NewTopic("my-topic", 1, (short) 1);
+            NewTopic newTopic = new NewTopic(topicName, 1, (short) 1);
             adminClient.createTopics(Collections.singleton(newTopic));
         }
     }
@@ -48,10 +50,10 @@ public class KafkaUtil {
     /**
      * 删除Topic
      */
-    public static void deleteTopic() {
+    public static void deleteTopic(String topicName) {
         Properties props = new Properties();
         props.put("bootstrap.servers", url);
         AdminClient adminClient = AdminClient.create(props);
-        adminClient.deleteTopics(Collections.singleton("my_topic"));
+        adminClient.deleteTopics(Collections.singleton(topicName));
     }
 }

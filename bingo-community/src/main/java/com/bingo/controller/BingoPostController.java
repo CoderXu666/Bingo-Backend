@@ -24,6 +24,9 @@ public class BingoPostController {
     @Autowired
     private KafkaProducer kafkaProducer;
 
+    /**
+     * 发布帖子
+     */
     @GetMapping("/test")
     public void test() {
         kafkaProducer.sendMessage("my-topic", "徐志斌测试");

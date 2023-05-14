@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class KafkaConsumer {
+    /**
+     * 监听
+     */
     @KafkaListener(topics = "my-topic", groupId = "my-group")
     public void consume(String message) {
         System.out.println("Received message: " + message);
