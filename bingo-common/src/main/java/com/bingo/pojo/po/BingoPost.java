@@ -38,12 +38,6 @@ public class BingoPost implements Serializable {
     private String userId;
 
     /**
-     * 帖子评论id（关联评论表）
-     */
-    @TableField("comment_id")
-    private Long commentId;
-
-    /**
      * 帖子文案
      */
     @TableField("post_font")

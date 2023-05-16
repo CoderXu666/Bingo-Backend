@@ -6,7 +6,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,13 +15,13 @@ import java.util.Map;
  * @Description: JWTUtil
  */
 public class JWTUtil {
-    public static final long EXPIRE = 24 * 60 * 60 * 1000;
+    public static final long EXPIRE = 86400000;
     public static final String JWT_SECRET = "bingobingo666xuzhibin";
 
     /**
-     * 生成token字符串的方法
+     * 生成token
      */
-    public static String getJwtToken(String userId, Integer userType) {
+    public static String generateToken(String userId, Integer userType) {
         String JwtToken = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setHeaderParam("alg", "HS256")
@@ -37,18 +36,14 @@ public class JWTUtil {
     }
 
     /**
-     * 根据token获取 ResolveCustomer Info
+     * 解析 Token
      */
-    public static Map<String, String> getResolveCustomerByToken(String token) {
+    public static Map<String, String> resolveToken(String token) {
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token);
         Claims claims = claimsJws.getBody();
         String productCode = (String) claims.get("productCode");
         String accountId = (String) claims.get("accountId");
         String customerId = (String) claims.get("customerId");
-        Map<String, String> resultMap = new HashMap<>();
-        resultMap.put("productCode", productCode);
-        resultMap.put("accountId", accountId);
-        resultMap.put("customerId", customerId);
-        return resultMap;
+        return null;
     }
 }

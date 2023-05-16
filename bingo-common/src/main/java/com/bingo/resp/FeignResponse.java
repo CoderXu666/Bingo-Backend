@@ -9,7 +9,7 @@ import lombok.Data;
  * @Description: 远程调用返回值封装类
  */
 @Data
-public class FeignResult<T> {
+public class FeignResponse<T> {
     private Integer code;
     private String msg;
     private T data;
