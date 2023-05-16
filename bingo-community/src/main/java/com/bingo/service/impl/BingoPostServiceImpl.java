@@ -41,7 +41,6 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
         // 将消息发送给 Kafka，异步同步 ES
         kafkaProducer.sendMessage(KafkaConstant.COMMUNITY_POST, JSON.toJSONString(postDTO));
 
-        //
         return true;
     }
 }
