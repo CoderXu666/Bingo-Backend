@@ -16,10 +16,10 @@ import java.util.Map;
  */
 public class JWTUtil {
     public static final long EXPIRE = 86400000;
-    public static final String JWT_SECRET = "bingobingo666xuzhibin";
+    public static final String JWT_SECRET = "bingo666xuzhibin";
 
     /**
-     * 生成token
+     * 生成 Token
      */
     public static String generateToken(String userId, Integer userType) {
         String JwtToken = Jwts.builder()

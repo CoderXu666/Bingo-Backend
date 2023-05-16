@@ -30,7 +30,7 @@ public class BingoPostController {
     @PostMapping("/save")
     public R savePost(BingoPostDTO postDTO) {
         try {
-            Boolean isSuccess = postService.savePost(postDTO);
+            postService.savePost(postDTO);
             return R.out(RespCodeEnum.SUCCESS, null);
         } catch (Exception e) {
             return R.out(RespCodeEnum.FAIL, "操作失败");
