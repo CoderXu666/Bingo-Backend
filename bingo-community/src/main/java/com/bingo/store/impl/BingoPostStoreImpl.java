@@ -19,7 +19,6 @@ public class BingoPostStoreImpl extends ServiceImpl<BingoPostMapper, BingoPost> 
 
     @Override
     public boolean savePost(BingoPost bingoPost) {
-        int insert = baseMapper.insert(bingoPost);
-        return true;
+        return this.save(bingoPost);
     }
 }

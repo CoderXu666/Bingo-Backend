@@ -7,6 +7,7 @@ import com.bingo.resp.R;
 import com.bingo.service.BingoPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +29,7 @@ public class BingoPostController {
      * 发布帖子
      */
     @PostMapping("/save")
-    public R savePost(BingoPostDTO postDTO) {
+    public R savePost(@RequestBody BingoPostDTO postDTO) {
         try {
             postService.savePost(postDTO);
             return R.out(RespCodeEnum.SUCCESS, null);
