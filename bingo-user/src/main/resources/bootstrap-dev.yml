@@ -12,10 +12,10 @@ spring:
     nacos:
       discovery:
         server-addr: 101.42.13.186:8848
-        namespace: ac6195e1-df2e-4f9f-a978-0702f35a9df6
+        namespace: bingo-namespace
       config:
         server-addr: 101.42.13.186:8848
-        namespace: ac6195e1-df2e-4f9f-a978-0702f35a9df6
+        namespace: bingo-namespace
         file-extension: yml
         shared-configs:
           - data-id: bingo_mysql.yml
