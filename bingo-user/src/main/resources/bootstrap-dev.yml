@@ -21,7 +21,6 @@ spring:
           - data-id: bingo_mysql.yml
           - data-id: bingo_redis.yml
           - data-id: bingo_kafka.yml
-          - data-id: bingo_elasticsearch.yml
 
 mybatis-plus:
   configuration:
