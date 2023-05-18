@@ -1,10 +1,7 @@
 package com.bingo.kafka;
 
-import com.alibaba.fastjson.JSON;
 import com.bingo.constant.ESConstant;
 import com.bingo.constant.KafkaConstant;
-import com.bingo.pojo.dto.BingoPostDTO;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
@@ -27,17 +24,23 @@ import java.io.IOException;
 @Component
 public class KafkaConsumer {
     @Autowired
-    private RestHighLevelClient elasticsearchClient;
+    private RestHighLevelClient esClient;
 
     /**
      * 监听帖子
      */
     @KafkaListener(topics = KafkaConstant.COMMUNITY_POST, groupId = KafkaConstant.GROUP_ID)
     public Boolean listenPostMsg(String message) throws IOException {
-        BingoPostDTO post = JSON.parseObject(message, BingoPostDTO.class);
-        IndexRequest request = new IndexRequest(ESConstant.POST_INDEX);
-        request.source(new ObjectMapper().writeValueAsString(post), XContentType.JSON);
-        IndexResponse response = elasticsearchClient.index(request, RequestOptions.DEFAULT);
-        return response.getResult() == IndexResponse.Result.CREATED;
+        try {
+            IndexRequest request = new IndexRequest(ESConstant.POST_INDEX);
+            request.source(message, XContentType.JSON);
+            IndexResponse response = esClient.index(request, RequestOptions.DEFAULT);
+            return response.getResult() == IndexResponse.Result.CREATED;
+        } catch (Exception e) {
+            log.error("保存帖子ES数据报错：{}", e.getMessage());
+            return null;
+        } finally {
+            esClient.close();
+        }
     }
 }

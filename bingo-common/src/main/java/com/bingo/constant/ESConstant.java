@@ -8,7 +8,7 @@ package com.bingo.constant;
  */
 public class ESConstant {
     /**
-     * 帖子
+     * ES索引
      */
     public static final String POST_INDEX = "community-post-topic";
 }
