@@ -40,6 +40,7 @@
         <redisson.version>3.16.6</redisson.version>
         <xxl.job.version>2.3.1</xxl.job.version>
         <spring-kafka.version>2.3.5.RELEASE</spring-kafka.version>
+        <elasticsearch.version>7.4.2</elasticsearch.version>
     </properties>
 
     <!--依赖管理：子Module不需要指定Version-->
@@ -156,7 +157,7 @@
             <dependency>
                 <groupId>org.elasticsearch.client</groupId>
                 <artifactId>elasticsearch-rest-high-level-client</artifactId>
-                <version>7.4.2</version>
+                <version>${elasticsearch.version}</version>
             </dependency>
 
             <!--ShardingSphere-->

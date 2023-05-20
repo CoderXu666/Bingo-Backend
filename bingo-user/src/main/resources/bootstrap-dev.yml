@@ -23,6 +23,21 @@ spring:
           - data-id: bingo_kafka.yml
 #          - data-id: bingo_elasticsearch.yml
 
+xxl:
+  job:
+    admin:
+      addresses: http://101.42.13.186:8800/xxl-job-admin/
+      userName: admin
+      password: 123456
+    accessToken: Lpoms_xxljob_default_token
+    executor:
+      appname: core
+      address:
+      ip:
+      port: 9999
+      logpath: logs/xxl-job/jobhandler
+      logretentiondays: 7
+
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

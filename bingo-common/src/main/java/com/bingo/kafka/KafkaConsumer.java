@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-
 /**
  * @Author 徐志斌
  * @Date: 2023/5/13 21:22
@@ -43,12 +41,6 @@ public class KafkaConsumer {
         } catch (Exception e) {
             log.error("保存帖子ES数据报错：{}", e.getMessage());
             return null;
-        } finally {
-            try {
-                esClient.close();
-            } catch (IOException ioException) {
-                log.error("Close ES Client Error：{}", ioException.getMessage());
-            }
         }
     }
 }
