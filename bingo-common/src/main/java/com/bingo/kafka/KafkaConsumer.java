@@ -1,7 +1,9 @@
 package com.bingo.kafka;
 
+import com.alibaba.fastjson.JSON;
 import com.bingo.constant.ESConstant;
 import com.bingo.constant.KafkaConstant;
+import com.bingo.pojo.po.BingoPost;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
@@ -30,12 +32,15 @@ public class KafkaConsumer {
      * 监听帖子
      */
     @KafkaListener(topics = KafkaConstant.COMMUNITY_POST, groupId = KafkaConstant.GROUP_ID)
-    public Boolean listenPostMsg(String message) throws IOException {
+    public String listenPostMsg(String message) throws IOException {
         try {
-            IndexRequest request = new IndexRequest(ESConstant.POST_INDEX);
-            request.source(message, XContentType.JSON);
+            BingoPost bingoPost = JSON.parseObject(message, BingoPost.class);
+            IndexRequest request = new IndexRequest(ESConstant.POST_INDEX)
+                    .id(bingoPost.getId().toString())
+                    .source(message, XContentType.JSON);
             IndexResponse response = esClient.index(request, RequestOptions.DEFAULT);
-            return response.getResult() == IndexResponse.Result.CREATED;
+            log.info(response.getId());
+            return response.getId();
         } catch (Exception e) {
             log.error("保存帖子ES数据报错：{}", e.getMessage());
             return null;
