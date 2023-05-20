@@ -10,5 +10,5 @@ public class ESConstant {
     /**
      * ES索引
      */
-    public static final String POST_INDEX = "community-post-topic";
+    public static final String POST_INDEX = "community_post_index";
 }
