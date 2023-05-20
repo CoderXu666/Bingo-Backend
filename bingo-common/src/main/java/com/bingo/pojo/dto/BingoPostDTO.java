@@ -31,4 +31,20 @@ public class BingoPostDTO {
      * 关联话题（#坤坤）
      */
     private String postTopic;
+
+    /**
+     * 点赞数
+     */
+    private Long likeCount;
+
+    /**
+     * 评论数
+     */
+    private Long commentCount;
+
+    /**
+     * 转发数
+     */
+    private Long forwardCount;
+
 }
