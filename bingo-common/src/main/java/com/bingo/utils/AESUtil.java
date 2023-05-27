@@ -15,7 +15,7 @@ import java.util.Base64;
  * @Version 1.0
  * @Description: AESUtils
  */
-public class AESUtils {
+public class AESUtil {
     private static final String SECRET_KEY_ALGORITHM = "AES";
     private static final String CIPHER_TRANSFORMATION = "AES/ECB/PKCS5Padding";
     private static final String SECRET_KEY = "bingoxuzhibin666";

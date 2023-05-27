@@ -18,7 +18,7 @@ public class MQTopicConstant {
     public static final String POST_LIKE_TOPIC = "POST_LIKE_TOPIC";
 
     /**
-     * 消费组
+     * 帖子消费组
      */
-    public static final String GROUP_ID = "my-group";
+    public static final String POST_GROUP_ID = "my-group";
 }

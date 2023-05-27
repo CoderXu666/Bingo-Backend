@@ -29,7 +29,7 @@ public class KafkaConsumer {
     /**
      * 保存帖子
      */
-    @KafkaListener(topics = MQTopicConstant.COMMUNITY_POST_TOPIC, groupId = MQTopicConstant.GROUP_ID)
+    @KafkaListener(topics = MQTopicConstant.COMMUNITY_POST_TOPIC, groupId = MQTopicConstant.POST_GROUP_ID)
     public String savePost(String message) {
         try {
             BingoPost bingoPost = JSON.parseObject(message, BingoPost.class);
@@ -47,18 +47,8 @@ public class KafkaConsumer {
     /**
      * 点赞帖子
      */
-    @KafkaListener(topics = MQTopicConstant.POST_LIKE_TOPIC, groupId = MQTopicConstant.GROUP_ID)
+    @KafkaListener(topics = MQTopicConstant.POST_LIKE_TOPIC, groupId = MQTopicConstant.POST_GROUP_ID)
     public String likePost(String message) {
-        try {
-            BingoPost bingoPost = JSON.parseObject(message, BingoPost.class);
-            IndexRequest request = new IndexRequest(ESConstant.POST_INDEX)
-                    .id(bingoPost.getId().toString())
-                    .source(JSON.toJSONString(bingoPost), XContentType.JSON);
-            IndexResponse response = esClient.index(request, RestHighLevelClientConfig.COMMON_OPTIONS);
-            return response.getId();
-        } catch (Exception e) {
-            log.error("点赞帖子报错：{}", e.getMessage());
-            return null;
-        }
+        return null;
     }
 }
