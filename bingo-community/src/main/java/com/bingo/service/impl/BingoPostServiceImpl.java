@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.constant.KafkaConstant;
 import com.bingo.kafka.KafkaProducer;
 import com.bingo.mapper.BingoPostMapper;
+import com.bingo.pojo.dto.LikeDTO;
 import com.bingo.pojo.dto.PostDTO;
 import com.bingo.pojo.po.BingoPost;
 import com.bingo.service.BingoPostService;
@@ -42,5 +43,13 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
         kafkaProducer.sendMessage(KafkaConstant.COMMUNITY_POST, JSON.toJSONString(bingoPost));
 
         return true;
+    }
+
+    /**
+     * 点赞帖子
+     */
+    @Override
+    public Boolean likePost(LikeDTO likeDTO) {
+        return null;
     }
 }

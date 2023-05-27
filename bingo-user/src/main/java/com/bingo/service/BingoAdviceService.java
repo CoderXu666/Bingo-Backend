@@ -14,12 +14,5 @@ import com.bingo.pojo.po.BingoAdvice;
  * @since 2023-03-01
  */
 public interface BingoAdviceService extends IService<BingoAdvice> {
-
-    /**
-     * 保存建议和评价
-     *
-     * @param bingoAdviceDTO
-     * @return
-     */
     Boolean saveAdvice(AdviceDTO bingoAdviceDTO);
 }

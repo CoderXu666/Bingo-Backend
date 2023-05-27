@@ -15,8 +15,11 @@ public class LikeDTO {
      */
     private Long postId;
     /**
-     * 发起点赞人
+     * 被点赞人
      */
     private Long userId;
-
+    /**
+     * 发起点赞人
+     */
+    private Long postLikeUserId;
 }

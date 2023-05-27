@@ -1,7 +1,7 @@
 package com.bingo.controller;
 
-
 import com.bingo.enums.RespCodeEnum;
+import com.bingo.pojo.dto.LikeDTO;
 import com.bingo.pojo.dto.PostDTO;
 import com.bingo.resp.R;
 import com.bingo.service.BingoPostService;
@@ -42,9 +42,9 @@ public class BingoPostController {
      * 点赞帖子
      */
     @PostMapping("/like")
-    public R likePost() {
+    public R likePost(@RequestBody LikeDTO likeDTO) {
         try {
-//            postService.likePost();
+            postService.likePost(likeDTO);
             return R.out(RespCodeEnum.SUCCESS, "操作成功");
         } catch (Exception e) {
             return R.out(RespCodeEnum.FAIL, "操作失败");

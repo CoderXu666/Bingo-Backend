@@ -17,19 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @since 2023-03-01
  */
 public interface BingoUserService extends IService<BingoUser> {
-
-    /**
-     * 根据userId查询用户信息
-     */
     BingoUserVO findById(Long id);
-
-    /**
-     * 生成验证码
-     */
     void generateCode(HttpServletRequest request, HttpServletResponse response);
-
-    /**
-     * 修改用户信息
-     */
     Boolean updateUser(BingoUser user);
 }
