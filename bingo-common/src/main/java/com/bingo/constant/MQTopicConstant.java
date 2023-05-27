@@ -4,18 +4,18 @@ package com.bingo.constant;
  * @Author 徐志斌
  * @Date: 2023/5/14 14:30
  * @Version 1.0
- * @Description: KafkaConstant
+ * @Description: MQTopicConstant
  */
-public class KafkaConstant {
+public class MQTopicConstant {
     /**
      * 帖子主题
      */
-    public static final String COMMUNITY_POST = "COMMUNITY-POST-TOPIC";
+    public static final String COMMUNITY_POST_TOPIC = "COMMUNITY-POST-TOPIC";
 
     /**
      * 点赞主题
      */
-    public static final String POST_LIKE = "POST_LIKE_TOPIC";
+    public static final String POST_LIKE_TOPIC = "POST_LIKE_TOPIC";
 
     /**
      * 消费组

@@ -2,7 +2,7 @@ package com.bingo.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bingo.constant.KafkaConstant;
+import com.bingo.constant.MQTopicConstant;
 import com.bingo.kafka.KafkaProducer;
 import com.bingo.mapper.BingoPostMapper;
 import com.bingo.pojo.dto.LikeDTO;
@@ -12,7 +12,10 @@ import com.bingo.service.BingoPostService;
 import com.bingo.store.BingoPostStore;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -28,6 +31,8 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
     private BingoPostStore postStore;
     @Autowired
     private KafkaProducer kafkaProducer;
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
 
     /**
      * 发布帖子
@@ -39,8 +44,8 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
         BeanUtils.copyProperties(postDTO, bingoPost);
         postStore.savePost(bingoPost);
 
-        // 将消息发送给 Kafka，异步同步 ES
-        kafkaProducer.sendMessage(KafkaConstant.COMMUNITY_POST, JSON.toJSONString(bingoPost));
+        // 消息发送MQ，同步ES
+        kafkaProducer.sendMessage(MQTopicConstant.COMMUNITY_POST_TOPIC, JSON.toJSONString(bingoPost));
 
         return true;
     }
@@ -50,6 +55,17 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
      */
     @Override
     public Boolean likePost(LikeDTO likeDTO) {
+        Long postId = likeDTO.getPostId();
+        Long userId = likeDTO.getUserId();
+        Long likeUserId = likeDTO.getLikeUserId();
+
+        // 生成RedisKey（帖子赞数、点赞记录）
+        String likeKey = "";
+        String likeCountKey = "";
+
+        // 消息发送给MQ，同步MySQL
+//        kafkaProducer.sendMessage(MQTopicConstant.POST_LIKE, JSON.toJSONString());
+
         return null;
     }
 }

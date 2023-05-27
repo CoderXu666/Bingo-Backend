@@ -1,5 +1,6 @@
 package com.bingo.kafka;
 
+import com.bingo.constant.MQTopicConstant;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.ListTopicsResult;
@@ -19,7 +20,8 @@ public class KafkaAdminClient {
     private static String url = "101.42.13.186:9092";
 
     public static void main(String[] args) throws Exception {
-        createTopic("community-post-topic");
+        createTopic(MQTopicConstant.COMMUNITY_POST_TOPIC);
+        createTopic(MQTopicConstant.POST_LIKE_TOPIC);
 //        getTopic();
 //        deleteTopic("");
     }
@@ -44,7 +46,7 @@ public class KafkaAdminClient {
         props.put("bootstrap.servers", url);
         AdminClient adminClient = AdminClient.create(props);
         ListTopicsResult topicsResult = adminClient.listTopics();
-        System.out.println(topicsResult.names().get());
+        System.out.println("============================================" + topicsResult.names().get());
     }
 
     /**

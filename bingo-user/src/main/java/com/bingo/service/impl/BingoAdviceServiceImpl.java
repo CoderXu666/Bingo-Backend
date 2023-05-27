@@ -30,6 +30,7 @@ public class BingoAdviceServiceImpl extends ServiceImpl<BingoAdviceMapper, Bingo
      * 保存建议和评价
      */
     @Override
+    public Boolean saveAdvice(AdviceDTO bingoAdviceDTO) {
         BingoAdvice bingoAdvice = new BingoAdvice();
         if (StringUtils.isNotEmpty(bingoAdviceDTO.getUserName())) {
             BeanUtils.copyProperties(bingoAdviceDTO, bingoAdvice);
@@ -37,6 +38,7 @@ public class BingoAdviceServiceImpl extends ServiceImpl<BingoAdviceMapper, Bingo
             bingoAdviceDTO.setUserName("未知用户");
             BeanUtils.copyProperties(bingoAdviceDTO, bingoAdvice);
         }
-        return bingoAdviceStore.saveAdvice(bingoAdvice);
+        Boolean isSuccess = bingoAdviceStore.saveAdvice(bingoAdvice);
+        return isSuccess;
     }
 }

@@ -3,7 +3,7 @@ package com.bingo.kafka;
 import com.alibaba.fastjson.JSON;
 import com.bingo.config.RestHighLevelClientConfig;
 import com.bingo.constant.ESConstant;
-import com.bingo.constant.KafkaConstant;
+import com.bingo.constant.MQTopicConstant;
 import com.bingo.pojo.po.BingoPost;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.index.IndexRequest;
@@ -29,7 +29,7 @@ public class KafkaConsumer {
     /**
      * 保存帖子
      */
-    @KafkaListener(topics = KafkaConstant.COMMUNITY_POST, groupId = KafkaConstant.GROUP_ID)
+    @KafkaListener(topics = MQTopicConstant.COMMUNITY_POST_TOPIC, groupId = MQTopicConstant.GROUP_ID)
     public String savePost(String message) {
         try {
             BingoPost bingoPost = JSON.parseObject(message, BingoPost.class);
@@ -47,7 +47,7 @@ public class KafkaConsumer {
     /**
      * 点赞帖子
      */
-    @KafkaListener(topics = KafkaConstant.POST_LIKE, groupId = KafkaConstant.GROUP_ID)
+    @KafkaListener(topics = MQTopicConstant.POST_LIKE_TOPIC, groupId = MQTopicConstant.GROUP_ID)
     public String likePost(String message) {
         try {
             BingoPost bingoPost = JSON.parseObject(message, BingoPost.class);
