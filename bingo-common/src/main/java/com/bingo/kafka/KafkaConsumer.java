@@ -27,10 +27,10 @@ public class KafkaConsumer {
     private RestHighLevelClient esClient;
 
     /**
-     * 监听帖子
+     * 保存帖子
      */
     @KafkaListener(topics = KafkaConstant.COMMUNITY_POST, groupId = KafkaConstant.GROUP_ID)
-    public String listenPostMsg(String message) {
+    public String savePost(String message) {
         try {
             BingoPost bingoPost = JSON.parseObject(message, BingoPost.class);
             IndexRequest request = new IndexRequest(ESConstant.POST_INDEX)
@@ -40,6 +40,24 @@ public class KafkaConsumer {
             return response.getId();
         } catch (Exception e) {
             log.error("保存帖子ES数据报错：{}", e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * 点赞帖子
+     */
+    @KafkaListener(topics = KafkaConstant.POST_LIKE, groupId = KafkaConstant.GROUP_ID)
+    public String likePost(String message) {
+        try {
+            BingoPost bingoPost = JSON.parseObject(message, BingoPost.class);
+            IndexRequest request = new IndexRequest(ESConstant.POST_INDEX)
+                    .id(bingoPost.getId().toString())
+                    .source(JSON.toJSONString(bingoPost), XContentType.JSON);
+            IndexResponse response = esClient.index(request, RestHighLevelClientConfig.COMMON_OPTIONS);
+            return response.getId();
+        } catch (Exception e) {
+            log.error("点赞帖子报错：{}", e.getMessage());
             return null;
         }
     }

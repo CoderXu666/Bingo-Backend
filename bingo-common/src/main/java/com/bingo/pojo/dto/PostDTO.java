@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 public class PostDTO {
     /**
-     * 账号
+     * 账号id
      */
     private String userId;
 
@@ -31,20 +31,4 @@ public class PostDTO {
      * 关联话题（#坤坤）
      */
     private String postTopic;
-
-    /**
-     * 点赞数
-     */
-    private Long likeCount;
-
-    /**
-     * 评论数
-     */
-    private Long commentCount;
-
-    /**
-     * 转发数
-     */
-    private Long forwardCount;
-
 }

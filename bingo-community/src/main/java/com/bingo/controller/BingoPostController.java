@@ -45,7 +45,7 @@ public class BingoPostController {
     public R likePost() {
         try {
 //            postService.likePost();
-            return R.out(RespCodeEnum.SUCCESS, null);
+            return R.out(RespCodeEnum.SUCCESS, "操作成功");
         } catch (Exception e) {
             return R.out(RespCodeEnum.FAIL, "操作失败");
         }

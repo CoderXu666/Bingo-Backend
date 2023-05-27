@@ -8,9 +8,14 @@ package com.bingo.constant;
  */
 public class KafkaConstant {
     /**
-     * 主题
+     * 帖子主题
      */
-    public static final String COMMUNITY_POST = "community-post-topic";
+    public static final String COMMUNITY_POST = "COMMUNITY-POST-TOPIC";
+
+    /**
+     * 点赞主题
+     */
+    public static final String POST_LIKE = "POST_LIKE_TOPIC";
 
     /**
      * 消费组
