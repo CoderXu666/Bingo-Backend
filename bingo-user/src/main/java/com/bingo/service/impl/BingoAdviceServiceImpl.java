@@ -3,7 +3,7 @@ package com.bingo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoAdviceMapper;
-import com.bingo.pojo.dto.BingoAdviceDTO;
+import com.bingo.pojo.dto.AdviceDTO;
 import com.bingo.pojo.po.BingoAdvice;
 import com.bingo.service.BingoAdviceService;
 import com.bingo.store.BingoAdviceStore;
@@ -30,7 +30,7 @@ public class BingoAdviceServiceImpl extends ServiceImpl<BingoAdviceMapper, Bingo
      * 保存建议和评价
      */
     @Override
-    public Boolean saveAdvice(BingoAdviceDTO bingoAdviceDTO) {
+    public Boolean saveAdvice(AdviceDTO bingoAdviceDTO) {
         BingoAdvice bingoAdvice = new BingoAdvice();
         if (StringUtils.isNotEmpty(bingoAdviceDTO.getUserName())) {
             BeanUtils.copyProperties(bingoAdviceDTO, bingoAdvice);

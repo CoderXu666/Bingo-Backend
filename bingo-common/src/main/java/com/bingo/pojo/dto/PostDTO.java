@@ -11,7 +11,7 @@ import lombok.Data;
  * @since 2023-05-13
  */
 @Data
-public class BingoPostDTO {
+public class PostDTO {
     /**
      * 账号
      */

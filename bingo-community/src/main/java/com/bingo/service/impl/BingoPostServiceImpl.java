@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.constant.KafkaConstant;
 import com.bingo.kafka.KafkaProducer;
 import com.bingo.mapper.BingoPostMapper;
-import com.bingo.pojo.dto.BingoPostDTO;
+import com.bingo.pojo.dto.PostDTO;
 import com.bingo.pojo.po.BingoPost;
 import com.bingo.service.BingoPostService;
 import com.bingo.store.BingoPostStore;
@@ -32,7 +32,7 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
      * 发布帖子
      */
     @Override
-    public Boolean savePost(BingoPostDTO postDTO) {
+    public Boolean savePost(PostDTO postDTO) {
         // 保存 DB
         BingoPost bingoPost = new BingoPost();
         BeanUtils.copyProperties(postDTO, bingoPost);

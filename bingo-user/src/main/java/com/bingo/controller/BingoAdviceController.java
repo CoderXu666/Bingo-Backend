@@ -2,7 +2,7 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.dto.BingoAdviceDTO;
+import com.bingo.pojo.dto.AdviceDTO;
 import com.bingo.resp.R;
 import com.bingo.service.BingoAdviceService;
 import com.bingo.service.BingoUserService;
@@ -34,7 +34,7 @@ public class BingoAdviceController {
      * @return
      */
     @PostMapping("/save")
-    public R saveAdvice(@RequestBody BingoAdviceDTO adviceDTO) {
+    public R saveAdvice(@RequestBody AdviceDTO adviceDTO) {
         try {
             adviceService.saveAdvice(adviceDTO);
             return R.out(RespCodeEnum.SUCCESS, "保存成功");

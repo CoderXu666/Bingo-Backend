@@ -4,7 +4,7 @@ import lombok.Data;
 
 
 @Data
-public class BingoAdviceDTO {
+public class AdviceDTO {
     /**
      * 用户名
      */

@@ -2,7 +2,7 @@ package com.bingo.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bingo.pojo.dto.BingoAdviceDTO;
+import com.bingo.pojo.dto.AdviceDTO;
 import com.bingo.pojo.po.BingoAdvice;
 
 /**
@@ -21,5 +21,5 @@ public interface BingoAdviceService extends IService<BingoAdvice> {
      * @param bingoAdviceDTO
      * @return
      */
-    Boolean saveAdvice(BingoAdviceDTO bingoAdviceDTO);
+    Boolean saveAdvice(AdviceDTO bingoAdviceDTO);
 }

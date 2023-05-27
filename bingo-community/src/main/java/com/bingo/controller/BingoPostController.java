@@ -2,7 +2,7 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.dto.BingoPostDTO;
+import com.bingo.pojo.dto.PostDTO;
 import com.bingo.resp.R;
 import com.bingo.service.BingoPostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +29,22 @@ public class BingoPostController {
      * 发布帖子
      */
     @PostMapping("/save")
-    public R savePost(@RequestBody BingoPostDTO postDTO) {
+    public R savePost(@RequestBody PostDTO postDTO) {
         try {
             postService.savePost(postDTO);
+            return R.out(RespCodeEnum.SUCCESS, null);
+        } catch (Exception e) {
+            return R.out(RespCodeEnum.FAIL, "操作失败");
+        }
+    }
+
+    /**
+     * 点赞帖子
+     */
+    @PostMapping("/like")
+    public R likePost() {
+        try {
+//            postService.likePost();
             return R.out(RespCodeEnum.SUCCESS, null);
         } catch (Exception e) {
             return R.out(RespCodeEnum.FAIL, "操作失败");
