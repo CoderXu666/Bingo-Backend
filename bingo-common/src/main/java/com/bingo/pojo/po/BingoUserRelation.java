@@ -34,13 +34,13 @@ public class BingoUserRelation implements Serializable {
     /**
      * 用户id1
      */
-    @TableField("user_id1")
+    @TableField("user1")
     private Long userId1;
 
     /**
      * 用户id2
      */
-    @TableField("user_id2")
+    @TableField("user2")
     private Long userId2;
 
     /**

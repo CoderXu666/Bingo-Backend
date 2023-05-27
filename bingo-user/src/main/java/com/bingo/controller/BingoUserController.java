@@ -87,12 +87,13 @@ public class BingoUserController {
 
     /**
      * 根据ids批量查询用户信息
+     * postman前端传参数不要声明变量名，否则调用不通，例如：[1,2,3]
      */
-    @GetMapping("/get_list")
+    @PostMapping("/get_list")
     public R getUserInfoByIds(List<Long> ids) {
         try {
             List<BingoUserVO> userList = userService.getUserByIds(ids);
-            return R.out(RespCodeEnum.SUCCESS, "userList");
+            return R.out(RespCodeEnum.SUCCESS, userList);
         } catch (Exception e) {
             return R.out(RespCodeEnum.FAIL, "操作失败");
         }

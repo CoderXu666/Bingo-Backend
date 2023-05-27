@@ -6,7 +6,7 @@ import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.resp.R;
 import com.bingo.service.BingoUserRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,21 +21,21 @@ import java.util.List;
  * @since 2023-05-27
  */
 @RestController
-@RequestMapping("/bingoUserRelation")
+@RequestMapping("/relation")
 public class BingoUserRelationController {
     @Autowired
     private BingoUserRelationService relationService;
 
     /**
-     * 查询当前用户的好友
+     * 查询当前用户的好友列表
      */
-    @PostMapping("/save")
-    public R findFrind(Long id) {
+    @GetMapping("/list")
+    public R findFriendById(Long id) {
         try {
             List<BingoUserVO> friendList = relationService.findFriend(id);
             return R.out(RespCodeEnum.SUCCESS, friendList);
         } catch (Exception e) {
-            return R.out(RespCodeEnum.FAIL, "操作失败");
+            return R.out(RespCodeEnum.FAIL, e.getMessage());
         }
     }
 }
