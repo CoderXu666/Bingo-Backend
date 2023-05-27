@@ -10,6 +10,7 @@ import com.bingo.pojo.dto.PostDTO;
 import com.bingo.pojo.po.BingoPost;
 import com.bingo.service.BingoPostService;
 import com.bingo.store.BingoPostStore;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -56,15 +57,38 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
     @Override
     public Boolean likePost(LikeDTO likeDTO) {
         Long postId = likeDTO.getPostId();
-        Long userId = likeDTO.getUserId();
         Long likeUserId = likeDTO.getLikeUserId();
 
-        // 生成RedisKey（帖子赞数、点赞记录）
-        String likeKey = "";
-        String likeCountKey = "";
+        // 生成RedisKey（点赞状态、点赞次数）
+        String likeStatusKey = postId + ":" + likeUserId;
+        String likeCountKey = postId + ":count";
+
+        // 查询点赞状态、点赞次数
+        String likeStatus = (String) redisTemplate.opsForValue().get(likeStatusKey);
+        String likeCount = (String) redisTemplate.opsForValue().get(likeCountKey);
+
+        // 处理点赞状态
+        if (StringUtils.isNotEmpty(likeStatus)) {
+            if ("0".equals(likeStatus)) {
+                redisTemplate.opsForValue().set(likeStatusKey, "1");
+            } else {
+                redisTemplate.opsForValue().set(likeStatusKey, "0");
+            }
+        } else {
+            redisTemplate.opsForValue().set(likeStatusKey, "1");
+        }
+
+        /// 处理点赞数量
+        if (StringUtils.isNotEmpty(likeCount)) {
+            String likeCountVal = (String) redisTemplate.opsForValue().get(likeCount);
+            redisTemplate.opsForValue().set(likeCountKey, likeCountVal + 1);
+        } else {
+            redisTemplate.opsForValue().set(likeCountKey, 1);
+        }
 
         // 消息发送给MQ，同步MySQL
 //        kafkaProducer.sendMessage(MQTopicConstant.POST_LIKE, JSON.toJSONString());
+
 
         return null;
     }
