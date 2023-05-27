@@ -42,7 +42,6 @@
         <elasticsearch.version>7.4.2</elasticsearch.version>
     </properties>
 
-    <!--依赖管理：子Module不需要指定Version-->
     <dependencyManagement>
         <dependencies>
             <!--SpringBoot-->
