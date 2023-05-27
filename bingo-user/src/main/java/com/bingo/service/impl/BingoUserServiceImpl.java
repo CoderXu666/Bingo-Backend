@@ -4,7 +4,6 @@ package com.bingo.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoUserMapper;
 import com.bingo.pojo.po.BingoUser;
-import com.bingo.pojo.po.BingoUserStatistics;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoUserService;
 import com.bingo.store.BingoUserStatisticsStore;
@@ -23,6 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -131,5 +132,20 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     @Override
     public Boolean updateUser(BingoUser user) {
         return userStore.updateUser(user);
+    }
+
+    /**
+     * 根据ids批量查询用户信息
+     */
+    @Override
+    public List<BingoUserVO> getUserByIds(List<Long> ids) {
+        List<BingoUser> userInfoList = userStore.getUserListByIds(ids);
+        List<BingoUserVO> userVOList = new ArrayList<>();
+        for (BingoUser bingoUser : userInfoList) {
+            BingoUserVO userVO = new BingoUserVO();
+            BeanUtils.copyProperties(bingoUser, userVO);
+            userVOList.add(userVO);
+        }
+        return userVOList;
     }
 }

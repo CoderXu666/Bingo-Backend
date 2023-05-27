@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * <p>
@@ -82,6 +83,19 @@ public class BingoUserController {
     @GetMapping("/captcha")
     public void generateCode(HttpServletRequest request, HttpServletResponse response) {
         userService.generateCode(request, response);
+    }
+
+    /**
+     * 根据ids批量查询用户信息
+     */
+    @GetMapping("/get_list")
+    public R getUserInfoByIds(List<Long> ids) {
+        try {
+            List<BingoUserVO> userList = userService.getUserByIds(ids);
+            return R.out(RespCodeEnum.SUCCESS, "userList");
+        } catch (Exception e) {
+            return R.out(RespCodeEnum.FAIL, "操作失败");
+        }
     }
 }
 

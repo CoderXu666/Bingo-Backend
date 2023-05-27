@@ -8,6 +8,8 @@ import com.bingo.pojo.po.BingoUser;
 import com.bingo.store.BingoUserStore;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 服务实现类
@@ -34,5 +36,15 @@ public class BingoUserStoreImpl extends ServiceImpl<BingoUserMapper, BingoUser> 
     @Override
     public Boolean updateUser(BingoUser user) {
         return this.updateById(user);
+    }
+
+    /**
+     * 根据ids批量查询用户信息
+     */
+    @Override
+    public List<BingoUser> getUserListByIds(List<Long> ids) {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.in("id", ids);
+        return this.list(wrapper);
     }
 }

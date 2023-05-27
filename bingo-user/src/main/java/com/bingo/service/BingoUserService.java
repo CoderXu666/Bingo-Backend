@@ -7,6 +7,7 @@ import com.bingo.pojo.vo.BingoUserVO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * <p>
@@ -20,4 +21,5 @@ public interface BingoUserService extends IService<BingoUser> {
     BingoUserVO findById(Long id);
     void generateCode(HttpServletRequest request, HttpServletResponse response);
     Boolean updateUser(BingoUser user);
+    List<BingoUserVO> getUserByIds(List<Long> ids);
 }
