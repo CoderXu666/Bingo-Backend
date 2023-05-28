@@ -12,9 +12,12 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.WebSocketHandler;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 /**
  * @Author 徐志斌
@@ -22,15 +25,43 @@ import org.springframework.web.socket.WebSocketHandler;
  * @Version 1.0
  * @Description: IMServer
  */
+@Slf4j
 @Component
 public class IMServer {
     @Autowired
-    private WebSocketHandler webSocketHandler;
+    private ChatHandler chatHandler;
     private EventLoopGroup bossGroup;
     private EventLoopGroup workGroup;
 
     /**
-     * 启动 Netty 服务端
+     * 启动 IM Server(通过新线程启动Netty Server)
+     */
+    @PostConstruct
+    private void init() {
+        new Thread(() -> {
+            try {
+                start();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    /**
+     * 服务器停止释放资源
+     */
+    @PreDestroy
+    private void destroy() throws InterruptedException {
+        if (bossGroup != null) {
+            bossGroup.shutdownGracefully().sync();
+        }
+        if (workGroup != null) {
+            workGroup.shutdownGracefully().sync();
+        }
+    }
+
+    /**
+     * Netty Server启动方法
      */
     private void start() throws InterruptedException {
         // 定义两个EventLoopGroup
@@ -53,12 +84,14 @@ public class IMServer {
                     // HTTP数据在传输过程中是分段的，HttpObjectAggregator可以将多个段聚合
                     pipeline.addLast(new HttpObjectAggregator(1024 * 64));
                     pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
-                    pipeline.addLast(webSocketHandler); // 自定义子处理器(用于处理服务端接收到的数据)
+                    pipeline.addLast(chatHandler); // 自定义子处理器(用于处理服务端接收到的数据)
                 }
             });
 
             // Netty Server绑定端口号
             ChannelFuture channelFuture = server.bind(9099).sync();
+            log.info("Server started and listen on:{}", channelFuture.channel().localAddress());
+
             // 监听关闭Channel
             channelFuture.channel().closeFuture().sync();
         } finally {
