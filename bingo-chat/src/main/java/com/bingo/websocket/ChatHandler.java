@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
  * @Description: ChatHandler
  * <p>
  * TextWebSocketFrame类型， 表示一个文本帧
+ * AttributeKey:
  */
 @Slf4j
 @Component
@@ -28,9 +29,9 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
      */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
-        log.info("服务器收到消息：{}", msg.text());
+        log.info("---------------服务器收到消息：{}---------------", msg.text());
         JSONObject jsonObject = JSON.parseObject(msg.text());
-        String uid = jsonObject.getString("uid");
+        String uid = jsonObject.getString("uid"); // 这个数据后续考虑换成userId
         // 同步用户 和 Channel的对应关系
         NettyChannelConfig.getUserChannelMap().put(uid, ctx.channel());
         AttributeKey<String> key = AttributeKey.valueOf("userId");
@@ -54,8 +55,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
     public void handlerRemoved(ChannelHandlerContext ctx) {
         log.info("客户端与Netty服务器断开连接:" + ctx.channel().id().asLongText());
         NettyChannelConfig.getChannelGroup().remove(ctx.channel());
-        removeUserId(ctx);
-        ctx.close();
+        removeUserId(ctx); // 移除userId 和 Channel关系数据
     }
 
     // 删除用户与channel的对应关系
