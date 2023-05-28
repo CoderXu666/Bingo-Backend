@@ -17,7 +17,7 @@ public class NettyChannelConfig {
      * 1:作用:定义一个Channel组,管理所有的channel
      * GlobalEventExecutor.INSTANCE:单例
      * <p>
-     * 2:放用户与Channel的对应信息，用于给指定用户发送消息
+     * 2:UserId 与 Channel 对应关系(用于给指定用户发送消息)
      */
     private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     private static ConcurrentHashMap<String, Channel> userChannelMap = new ConcurrentHashMap<>();

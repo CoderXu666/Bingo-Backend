@@ -1,4 +1,4 @@
-package com.bingo.im;
+package com.bingo.websocket;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -77,7 +77,7 @@ public class IMServer {
             // 为每个连接成功的Channel绑定子处理器
             server.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
-                protected void initChannel(SocketChannel channel) throws Exception {
+                protected void initChannel(SocketChannel channel) {
                     ChannelPipeline pipeline = channel.pipeline();
                     pipeline.addLast(new HttpServerCodec());     // WebSocket基于http协议
                     pipeline.addLast(new ChunkedWriteHandler()); // 写大数据流的支持
