@@ -101,6 +101,13 @@
                 <version>2.2.4.RELEASE</version>
             </dependency>
 
+            <!--Netty-->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>4.1.45.Final</version>
+            </dependency>
+
             <!--sentinel-->
             <dependency>
                 <groupId>com.alibaba.csp</groupId>

@@ -58,6 +58,12 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
+        <!--Netty-->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+        </dependency>
+
         <!--OpenFeign-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
