@@ -1,4 +1,4 @@
-package com.bingo.websocket;
+package com.bingo.netty;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -31,7 +31,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
         log.info("---------------服务器收到消息：{}---------------", msg.text());
         JSONObject jsonObject = JSON.parseObject(msg.text());
-        String uid = jsonObject.getString("uid"); // 这个数据后续考虑换成userId
+        String uid = jsonObject.getString("userId"); // 这个数据后续考虑换成userId
         // 同步用户 和 Channel的对应关系
         NettyChannelConfig.getUserChannelMap().put(uid, ctx.channel());
         AttributeKey<String> key = AttributeKey.valueOf("userId");
@@ -46,6 +46,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
     public void handlerAdded(ChannelHandlerContext ctx) {
         log.info("客户端连接到Netty服务器:" + ctx.channel().id().asLongText());
         NettyChannelConfig.getChannelGroup().add(ctx.channel());
+        System.out.println(NettyChannelConfig.getChannelGroup());
     }
 
     /**

@@ -20,7 +20,7 @@ public class SendServiceImpl implements SendService {
      * 发送消息给某个用户
      */
     @Override
-    public void sendMsgToOne(String userId, String msg) {
+    public void sendMsgByUserId(String userId, String msg) {
         ConcurrentHashMap<String, Channel> userChannelMap = NettyChannelConfig.getUserChannelMap();
         Channel channel = userChannelMap.get(userId);
         channel.writeAndFlush(new TextWebSocketFrame(msg));
