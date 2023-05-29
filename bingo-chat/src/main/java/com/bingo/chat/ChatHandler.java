@@ -17,8 +17,7 @@ import org.springframework.stereotype.Component;
  * @Version 1.0
  * @Description: ChatHandler
  * <p>
- * TextWebSocketFrame类型， 表示一个文本帧
- * AttributeKey:
+ * TextWebSocketFrame类型,表示一个文本帧
  */
 @Slf4j
 @Component
@@ -26,12 +25,12 @@ import org.springframework.stereotype.Component;
 public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     /**
      * 读取客户端的数据
+     * 同步用户 和 Channel的对应关系 (K:userId V:channel)
      */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
         JSONObject jsonObject = JSON.parseObject(msg.text());
-        String userId = jsonObject.getString("userId"); // 这个数据后续考虑换成userId
-        // 同步用户 和 Channel的对应关系 (K:userId V:channel)
+        String userId = jsonObject.getString("userId");
         NettyChannelConfig.getUserChannelMap().put(userId, ctx.channel());
         AttributeKey<String> key = AttributeKey.valueOf("userId");
         ctx.channel().attr(key).setIfAbsent(userId);
@@ -44,7 +43,6 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
     public void handlerAdded(ChannelHandlerContext ctx) {
         log.info("客户端连接到Netty服务器:" + ctx.channel().id().asLongText());
         NettyChannelConfig.getChannelGroup().add(ctx.channel());
-        System.out.println(NettyChannelConfig.getChannelGroup());
     }
 
     /**
