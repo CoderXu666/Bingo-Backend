@@ -1,4 +1,4 @@
-package com.bingo.netty;
+package com.bingo.chat;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

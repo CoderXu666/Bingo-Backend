@@ -1,7 +1,9 @@
 package com.bingo.controller;
 
 import com.bingo.ChatMsgDTO;
-import com.bingo.service.SendService;
+import com.bingo.enums.RespCodeEnum;
+import com.bingo.resp.R;
+import com.bingo.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/chat")
 public class ChatController {
     @Autowired
-    private SendService pushService;
+    private ChatService pushService;
 
     /**
      * 消息推送给所有用户
@@ -23,7 +25,12 @@ public class ChatController {
      * 消息推送给指定用户
      */
     @PostMapping("/send_one")
-    public void sendMsgByUserId(@RequestBody ChatMsgDTO msgDTO) {
-        pushService.sendMsgByUserId(msgDTO.getUserId(), msgDTO.getMsg());
+    public R sendMsgByUserId(@RequestBody ChatMsgDTO msgDTO) {
+        try {
+            pushService.sendMsgByUserId(msgDTO.getUserId(), msgDTO.getMsg());
+            return R.out(RespCodeEnum.SUCCESS, "发送消息成功");
+        } catch (Exception e) {
+            return R.out(RespCodeEnum.FAIL, e.getMessage());
+        }
     }
 }

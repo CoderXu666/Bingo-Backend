@@ -1,9 +1,10 @@
 package com.bingo.service.impl;
 
 import com.bingo.config.NettyChannelConfig;
-import com.bingo.service.SendService;
+import com.bingo.service.ChatService;
 import io.netty.channel.Channel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,14 +16,17 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Description: SendServiceImpl
  */
 @Service
-public class SendServiceImpl implements SendService {
+public class ChatServiceImpl implements ChatService {
     /**
      * 发送消息给某个用户
      */
     @Override
-    public void sendMsgByUserId(String userId, String msg) {
+    public void sendMsgByUserId(String userId, String msg) throws Exception {
         ConcurrentHashMap<String, Channel> userChannelMap = NettyChannelConfig.getUserChannelMap();
         Channel channel = userChannelMap.get(userId);
+        if (ObjectUtils.isEmpty(channel)) {
+            throw new Exception("用户信息不存在Netty服务端");
+        }
         channel.writeAndFlush(new TextWebSocketFrame(msg));
     }
 
