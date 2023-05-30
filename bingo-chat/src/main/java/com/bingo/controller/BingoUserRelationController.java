@@ -6,6 +6,7 @@ import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.resp.R;
 import com.bingo.service.BingoUserRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,5 +39,20 @@ public class BingoUserRelationController {
             return R.out(RespCodeEnum.FAIL, e.getMessage());
         }
     }
+
+    /**
+     * 删除当前用户的好友
+     */
+    @DeleteMapping("/delete")
+    public R deleteById(Long userId, Long friendId) {
+        try {
+            relationService.deleteById(userId, friendId);
+            return R.out(RespCodeEnum.SUCCESS, "操作成功");
+        } catch (Exception e) {
+            return R.out(RespCodeEnum.FAIL, "操作失败");
+        }
+    }
+
+
 }
 

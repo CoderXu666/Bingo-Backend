@@ -7,6 +7,7 @@ import com.bingo.mapper.BingoUserRelationMapper;
 import com.bingo.pojo.po.BingoUserRelation;
 import com.bingo.store.BingoUserRelationStore;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,5 +45,35 @@ public class BingoUserRelationStoreImpl extends ServiceImpl<BingoUserRelationMap
             ids.add(userId1);
         }
         return ids;
+    }
+
+    /**
+     * 删除当前用户好友id
+     */
+    @Override
+    public Boolean deleteById(Long userId, Long friendId) throws Exception {
+        BingoUserRelation relation = null;
+        List<Long> friendList = this.findFriend(userId);
+        for (Long id : friendList) {
+            if (friendId.equals(id)) {
+                QueryWrapper<BingoUserRelation> wrapper1 = new QueryWrapper();
+                wrapper1.eq("user1", friendId);
+                wrapper1.eq("user2", userId);
+                BingoUserRelation userInfo1 = this.getOne(wrapper1);
+                QueryWrapper<BingoUserRelation> wrapper2 = new QueryWrapper();
+                wrapper2.eq("user1", userId);
+                wrapper2.eq("user2", friendId);
+                BingoUserRelation userInfo2 = this.getOne(wrapper2);
+                if (ObjectUtils.isEmpty(userInfo1)) {
+                    relation = userInfo2;
+                } else {
+                    relation = userInfo1;
+                }
+            }
+        }
+        if (ObjectUtils.isEmpty(relation)) {
+            throw new Exception("不能进行删除，你没有该好友");
+        }
+        return this.removeById(relation);
     }
 }

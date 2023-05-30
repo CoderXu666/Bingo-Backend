@@ -17,4 +17,5 @@ import java.util.List;
  */
 public interface BingoUserRelationService extends IService<BingoUserRelation> {
     List<BingoUserVO> findFriend(Long id);
+    Boolean deleteById(Long userId,Long friendId) throws Exception;
 }

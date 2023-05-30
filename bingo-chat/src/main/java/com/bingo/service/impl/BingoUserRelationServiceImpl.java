@@ -40,4 +40,13 @@ public class BingoUserRelationServiceImpl extends ServiceImpl<BingoUserRelationM
         List<BingoUserVO> userVOList = feignResponse.getData();
         return userVOList;
     }
+
+    /**
+     * 删除当前用户的好友
+     */
+    @Override
+    public Boolean deleteById(Long userId, Long friendId) throws Exception {
+        Boolean isSuccess = relationStore.deleteById(userId, friendId);
+        return isSuccess;
+    }
 }
