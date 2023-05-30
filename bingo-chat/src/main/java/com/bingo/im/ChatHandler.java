@@ -2,7 +2,7 @@ package com.bingo.im;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.bingo.config.im.ChannelConfig;
+import com.bingo.config.im.ChatChannelConfig;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -31,7 +31,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
         JSONObject jsonObject = JSON.parseObject(msg.text());
         String userId = jsonObject.getString("userId");
-        ChannelConfig.getUserChannelMap().put(userId, ctx.channel());
+        ChatChannelConfig.getUserChannelMap().put(userId, ctx.channel());
         AttributeKey<String> key = AttributeKey.valueOf("userId");
         ctx.channel().attr(key).setIfAbsent(userId);
     }
@@ -42,7 +42,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) {
         log.info("客户端连接到Netty服务器:" + ctx.channel().id().asLongText());
-        ChannelConfig.getChannelGroup().add(ctx.channel());
+        ChatChannelConfig.getChannelGroup().add(ctx.channel());
     }
 
     /**
@@ -51,7 +51,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) {
         log.info("客户端与Netty服务器断开连接:" + ctx.channel().id().asLongText());
-        ChannelConfig.getChannelGroup().remove(ctx.channel());
+        ChatChannelConfig.getChannelGroup().remove(ctx.channel());
         removeUserId(ctx); // 移除userId 和 Channel关系数据
     }
 
@@ -59,6 +59,6 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
     private void removeUserId(ChannelHandlerContext ctx) {
         AttributeKey<String> key = AttributeKey.valueOf("userId");
         String userId = ctx.channel().attr(key).get();
-        ChannelConfig.getUserChannelMap().remove(userId);
+        ChatChannelConfig.getUserChannelMap().remove(userId);
     }
 }

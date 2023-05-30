@@ -1,4 +1,4 @@
-package com.bingo.config.im;
+package com.bingo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

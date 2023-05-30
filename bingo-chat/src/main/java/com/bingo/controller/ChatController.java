@@ -1,6 +1,6 @@
 package com.bingo.controller;
 
-import com.bingo.ChatMsgDTO;
+import com.bingo.pojo.dto.ChatMsgDTO;
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.resp.R;
 import com.bingo.service.ChatService;

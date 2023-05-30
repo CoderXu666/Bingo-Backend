@@ -27,7 +27,7 @@ import javax.annotation.PreDestroy;
  */
 @Slf4j
 @Component
-public class ChatServer {
+public class IMChatServer {
     @Autowired
     private ChatHandler chatHandler;
     private EventLoopGroup bossGroup;
@@ -61,7 +61,7 @@ public class ChatServer {
     }
 
     /**
-     * Netty Server启动方法
+     * Netty Chat Server启动
      */
     private void start() throws InterruptedException {
         // 定义两个EventLoopGroup

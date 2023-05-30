@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Date: 2023/5/28 19:29
  * @Description: 管理 Channel 信息(文字聊天)
  */
-public class ChannelConfig {
+public class ChatChannelConfig {
     /**
      * 1:作用:定义一个Channel组,管理所有的channel
      * GlobalEventExecutor.INSTANCE:单例
