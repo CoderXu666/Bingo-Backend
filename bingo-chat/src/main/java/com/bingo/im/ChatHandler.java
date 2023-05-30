@@ -41,7 +41,6 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
      */
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) {
-        log.info("客户端连接到Netty服务器:" + ctx.channel().id().asLongText());
         ChatChannelConfig.getChannelGroup().add(ctx.channel());
     }
 
@@ -50,7 +49,6 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
      */
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) {
-        log.info("客户端与Netty服务器断开连接:" + ctx.channel().id().asLongText());
         ChatChannelConfig.getChannelGroup().remove(ctx.channel());
         removeUserId(ctx); // 移除userId 和 Channel关系数据
     }
