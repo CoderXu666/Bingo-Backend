@@ -1,6 +1,6 @@
 package com.bingo.service.impl;
 
-import com.bingo.config.NettyChannelConfig;
+import com.bingo.config.im.ChannelConfig;
 import com.bingo.service.ChatService;
 import io.netty.channel.Channel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
@@ -22,7 +22,7 @@ public class ChatServiceImpl implements ChatService {
      */
     @Override
     public void sendMsgByUserId(String userId, String msg) throws Exception {
-        ConcurrentHashMap<String, Channel> userChannelMap = NettyChannelConfig.getUserChannelMap();
+        ConcurrentHashMap<String, Channel> userChannelMap = ChannelConfig.getUserChannelMap();
         Channel channel = userChannelMap.get(userId);
         if (ObjectUtils.isEmpty(channel)) {
             throw new Exception("用户信息不存在Netty服务端");
@@ -35,6 +35,6 @@ public class ChatServiceImpl implements ChatService {
      */
     @Override
     public void sendMsgToAll(String msg) {
-        NettyChannelConfig.getChannelGroup().writeAndFlush(new TextWebSocketFrame(msg));
+        ChannelConfig.getChannelGroup().writeAndFlush(new TextWebSocketFrame(msg));
     }
 }

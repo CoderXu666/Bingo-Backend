@@ -1,4 +1,4 @@
-package com.bingo.config;
+package com.bingo.config.im;
 
 import io.netty.channel.Channel;
 import io.netty.channel.group.ChannelGroup;
@@ -10,9 +10,9 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @Author 徐志斌
  * @Date: 2023/5/28 19:29
- * @Description: 管理 Netty Channel 信息
+ * @Description: 管理 Channel 信息(文字聊天)
  */
-public class NettyChannelConfig {
+public class ChannelConfig {
     /**
      * 1:作用:定义一个Channel组,管理所有的channel
      * GlobalEventExecutor.INSTANCE:单例

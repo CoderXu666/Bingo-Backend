@@ -1,4 +1,4 @@
-package com.bingo.chat;
+package com.bingo.im;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -23,11 +23,11 @@ import javax.annotation.PreDestroy;
  * @Author 徐志斌
  * @Date: 2023/5/28 19:36
  * @Version 1.0
- * @Description: IMServer
+ * @Description: Netty服务器(用于文字聊天)
  */
 @Slf4j
 @Component
-public class IMServer {
+public class ChatServer {
     @Autowired
     private ChatHandler chatHandler;
     private EventLoopGroup bossGroup;
