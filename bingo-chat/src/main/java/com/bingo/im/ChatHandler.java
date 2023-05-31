@@ -25,7 +25,12 @@ import org.springframework.stereotype.Component;
 public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     /**
      * 读取客户端的数据
+     * <p>
      * 同步用户 和 Channel的对应关系 (K:userId V:channel)
+     * <p>
+     * 注意:这里不会接收用户聊天内容,用户发送数据时候,调用了Controller,并没有在js中使用socket.send api
+     * 所以换个角度说,这里还有种实现方式就是发送消息不调用Controller,而是js调用socket.send
+     * 该方法接收后在做处理,也是可以实现的
      */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
