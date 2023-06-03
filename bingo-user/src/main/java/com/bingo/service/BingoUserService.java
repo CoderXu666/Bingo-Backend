@@ -2,6 +2,7 @@ package com.bingo.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bingo.pojo.dto.LoginUserDTO;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.vo.BingoUserVO;
 
@@ -19,7 +20,14 @@ import java.util.List;
  */
 public interface BingoUserService extends IService<BingoUser> {
     BingoUserVO findById(Long id);
+
     void generateCode(HttpServletRequest request, HttpServletResponse response);
+
     Boolean updateUser(BingoUser user);
+
     List<BingoUserVO> getUserByIds(List<Long> ids);
+
+    Boolean register(LoginUserDTO userDTO);
+
+    Boolean login(LoginUserDTO userDTO) throws Exception;
 }

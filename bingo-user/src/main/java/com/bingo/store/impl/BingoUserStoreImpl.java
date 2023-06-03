@@ -31,6 +31,14 @@ public class BingoUserStoreImpl extends ServiceImpl<BingoUserMapper, BingoUser> 
     }
 
     /**
+     * 根据userId查询用户信息
+     */
+    @Override
+    public BingoUser findByUserId(String userId) {
+        return null;
+    }
+
+    /**
      * 修改用户信息
      */
     @Override

@@ -2,6 +2,7 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
+import com.bingo.pojo.dto.LoginUserDTO;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.resp.R;
@@ -44,9 +45,10 @@ public class BingoUserController {
      * 注册
      */
     @PostMapping("/register")
-    public R register(@RequestBody BingoUser user) {
+    public R register(@RequestBody LoginUserDTO userDTO) {
         try {
-            return null;
+            userService.register(userDTO);
+            return R.out(RespCodeEnum.SUCCESS, "操作成功");
         } catch (Exception e) {
             return R.out(RespCodeEnum.FAIL, "操作失败");
         }
@@ -56,9 +58,10 @@ public class BingoUserController {
      * 登录
      */
     @PostMapping("/login")
-    public R login(@RequestBody BingoUser user) {
+    public R login(@RequestBody LoginUserDTO userDTO) {
         try {
-            return null;
+            userService.login(userDTO);
+            return R.out(RespCodeEnum.SUCCESS, "操作成功");
         } catch (Exception e) {
             return R.out(RespCodeEnum.FAIL, "操作失败");
         }
