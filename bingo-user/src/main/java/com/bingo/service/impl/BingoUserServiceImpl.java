@@ -158,8 +158,26 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 注册
      */
     @Override
-    public Boolean register(RegisterUserDTO userDTO) {
+    public Boolean register(RegisterUserDTO userDTO) throws Exception {
+        String userId = userDTO.getUserId();
+        String passWord = userDTO.getPassWord();
+        String email = userDTO.getEmail();
 
+        // TODO: 入参校验：JSR 303
+
+        // 判断账号是否注册过
+        BingoUser userInfo = userStore.findByUserId(userId);
+        if (ObjectUtils.isNotEmpty(userInfo)) {
+            throw new Exception("该账号已存在，请重试");
+        }
+
+        // 保存账号信息
+        BingoUser user = new BingoUser();
+        user.setUserId(userId);
+        user.setPassWord(AESUtil.encrypt(passWord));
+//        user.setUserName(); // 默认
+//        user.setAvatarUrl(); // 默认
+        userStore.save(user);
 
         return null;
     }

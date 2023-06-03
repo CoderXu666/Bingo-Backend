@@ -28,7 +28,7 @@ public interface BingoUserService extends IService<BingoUser> {
 
     List<BingoUserVO> getUserByIds(List<Long> ids);
 
-    Boolean register(RegisterUserDTO userDTO);
+    Boolean register(RegisterUserDTO userDTO) throws Exception;
 
     String login(LoginUserDTO userDTO) throws Exception;
 }

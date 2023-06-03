@@ -59,30 +59,6 @@ public class BingoUser implements Serializable {
     private String signature;
 
     /**
-     * 生日
-     */
-    @TableField("birth_day")
-    private Date birthDay;
-
-    /**
-     * 电话
-     */
-    @TableField("phone")
-    private String phone;
-
-    /**
-     * 性别(男:1 女:0)
-     */
-    @TableField("gender")
-    private Integer gender;
-
-    /**
-     * 地址
-     */
-    @TableField("address")
-    private String address;
-
-    /**
      * 邮箱
      */
     @TableField("email")

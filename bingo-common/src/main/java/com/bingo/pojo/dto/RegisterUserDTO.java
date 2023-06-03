@@ -26,5 +26,5 @@ public class RegisterUserDTO {
     /**
      * 邮箱
      */
-    private String address;
+    private String email;
 }
