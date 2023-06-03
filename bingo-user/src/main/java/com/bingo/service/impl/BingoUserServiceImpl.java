@@ -10,8 +10,10 @@ import com.bingo.service.BingoUserService;
 import com.bingo.store.BingoUserStatisticsStore;
 import com.bingo.store.BingoUserStore;
 import com.bingo.utils.AESUtil;
+import com.bingo.utils.JWTUtil;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -164,14 +166,27 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 登录
      */
     @Override
-    public Boolean login(LoginUserDTO userDTO) throws Exception {
+    public String login(LoginUserDTO userDTO) throws Exception {
+        // 获取需要使用的入参
         String userId = userDTO.getUserId();
         String passWord = userDTO.getPassWord();
+        String frontCaptcha = userDTO.getCaptcha();
+
+        // 校验入参为空
+        if (StringUtils.isEmpty(userId) || StringUtils.isEmpty(passWord) || StringUtils.isEmpty(frontCaptcha)) {
+            throw new Exception("您填写的登录信息不完整，请重试");
+        }
 
         // 判断用户是否注册过
         BingoUser userInfo = userStore.findByUserId(userId);
         if (ObjectUtils.isNotEmpty(userInfo)) {
             throw new Exception("该用户账号不存在，请重试");
+        }
+
+        // 判断验证码是否正确
+        String captcha = (String) redisTemplate.opsForValue().get("captcha");
+        if (!frontCaptcha.equals(captcha)) {
+            throw new Exception("验证码错误，请重试");
         }
 
         // 判断密码是否正确
@@ -181,7 +196,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
             throw new Exception("密码错误，请重试");
         }
 
-        //
-        return null;
+        // 验证通过，生成Token
+        return JWTUtil.generateToken(userId);
     }
 }

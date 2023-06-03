@@ -16,20 +16,19 @@ import java.util.Map;
  */
 public class JWTUtil {
     public static final long EXPIRE = 86400000;
-    public static final String JWT_SECRET = "bingo666xuzhibin";
+    public static final String JWT_SECRET = "Bingo_XuZhiBin_666";
 
     /**
      * 生成 Token
      */
-    public static String generateToken(String userId, Integer userType) {
+    public static String generateToken(String userId) {
         String JwtToken = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setHeaderParam("alg", "HS256")
-                .setSubject("Lark XR SAAS")
+                .setSubject("Bingo")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
                 .claim("userId", userId)
-                .claim("userType", userType)
                 .signWith(SignatureAlgorithm.HS256, JWT_SECRET)
                 .compact();
         return JwtToken;
