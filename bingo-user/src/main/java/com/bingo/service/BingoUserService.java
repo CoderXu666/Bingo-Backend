@@ -3,6 +3,7 @@ package com.bingo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bingo.pojo.dto.LoginUserDTO;
+import com.bingo.pojo.dto.RegisterUserDTO;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.vo.BingoUserVO;
 
@@ -27,7 +28,7 @@ public interface BingoUserService extends IService<BingoUser> {
 
     List<BingoUserVO> getUserByIds(List<Long> ids);
 
-    Boolean register(LoginUserDTO userDTO);
+    Boolean register(RegisterUserDTO userDTO);
 
     String login(LoginUserDTO userDTO) throws Exception;
 }

@@ -4,6 +4,7 @@ package com.bingo.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoUserMapper;
 import com.bingo.pojo.dto.LoginUserDTO;
+import com.bingo.pojo.dto.RegisterUserDTO;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoUserService;
@@ -157,7 +158,8 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 注册
      */
     @Override
-    public Boolean register(LoginUserDTO userDTO) {
+    public Boolean register(RegisterUserDTO userDTO) {
+
 
         return null;
     }
@@ -167,7 +169,6 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      */
     @Override
     public String login(LoginUserDTO userDTO) throws Exception {
-        // 获取需要使用的入参
         String userId = userDTO.getUserId();
         String passWord = userDTO.getPassWord();
         String frontCaptcha = userDTO.getCaptcha();

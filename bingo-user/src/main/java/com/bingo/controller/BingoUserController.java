@@ -3,6 +3,7 @@ package com.bingo.controller;
 
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.dto.LoginUserDTO;
+import com.bingo.pojo.dto.RegisterUserDTO;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.resp.R;
@@ -45,7 +46,7 @@ public class BingoUserController {
      * 注册
      */
     @PostMapping("/register")
-    public R register(@RequestBody LoginUserDTO userDTO) {
+    public R register(@RequestBody RegisterUserDTO userDTO) {
         try {
             userService.register(userDTO);
             return R.out(RespCodeEnum.SUCCESS, "操作成功");
