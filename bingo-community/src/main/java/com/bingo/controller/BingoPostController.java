@@ -3,10 +3,13 @@ package com.bingo.controller;
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.dto.LikeDTO;
 import com.bingo.pojo.dto.PostDTO;
+import com.bingo.pojo.vo.PostVO;
 import com.bingo.resp.R;
 import com.bingo.service.BingoPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -41,8 +44,8 @@ public class BingoPostController {
     @GetMapping("/search")
     public R searchPost(String content) {
         try {
-//            postService.searchPost(content);
-            return R.out(RespCodeEnum.SUCCESS, "");
+            List<PostVO> result = postService.searchPost(content);
+            return R.out(RespCodeEnum.SUCCESS, result);
         } catch (Exception e) {
             return R.out(RespCodeEnum.FAIL, "操作失败");
         }

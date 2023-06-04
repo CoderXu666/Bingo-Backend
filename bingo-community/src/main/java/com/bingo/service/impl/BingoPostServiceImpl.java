@@ -2,20 +2,33 @@ package com.bingo.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bingo.constant.ESConstant;
 import com.bingo.constant.MQTopicConstant;
 import com.bingo.kafka.KafkaProducer;
 import com.bingo.mapper.BingoPostMapper;
 import com.bingo.pojo.dto.LikeDTO;
 import com.bingo.pojo.dto.PostDTO;
 import com.bingo.pojo.po.BingoPost;
+import com.bingo.pojo.vo.PostVO;
 import com.bingo.service.BingoPostService;
 import com.bingo.store.BingoPostStore;
+import org.apache.commons.lang3.ObjectUtils;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -33,6 +46,8 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
     private KafkaProducer kafkaProducer;
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    private RestHighLevelClient restHighLevelClient;
 
     /**
      * 发布帖子
@@ -86,5 +101,36 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
 //        kafkaProducer.sendMessage(MQTopicConstant.POST_LIKE, JSON.toJSONString());
 
         return null;
+    }
+
+    /**
+     * 根据关键字，搜索帖子
+     */
+    @Override
+    public List<PostVO> searchPost(String content) throws IOException {
+        // 构建查询请求，指定查询索引
+        SearchRequest request = new SearchRequest(ESConstant.POST_INDEX);
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+        builder.query(QueryBuilders.matchQuery("postFont", content));
+        request.source(builder);
+
+        // 发送请求
+        SearchResponse response = restHighLevelClient.search(request, RequestOptions.DEFAULT);
+
+        // 处理响应结果
+        SearchHit[] hits = response.getHits().getHits();
+        List<PostVO> result = new ArrayList<>();
+        if (ObjectUtils.isEmpty(hits)) {
+            return result;
+        }
+
+        // 如果查询到了数据
+        for (SearchHit hit : hits) {
+            String postString = hit.getSourceAsString();
+            PostVO postVO = JSON.parseObject(postString, PostVO.class);
+            result.add(postVO);
+        }
+
+        return result;
     }
 }
