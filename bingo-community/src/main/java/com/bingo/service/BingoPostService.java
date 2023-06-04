@@ -3,6 +3,7 @@ package com.bingo.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bingo.pojo.dto.LikeDTO;
 import com.bingo.pojo.dto.PostDTO;
+import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.po.BingoPost;
 import com.bingo.pojo.vo.PostVO;
 
@@ -20,5 +21,5 @@ import java.util.List;
 public interface BingoPostService extends IService<BingoPost> {
     Boolean savePost(PostDTO postDTO);
     Boolean likePost(LikeDTO likeDTO);
-    List<PostVO> searchPost(String content) throws IOException;
+    List<PostVO> searchPost(SearchDTO searchDTO) throws IOException;
 }

@@ -8,11 +8,11 @@ import com.bingo.kafka.KafkaProducer;
 import com.bingo.mapper.BingoPostMapper;
 import com.bingo.pojo.dto.LikeDTO;
 import com.bingo.pojo.dto.PostDTO;
+import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.po.BingoPost;
 import com.bingo.pojo.vo.PostVO;
 import com.bingo.service.BingoPostService;
 import com.bingo.store.BingoPostStore;
-import org.apache.commons.lang3.ObjectUtils;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -104,33 +104,35 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
     }
 
     /**
-     * 根据关键字，搜索帖子
+     * 根据关键字 postFont，全文搜索帖子
      */
     @Override
-    public List<PostVO> searchPost(String content) throws IOException {
+    public List<PostVO> searchPost(SearchDTO searchDTO) throws IOException {
+        List<PostVO> resultList = new ArrayList<>();
+        String content = searchDTO.getContent();
+        Integer current = searchDTO.getCurrent();
+        Integer limit = searchDTO.getLimit();
+
         // 构建查询请求，指定查询索引
         SearchRequest request = new SearchRequest(ESConstant.POST_INDEX);
         SearchSourceBuilder builder = new SearchSourceBuilder();
         builder.query(QueryBuilders.matchQuery("postFont", content));
+        builder.from(current);
+        builder.size(limit);
         request.source(builder);
 
-        // 发送请求
+        // 发送请求，分页查询帖子信息
         SearchResponse response = restHighLevelClient.search(request, RequestOptions.DEFAULT);
-
-        // 处理响应结果
         SearchHit[] hits = response.getHits().getHits();
-        List<PostVO> result = new ArrayList<>();
-        if (ObjectUtils.isEmpty(hits)) {
-            return result;
-        }
 
-        // 如果查询到了数据
+        // 处理查询结果
         for (SearchHit hit : hits) {
             String postString = hit.getSourceAsString();
             PostVO postVO = JSON.parseObject(postString, PostVO.class);
-            result.add(postVO);
+            resultList.add(postVO);
         }
 
-        return result;
+        // TODO 将帖子点赞、评论相关数量信息封装到帖子中
+        return resultList;
     }
 }
