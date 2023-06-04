@@ -32,6 +32,7 @@
         <springboot.version>2.2.4.RELEASE</springboot.version>
         <nacos.version>2.2.4.RELEASE</nacos.version>
         <feign.version>2.2.4.RELEASE</feign.version>
+        <websocket.version>2.2.4.RELEASE</websocket.version>
         <sentinel.version>1.8.0</sentinel.version>
         <mybatis.plus.version>3.0.5</mybatis.plus.version>
         <mysql.version>5.1.47</mysql.version>
@@ -40,6 +41,7 @@
         <xxl.job.version>2.3.1</xxl.job.version>
         <spring-kafka.version>2.3.5.RELEASE</spring-kafka.version>
         <elasticsearch.version>7.4.2</elasticsearch.version>
+        <netty.version>4.1.45.Final</netty.version>
     </properties>
 
     <dependencyManagement>
@@ -98,17 +100,17 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-websocket</artifactId>
-                <version>2.2.4.RELEASE</version>
+                <version>${websocket.version}</version>
             </dependency>
 
             <!--Netty-->
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
-                <version>4.1.45.Final</version>
+                <version>${netty.version}</version>
             </dependency>
 
-            <!--sentinel-->
+            <!--Sentinel-->
             <dependency>
                 <groupId>com.alibaba.csp</groupId>
                 <artifactId>sentinel-core</artifactId>
@@ -176,7 +178,7 @@
             <dependency>
                 <groupId>org.apache.shardingsphere</groupId>
                 <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-                <version>4.0.0-RC1</version>
+                <version>5.0.0</version>
             </dependency>
 
             <!--OSS-->
@@ -185,7 +187,6 @@
                 <artifactId>aliyun-sdk-oss</artifactId>
                 <version>3.15.1</version>
             </dependency>
-
             <dependency>
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity-engine-core</artifactId>
@@ -214,16 +215,6 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>1.2.83</version>
-            </dependency>
-            <dependency>
-                <groupId>org.json</groupId>
-                <artifactId>json</artifactId>
-                <version>20170516</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.code.gson</groupId>
-                <artifactId>gson</artifactId>
-                <version>2.8.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

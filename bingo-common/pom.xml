@@ -159,14 +159,6 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-        </dependency>
 
         <!--Redis-->
         <dependency>
@@ -214,5 +206,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
