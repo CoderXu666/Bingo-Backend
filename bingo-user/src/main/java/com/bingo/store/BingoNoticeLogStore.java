@@ -1,0 +1,19 @@
+package com.bingo.store;
+
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.bingo.pojo.po.BingoNoticeLog;
+
+import java.util.List;
+
+/**
+ * <p>
+ * 服务类
+ * </p>
+ *
+ * @author 徐志斌
+ * @since 2023-06-04
+ */
+public interface BingoNoticeLogStore extends IService<BingoNoticeLog> {
+    List<BingoNoticeLog> find(String id, Integer type);
+}
