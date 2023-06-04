@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: bingo-user
+  main:
+    # 允许覆盖数据源
+    allow-bean-definition-overriding: true
   servlet:
     multipart:
       max-file-size: 10MB
@@ -21,6 +24,7 @@ spring:
           - data-id: bingo_mysql.yml
           - data-id: bingo_redis.yml
           - data-id: bingo_kafka.yml
+          - data-id: bingo_sharding_jdbc.yml
 #          - data-id: bingo_elasticsearch.yml
 
 xxl:
