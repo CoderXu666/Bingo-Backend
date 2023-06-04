@@ -16,7 +16,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class BingoPostStoreImpl extends ServiceImpl<BingoPostMapper, BingoPost> implements BingoPostStore {
-
+    /**
+     * 保存帖子信息
+     */
     @Override
     public boolean savePost(BingoPost bingoPost) {
         return this.save(bingoPost);

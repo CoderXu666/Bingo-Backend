@@ -5,6 +5,7 @@ spring:
   application:
     name: bingo-community
   main:
+    # 允许覆盖数据源
     allow-bean-definition-overriding: true
   cloud:
     nacos:

@@ -26,9 +26,4 @@ public class PostDTO {
      * 帖子图片/视频链接
      */
     private String postUrl;
-
-    /**
-     * 关联话题（#坤坤）
-     */
-    private String postTopic;
 }

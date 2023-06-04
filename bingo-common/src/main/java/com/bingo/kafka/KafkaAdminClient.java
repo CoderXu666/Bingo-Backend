@@ -20,9 +20,9 @@ public class KafkaAdminClient {
     private static String url = "101.42.13.186:9092";
 
     public static void main(String[] args) throws Exception {
-        createTopic(MQTopicConstant.COMMUNITY_POST_TOPIC);
-        createTopic(MQTopicConstant.POST_LIKE_TOPIC);
-//        getTopic();
+//        createTopic(MQTopicConstant.COMMUNITY_POST_TOPIC);
+//        createTopic(MQTopicConstant.POST_LIKE_TOPIC);
+        getTopic();
 //        deleteTopic("");
     }
 
