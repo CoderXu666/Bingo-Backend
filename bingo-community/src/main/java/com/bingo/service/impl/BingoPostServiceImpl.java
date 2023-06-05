@@ -10,6 +10,7 @@ import com.bingo.pojo.dto.LikeDTO;
 import com.bingo.pojo.dto.PostDTO;
 import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.po.BingoPost;
+import com.bingo.pojo.po.BingoUserStatistics;
 import com.bingo.pojo.vo.PostVO;
 import com.bingo.service.BingoPostService;
 import com.bingo.store.BingoPostStore;
@@ -108,6 +109,7 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
      */
     @Override
     public List<PostVO> searchPost(SearchDTO searchDTO) throws IOException {
+        List<Long> idList = new ArrayList<>();
         List<PostVO> resultList = new ArrayList<>();
         String content = searchDTO.getContent();
         Integer current = searchDTO.getCurrent();
@@ -130,9 +132,11 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
             String postString = hit.getSourceAsString();
             PostVO postVO = JSON.parseObject(postString, PostVO.class);
             resultList.add(postVO);
+            idList.add(postVO.getId());
         }
 
         // TODO 将帖子点赞、评论相关数量信息封装到帖子中
+
         return resultList;
     }
 }
