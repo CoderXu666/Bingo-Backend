@@ -25,11 +25,19 @@ public class BingoNoticeLogServiceImpl extends ServiceImpl<BingoNoticeLogMapper,
     BingoNoticeLogStore noticeLogStore;
 
     /**
-     * 根据userId,通知类型查询用用户的通知
+     * 根据Id,通知类型查询用用户的通知
      */
     @Override
     public List<BingoNoticeLog> find(String id, Integer type) {
         List<BingoNoticeLog> bingoNoticeLog = noticeLogStore.find(id, type);
         return bingoNoticeLog;
+    }
+
+    /**
+     * 保存用户通知
+     */
+    @Override
+    public Boolean saveNotice(BingoNoticeLog noticeLog) {
+        return noticeLogStore.saveNotice(noticeLog);
     }
 }

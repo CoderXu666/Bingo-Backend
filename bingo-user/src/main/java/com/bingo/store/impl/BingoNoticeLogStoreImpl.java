@@ -21,14 +21,22 @@ import java.util.List;
 public class BingoNoticeLogStoreImpl extends ServiceImpl<BingoNoticeLogMapper, BingoNoticeLog> implements BingoNoticeLogStore {
 
     /**
-     * 根据userId,通知类型查询用用户的通知
+     * 根据Id,通知类型查询用用户的通知
      */
     @Override
     public List<BingoNoticeLog> find(String id, Integer type) {
         QueryWrapper<BingoNoticeLog> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_id", id);
+        queryWrapper.eq("id", id);
         queryWrapper.eq("notice_type", type);
         List<BingoNoticeLog> list = this.list(queryWrapper);
         return list;
+    }
+
+    /**
+     * 保存用户通知
+     */
+    @Override
+    public Boolean saveNotice(BingoNoticeLog noticeLog) {
+        return this.save(noticeLog);
     }
 }

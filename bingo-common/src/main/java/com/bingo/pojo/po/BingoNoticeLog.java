@@ -26,16 +26,10 @@ public class BingoNoticeLog implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键ID
+     * 关联用户表主键ID
      */
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
-
-    /**
-     * 关联用户ID
-     */
-    @TableField("user_id")
-    private Long userId;
 
     /**
      * 通知类型（1:系统通知，2:点赞通知，3:关注通知）

@@ -16,5 +16,5 @@ import java.util.List;
  */
 public interface BingoNoticeLogService extends IService<BingoNoticeLog> {
     List<BingoNoticeLog> find(String id, Integer type);
-
+    Boolean saveNotice(BingoNoticeLog noticeLog);
 }

@@ -6,9 +6,7 @@ import com.bingo.pojo.po.BingoNoticeLog;
 import com.bingo.resp.R;
 import com.bingo.service.BingoNoticeLogService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,7 +25,7 @@ public class BingoNoticeLogController {
     BingoNoticeLogService noticeLogService;
 
     /**
-     * 根据userId,通知类型查询用用户的通知
+     * 根据Id,通知类型查询用用户的通知
      */
     @GetMapping("/find")
     public R find(String id, Integer type) {
@@ -38,5 +36,19 @@ public class BingoNoticeLogController {
             return R.out(RespCodeEnum.FAIL, "操作失败");
         }
     }
+
+    /**
+     * 保存用户通知
+     */
+    @PostMapping("/save")
+    public R saveNotice(@RequestBody BingoNoticeLog noticeLog) {
+        try {
+            noticeLogService.saveNotice(noticeLog);
+            return R.out(RespCodeEnum.SUCCESS, "操作成功");
+        } catch (Exception e) {
+            return R.out(RespCodeEnum.FAIL, "操作失败");
+        }
+    }
+
 }
 
