@@ -22,14 +22,14 @@ import java.util.List;
 public class BingoNoticeLogServiceImpl extends ServiceImpl<BingoNoticeLogMapper, BingoNoticeLog> implements BingoNoticeLogService {
 
     @Autowired
-    BingoNoticeLogStore noticeLogStore;
+    private BingoNoticeLogStore noticeLogStore;
 
     /**
      * 根据Id,通知类型查询用用户的通知
      */
     @Override
-    public List<BingoNoticeLog> find(String id, Integer type) {
-        List<BingoNoticeLog> bingoNoticeLog = noticeLogStore.find(id, type);
+    public List<BingoNoticeLog> findByIdAndType(Long id, Integer type) {
+        List<BingoNoticeLog> bingoNoticeLog = noticeLogStore.findByIdAndType(id, type);
         return bingoNoticeLog;
     }
 

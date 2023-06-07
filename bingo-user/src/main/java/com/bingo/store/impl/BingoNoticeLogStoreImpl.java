@@ -24,7 +24,7 @@ public class BingoNoticeLogStoreImpl extends ServiceImpl<BingoNoticeLogMapper, B
      * 根据Id,通知类型查询用用户的通知
      */
     @Override
-    public List<BingoNoticeLog> find(String id, Integer type) {
+    public List<BingoNoticeLog> findByIdAndType(Long id, Integer type) {
         QueryWrapper<BingoNoticeLog> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id", id);
         queryWrapper.eq("notice_type", type);

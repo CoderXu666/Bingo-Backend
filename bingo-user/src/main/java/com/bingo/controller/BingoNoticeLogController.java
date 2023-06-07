@@ -22,15 +22,15 @@ import java.util.List;
 @RequestMapping("/notice")
 public class BingoNoticeLogController {
     @Autowired
-    BingoNoticeLogService noticeLogService;
+    private BingoNoticeLogService noticeLogService;
 
     /**
-     * 根据Id,通知类型查询用用户的通知
+     * 根据Id,通知类型查询用户的通知
      */
     @GetMapping("/find")
-    public R find(String id, Integer type) {
+    public R find(Long id, Integer type) {
         try {
-            List<BingoNoticeLog> bingoNoticeLog = noticeLogService.find(id, type);
+            List<BingoNoticeLog> bingoNoticeLog = noticeLogService.findByIdAndType(id, type);
             return R.out(RespCodeEnum.SUCCESS, bingoNoticeLog);
         } catch (Exception e) {
             return R.out(RespCodeEnum.FAIL, "操作失败");
