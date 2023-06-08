@@ -49,6 +49,5 @@ public class BingoNoticeLogController {
             return R.out(RespCodeEnum.FAIL, "操作失败");
         }
     }
-
 }
 

@@ -25,13 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class BingoAdviceController {
     @Autowired
     private BingoAdviceService adviceService;
-    @Autowired
-    private BingoUserService userService;
 
     /**
      * 保存建议和评价
-     *
-     * @return
      */
     @PostMapping("/save")
     public R saveAdvice(@RequestBody AdviceDTO adviceDTO) {
