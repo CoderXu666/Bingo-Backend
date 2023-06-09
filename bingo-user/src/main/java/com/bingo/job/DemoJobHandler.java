@@ -18,4 +18,7 @@ public class DemoJobHandler {
         System.out.println("testJobHandler......");
         return ReturnT.SUCCESS;
     }
+
+    public static void main(String[] args) {
+    }
 }

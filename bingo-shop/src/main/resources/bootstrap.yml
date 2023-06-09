@@ -1,0 +1,7 @@
+server:
+  servlet:
+    context-path: /api
+
+spring:
+  profiles:
+    active: dev
