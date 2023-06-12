@@ -1,9 +1,11 @@
 package com.bingo.controller;
 
 import com.bingo.enums.RespCodeEnum;
+import com.bingo.pojo.common.PageParam;
 import com.bingo.pojo.dto.LikeDTO;
 import com.bingo.pojo.dto.PostDTO;
 import com.bingo.pojo.dto.SearchDTO;
+import com.bingo.pojo.vo.PostPageVO;
 import com.bingo.pojo.vo.PostVO;
 import com.bingo.resp.R;
 import com.bingo.service.BingoPostService;
@@ -70,5 +72,21 @@ public class BingoPostController {
             return R.out(RespCodeEnum.FAIL, "操作失败");
         }
     }
+
+    /**
+     * 展示用户最新的帖子（分页10条）
+     */
+    @PostMapping("/post_list")
+    public R pagePost(@RequestBody PageParam pageParam) {
+        try {
+            PostPageVO postPageVO = postService.pagePost(pageParam);
+            return R.out(RespCodeEnum.SUCCESS, postPageVO);
+        } catch (Exception e) {
+            System.out.println(e);
+            return R.out(RespCodeEnum.FAIL, "操作失败");
+        }
+    }
+
+
 }
 

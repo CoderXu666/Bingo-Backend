@@ -5,7 +5,10 @@ import com.bingo.resp.FeignResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * @Author 徐志斌
@@ -21,4 +24,10 @@ public interface CommunityUserFeign {
      */
     @GetMapping("/find_by_id")
     FeignResponse<BingoUserVO> findByUserId(@RequestParam("id") Long id);
+
+    /**
+     * 根据ids批量查询用户信息
+     */
+    @PostMapping("/get_list")
+    FeignResponse<List<BingoUserVO>> getUserInfoByIds(@RequestParam("ids") List<Long> ids);
 }

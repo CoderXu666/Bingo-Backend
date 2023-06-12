@@ -1,17 +1,22 @@
 package com.bingo.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.constant.ESConstant;
 import com.bingo.constant.MQTopicConstant;
+import com.bingo.feign.CommunityUserFeign;
 import com.bingo.kafka.KafkaProducer;
 import com.bingo.mapper.BingoPostMapper;
+import com.bingo.pojo.common.PageParam;
 import com.bingo.pojo.dto.LikeDTO;
 import com.bingo.pojo.dto.PostDTO;
 import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.po.BingoPost;
-import com.bingo.pojo.po.BingoUserStatistics;
+import com.bingo.pojo.vo.BingoUserVO;
+import com.bingo.pojo.vo.PostPageVO;
 import com.bingo.pojo.vo.PostVO;
+import com.bingo.resp.FeignResponse;
 import com.bingo.service.BingoPostService;
 import com.bingo.store.BingoPostStore;
 import org.elasticsearch.action.search.SearchRequest;
@@ -49,6 +54,8 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
     private RedisTemplate<String, Object> redisTemplate;
     @Autowired
     private RestHighLevelClient restHighLevelClient;
+    @Autowired
+    private CommunityUserFeign userFeign;
 
     /**
      * 发布帖子
@@ -138,5 +145,31 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
         // TODO 将帖子点赞、评论相关数量信息封装到帖子中
 
         return resultList;
+    }
+
+    /**
+     * 展示用户最新的帖子（分页10条）
+     */
+    @Override
+    public PostPageVO pagePost(PageParam pageParam) {
+        PostPageVO postPageVO = new PostPageVO();
+
+        //查询帖子表（分页10条）
+        Page<BingoPost> bingoPost = postStore.pagePost(pageParam);
+        List<BingoPost> records = bingoPost.getRecords();
+
+        //封装账号ID
+        List<Long> ids = new ArrayList<>();
+        for (BingoPost post : records) {
+            Long userId = post.getId();
+            ids.add(userId);
+        }
+
+        //Feign取得对应用户相关信息
+        FeignResponse<List<BingoUserVO>> feignResponse = userFeign.getUserInfoByIds(ids);
+        List<BingoUserVO> userVOList = feignResponse.getData();
+        BeanUtils.copyProperties(bingoPost, postPageVO);
+        BeanUtils.copyProperties(userVOList, postPageVO);
+        return postPageVO;
     }
 }

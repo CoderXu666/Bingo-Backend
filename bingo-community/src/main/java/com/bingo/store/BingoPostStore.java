@@ -1,6 +1,8 @@
 package com.bingo.store;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bingo.pojo.common.PageParam;
 import com.bingo.pojo.po.BingoPost;
 
 /**
@@ -14,4 +16,5 @@ import com.bingo.pojo.po.BingoPost;
 public interface BingoPostStore extends IService<BingoPost> {
 
     boolean savePost(BingoPost bingoPost);
+    Page<BingoPost> pagePost(PageParam pageParam);
 }

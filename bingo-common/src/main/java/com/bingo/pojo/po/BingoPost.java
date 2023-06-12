@@ -53,24 +53,6 @@ public class BingoPost implements Serializable {
     private String postTopic;
 
     /**
-     * 点赞数
-     */
-    @TableField("like_count")
-    private Long likeCount;
-
-    /**
-     * 评论数
-     */
-    @TableField("comment_count")
-    private Long commentCount;
-
-    /**
-     * 转发数
-     */
-    @TableField("forward_count")
-    private Long forwardCount;
-
-    /**
      * 创建时间
      */
     @TableField("create_time")
