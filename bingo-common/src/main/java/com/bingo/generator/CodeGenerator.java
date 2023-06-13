@@ -41,7 +41,7 @@ public class CodeGenerator {
          * 第三步：    设置包名相关配置
          */
         PackageConfig packageConfig = new PackageConfig();
-        packageConfig.setParent("com.newcode");
+        packageConfig.setParent("com.bingo");
         packageConfig.setEntity("entity");
         packageConfig.setMapper("mapper");
         autoGenerator.setPackageInfo(packageConfig);
@@ -50,7 +50,7 @@ public class CodeGenerator {
          * 第四步：   策略设置
          */
         StrategyConfig strategyConfig = new StrategyConfig();
-        strategyConfig.setInclude("bingo_goods");
+        strategyConfig.setInclude("bingo_post_comment");
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setEntityLombokModel(true);
