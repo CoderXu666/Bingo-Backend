@@ -4,7 +4,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoPostCommentMapper;
 import com.bingo.pojo.po.BingoPostComment;
 import com.bingo.service.BingoPostCommentService;
+import com.bingo.store.BingoPostCommentStore;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +20,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class BingoPostCommentServiceImpl extends ServiceImpl<BingoPostCommentMapper, BingoPostComment> implements BingoPostCommentService {
+    @Autowired
+    private BingoPostCommentStore postCommentStore;
 
+    @Override
+    public List<BingoPostComment> searchPostCommentList(Long commentId) {
+        List<BingoPostComment> list = postCommentStore.searchPostCommentList(commentId);
+        return list;
+    }
 }

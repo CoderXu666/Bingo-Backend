@@ -3,6 +3,8 @@ package com.bingo.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bingo.pojo.po.BingoPostComment;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,5 @@ import com.bingo.pojo.po.BingoPostComment;
  */
 public interface BingoPostCommentService extends IService<BingoPostComment> {
 
+    List<BingoPostComment> searchPostCommentList(Long commentId);
 }
