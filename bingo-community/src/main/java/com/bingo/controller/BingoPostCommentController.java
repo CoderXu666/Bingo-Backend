@@ -7,6 +7,7 @@ import com.bingo.resp.R;
 import com.bingo.service.BingoPostCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +15,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author 徐志斌
@@ -25,6 +26,7 @@ import java.util.List;
 public class BingoPostCommentController {
     @Autowired
     private BingoPostCommentService postCommentService;
+
     /**
      * 查询帖子信息
      */
@@ -41,6 +43,11 @@ public class BingoPostCommentController {
     /**
      * 对帖子进行评论
      */
+    @PostMapping("/do_comment")
+    public R doComment() {
+//        Boolean isSuccess = postCommentService.doComment();
+        return R.out(RespCodeEnum.SUCCESS, null);
+    }
 
     /**
      * 删除帖子评论
