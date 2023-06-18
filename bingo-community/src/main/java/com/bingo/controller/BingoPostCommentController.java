@@ -37,5 +37,13 @@ public class BingoPostCommentController {
             return R.out(RespCodeEnum.FAIL, "操作失败");
         }
     }
+
+    /**
+     * 对帖子进行评论
+     */
+
+    /**
+     * 删除帖子评论
+     */
 }
 
