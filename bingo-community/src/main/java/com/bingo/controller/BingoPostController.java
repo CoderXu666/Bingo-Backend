@@ -82,7 +82,7 @@ public class BingoPostController {
             PostPageVO postPageVO = postService.pagePost(pageParam);
             return R.out(RespCodeEnum.SUCCESS, postPageVO);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.print(e);
             return R.out(RespCodeEnum.FAIL, "操作失败");
         }
     }

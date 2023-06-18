@@ -29,8 +29,6 @@ public class BingoPostStoreImpl extends ServiceImpl<BingoPostMapper, BingoPost> 
 
     /**
      * 展示用户最新的帖子（分页10条）
-     *
-     * @return
      */
     @Override
     public Page<BingoPost> pagePost(PageParam pageParam) {

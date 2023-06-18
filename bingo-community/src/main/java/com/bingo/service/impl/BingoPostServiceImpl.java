@@ -13,11 +13,13 @@ import com.bingo.pojo.dto.LikeDTO;
 import com.bingo.pojo.dto.PostDTO;
 import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.po.BingoPost;
+import com.bingo.pojo.po.BingoPostStatistics;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.pojo.vo.PostPageVO;
 import com.bingo.pojo.vo.PostVO;
 import com.bingo.resp.FeignResponse;
 import com.bingo.service.BingoPostService;
+import com.bingo.store.BingoPostStatisticsStore;
 import com.bingo.store.BingoPostStore;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -56,6 +58,9 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
     private RestHighLevelClient restHighLevelClient;
     @Autowired
     private CommunityUserFeign userFeign;
+    @Autowired
+    private BingoPostStatisticsStore PostStatisticsStore;
+
 
     /**
      * 发布帖子
@@ -165,10 +170,14 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
             ids.add(userId);
         }
 
+        //查询对应的帖子的点赞数，转发数，评论数
+        List<BingoPostStatistics> postStatistics = PostStatisticsStore.findPost(ids);
+
         //Feign取得对应用户相关信息
         FeignResponse<List<BingoUserVO>> feignResponse = userFeign.getUserInfoByIds(ids);
         List<BingoUserVO> userVOList = feignResponse.getData();
         BeanUtils.copyProperties(bingoPost, postPageVO);
+        BeanUtils.copyProperties(postStatistics, postPageVO);
         BeanUtils.copyProperties(userVOList, postPageVO);
         return postPageVO;
     }

@@ -6,6 +6,8 @@ import com.bingo.pojo.po.BingoPostComment;
 import com.bingo.store.BingoPostCommentStore;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -17,4 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class BingoPostCommentStoreImpl extends ServiceImpl<BingoPostCommentMapper, BingoPostComment> implements BingoPostCommentStore {
 
+    @Override
+    public List<BingoPostComment> searchPostCommentList(Long commentId) {
+        return null;
+    }
 }
