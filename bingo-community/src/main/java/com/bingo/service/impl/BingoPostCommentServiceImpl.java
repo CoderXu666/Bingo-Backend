@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author 徐志斌
@@ -27,5 +27,10 @@ public class BingoPostCommentServiceImpl extends ServiceImpl<BingoPostCommentMap
     public List<BingoPostComment> searchPostCommentList(Long commentId) {
         List<BingoPostComment> list = postCommentStore.searchPostCommentList(commentId);
         return list;
+    }
+
+    @Override
+    public Boolean deleteCommentById(Long commentId) {
+        return postCommentStore.deleteCommentById(commentId);
     }
 }

@@ -14,6 +14,6 @@ import java.util.List;
  * @since 2023-06-13
  */
 public interface BingoPostCommentStore extends IService<BingoPostComment> {
-
     List<BingoPostComment> searchPostCommentList(Long commentId);
+    Boolean deleteCommentById(Long commentId);
 }

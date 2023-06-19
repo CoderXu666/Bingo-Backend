@@ -6,10 +6,7 @@ import com.bingo.pojo.po.BingoPostComment;
 import com.bingo.resp.R;
 import com.bingo.service.BingoPostCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,7 +41,7 @@ public class BingoPostCommentController {
      * 对帖子进行评论
      */
     @PostMapping("/do_comment")
-    public R doComment() {
+    public R doComment(Long postId, Long userId) {
 //        Boolean isSuccess = postCommentService.doComment();
         return R.out(RespCodeEnum.SUCCESS, null);
     }
@@ -52,5 +49,10 @@ public class BingoPostCommentController {
     /**
      * 删除帖子评论
      */
+    @DeleteMapping("/delete_comment")
+    public R deleteComment(Long commentId) {
+        postCommentService.deleteCommentById(commentId);
+        return null;
+    }
 }
 

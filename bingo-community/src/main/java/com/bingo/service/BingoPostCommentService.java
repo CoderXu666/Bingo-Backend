@@ -16,4 +16,6 @@ import java.util.List;
 public interface BingoPostCommentService extends IService<BingoPostComment> {
 
     List<BingoPostComment> searchPostCommentList(Long commentId);
+
+    Boolean deleteCommentById(Long commentId);
 }
