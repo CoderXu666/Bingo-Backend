@@ -1,4 +1,4 @@
-package com.bingo.constant;
+package com.bingo.pojo.constant;
 
 import lombok.Data;
 

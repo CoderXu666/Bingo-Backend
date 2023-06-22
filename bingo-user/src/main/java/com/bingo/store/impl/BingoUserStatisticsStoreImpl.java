@@ -3,7 +3,7 @@ package com.bingo.store.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.anno.DoubleCache;
-import com.bingo.constant.CacheConstant;
+import com.bingo.pojo.constant.CacheConstant;
 import com.bingo.enums.CacheType;
 import com.bingo.mapper.BingoUserStatisticsMapper;
 import com.bingo.pojo.po.BingoUserStatistics;

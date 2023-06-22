@@ -2,8 +2,8 @@ package com.bingo.kafka;
 
 import com.alibaba.fastjson.JSON;
 import com.bingo.config.RestHighLevelClientConfig;
-import com.bingo.constant.ESConstant;
-import com.bingo.constant.MQTopicConstant;
+import com.bingo.pojo.constant.ESConstant;
+import com.bingo.pojo.constant.MQTopicConstant;
 import com.bingo.pojo.po.BingoPost;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.index.IndexRequest;

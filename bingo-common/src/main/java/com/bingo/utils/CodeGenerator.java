@@ -1,4 +1,4 @@
-package com.bingo.generator;
+package com.bingo.utils;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
