@@ -51,8 +51,12 @@ public class BingoPostCommentController {
      */
     @DeleteMapping("/delete_comment")
     public R deleteComment(Long commentId) {
-        postCommentService.deleteCommentById(commentId);
-        return null;
+        try {
+            Boolean isSuccess = postCommentService.deleteCommentById(commentId);
+            return R.out(RespCodeEnum.SUCCESS, "操作成功");
+        } catch (Exception e) {
+            return R.out(RespCodeEnum.FAIL, "操作失败");
+        }
     }
 }
 

@@ -166,8 +166,7 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
         //封装账号ID
         List<Long> ids = new ArrayList<>();
         for (BingoPost post : records) {
-            Long userId = post.getId();
-            ids.add(userId);
+            ids.add(post.getId());
         }
 
         //查询对应的帖子的点赞数，转发数，评论数
