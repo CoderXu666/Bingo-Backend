@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -38,26 +39,17 @@ public class BingoPostController {
      */
     @PostMapping("/save")
     public R savePost(@RequestBody PostDTO postDTO) {
-        try {
-            postService.savePost(postDTO);
-            return R.out(RespCodeEnum.SUCCESS, "操作成功");
-        } catch (Exception e) {
-            return R.out(RespCodeEnum.FAIL, "操作失败");
-        }
+        postService.savePost(postDTO);
+        return R.out(RespCodeEnum.SUCCESS, "操作成功");
     }
 
     /**
      * 根据关键字，搜索帖子
      */
     @PostMapping("/search")
-    public R searchPost(@RequestBody SearchDTO searchDTO) {
-        try {
-            List<PostVO> result = postService.searchPost(searchDTO);
-            return R.out(RespCodeEnum.SUCCESS, result);
-        } catch (Exception e) {
-            log.error(e.getMessage());
-            return R.out(RespCodeEnum.FAIL, "操作失败");
-        }
+    public R searchPost(@RequestBody SearchDTO searchDTO) throws IOException {
+        List<PostVO> result = postService.searchPost(searchDTO);
+        return R.out(RespCodeEnum.SUCCESS, result);
     }
 
     /**
@@ -65,12 +57,8 @@ public class BingoPostController {
      */
     @PostMapping("/like")
     public R likePost(@RequestBody LikeDTO likeDTO) {
-        try {
-            postService.likePost(likeDTO);
-            return R.out(RespCodeEnum.SUCCESS, "操作成功");
-        } catch (Exception e) {
-            return R.out(RespCodeEnum.FAIL, "操作失败");
-        }
+        postService.likePost(likeDTO);
+        return R.out(RespCodeEnum.SUCCESS, "操作成功");
     }
 
     /**
@@ -78,15 +66,8 @@ public class BingoPostController {
      */
     @PostMapping("/post_list")
     public R pagePost(@RequestBody PageParam pageParam) {
-        try {
-            PostPageVO postPageVO = postService.pagePost(pageParam);
-            return R.out(RespCodeEnum.SUCCESS, postPageVO);
-        } catch (Exception e) {
-            System.out.print(e);
-            return R.out(RespCodeEnum.FAIL, "操作失败");
-        }
+        PostPageVO postPageVO = postService.pagePost(pageParam);
+        return R.out(RespCodeEnum.SUCCESS, postPageVO);
     }
-
-
 }
 

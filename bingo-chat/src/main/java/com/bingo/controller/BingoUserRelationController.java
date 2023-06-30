@@ -32,27 +32,17 @@ public class BingoUserRelationController {
      */
     @GetMapping("/list")
     public R findFriendById(Long id) {
-        try {
-            List<BingoUserVO> friendList = relationService.findFriend(id);
-            return R.out(RespCodeEnum.SUCCESS, friendList);
-        } catch (Exception e) {
-            return R.out(RespCodeEnum.FAIL, e.getMessage());
-        }
+        List<BingoUserVO> friendList = relationService.findFriend(id);
+        return R.out(RespCodeEnum.SUCCESS, friendList);
     }
 
     /**
      * 删除当前用户的好友
      */
     @DeleteMapping("/delete")
-    public R deleteById(Long userId, Long friendId) {
-        try {
-            relationService.deleteById(userId, friendId);
-            return R.out(RespCodeEnum.SUCCESS, "操作成功");
-        } catch (Exception e) {
-            return R.out(RespCodeEnum.FAIL, "操作失败");
-        }
+    public R deleteById(Long userId, Long friendId) throws Exception {
+        relationService.deleteById(userId, friendId);
+        return R.out(RespCodeEnum.SUCCESS, "操作成功");
     }
-
-
 }
 

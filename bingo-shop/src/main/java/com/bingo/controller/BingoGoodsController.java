@@ -33,12 +33,8 @@ public class BingoGoodsController {
      */
     @GetMapping("/list")
     public R queryList() {
-        try {
-            List<BingoGoods> list = goodsService.queryList();
-            return R.out(RespCodeEnum.SUCCESS, list);
-        } catch (Exception e) {
-            return R.out(RespCodeEnum.FAIL, "操作失败");
-        }
+        List<BingoGoods> list = goodsService.queryList();
+        return R.out(RespCodeEnum.SUCCESS, list);
     }
 }
 

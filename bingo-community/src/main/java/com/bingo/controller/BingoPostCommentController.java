@@ -29,12 +29,8 @@ public class BingoPostCommentController {
      */
     @GetMapping("/comment_list")
     public R commentList(Long commentId) {
-        try {
-            List<BingoPostComment> list = postCommentService.searchPostCommentList(commentId);
-            return R.out(RespCodeEnum.SUCCESS, list);
-        } catch (Exception e) {
-            return R.out(RespCodeEnum.FAIL, "操作失败");
-        }
+        List<BingoPostComment> list = postCommentService.searchPostCommentList(commentId);
+        return R.out(RespCodeEnum.SUCCESS, list);
     }
 
     /**
@@ -51,12 +47,8 @@ public class BingoPostCommentController {
      */
     @DeleteMapping("/delete_comment")
     public R deleteComment(Long commentId) {
-        try {
-            Boolean isSuccess = postCommentService.deleteCommentById(commentId);
-            return R.out(RespCodeEnum.SUCCESS, "操作成功");
-        } catch (Exception e) {
-            return R.out(RespCodeEnum.FAIL, "操作失败");
-        }
+        Boolean isSuccess = postCommentService.deleteCommentById(commentId);
+        return R.out(RespCodeEnum.SUCCESS, "操作成功");
     }
 }
 

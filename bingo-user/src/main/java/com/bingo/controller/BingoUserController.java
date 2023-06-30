@@ -34,38 +34,26 @@ public class BingoUserController {
      */
     @GetMapping("/find_by_id")
     public R findByUserId(Long id) {
-        try {
-            BingoUserVO userVO = userService.findById(id);
-            return R.out(RespCodeEnum.SUCCESS, userVO);
-        } catch (Exception e) {
-            return R.out(RespCodeEnum.FAIL, "操作失败");
-        }
+        BingoUserVO userVO = userService.findById(id);
+        return R.out(RespCodeEnum.SUCCESS, userVO);
     }
 
     /**
      * 注册
      */
     @PostMapping("/register")
-    public R register(@RequestBody RegisterUserDTO userDTO) {
-        try {
-            userService.register(userDTO);
-            return R.out(RespCodeEnum.SUCCESS, "操作成功");
-        } catch (Exception e) {
-            return R.out(RespCodeEnum.FAIL, "操作失败");
-        }
+    public R register(@RequestBody RegisterUserDTO userDTO) throws Exception {
+        userService.register(userDTO);
+        return R.out(RespCodeEnum.SUCCESS, "操作成功");
     }
 
     /**
      * 登录
      */
     @PostMapping("/login")
-    public R login(@RequestBody LoginUserDTO userDTO) {
-        try {
-            userService.login(userDTO);
-            return R.out(RespCodeEnum.SUCCESS, "操作成功");
-        } catch (Exception e) {
-            return R.out(RespCodeEnum.FAIL, "操作失败");
-        }
+    public R login(@RequestBody LoginUserDTO userDTO) throws Exception {
+        userService.login(userDTO);
+        return R.out(RespCodeEnum.SUCCESS, "操作成功");
     }
 
     /**
@@ -73,12 +61,8 @@ public class BingoUserController {
      */
     @PostMapping("/update")
     public R updateUserInfo(@RequestBody BingoUser user) {
-        try {
-            userService.updateUser(user);
-            return R.out(RespCodeEnum.SUCCESS, "操作成功");
-        } catch (Exception e) {
-            return R.out(RespCodeEnum.FAIL, "操作失败");
-        }
+        userService.updateUser(user);
+        return R.out(RespCodeEnum.SUCCESS, "操作成功");
     }
 
     /**
@@ -95,12 +79,8 @@ public class BingoUserController {
      */
     @PostMapping("/get_list")
     public R getUserInfoByIds(List<Long> ids) {
-        try {
-            List<BingoUserVO> userList = userService.getUserByIds(ids);
-            return R.out(RespCodeEnum.SUCCESS, userList);
-        } catch (Exception e) {
-            return R.out(RespCodeEnum.FAIL, "操作失败");
-        }
+        List<BingoUserVO> userList = userService.getUserByIds(ids);
+        return R.out(RespCodeEnum.SUCCESS, userList);
     }
 }
 

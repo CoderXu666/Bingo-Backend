@@ -29,12 +29,8 @@ public class BingoNoticeLogController {
      */
     @GetMapping("/find")
     public R find(Long id, Integer type) {
-        try {
-            List<BingoNoticeLog> bingoNoticeLog = noticeLogService.findByIdAndType(id, type);
-            return R.out(RespCodeEnum.SUCCESS, bingoNoticeLog);
-        } catch (Exception e) {
-            return R.out(RespCodeEnum.FAIL, "操作失败");
-        }
+        List<BingoNoticeLog> bingoNoticeLog = noticeLogService.findByIdAndType(id, type);
+        return R.out(RespCodeEnum.SUCCESS, bingoNoticeLog);
     }
 
     /**
@@ -42,12 +38,8 @@ public class BingoNoticeLogController {
      */
     @PostMapping("/save")
     public R saveNotice(@RequestBody BingoNoticeLog noticeLog) {
-        try {
-            noticeLogService.saveNotice(noticeLog);
-            return R.out(RespCodeEnum.SUCCESS, "操作成功");
-        } catch (Exception e) {
-            return R.out(RespCodeEnum.FAIL, "操作失败");
-        }
+        noticeLogService.saveNotice(noticeLog);
+        return R.out(RespCodeEnum.SUCCESS, "操作成功");
     }
 }
 
