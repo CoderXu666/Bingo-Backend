@@ -70,6 +70,13 @@
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
+        <!--JSR 303-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+            <version>2.5.2</version>
+        </dependency>
+
         <!--kaptcha-->
         <dependency>
             <groupId>com.github.penggle</groupId>
