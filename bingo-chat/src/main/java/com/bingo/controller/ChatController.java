@@ -2,7 +2,7 @@ package com.bingo.controller;
 
 import com.bingo.pojo.dto.ChatMsgDTO;
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.resp.R;
+import com.bingo.pojo.resp.R;
 import com.bingo.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

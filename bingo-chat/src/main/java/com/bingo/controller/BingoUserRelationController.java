@@ -3,7 +3,7 @@ package com.bingo.controller;
 
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.vo.BingoUserVO;
-import com.bingo.resp.R;
+import com.bingo.pojo.resp.R;
 import com.bingo.service.BingoUserRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;

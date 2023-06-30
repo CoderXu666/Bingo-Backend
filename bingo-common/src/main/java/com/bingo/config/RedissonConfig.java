@@ -1,4 +1,4 @@
-package com.bingo.config.cache;
+package com.bingo.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;

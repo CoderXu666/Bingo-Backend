@@ -6,7 +6,7 @@ import com.bingo.feign.ChatUserFeign;
 import com.bingo.mapper.BingoUserRelationMapper;
 import com.bingo.pojo.po.BingoUserRelation;
 import com.bingo.pojo.vo.BingoUserVO;
-import com.bingo.resp.FeignResponse;
+import com.bingo.pojo.resp.FeignResponse;
 import com.bingo.service.BingoUserRelationService;
 import com.bingo.store.BingoUserRelationStore;
 import org.springframework.beans.factory.annotation.Autowired;

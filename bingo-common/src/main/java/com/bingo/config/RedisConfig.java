@@ -1,4 +1,4 @@
-package com.bingo.config.cache;
+package com.bingo.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;

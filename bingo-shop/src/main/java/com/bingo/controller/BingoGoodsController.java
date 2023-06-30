@@ -3,15 +3,13 @@ package com.bingo.controller;
 
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.po.BingoGoods;
-import com.bingo.resp.R;
+import com.bingo.pojo.resp.R;
 import com.bingo.service.BingoGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**

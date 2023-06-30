@@ -1,6 +1,6 @@
 package com.bingo.service.impl;
 
-import com.bingo.config.im.ChatChannelConfig;
+import com.bingo.config.ChatChannelConfig;
 import com.bingo.service.ChatService;
 import io.netty.channel.Channel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;

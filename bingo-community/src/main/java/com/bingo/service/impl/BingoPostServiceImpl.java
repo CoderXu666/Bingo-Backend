@@ -17,7 +17,7 @@ import com.bingo.pojo.po.BingoPostStatistics;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.pojo.vo.PostPageVO;
 import com.bingo.pojo.vo.PostVO;
-import com.bingo.resp.FeignResponse;
+import com.bingo.pojo.resp.FeignResponse;
 import com.bingo.service.BingoPostService;
 import com.bingo.store.BingoPostStatisticsStore;
 import com.bingo.store.BingoPostStore;

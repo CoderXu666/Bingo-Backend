@@ -2,7 +2,7 @@ package com.bingo.im;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.bingo.config.im.ChatChannelConfig;
+import com.bingo.config.ChatChannelConfig;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
