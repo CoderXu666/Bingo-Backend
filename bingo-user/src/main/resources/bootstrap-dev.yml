@@ -31,16 +31,13 @@ xxl:
   job:
     admin:
       addresses: http://101.42.13.186:8800/xxl-job-admin/
-      userName: admin
-      password: 123456
-    accessToken: Lpoms_xxljob_default_token
+      accessToken: Lpoms_xxljob_default_token
     executor:
       appname: bingo
       address: http://101.42.13.186:9999
-      ip: 101.42.13.186
-      port: 9999
       logpath: logs/xxl-job/jobhandler
       logretentiondays: 7
+      port: 9999
 
 mybatis-plus:
   configuration:
