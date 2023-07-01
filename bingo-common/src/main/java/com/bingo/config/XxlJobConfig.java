@@ -73,11 +73,11 @@ public class XxlJobConfig {
         XxlJobSpringExecutor xxlJobExecutor = new XxlJobSpringExecutor();
         xxlJobExecutor.setAdminAddresses("http://101.42.13.186:8800/xxl-job-admin/");
         xxlJobExecutor.setAppname("bingo-executor");
-        xxlJobExecutor.setAddress("http://101.42.13.186");
-        xxlJobExecutor.setPort(10001);
+        xxlJobExecutor.setAddress("http://101.42.13.186:9999");
         xxlJobExecutor.setAccessToken("Lpoms_xxljob_default_token");
         xxlJobExecutor.setLogPath("logs/xxl-job/jobhandler");
         xxlJobExecutor.setLogRetentionDays(7);
+        xxlJobExecutor.setPort(9999);
         return xxlJobExecutor;
     }
 }
