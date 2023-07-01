@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -56,31 +57,31 @@ public class BingoTopic implements Serializable {
      * 话题点赞数
      */
     @TableField("like_count")
-    private Long likeCount;
+    private Integer likeCount;
 
     /**
      * 话题转发数
      */
     @TableField("forward_count")
-    private Long forwardCount;
+    private Integer forwardCount;
 
     /**
      * 话题评论数
      */
     @TableField("comment_count")
-    private Long commentCount;
+    private Integer commentCount;
 
     /**
      * 创建时间
      */
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新时间
      */
     @TableField("update_time")
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 删除标识
