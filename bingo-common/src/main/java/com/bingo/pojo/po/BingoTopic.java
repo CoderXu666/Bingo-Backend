@@ -36,12 +36,6 @@ public class BingoTopic implements Serializable {
     private String userId;
 
     /**
-     * 关联话题评论ID
-     */
-    @TableField("topic_comment_id")
-    private String topicCommentId;
-
-    /**
      * 话题内容
      */
     @TableField("topic_content")
@@ -52,6 +46,12 @@ public class BingoTopic implements Serializable {
      */
     @TableField("topic_picture")
     private String topicPicture;
+
+    /**
+     * 话题标签
+     */
+    @TableField("topic_tag")
+    private String topicTag;
 
     /**
      * 话题点赞数

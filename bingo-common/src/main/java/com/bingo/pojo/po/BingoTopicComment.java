@@ -35,10 +35,16 @@ public class BingoTopicComment implements Serializable {
     private String userId;
 
     /**
+     * 关联话题ID
+     */
+    @TableField("topic_id")
+    private String topicId;
+
+    /**
      * 父ID(确定当前评论位置)
      */
-    @TableField("parent_id")
-    private String parentId;
+    @TableField("comment_parent_id")
+    private String commentParentId;
 
     /**
      * 话题评论内容
