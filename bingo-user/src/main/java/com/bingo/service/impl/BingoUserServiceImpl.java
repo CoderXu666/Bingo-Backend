@@ -8,7 +8,6 @@ import com.bingo.pojo.dto.RegisterUserDTO;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoUserService;
-import com.bingo.store.BingoUserStatisticsStore;
 import com.bingo.store.BingoUserStore;
 import com.bingo.utils.AESUtil;
 import com.bingo.utils.JWTUtil;

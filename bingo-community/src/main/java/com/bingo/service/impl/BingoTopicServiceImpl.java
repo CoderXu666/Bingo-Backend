@@ -7,6 +7,8 @@ import com.bingo.pojo.dto.TopicDTO;
 import com.bingo.pojo.po.BingoTopic;
 import com.bingo.service.BingoTopicService;
 import com.bingo.store.BingoTopicStore;
+import lombok.SneakyThrows;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +29,12 @@ public class BingoTopicServiceImpl extends ServiceImpl<BingoTopicMapper, BingoTo
     /**
      * 用户创建话题
      */
+    @SneakyThrows
     @Override
     public Boolean saveTopic(TopicDTO topicDTO) {
+        if (!StringUtils.isNotEmpty(topicDTO.getUserId())){
+            throw new Exception("用户ID为空");
+        }
         Boolean isSuccess = topicStore.saveTopic(topicDTO);
         return isSuccess;
     }
