@@ -3,20 +3,20 @@ package com.bingo.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bingo.pojo.constant.ESConstant;
-import com.bingo.pojo.constant.MQTopicConstant;
 import com.bingo.feign.CommunityUserFeign;
 import com.bingo.kafka.KafkaProducer;
 import com.bingo.mapper.BingoPostMapper;
 import com.bingo.pojo.common.PageParam;
+import com.bingo.pojo.constant.ESConstant;
+import com.bingo.pojo.constant.MQTopicConstant;
 import com.bingo.pojo.dto.LikeDTO;
 import com.bingo.pojo.dto.PostDTO;
 import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.po.BingoPost;
+import com.bingo.pojo.resp.FeignResponse;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.pojo.vo.PostPageVO;
 import com.bingo.pojo.vo.PostVO;
-import com.bingo.pojo.resp.FeignResponse;
 import com.bingo.service.BingoPostService;
 import com.bingo.store.BingoPostStore;
 import org.elasticsearch.action.search.SearchRequest;
@@ -56,8 +56,6 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
     private RestHighLevelClient restHighLevelClient;
     @Autowired
     private CommunityUserFeign userFeign;
-    @Autowired
-    private BingoPostStatisticsStore PostStatisticsStore;
 
 
     /**
@@ -168,13 +166,13 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
         }
 
         //查询对应的帖子的点赞数，转发数，评论数
-        List<BingoPostStatistics> postStatistics = PostStatisticsStore.findPost(ids);
+        //List<BingoPostStatistics> postStatistics = PostStatisticsStore.findPost(ids);
 
         //Feign取得对应用户相关信息
         FeignResponse<List<BingoUserVO>> feignResponse = userFeign.getUserInfoByIds(ids);
         List<BingoUserVO> userVOList = feignResponse.getData();
         BeanUtils.copyProperties(bingoPost, postPageVO);
-        BeanUtils.copyProperties(postStatistics, postPageVO);
+//        BeanUtils.copyProperties(postStatistics, postPageVO);
         BeanUtils.copyProperties(userVOList, postPageVO);
         return postPageVO;
     }

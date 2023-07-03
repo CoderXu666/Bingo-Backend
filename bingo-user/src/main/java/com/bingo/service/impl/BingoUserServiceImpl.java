@@ -42,8 +42,6 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     @Autowired
     private BingoUserStore userStore;
     @Autowired
-    private BingoUserStatisticsStore userStatisticsStore;
-    @Autowired
     private DefaultKaptcha defaultKaptcha;
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
