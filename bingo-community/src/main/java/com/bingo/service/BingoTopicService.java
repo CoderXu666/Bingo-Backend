@@ -4,6 +4,7 @@ package com.bingo.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bingo.pojo.dto.TopicDTO;
 import com.bingo.pojo.po.BingoTopic;
+import com.bingo.pojo.vo.BingoTopicVO;
 
 /**
  * <p>
@@ -17,5 +18,7 @@ public interface BingoTopicService extends IService<BingoTopic> {
 
     Boolean saveTopic(TopicDTO topicDTO);
 
-    Boolean deleteTopic(String id);
+    Boolean deleteTopic(Long id);
+
+    BingoTopicVO topicInformation(Long topicId);
 }

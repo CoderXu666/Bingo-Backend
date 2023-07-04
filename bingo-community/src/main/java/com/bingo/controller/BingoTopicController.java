@@ -4,12 +4,10 @@ package com.bingo.controller;
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.dto.TopicDTO;
 import com.bingo.pojo.resp.R;
+import com.bingo.pojo.vo.BingoTopicVO;
 import com.bingo.service.BingoTopicService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -45,11 +43,22 @@ public class BingoTopicController {
     /**
      * 用户删除话题
      */
-    @PostMapping("/delete_topic")
-    public R deleteTopic(String id) {
+    @DeleteMapping("/delete_topic")
+    public R deleteTopic(Long id) {
         topicService.deleteTopic(id);
         return R.out(RespCodeEnum.SUCCESS, "删除成功");
     }
+
+    /**
+     * 话题详细信息
+     */
+
+    public R topicInformation(Long topicId){
+        BingoTopicVO topicVO = topicService.topicInformation(topicId);
+        return R.out(RespCodeEnum.SUCCESS, "删除成功");
+    }
+
+
 
 }
 
