@@ -18,4 +18,6 @@ public interface BingoTopicStore extends IService<BingoTopic> {
     Boolean saveTopic(BingoTopic Topic);
 
     Boolean deleteTopic(Long id);
+
+    BingoTopic findTopicById(Long topicId);
 }

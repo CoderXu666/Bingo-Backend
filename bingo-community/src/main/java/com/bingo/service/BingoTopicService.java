@@ -20,5 +20,5 @@ public interface BingoTopicService extends IService<BingoTopic> {
 
     Boolean deleteTopic(Long id);
 
-    BingoTopicVO topicInformation(Long topicId);
+    BingoTopicVO getTopicById(Long topicId) throws Exception;
 }

@@ -1,6 +1,9 @@
 package com.bingo.pojo.vo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
+
+import java.util.Date;
 
 @Data
 public class BingoTopicVO {
@@ -49,5 +52,9 @@ public class BingoTopicVO {
      */
     private Integer commentCount;
 
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 
 }

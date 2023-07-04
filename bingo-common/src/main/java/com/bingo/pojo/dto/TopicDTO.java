@@ -9,7 +9,7 @@ public class TopicDTO {
      * 关联用户ID
      */
     @TableField("user_id")
-    private String userId;
+    private Long userId;
 
     /**
      * 话题内容

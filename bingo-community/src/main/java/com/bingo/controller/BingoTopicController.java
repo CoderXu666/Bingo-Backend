@@ -50,14 +50,13 @@ public class BingoTopicController {
     }
 
     /**
-     * 话题详细信息
+     * 根据话题ID查询话题详细信息以及用户相关信息
      */
-
-    public R topicInformation(Long topicId){
-        BingoTopicVO topicVO = topicService.topicInformation(topicId);
-        return R.out(RespCodeEnum.SUCCESS, "删除成功");
+    @GetMapping("/information")
+    public R getTopicById(Long topicId) throws Exception {
+        BingoTopicVO topicVO = topicService.getTopicById(topicId);
+        return R.out(RespCodeEnum.SUCCESS, topicVO);
     }
-
 
 
 }

@@ -33,4 +33,13 @@ public class BingoTopicStoreImpl extends ServiceImpl<BingoTopicMapper, BingoTopi
     public Boolean deleteTopic(Long id) {
         return this.removeById(id);
     }
+
+    /**
+     * 根据话题ID查询话题详细信息
+     */
+    @Override
+    public BingoTopic findTopicById(Long topicId) {
+        BingoTopic topic = this.getById(topicId);
+        return topic;
+    }
 }

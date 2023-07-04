@@ -2,10 +2,13 @@ package com.bingo.service.impl;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bingo.feign.TopicUserFeign;
 import com.bingo.mapper.BingoTopicMapper;
 import com.bingo.pojo.dto.TopicDTO;
 import com.bingo.pojo.po.BingoTopic;
+import com.bingo.pojo.resp.FeignResponse;
 import com.bingo.pojo.vo.BingoTopicVO;
+import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoTopicService;
 import com.bingo.store.BingoTopicStore;
 import lombok.SneakyThrows;
@@ -27,6 +30,8 @@ public class BingoTopicServiceImpl extends ServiceImpl<BingoTopicMapper, BingoTo
 
     @Autowired
     private BingoTopicStore topicStore;
+    @Autowired
+    private TopicUserFeign userFeign;
 
     /**
      * 用户创建话题
@@ -34,7 +39,7 @@ public class BingoTopicServiceImpl extends ServiceImpl<BingoTopicMapper, BingoTo
     @SneakyThrows
     @Override
     public Boolean saveTopic(TopicDTO topicDTO) {
-        if (!StringUtils.isNotEmpty(topicDTO.getUserId())){
+        if (!StringUtils.isNotEmpty(topicDTO.getUserId().toString())) {
             throw new Exception("用户ID为空");
         }
         BingoTopic bingoTopic = new BingoTopic();
@@ -53,10 +58,24 @@ public class BingoTopicServiceImpl extends ServiceImpl<BingoTopicMapper, BingoTo
     }
 
     /**
-     * 话题详细信息
+     * 根据话题ID查询话题详细信息以及用户相关信息
      */
     @Override
-    public BingoTopicVO topicInformation(Long topicId) {
-        return null;
+    public BingoTopicVO getTopicById(Long topicId) throws Exception {
+        if (!StringUtils.isNotEmpty(topicId.toString())) {
+            throw new Exception("话题异常");
+        }
+
+        //查询话题相关信息
+        BingoTopic topic = topicStore.findTopicById(topicId);
+
+        //远程调用查询用户相关信息
+        FeignResponse<BingoUserVO> feignResponse = userFeign.findByUserId(topic.getUserId());
+        BingoUserVO userVO = feignResponse.getData();
+
+        BingoTopicVO topicVO = new BingoTopicVO();
+        BeanUtils.copyProperties(userVO,topicVO);
+        BeanUtils.copyProperties(topic,topicVO);
+        return topicVO;
     }
 }
