@@ -28,34 +28,21 @@ public class BingoFollowRelationController {
     private BingoFollowRelationService followRelationService;
 
     /**
-     * 关注用户
+     * 关注/取消用户
      */
-    @PostMapping("/save_follow")
-    public R saveFollow(Long userId1, Long userId2) throws Exception {
-        followRelationService.saveFollow(userId1, userId2);
+    @PostMapping("/follow_user")
+    public R followUser(Long userId1, Long userId2) throws Exception {
+        followRelationService.followUser(userId1, userId2);
         return R.out(RespCodeEnum.SUCCESS, "关注成功");
     }
 
     /**
-     * 查询用户的关注
+     * 查询用户的关注列表
      */
-    @GetMapping("/find_follow")
-    public R findFollow(Long userId1) {
-        List<BingoFollowRelation> followRelation = followRelationService.findFollow(userId1);
+    @GetMapping("/follow_list")
+    public R findFollowList(Long userId) {
+        List<BingoFollowRelation> followRelation = followRelationService.findFollowList(userId);
         return R.out(RespCodeEnum.SUCCESS, followRelation);
     }
-
-    /**
-     * 取消关注
-     */
-    @GetMapping("")
-    public R deleteFollow(Long userId1, Long userId2) {
-        // followRelationService.deleteFollow(userId1, userId2);
-        return R.out(RespCodeEnum.SUCCESS, "");
-
-
-    }
-
-
 }
 

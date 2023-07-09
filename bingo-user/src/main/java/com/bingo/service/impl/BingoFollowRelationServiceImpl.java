@@ -10,7 +10,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,18 +28,19 @@ public class BingoFollowRelationServiceImpl extends ServiceImpl<BingoFollowRelat
     private BingoFollowRelationStore followRelationStore;
 
     /**
-     * 关注用户
+     * 关注/取消用户
      */
     @Override
-    public Boolean saveFollow(Long userId1, Long userId2) throws Exception {
+    public Boolean followUser(Long userId1, Long userId2) {
+        BingoFollowRelation followRelation = followRelationStore.getOneFollow(userId1, userId1);
+        // 没关注过，进行关注
+        if (ObjectUtils.isEmpty(followRelation)) {
+            followRelationStore.saveFollow(null);
+        }
+        // TODO 关注过了，是什么状态
         BingoFollowRelation bingoFollowRelation = new BingoFollowRelation();
         bingoFollowRelation.setUserId1(userId1);
         bingoFollowRelation.setUserId2(userId2);
-        bingoFollowRelation.setCreateTime(new Date());
-        BingoFollowRelation followOne = followRelationStore.findFollowOne(userId1, userId1);
-        if (!ObjectUtils.isEmpty(followOne)) {
-            throw new Exception("您已关注用户");
-        }
         return followRelationStore.saveFollow(bingoFollowRelation);
     }
 
@@ -47,9 +48,13 @@ public class BingoFollowRelationServiceImpl extends ServiceImpl<BingoFollowRelat
      * 查询用户的关注
      */
     @Override
-    public List<BingoFollowRelation> findFollow(Long userId1) {
-        List<BingoFollowRelation> followRelation = followRelationStore.findFollow(userId1);
+    public List<BingoFollowRelation> findFollowList(Long userId) {
+        List<BingoFollowRelation> followRelation = followRelationStore.findFollowList(userId);
+        List<Long> ids = new ArrayList<>();
+        // TODO 用户信息
+        for (BingoFollowRelation relation : followRelation) {
+            ids.add(relation.getUserId2());
+        }
         return followRelation;
     }
-
 }

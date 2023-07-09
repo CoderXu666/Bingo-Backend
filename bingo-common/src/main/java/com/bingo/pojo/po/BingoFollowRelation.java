@@ -55,5 +55,4 @@ public class BingoFollowRelation implements Serializable {
     @TableLogic
     private Boolean deleted;
 
-
 }
