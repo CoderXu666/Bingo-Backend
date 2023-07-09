@@ -31,7 +31,7 @@ public class BingoFollowRelationController {
      * 关注用户
      */
     @PostMapping("/save_follow")
-    public R saveFollow(Long userId1, Long userId2) {
+    public R saveFollow(Long userId1, Long userId2) throws Exception {
         followRelationService.saveFollow(userId1, userId2);
         return R.out(RespCodeEnum.SUCCESS, "关注成功");
     }
@@ -46,8 +46,15 @@ public class BingoFollowRelationController {
     }
 
     /**
-     *
+     * 取消关注
      */
+    @GetMapping("")
+    public R deleteFollow(Long userId1, Long userId2) {
+        // followRelationService.deleteFollow(userId1, userId2);
+        return R.out(RespCodeEnum.SUCCESS, "");
+
+
+    }
 
 
 }

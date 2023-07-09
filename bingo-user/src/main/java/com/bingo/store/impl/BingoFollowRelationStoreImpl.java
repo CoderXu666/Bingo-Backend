@@ -36,4 +36,13 @@ public class BingoFollowRelationStoreImpl extends ServiceImpl<BingoFollowRelatio
         List<BingoFollowRelation> followRelation = this.list(queryWrapper);
         return followRelation;
     }
+
+    @Override
+    public BingoFollowRelation findFollowOne(Long userId1, Long userId2) {
+        QueryWrapper<BingoFollowRelation> queryWrapper = new QueryWrapper();
+        queryWrapper.eq("uesr_id1", userId1);
+        queryWrapper.eq("uesr_id2", userId2);
+        BingoFollowRelation followRelation = this.getOne(queryWrapper);
+        return followRelation;
+    }
 }

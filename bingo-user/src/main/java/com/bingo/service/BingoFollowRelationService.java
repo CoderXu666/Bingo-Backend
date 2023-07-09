@@ -16,7 +16,8 @@ import java.util.List;
  */
 public interface BingoFollowRelationService extends IService<BingoFollowRelation> {
 
-    Boolean saveFollow(Long userId1, Long userId2);
+    Boolean saveFollow(Long userId1, Long userId2) throws Exception;
 
     List<BingoFollowRelation> findFollow(Long userId1);
+
 }
