@@ -1,11 +1,14 @@
 package com.bingo.service.impl;
 
 import com.bingo.config.ChatChannelConfig;
+import com.bingo.pojo.dto.ChatMsgDTO;
 import com.bingo.service.ChatService;
 import io.netty.channel.Channel;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,6 +21,9 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Service
 public class ChatServiceImpl implements ChatService {
+    @Autowired
+    private KafkaTemplate kafkaTemplate;
+
     /**
      * 发送消息给某个用户
      */
@@ -37,7 +43,16 @@ public class ChatServiceImpl implements ChatService {
     @Override
     public void sendMsgToAll(String msg) {
         ChannelGroup channelGroup = ChatChannelConfig.getChannelGroup();
+        channelGroup.writeAndFlush(new TextWebSocketFrame(msg));
+    }
 
-//        ChatChannelConfig.getChannelGroup().writeAndFlush(new TextWebSocketFrame(msg));
+    /**
+     * 发送消息给某个群聊
+     */
+    @Override
+    public void sendMsg2Group(ChatMsgDTO msgDTO) {
+        // 根据群id，查询所有的群成员
+        // 根据userId取出所有的channel
+        // 使用channel进行消息发送
     }
 }

@@ -91,7 +91,7 @@ public class IMChatServer {
             ChannelFuture channelFuture = server.bind(9099).sync();
             log.info("Server started and listen on:{}", channelFuture.channel().localAddress());
 
-            // 监听关闭Channel
+            // 关闭 Channel
             channelFuture.channel().closeFuture().sync();
         } finally {
             bossGroup.shutdownGracefully();

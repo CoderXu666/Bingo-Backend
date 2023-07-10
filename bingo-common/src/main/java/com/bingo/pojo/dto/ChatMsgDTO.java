@@ -18,4 +18,8 @@ public class ChatMsgDTO {
      * 接收用户
      */
     private Long userId;
+    /**
+     * 群id
+     */
+    private Long groupId;
 }

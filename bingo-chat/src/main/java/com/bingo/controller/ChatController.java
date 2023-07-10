@@ -16,7 +16,7 @@ public class ChatController {
     /**
      * 消息推送给所有用户
      */
-    @PostMapping("/push_all")
+    @PostMapping("/send_all")
     public R pushToAll(@RequestParam("msg") String msg) {
         chatService.sendMsgToAll(msg);
         return R.out(RespCodeEnum.SUCCESS, "消息群发成功");
@@ -25,9 +25,18 @@ public class ChatController {
     /**
      * 消息推送给指定用户
      */
-    @PostMapping("/send_one")
+    @PostMapping("/send_msg")
     public R sendMsgByUserId(@RequestBody ChatMsgDTO msgDTO) throws Exception {
         chatService.sendMsgByUserId(msgDTO.getUserId(), msgDTO.getMsg());
         return R.out(RespCodeEnum.SUCCESS, "发送消息成功");
+    }
+
+    /**
+     * 发送信息给某个群聊
+     */
+    @PostMapping("/send_msg_group")
+    public R sendMsg2Group(@RequestBody ChatMsgDTO msgDTO) {
+        chatService.sendMsg2Group(msgDTO);
+        return R.out(RespCodeEnum.SUCCESS, "发送群聊消息成功");
     }
 }
