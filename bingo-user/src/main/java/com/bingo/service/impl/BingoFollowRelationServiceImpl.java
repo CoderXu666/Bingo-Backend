@@ -4,13 +4,18 @@ package com.bingo.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoFollowRelationMapper;
 import com.bingo.pojo.po.BingoFollowRelation;
+import com.bingo.pojo.po.BingoUser;
+import com.bingo.pojo.vo.BingoFollowVO;
 import com.bingo.service.BingoFollowRelationService;
 import com.bingo.store.BingoFollowRelationStore;
+import com.bingo.store.BingoUserStore;
 import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,35 +31,53 @@ public class BingoFollowRelationServiceImpl extends ServiceImpl<BingoFollowRelat
 
     @Autowired
     private BingoFollowRelationStore followRelationStore;
+    @Autowired
+    private BingoUserStore userStore;
 
     /**
      * 关注/取消用户
      */
     @Override
     public Boolean followUser(Long userId1, Long userId2) {
-        BingoFollowRelation followRelation = followRelationStore.getOneFollow(userId1, userId1);
-        // 没关注过，进行关注
-        if (ObjectUtils.isEmpty(followRelation)) {
-            followRelationStore.saveFollow(null);
-        }
-        // TODO 关注过了，是什么状态
+        //查询是否关注过
+        BingoFollowRelation followRelation = followRelationStore.getOneFollow(userId1, userId2);
         BingoFollowRelation bingoFollowRelation = new BingoFollowRelation();
         bingoFollowRelation.setUserId1(userId1);
         bingoFollowRelation.setUserId2(userId2);
-        return followRelationStore.saveFollow(bingoFollowRelation);
+        // 没关注过
+        if (ObjectUtils.isEmpty(followRelation)) {
+            return followRelationStore.saveFollow(bingoFollowRelation);
+        }
+        // TODO 已经关注了、再点取消关注
+        if (followRelation.getFollowMark()) {
+            bingoFollowRelation.setFollowMark(false);
+            bingoFollowRelation.setCreateTime(new Date());
+            return followRelationStore.updateFollow(bingoFollowRelation);
+        }
+        // TODO 曾经关注过了、（取关状态）
+        bingoFollowRelation.setFollowMark(true);
+        bingoFollowRelation.setCreateTime(new Date());
+        return followRelationStore.updateFollow(bingoFollowRelation);
     }
 
     /**
      * 查询用户的关注
      */
     @Override
-    public List<BingoFollowRelation> findFollowList(Long userId) {
+    public List<BingoFollowVO> findFollowList(Long userId) {
         List<BingoFollowRelation> followRelation = followRelationStore.findFollowList(userId);
         List<Long> ids = new ArrayList<>();
         // TODO 用户信息
         for (BingoFollowRelation relation : followRelation) {
             ids.add(relation.getUserId2());
         }
-        return followRelation;
+        List<BingoUser> userList = userStore.getUserListByIds(ids);
+        List<BingoFollowVO> followVOList = new ArrayList<>();
+        for (BingoUser bingoUser : userList) {
+            BingoFollowVO followVO = new BingoFollowVO();
+            BeanUtils.copyProperties(bingoUser, followVO);
+            followVOList.add(followVO);
+        }
+        return followVOList;
     }
 }

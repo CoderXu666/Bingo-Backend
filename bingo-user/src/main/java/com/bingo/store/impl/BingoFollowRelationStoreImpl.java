@@ -29,6 +29,9 @@ public class BingoFollowRelationStoreImpl extends ServiceImpl<BingoFollowRelatio
         return this.save(bingoFollowRelation);
     }
 
+    /**
+     * 查询用户的关注列表
+     */
     @Override
     public List<BingoFollowRelation> findFollowList(Long userId1) {
         QueryWrapper<BingoFollowRelation> queryWrapper = new QueryWrapper<>();
@@ -37,11 +40,22 @@ public class BingoFollowRelationStoreImpl extends ServiceImpl<BingoFollowRelatio
         return this.list(queryWrapper);
     }
 
+    /**
+     * 查询是否关注该用户
+     */
     @Override
     public BingoFollowRelation getOneFollow(Long userId1, Long userId2) {
         QueryWrapper<BingoFollowRelation> queryWrapper = new QueryWrapper();
         queryWrapper.eq("user_id1", userId1);
         queryWrapper.eq("user_id2", userId2);
         return this.getOne(queryWrapper);
+    }
+
+    /**
+     * 关注、取消关注
+     */
+    @Override
+    public Boolean updateFollow(BingoFollowRelation bingoFollowRelation) {
+        return this.updateById(bingoFollowRelation);
     }
 }

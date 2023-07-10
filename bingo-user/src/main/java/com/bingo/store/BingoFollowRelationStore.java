@@ -21,4 +21,6 @@ public interface BingoFollowRelationStore extends IService<BingoFollowRelation> 
     List<BingoFollowRelation> findFollowList(Long userId1);
 
     BingoFollowRelation getOneFollow(Long userId1, Long userId2);
+
+    Boolean updateFollow(BingoFollowRelation bingoFollowRelation);
 }

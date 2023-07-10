@@ -4,6 +4,7 @@ package com.bingo.controller;
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.po.BingoFollowRelation;
 import com.bingo.pojo.resp.R;
+import com.bingo.pojo.vo.BingoFollowVO;
 import com.bingo.service.BingoFollowRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,7 @@ public class BingoFollowRelationController {
      * 关注/取消用户
      */
     @PostMapping("/follow_user")
-    public R followUser(Long userId1, Long userId2) throws Exception {
+    public R followUser(Long userId1, Long userId2) {
         followRelationService.followUser(userId1, userId2);
         return R.out(RespCodeEnum.SUCCESS, "关注成功");
     }
@@ -41,7 +42,7 @@ public class BingoFollowRelationController {
      */
     @GetMapping("/follow_list")
     public R findFollowList(Long userId) {
-        List<BingoFollowRelation> followRelation = followRelationService.findFollowList(userId);
+        List<BingoFollowVO> followRelation = followRelationService.findFollowList(userId);
         return R.out(RespCodeEnum.SUCCESS, followRelation);
     }
 }

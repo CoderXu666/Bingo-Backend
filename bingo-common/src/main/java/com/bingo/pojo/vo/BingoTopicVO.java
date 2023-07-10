@@ -1,8 +1,6 @@
 package com.bingo.pojo.vo;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
-
 import java.util.Date;
 
 @Data
