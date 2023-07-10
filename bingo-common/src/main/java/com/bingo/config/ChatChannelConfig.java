@@ -14,13 +14,11 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ChatChannelConfig {
     /**
-     * 1:作用:定义一个Channel组,管理所有的channel
-     * GlobalEventExecutor.INSTANCE:单例
-     * <p>
-     * 2:UserId 与 Channel 对应关系(用于给指定用户发送消息)
+     * 1：ChannelGroup：管理所有channel，每个channel就是一个通道（GlobalEventExecutor.INSTANCE:单例）
+     * 2：ConcurrentHashMap：管理 UserId 与 Channel 对应关系（用于给指定用户发送消息）
      */
     private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
-    private static ConcurrentHashMap<String, Channel> userChannelMap = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<Long, Channel> userChannelMap = new ConcurrentHashMap<>();
 
     /**
      * 获取channel组
@@ -32,7 +30,7 @@ public class ChatChannelConfig {
     /**
      * 获取用户channel map
      */
-    public static ConcurrentHashMap<String, Channel> getUserChannelMap() {
+    public static ConcurrentHashMap<Long, Channel> getUserChannelMap() {
         return userChannelMap;
     }
 }

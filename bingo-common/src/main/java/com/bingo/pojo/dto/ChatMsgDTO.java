@@ -11,11 +11,11 @@ import lombok.Data;
 @Data
 public class ChatMsgDTO {
     /**
-     * 文字消息
+     * 消息内容
      */
     private String msg;
     /**
      * 接收用户
      */
-    private String userId;
+    private Long userId;
 }

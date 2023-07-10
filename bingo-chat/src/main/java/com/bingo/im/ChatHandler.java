@@ -35,9 +35,9 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
         JSONObject jsonObject = JSON.parseObject(msg.text());
-        String userId = jsonObject.getString("userId");
+        Long userId = jsonObject.getLong("userId");
         ChatChannelConfig.getUserChannelMap().put(userId, ctx.channel());
-        AttributeKey<String> key = AttributeKey.valueOf("userId");
+        AttributeKey<Long> key = AttributeKey.valueOf("userId");
         ctx.channel().attr(key).setIfAbsent(userId);
     }
 
@@ -55,13 +55,13 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) {
         ChatChannelConfig.getChannelGroup().remove(ctx.channel());
-        removeUserId(ctx); // 移除userId 和 Channel关系数据
+        removeUserId(ctx);
     }
 
     // 删除用户与channel的对应关系
     private void removeUserId(ChannelHandlerContext ctx) {
-        AttributeKey<String> key = AttributeKey.valueOf("userId");
-        String userId = ctx.channel().attr(key).get();
+        AttributeKey<Long> key = AttributeKey.valueOf("userId");
+        Long userId = ctx.channel().attr(key).get();
         ChatChannelConfig.getUserChannelMap().remove(userId);
     }
 }

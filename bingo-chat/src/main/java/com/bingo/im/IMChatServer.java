@@ -23,7 +23,7 @@ import javax.annotation.PreDestroy;
  * @Author 徐志斌
  * @Date: 2023/5/28 19:36
  * @Version 1.0
- * @Description: Netty服务器(用于文字聊天)
+ * @Description: Netty服务器(用于聊天)
  */
 @Slf4j
 @Component
@@ -64,8 +64,7 @@ public class IMChatServer {
      * Netty Chat Server启动
      */
     private void start() throws InterruptedException {
-        // 定义两个EventLoopGroup
-        // boss负责接受客户端连接等事件,work负责处理boss接收到的事件
+        // 两个EventLoopGroup：boss负责接受客户端连接等事件,work负责处理boss接收到的事件
         bossGroup = new NioEventLoopGroup();
         workGroup = new NioEventLoopGroup();
 
