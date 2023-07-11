@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author 周英俊
@@ -18,7 +18,7 @@ public interface BingoFollowRelationStore extends IService<BingoFollowRelation> 
 
     Boolean saveFollow(BingoFollowRelation bingoFollowRelation);
 
-    List<BingoFollowRelation> findFollowList(Long userId1);
+    List<BingoFollowRelation> findFollowList(Long userId);
 
     BingoFollowRelation getOneFollow(Long userId1, Long userId2);
 

@@ -54,6 +54,12 @@ public class BingoFollowRelation implements Serializable {
     private Date createTime;
 
     /**
+     * 创建时间
+     */
+    @TableField("update_time")
+    private Date updateTime;
+
+    /**
      * 删除标识
      */
     @TableField("deleted")

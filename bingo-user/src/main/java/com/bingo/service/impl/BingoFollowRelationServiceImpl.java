@@ -48,15 +48,16 @@ public class BingoFollowRelationServiceImpl extends ServiceImpl<BingoFollowRelat
         if (ObjectUtils.isEmpty(followRelation)) {
             return followRelationStore.saveFollow(bingoFollowRelation);
         }
+        Long id = followRelation.getId();
+        bingoFollowRelation.setId(id);
+        bingoFollowRelation.setUpdateTime(new Date());
         // TODO 已经关注了、再点取消关注
         if (followRelation.getFollowMark()) {
             bingoFollowRelation.setFollowMark(false);
-            bingoFollowRelation.setCreateTime(new Date());
-            return followRelationStore.updateFollow(bingoFollowRelation);
+        } else {
+            // TODO 曾经关注过了、（取关状态）
+            bingoFollowRelation.setFollowMark(true);
         }
-        // TODO 曾经关注过了、（取关状态）
-        bingoFollowRelation.setFollowMark(true);
-        bingoFollowRelation.setCreateTime(new Date());
         return followRelationStore.updateFollow(bingoFollowRelation);
     }
 

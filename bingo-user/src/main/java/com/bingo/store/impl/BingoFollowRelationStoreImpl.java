@@ -33,9 +33,9 @@ public class BingoFollowRelationStoreImpl extends ServiceImpl<BingoFollowRelatio
      * 查询用户的关注列表
      */
     @Override
-    public List<BingoFollowRelation> findFollowList(Long userId1) {
+    public List<BingoFollowRelation> findFollowList(Long userId) {
         QueryWrapper<BingoFollowRelation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_id1", userId1);
+        queryWrapper.eq("user_id1", userId);
         queryWrapper.orderByDesc("create_time");
         return this.list(queryWrapper);
     }
@@ -57,5 +57,6 @@ public class BingoFollowRelationStoreImpl extends ServiceImpl<BingoFollowRelatio
     @Override
     public Boolean updateFollow(BingoFollowRelation bingoFollowRelation) {
         return this.updateById(bingoFollowRelation);
+
     }
 }

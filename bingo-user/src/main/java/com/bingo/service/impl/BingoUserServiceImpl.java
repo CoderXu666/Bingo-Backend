@@ -170,7 +170,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
 
         // 保存账号信息
         BingoUser user = new BingoUser();
-        user.setUserId(userId);
+        //user.setUserId(userId);
         user.setPassWord(AESUtil.encrypt(passWord));
 //        user.setUserName(); // 默认
 //        user.setAvatarUrl(); // 默认

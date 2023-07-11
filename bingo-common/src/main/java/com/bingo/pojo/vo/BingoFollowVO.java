@@ -21,9 +21,4 @@ public class BingoFollowVO {
      */
     private String userName;
 
-    /**
-     * 关注时间
-     */
-    private Date createTime;
-
 }
