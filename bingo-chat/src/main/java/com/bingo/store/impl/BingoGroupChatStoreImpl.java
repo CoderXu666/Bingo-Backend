@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author 周英俊
@@ -18,4 +18,27 @@ import org.springframework.stereotype.Service;
 @Service
 public class BingoGroupChatStoreImpl extends ServiceImpl<BingoGroupChatMapper, BingoGroupChat> implements BingoGroupChatStore {
 
+    /**
+     * 创建群聊
+     */
+    @Override
+    public Boolean saveGroup(BingoGroupChat groupChat) {
+        return this.save(groupChat);
+    }
+
+    /**
+     * 删除群聊
+     */
+    @Override
+    public Boolean deleteGroup(Long id) {
+        return this.removeById(id);
+    }
+
+    /**
+     * 更新群聊
+     */
+    @Override
+    public Boolean updateGroup(BingoGroupChat groupChat) {
+        return this.updateById(groupChat);
+    }
 }

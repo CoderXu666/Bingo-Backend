@@ -6,7 +6,7 @@ import com.bingo.pojo.po.BingoGroupChat;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author 周英俊
@@ -14,4 +14,9 @@ import com.bingo.pojo.po.BingoGroupChat;
  */
 public interface BingoGroupChatStore extends IService<BingoGroupChat> {
 
+    Boolean saveGroup(BingoGroupChat groupChat);
+
+    Boolean deleteGroup(Long id);
+
+    Boolean updateGroup(BingoGroupChat groupChat);
 }
