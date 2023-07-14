@@ -1,4 +1,4 @@
-package com.bingo.handler;
+package com.bingo.exception;
 
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.resp.R;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @Slf4j
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalException {
     /**
      * 兜底异常
      */
