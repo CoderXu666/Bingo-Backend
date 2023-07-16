@@ -12,7 +12,7 @@ import com.bingo.pojo.po.BingoGroupInfo;
  * @author 周英俊
  * @since 2023-07-13
  */
-public interface BingoGroupChatStore extends IService<BingoGroupInfo> {
+public interface BingoGroupInfoStore extends IService<BingoGroupInfo> {
 
     Boolean saveGroup(BingoGroupInfo groupChat);
 

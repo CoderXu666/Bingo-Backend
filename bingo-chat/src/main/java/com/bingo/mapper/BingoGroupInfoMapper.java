@@ -12,6 +12,6 @@ import com.bingo.pojo.po.BingoGroupInfo;
  * @author 周英俊
  * @since 2023-07-13
  */
-public interface BingoGroupChatMapper extends BaseMapper<BingoGroupInfo> {
+public interface BingoGroupInfoMapper extends BaseMapper<BingoGroupInfo> {
 
 }

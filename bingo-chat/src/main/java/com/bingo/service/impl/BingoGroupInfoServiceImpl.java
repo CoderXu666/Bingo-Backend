@@ -2,11 +2,11 @@ package com.bingo.service.impl;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bingo.mapper.BingoGroupChatMapper;
-import com.bingo.pojo.dto.GroupChatDTO;
+import com.bingo.mapper.BingoGroupInfoMapper;
+import com.bingo.pojo.dto.GroupInfoDTO;
 import com.bingo.pojo.po.BingoGroupInfo;
-import com.bingo.service.BingoGroupChatService;
-import com.bingo.store.BingoGroupChatStore;
+import com.bingo.service.BingoGroupInfoService;
+import com.bingo.store.BingoGroupInfoStore;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,15 +22,15 @@ import java.util.Date;
  * @since 2023-07-13
  */
 @Service
-public class BingoGroupChatServiceImpl extends ServiceImpl<BingoGroupChatMapper, BingoGroupInfo> implements BingoGroupChatService {
+public class BingoGroupInfoServiceImpl extends ServiceImpl<BingoGroupInfoMapper, BingoGroupInfo> implements BingoGroupInfoService {
     @Autowired
-    private BingoGroupChatStore groupChatStore;
+    private BingoGroupInfoStore groupChatStore;
 
     /**
      * 创建群聊
      */
     @Override
-    public Boolean saveGroup(GroupChatDTO groupChatDTO) {
+    public Boolean saveGroup(GroupInfoDTO groupChatDTO) {
         BingoGroupInfo groupChat = new BingoGroupInfo();
         BeanUtils.copyProperties(groupChatDTO, groupChat);
         return groupChatStore.saveGroup(groupChat);
@@ -48,7 +48,7 @@ public class BingoGroupChatServiceImpl extends ServiceImpl<BingoGroupChatMapper,
      * 更新群聊
      */
     @Override
-    public Boolean updateGroup(GroupChatDTO groupChatDTO) {
+    public Boolean updateGroup(GroupInfoDTO groupChatDTO) {
         BingoGroupInfo groupChat = new BingoGroupInfo();
         groupChat.setUpdateTime(new Date());
         BeanUtils.copyProperties(groupChatDTO, groupChat);

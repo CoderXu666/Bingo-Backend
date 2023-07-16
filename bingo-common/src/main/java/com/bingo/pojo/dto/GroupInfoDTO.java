@@ -3,7 +3,7 @@ package com.bingo.pojo.dto;
 import lombok.Data;
 
 @Data
-public class GroupChatDTO {
+public class GroupInfoDTO {
 
     /**
      * ID

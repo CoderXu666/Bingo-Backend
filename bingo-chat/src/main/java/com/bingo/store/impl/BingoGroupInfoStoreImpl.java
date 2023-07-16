@@ -2,9 +2,9 @@ package com.bingo.store.impl;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bingo.mapper.BingoGroupChatMapper;
+import com.bingo.mapper.BingoGroupInfoMapper;
 import com.bingo.pojo.po.BingoGroupInfo;
-import com.bingo.store.BingoGroupChatStore;
+import com.bingo.store.BingoGroupInfoStore;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @since 2023-07-13
  */
 @Service
-public class BingoGroupChatStoreImpl extends ServiceImpl<BingoGroupChatMapper, BingoGroupInfo> implements BingoGroupChatStore {
+public class BingoGroupInfoStoreImpl extends ServiceImpl<BingoGroupInfoMapper, BingoGroupInfo> implements BingoGroupInfoStore {
 
     /**
      * 创建群聊

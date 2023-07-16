@@ -2,7 +2,7 @@ package com.bingo.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bingo.pojo.dto.GroupChatDTO;
+import com.bingo.pojo.dto.GroupInfoDTO;
 import com.bingo.pojo.po.BingoGroupInfo;
 
 /**
@@ -13,11 +13,11 @@ import com.bingo.pojo.po.BingoGroupInfo;
  * @author 周英俊
  * @since 2023-07-13
  */
-public interface BingoGroupChatService extends IService<BingoGroupInfo> {
+public interface BingoGroupInfoService extends IService<BingoGroupInfo> {
 
-    Boolean saveGroup(GroupChatDTO groupChatDTO);
+    Boolean saveGroup(GroupInfoDTO groupChatDTO);
 
     Boolean deleteGroup(Long id);
 
-    Boolean updateGroup(GroupChatDTO groupChatDTO);
+    Boolean updateGroup(GroupInfoDTO groupChatDTO);
 }

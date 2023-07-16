@@ -2,9 +2,9 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.dto.GroupChatDTO;
+import com.bingo.pojo.dto.GroupInfoDTO;
 import com.bingo.pojo.resp.R;
-import com.bingo.service.BingoGroupChatService;
+import com.bingo.service.BingoGroupInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,15 +18,15 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/group_chat")
-public class BingoGroupChatController {
+public class BingoGroupInfoController {
     @Autowired
-    private BingoGroupChatService groupChatService;
+    private BingoGroupInfoService groupChatService;
 
     /**
      * 创建群聊
      */
     @PostMapping("/save")
-    public R saveGroup(@RequestBody GroupChatDTO groupChatDTO) {
+    public R saveGroup(@RequestBody GroupInfoDTO groupChatDTO) {
         groupChatService.saveGroup(groupChatDTO);
         return R.out(RespCodeEnum.SUCCESS, "创建成功");
     }
@@ -44,7 +44,7 @@ public class BingoGroupChatController {
      * 更新群聊
      */
     @PostMapping("/update")
-    public R updateGroup(@RequestBody GroupChatDTO groupChatDTO) {
+    public R updateGroup(@RequestBody GroupInfoDTO groupChatDTO) {
         groupChatService.updateGroup(groupChatDTO);
         return R.out(RespCodeEnum.SUCCESS, "更新成功");
     }
