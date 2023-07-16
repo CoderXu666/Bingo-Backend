@@ -4,7 +4,7 @@ package com.bingo.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoGroupChatMapper;
 import com.bingo.pojo.dto.GroupChatDTO;
-import com.bingo.pojo.po.BingoGroupChat;
+import com.bingo.pojo.po.BingoGroupInfo;
 import com.bingo.service.BingoGroupChatService;
 import com.bingo.store.BingoGroupChatStore;
 import org.springframework.beans.BeanUtils;
@@ -22,7 +22,7 @@ import java.util.Date;
  * @since 2023-07-13
  */
 @Service
-public class BingoGroupChatServiceImpl extends ServiceImpl<BingoGroupChatMapper, BingoGroupChat> implements BingoGroupChatService {
+public class BingoGroupChatServiceImpl extends ServiceImpl<BingoGroupChatMapper, BingoGroupInfo> implements BingoGroupChatService {
     @Autowired
     private BingoGroupChatStore groupChatStore;
 
@@ -31,7 +31,7 @@ public class BingoGroupChatServiceImpl extends ServiceImpl<BingoGroupChatMapper,
      */
     @Override
     public Boolean saveGroup(GroupChatDTO groupChatDTO) {
-        BingoGroupChat groupChat = new BingoGroupChat();
+        BingoGroupInfo groupChat = new BingoGroupInfo();
         BeanUtils.copyProperties(groupChatDTO, groupChat);
         return groupChatStore.saveGroup(groupChat);
     }
@@ -49,7 +49,7 @@ public class BingoGroupChatServiceImpl extends ServiceImpl<BingoGroupChatMapper,
      */
     @Override
     public Boolean updateGroup(GroupChatDTO groupChatDTO) {
-        BingoGroupChat groupChat = new BingoGroupChat();
+        BingoGroupInfo groupChat = new BingoGroupInfo();
         groupChat.setUpdateTime(new Date());
         BeanUtils.copyProperties(groupChatDTO, groupChat);
         return groupChatStore.updateGroup(groupChat);

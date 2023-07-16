@@ -2,7 +2,7 @@ package com.bingo.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.bingo.pojo.po.BingoGroupChat;
+import com.bingo.pojo.po.BingoGroupInfo;
 
 /**
  * <p>
@@ -12,6 +12,6 @@ import com.bingo.pojo.po.BingoGroupChat;
  * @author 周英俊
  * @since 2023-07-13
  */
-public interface BingoGroupChatMapper extends BaseMapper<BingoGroupChat> {
+public interface BingoGroupChatMapper extends BaseMapper<BingoGroupInfo> {
 
 }

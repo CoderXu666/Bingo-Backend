@@ -3,7 +3,7 @@ package com.bingo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bingo.pojo.dto.GroupChatDTO;
-import com.bingo.pojo.po.BingoGroupChat;
+import com.bingo.pojo.po.BingoGroupInfo;
 
 /**
  * <p>
@@ -13,7 +13,7 @@ import com.bingo.pojo.po.BingoGroupChat;
  * @author 周英俊
  * @since 2023-07-13
  */
-public interface BingoGroupChatService extends IService<BingoGroupChat> {
+public interface BingoGroupChatService extends IService<BingoGroupInfo> {
 
     Boolean saveGroup(GroupChatDTO groupChatDTO);
 

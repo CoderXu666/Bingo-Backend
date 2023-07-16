@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -22,7 +21,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("bingo_group_chat")
-public class BingoGroupChat implements Serializable {
+public class BingoGroupInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
