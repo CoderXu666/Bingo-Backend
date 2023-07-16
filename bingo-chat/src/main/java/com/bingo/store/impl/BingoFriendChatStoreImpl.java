@@ -17,4 +17,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class BingoFriendChatStoreImpl extends ServiceImpl<BingoFriendChatMapper, BingoFriendChat> implements BingoFriendChatStore {
 
+    /**
+     * 好友发送消息
+     */
+    @Override
+    public Boolean saveFriendChat(BingoFriendChat bingoFriendChat) {
+        return this.save(bingoFriendChat);
+    }
 }

@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.util.Date;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -41,13 +43,13 @@ public class BingoFriendChat implements Serializable {
      * 用户ID（关联用户ID: 接受者）
      */
     @TableField("user_id2")
-    private String userId2;
+    private Long userId2;
 
     /**
      * 聊天类型（0：文字/图片、1：表情包、2：语音/视频）
      */
     @TableField("chat_type")
-    private Boolean chatType;
+    private Integer chatType;
 
     /**
      * 聊天内容
@@ -59,7 +61,7 @@ public class BingoFriendChat implements Serializable {
      * 创建时间
      */
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 删除标识

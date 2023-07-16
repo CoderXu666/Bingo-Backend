@@ -2,9 +2,9 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.dto.GroupInfoDTO;
+import com.bingo.pojo.dto.GroupChatDTO;
 import com.bingo.pojo.resp.R;
-import com.bingo.service.BingoGroupInfoService;
+import com.bingo.service.BingoGroupChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,13 +24,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class BingoFriendChatController {
 
     @Autowired
-    private BingoGroupInfoService groupChatService;
+    private BingoGroupChatService groupChatService;
 
     /**
      * 发送消息
      */
     @PostMapping("/save")
-    public R saveGroup(@RequestBody GroupInfoDTO groupChatDTO) {
+    public R saveGroup(@RequestBody GroupChatDTO groupChatDTO) {
         groupChatService.saveGroup(groupChatDTO);
         return R.out(RespCodeEnum.SUCCESS, "创建成功");
     }

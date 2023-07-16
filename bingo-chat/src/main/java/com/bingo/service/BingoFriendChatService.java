@@ -2,6 +2,7 @@ package com.bingo.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bingo.pojo.dto.FriendChatDTO;
 import com.bingo.pojo.po.BingoFriendChat;
 
 /**
@@ -14,4 +15,5 @@ import com.bingo.pojo.po.BingoFriendChat;
  */
 public interface BingoFriendChatService extends IService<BingoFriendChat> {
 
+    Boolean saveFriendChat(FriendChatDTO friendChatDTO);
 }
