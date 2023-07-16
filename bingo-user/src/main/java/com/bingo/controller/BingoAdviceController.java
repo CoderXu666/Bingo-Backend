@@ -31,6 +31,7 @@ public class BingoAdviceController {
     @PostMapping("/save")
     public R saveAdvice(@RequestBody AdviceDTO adviceDTO) {
         adviceService.saveAdvice(adviceDTO);
+
         return R.out(RespCodeEnum.SUCCESS, "保存成功");
     }
 }
