@@ -33,4 +33,12 @@ public class BingoFriendChatServiceImpl extends ServiceImpl<BingoFriendChatMappe
         BeanUtils.copyProperties(friendChatDTO, bingoFriendChat);
         return friendChatStore.saveFriendChat(bingoFriendChat);
     }
+
+    /**
+     * 删除好友消息
+     */
+    @Override
+    public Boolean deleteFriendChat(Long id) {
+        return friendChatStore.deleteFriendChat(id);
+    }
 }

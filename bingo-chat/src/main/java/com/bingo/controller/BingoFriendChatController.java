@@ -2,14 +2,11 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.dto.GroupChatDTO;
+import com.bingo.pojo.dto.FriendChatDTO;
 import com.bingo.pojo.resp.R;
-import com.bingo.service.BingoGroupChatService;
+import com.bingo.service.BingoFriendChatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -24,16 +21,26 @@ import org.springframework.web.bind.annotation.RestController;
 public class BingoFriendChatController {
 
     @Autowired
-    private BingoGroupChatService groupChatService;
+    private BingoFriendChatService friendChatService;
 
     /**
-     * 发送消息
+     * 好友发送消息
      */
     @PostMapping("/save")
-    public R saveGroup(@RequestBody GroupChatDTO groupChatDTO) {
-        groupChatService.saveGroup(groupChatDTO);
+    public R saveFriendChat(@RequestBody FriendChatDTO friendChatDTO) {
+        friendChatService.saveFriendChat(friendChatDTO);
         return R.out(RespCodeEnum.SUCCESS, "创建成功");
     }
+
+    /**
+     * 删除好友消息
+     */
+    @DeleteMapping("/delete")
+    public R deleteFriendChat(Long id) {
+        friendChatService.deleteFriendChat(id);
+        return R.out(RespCodeEnum.SUCCESS, "删除成功");
+    }
+
 
 
 }

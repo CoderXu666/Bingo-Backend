@@ -16,4 +16,6 @@ import com.bingo.pojo.po.BingoFriendChat;
 public interface BingoFriendChatService extends IService<BingoFriendChat> {
 
     Boolean saveFriendChat(FriendChatDTO friendChatDTO);
+
+    Boolean deleteFriendChat(Long id);
 }

@@ -24,4 +24,12 @@ public class BingoFriendChatStoreImpl extends ServiceImpl<BingoFriendChatMapper,
     public Boolean saveFriendChat(BingoFriendChat bingoFriendChat) {
         return this.save(bingoFriendChat);
     }
+
+    /**
+     * 删除好友消息
+     */
+    @Override
+    public Boolean deleteFriendChat(Long id) {
+        return this.removeById(id);
+    }
 }

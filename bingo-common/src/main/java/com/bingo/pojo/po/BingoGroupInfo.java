@@ -20,7 +20,7 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("bingo_group_chat")
+@TableName("bingo_group_info")
 public class BingoGroupInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
