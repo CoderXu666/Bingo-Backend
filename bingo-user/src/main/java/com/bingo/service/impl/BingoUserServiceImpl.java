@@ -4,7 +4,6 @@ package com.bingo.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoUserMapper;
 import com.bingo.pojo.dto.LoginUserDTO;
-import com.bingo.pojo.dto.RegisterUserDTO;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoUserService;
@@ -13,7 +12,6 @@ import com.bingo.utils.AESUtil;
 import com.bingo.utils.JWTUtil;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -155,28 +153,26 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 注册
      */
     @Override
-    public Boolean register(RegisterUserDTO userDTO) throws Exception {
-        String userId = userDTO.getUserId();
+    public Boolean register(LoginUserDTO userDTO) throws Exception {
+        String accountId = userDTO.getAccountId();
         String passWord = userDTO.getPassWord();
         String email = userDTO.getEmail();
 
         // TODO: 入参校验：JSR 303
 
         // 判断账号是否注册过
-        BingoUser userInfo = userStore.findByUserId(userId);
+        BingoUser userInfo = userStore.findByAccountId(accountId);
         if (ObjectUtils.isNotEmpty(userInfo)) {
-            throw new Exception("该账号已存在，请重试");
+            throw new Exception("该账号已存在，换个试试~");
         }
 
         // 保存账号信息
         BingoUser user = new BingoUser();
-        //user.setUserId(userId);
+        user.setAccountId(accountId);
         user.setPassWord(AESUtil.encrypt(passWord));
-//        user.setUserName(); // 默认
-//        user.setAvatarUrl(); // 默认
-        userStore.save(user);
-
-        return null;
+        user.setSignature("这个人是个懒蛋，未设置个性签名");
+        user.setEmail(email);
+        return userStore.save(user);
     }
 
     /**
@@ -184,17 +180,14 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      */
     @Override
     public String login(LoginUserDTO userDTO) throws Exception {
-        String userId = userDTO.getUserId();
+        String accountId = userDTO.getAccountId();
         String passWord = userDTO.getPassWord();
         String frontCaptcha = userDTO.getCaptcha();
 
-        // 校验入参为空
-        if (StringUtils.isEmpty(userId) || StringUtils.isEmpty(passWord) || StringUtils.isEmpty(frontCaptcha)) {
-            throw new Exception("您填写的登录信息不完整，请重试");
-        }
+        // TODO JSR 303检验
 
         // 判断用户是否注册过
-        BingoUser userInfo = userStore.findByUserId(userId);
+        BingoUser userInfo = userStore.findByAccountId(accountId);
         if (ObjectUtils.isNotEmpty(userInfo)) {
             throw new Exception("该用户账号不存在，请重试");
         }
@@ -213,6 +206,6 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         }
 
         // 验证通过，生成Token
-        return JWTUtil.generateToken(userId);
+        return JWTUtil.generateToken(accountId);
     }
 }

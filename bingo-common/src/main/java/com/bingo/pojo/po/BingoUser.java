@@ -29,6 +29,12 @@ public class BingoUser implements Serializable {
     private Long id;
 
     /**
+     * 账号id
+     */
+    @TableId("account_id")
+    private String accountId;
+
+    /**
      * 用户名
      */
     @TableField("user_name")

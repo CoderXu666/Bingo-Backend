@@ -31,11 +31,13 @@ public class BingoUserStoreImpl extends ServiceImpl<BingoUserMapper, BingoUser> 
     }
 
     /**
-     * 根据userId查询用户信息
+     * 根据查询用户信息
      */
     @Override
-    public BingoUser findByUserId(String userId) {
-        return null;
+    public BingoUser findByAccountId(String accountId) {
+        QueryWrapper<BingoUser> wrapper = new QueryWrapper<>();
+        wrapper.eq("account_id", accountId);
+        return this.getOne(wrapper);
     }
 
     /**
