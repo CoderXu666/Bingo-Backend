@@ -1,22 +1,32 @@
 package com.bingo.pojo.dto;
 
+
 import lombok.Data;
 
 /**
+ * <p>
+ *
+ * </p>
+ *
  * @author 徐志斌
  * @since 2023-03-01
  */
 @Data
 public class LoginUserDTO {
     /**
-     * 账号
+     * 账号id
      */
-    private String userId;
+    private String accountId;
 
     /**
      * 密码
      */
     private String passWord;
+
+    /**
+     * 邮箱
+     */
+    private String email;
 
     /**
      * 验证码

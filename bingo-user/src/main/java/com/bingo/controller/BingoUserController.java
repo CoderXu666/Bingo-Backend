@@ -3,10 +3,9 @@ package com.bingo.controller;
 
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.dto.LoginUserDTO;
-import com.bingo.pojo.dto.RegisterUserDTO;
 import com.bingo.pojo.po.BingoUser;
-import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.pojo.resp.R;
+import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +41,7 @@ public class BingoUserController {
      * 注册
      */
     @PostMapping("/register")
-    public R register(@RequestBody RegisterUserDTO userDTO) throws Exception {
+    public R register(@RequestBody LoginUserDTO userDTO) throws Exception {
         userService.register(userDTO);
         return R.out(RespCodeEnum.SUCCESS, "操作成功");
     }
