@@ -3,6 +3,7 @@ package com.bingo.pojo.vo;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.Map;
 
 @Data
 public class BingoUserVO {
@@ -55,6 +56,11 @@ public class BingoUserVO {
      * 邮箱
      */
     private String email;
+
+    /**
+     * 聊天记录
+     */
+    private Map<String, Object> chatContentMap;
 
     /**
      * 创建时间

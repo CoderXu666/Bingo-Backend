@@ -40,8 +40,5 @@ public class BingoFriendChatController {
         friendChatService.deleteFriendChat(id);
         return R.out(RespCodeEnum.SUCCESS, "删除成功");
     }
-
-
-
 }
 

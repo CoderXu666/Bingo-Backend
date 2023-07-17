@@ -5,14 +5,15 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.feign.ChatUserFeign;
 import com.bingo.mapper.BingoUserRelationMapper;
 import com.bingo.pojo.po.BingoUserRelation;
-import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.pojo.resp.FeignResponse;
+import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoUserRelationService;
 import com.bingo.store.BingoUserRelationStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -38,6 +39,12 @@ public class BingoUserRelationServiceImpl extends ServiceImpl<BingoUserRelationM
         List<Long> ids = relationStore.findFriend(id);
         FeignResponse<List<BingoUserVO>> feignResponse = userFeign.getUserInfoByIds(ids);
         List<BingoUserVO> userVOList = feignResponse.getData();
+
+        // TODO 查询好友聊天记录
+        for (BingoUserVO userVO : userVOList) {
+
+        }
+
         return userVOList;
     }
 

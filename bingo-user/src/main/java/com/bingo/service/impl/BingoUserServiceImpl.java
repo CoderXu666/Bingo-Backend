@@ -182,20 +182,13 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     public String login(LoginUserDTO userDTO) throws Exception {
         String accountId = userDTO.getAccountId();
         String passWord = userDTO.getPassWord();
-        String frontCaptcha = userDTO.getCaptcha();
 
         // TODO JSR 303检验
 
-        // 判断用户是否注册过
+        // 判断用户账号是否存在
         BingoUser userInfo = userStore.findByAccountId(accountId);
         if (ObjectUtils.isNotEmpty(userInfo)) {
             throw new Exception("该用户账号不存在，请重试");
-        }
-
-        // 判断验证码是否正确
-        String captcha = (String) redisTemplate.opsForValue().get("captcha");
-        if (!frontCaptcha.equals(captcha)) {
-            throw new Exception("验证码错误，请重试");
         }
 
         // 判断密码是否正确
@@ -205,7 +198,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
             throw new Exception("密码错误，请重试");
         }
 
-        // 验证通过，生成Token
+        // 生成Token
         return JWTUtil.generateToken(accountId);
     }
 }

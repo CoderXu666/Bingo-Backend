@@ -4,11 +4,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoFriendChatMapper;
 import com.bingo.pojo.dto.FriendChatDTO;
 import com.bingo.pojo.po.BingoFriendChat;
+import com.bingo.pojo.vo.ChatContentVO;
 import com.bingo.service.BingoFriendChatService;
 import com.bingo.store.BingoFriendChatStore;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -40,5 +43,13 @@ public class BingoFriendChatServiceImpl extends ServiceImpl<BingoFriendChatMappe
     @Override
     public Boolean deleteFriendChat(Long id) {
         return friendChatStore.deleteFriendChat(id);
+    }
+
+    /**
+     * 查询用户聊天记录
+     */
+    @Override
+    public List<ChatContentVO> getChatContentByUserId(Long userId1, Long userId2) {
+        return null;
     }
 }
