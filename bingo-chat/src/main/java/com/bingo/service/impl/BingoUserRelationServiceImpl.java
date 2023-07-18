@@ -35,8 +35,8 @@ public class BingoUserRelationServiceImpl extends ServiceImpl<BingoUserRelationM
      * 查询当前用户的好友
      */
     @Override
-    public List<BingoUserVO> findFriend(Long id) {
-        List<Long> ids = relationStore.findFriend(id);
+    public List<BingoUserVO> getListById(Long id) {
+        List<Long> ids = relationStore.getListById(id);
         FeignResponse<List<BingoUserVO>> feignResponse = userFeign.getUserInfoByIds(ids);
         List<BingoUserVO> userVOList = feignResponse.getData();
 

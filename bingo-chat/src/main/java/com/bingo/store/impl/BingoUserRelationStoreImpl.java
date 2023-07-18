@@ -25,10 +25,10 @@ import java.util.List;
 public class BingoUserRelationStoreImpl extends ServiceImpl<BingoUserRelationMapper, BingoUserRelation> implements BingoUserRelationStore {
 
     /**
-     * 查询当前用户的好友id集合
+     * 根据user_id查询当前用户的好友
      */
     @Override
-    public List<Long> findFriend(Long id) {
+    public List<Long> getListById(Long id) {
         List<Long> ids = new ArrayList<>();
         QueryWrapper<BingoUserRelation> queryWrapper1 = new QueryWrapper();
         queryWrapper1.eq("user1", id);
@@ -53,7 +53,7 @@ public class BingoUserRelationStoreImpl extends ServiceImpl<BingoUserRelationMap
     @Override
     public Boolean deleteById(Long userId, Long friendId) throws Exception {
         BingoUserRelation relation = null;
-        List<Long> friendList = this.findFriend(userId);
+        List<Long> friendList = this.getListById(userId);
         for (Long id : friendList) {
             if (friendId.equals(id)) {
                 QueryWrapper<BingoUserRelation> wrapper1 = new QueryWrapper();

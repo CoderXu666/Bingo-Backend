@@ -7,6 +7,7 @@ import com.bingo.pojo.po.BingoFriendChat;
 import com.bingo.pojo.vo.ChatContentVO;
 import com.bingo.service.BingoFriendChatService;
 import com.bingo.store.BingoFriendChatStore;
+import com.bingo.store.BingoUserRelationStore;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,12 +27,17 @@ public class BingoFriendChatServiceImpl extends ServiceImpl<BingoFriendChatMappe
 
     @Autowired
     private BingoFriendChatStore friendChatStore;
+    @Autowired
+    private BingoUserRelationStore relationStore;
 
     /**
      * 好友发送消息
      */
     @Override
     public Boolean saveFriendChat(FriendChatDTO friendChatDTO) {
+        // 校验双方是否是好友
+
+
         BingoFriendChat bingoFriendChat = new BingoFriendChat();
         BeanUtils.copyProperties(friendChatDTO, bingoFriendChat);
         return friendChatStore.saveFriendChat(bingoFriendChat);

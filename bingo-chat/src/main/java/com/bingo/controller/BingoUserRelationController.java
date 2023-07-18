@@ -31,8 +31,8 @@ public class BingoUserRelationController {
      * 查询当前用户的好友列表
      */
     @GetMapping("/list")
-    public R findFriendById(Long id) {
-        List<BingoUserVO> friendList = relationService.findFriend(id);
+    public R getListById(Long id) {
+        List<BingoUserVO> friendList = relationService.getListById(id);
         return R.out(RespCodeEnum.SUCCESS, friendList);
     }
 

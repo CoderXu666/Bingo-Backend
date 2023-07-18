@@ -1,20 +1,15 @@
 package com.bingo.pojo.po;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
-import java.util.Date;
-
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author 周英俊
@@ -34,16 +29,16 @@ public class BingoFriendChat implements Serializable {
     private Long id;
 
     /**
-     * 用户ID（关联用户ID: 发送者）
+     * 好友标识（userId1:userId2）
      */
-    @TableField("user_id1")
-    private Long userId1;
+    @TableField("relation")
+    private String relation;
 
     /**
-     * 用户ID（关联用户ID: 接受者）
+     * 用户ID（关联用户ID: 发送者）
      */
-    @TableField("user_id2")
-    private Long userId2;
+    @TableField("user_id")
+    private Long userId;
 
     /**
      * 聊天类型（0：文字/图片、1：表情包、2：语音/视频）
@@ -69,6 +64,5 @@ public class BingoFriendChat implements Serializable {
     @TableField("deleted")
     @TableLogic
     private Boolean deleted;
-
 
 }
