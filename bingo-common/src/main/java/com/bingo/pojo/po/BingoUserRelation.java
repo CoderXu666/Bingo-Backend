@@ -1,18 +1,15 @@
 package com.bingo.pojo.po;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author 徐志斌
@@ -32,28 +29,16 @@ public class BingoUserRelation implements Serializable {
     private Long id;
 
     /**
-     * 用户id1
+     * 好友关系
      */
-    @TableField("user1")
-    private Long userId1;
+    @TableField("relation")
+    private String relation;
 
     /**
-     * 用户id2
+     * 申请状态
      */
-    @TableField("user2")
-    private Long userId2;
-
-    /**
-     * 备注（用户1给用户2的备注）
-     */
-    @TableField("user_alias1")
-    private String userAlias1;
-
-    /**
-     * 备注（用户2给用户1的备注）
-     */
-    @TableField("user_alias2")
-    private String userAlias2;
+    @TableField("status")
+    private Integer status;
 
     /**
      * 创建时间
@@ -67,6 +52,5 @@ public class BingoUserRelation implements Serializable {
     @TableField("deleted")
     @TableLogic
     private Boolean deleted;
-
 
 }

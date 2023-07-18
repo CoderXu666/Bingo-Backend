@@ -1,9 +1,10 @@
 package com.bingo.pojo.vo;
 
+import com.bingo.pojo.po.BingoFriendChat;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
 
 @Data
 public class BingoUserVO {
@@ -15,12 +16,12 @@ public class BingoUserVO {
     /**
      * 账号
      */
-    private String userId;
+    private String accountId;
 
     /**
      * 用户名
      */
-    private String userName;
+    private String nickName;
 
     /**
      * 头像
@@ -60,7 +61,7 @@ public class BingoUserVO {
     /**
      * 聊天记录
      */
-    private Map<String, Object> chatContentMap;
+    private List<BingoFriendChat> chatContentList;
 
     /**
      * 创建时间

@@ -2,8 +2,8 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.pojo.resp.R;
+import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoUserRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +28,7 @@ public class BingoUserRelationController {
     private BingoUserRelationService relationService;
 
     /**
-     * 查询当前用户的好友列表
+     * 根据 user_id 查询当前用户的好友列表，顺带查询聊天记录
      */
     @GetMapping("/list")
     public R getListById(Long id) {

@@ -2,6 +2,8 @@ package com.bingo.pojo.vo;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @Author 徐志斌
  * @Date: 2023/7/17 22:10
@@ -26,4 +28,8 @@ public class ChatContentVO {
      * 聊天消息
      */
     private String chatContent;
+    /**
+     * 发送时间
+     */
+    private Date createTime;
 }
