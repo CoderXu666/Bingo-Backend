@@ -3,13 +3,12 @@ package com.bingo.store.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoEmojiMapper;
 import com.bingo.pojo.po.BingoEmoji;
-import com.bingo.service.BingoEmojiService;
 import com.bingo.store.BingoEmojiStore;
 import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author 徐志斌

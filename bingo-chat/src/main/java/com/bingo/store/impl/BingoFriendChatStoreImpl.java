@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoFriendChatMapper;
 import com.bingo.pojo.po.BingoFriendChat;
 import com.bingo.store.BingoFriendChatStore;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
