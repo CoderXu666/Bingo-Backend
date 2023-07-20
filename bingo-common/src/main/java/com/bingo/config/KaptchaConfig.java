@@ -27,8 +27,8 @@ public class KaptchaConfig {
         properties.setProperty("kaptcha.textproducer.font.names", "Arial, Courier, Georgia");
         properties.setProperty("kaptcha.textproducer.font.size", "30");
         properties.setProperty("kaptcha.textproducer.font.color", "0,102,204");
-        properties.setProperty("kaptcha.textproducer.char.space", "3");
-        properties.setProperty("kaptcha.image.width", "84");
+        properties.setProperty("kaptcha.textproducer.char.space", "2");
+        properties.setProperty("kaptcha.image.width", "85");
         properties.setProperty("kaptcha.image.height", "41");
         properties.setProperty("kaptcha.obscurificator.impl", "com.google.code.kaptcha.impl.WaterRipple");
         properties.setProperty("kaptcha.noise.impl", "com.google.code.kaptcha.impl.NoNoise");
