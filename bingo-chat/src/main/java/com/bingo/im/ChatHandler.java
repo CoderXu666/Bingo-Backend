@@ -33,7 +33,8 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         Long userId = msgJson.getLong("userId");
         ChatChannelConfig.getUserChannelMap().put(userId, ctx.channel());
         AttributeKey<Long> key = AttributeKey.valueOf("userId");
-        ctx.channel().attr(key).setIfAbsent(userId); // 相当于为channel做个标识，用于removeUserId()
+        // 相当于为channel做个标识，用于removeUserId()
+        ctx.channel().attr(key).setIfAbsent(userId);
     }
 
     /**

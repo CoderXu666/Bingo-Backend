@@ -31,14 +31,14 @@ public class BingoUser implements Serializable {
     /**
      * 账号id
      */
-    @TableId("account_id")
+    @TableField("account_id")
     private String accountId;
 
     /**
      * 用户名
      */
-    @TableField("user_name")
-    private String userName;
+    @TableField("nick_name")
+    private String nickName;
 
     /**
      * 密码
