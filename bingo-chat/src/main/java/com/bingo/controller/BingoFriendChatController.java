@@ -27,7 +27,7 @@ public class BingoFriendChatController {
      * 好友发送消息
      */
     @PostMapping("/save")
-    public R saveFriendChat(@RequestBody FriendChatDTO friendChatDTO) {
+    public R saveFriendChat(@RequestBody FriendChatDTO friendChatDTO) throws Exception {
         friendChatService.saveFriendChat(friendChatDTO);
         return R.out(RespCodeEnum.SUCCESS, "创建成功");
     }

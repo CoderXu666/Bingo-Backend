@@ -2,26 +2,54 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.dto.FriendChatDTO;
+import com.bingo.pojo.dto.EmojiDTO;
 import com.bingo.pojo.resp.R;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.bingo.service.BingoEmojiService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author 徐志斌
  * @since 2023-07-18
  */
 @RestController
-@RequestMapping("/bingoEmoji")
+@RequestMapping("/emoji")
 public class BingoEmojiController {
+    @Autowired
+    private BingoEmojiService emojiService;
 
+    /**
+     * 保存一張表情包
+     */
+    @PostMapping("/save")
+    public R saveEmoji(@RequestBody EmojiDTO emojiDTO) {
+        emojiService.saveEmoji(emojiDTO);
+        return R.out(RespCodeEnum.SUCCESS, "添加成功");
+    }
+
+    /**
+     * 刪除一張表情包
+     */
+    @DeleteMapping("/delete")
+    public R deleteEmojiById(Long id) {
+        emojiService.deleteEmojiById(id);
+        return R.out(RespCodeEnum.SUCCESS, "刪除成功");
+    }
+
+    /**
+     * 表情包展示（按照最新时间排序）
+     */
+    @GetMapping ("/find")
+    public R findEmojiByUserId(Long userId) {
+        List emojiUrl = emojiService.findEmojiByUserId(userId);
+        return R.out(RespCodeEnum.SUCCESS, emojiUrl);
+    }
 
 }
 
