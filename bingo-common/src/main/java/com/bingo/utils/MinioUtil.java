@@ -5,7 +5,6 @@ import io.minio.messages.DeleteObject;
 import io.minio.messages.Item;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,8 +32,6 @@ import java.util.stream.Collectors;
 public class MinioUtil {
     @Autowired
     private MinioClient minioClient;
-    @Value("${minio.bucketName}")
-    private String bucketName;
 
     /**
      * 判断bucket是否存在（不存在则创建）
@@ -49,7 +46,7 @@ public class MinioUtil {
     /**
      * 创建 bucket
      */
-    public void makeBucket(String bucketName) throws Exception {
+    public void createBucket(String bucketName) throws Exception {
         minioClient.makeBucket(MakeBucketArgs.builder()
                 .bucket(bucketName)
                 .build());
@@ -58,7 +55,7 @@ public class MinioUtil {
     /**
      * 删除 bucket
      */
-    public void removeBucket(String bucketName) throws Exception {
+    public void deleteBucket(String bucketName) throws Exception {
         minioClient.removeBucket(RemoveBucketArgs.builder()
                 .bucket(bucketName)
                 .build());
@@ -67,7 +64,7 @@ public class MinioUtil {
     /**
      * 上传文件
      */
-    public List<String> upload(MultipartFile[] multipartFile) {
+    public List<String> upload(MultipartFile[] multipartFile, String bucketName) {
         List<String> names = new ArrayList<>(multipartFile.length);
         for (MultipartFile file : multipartFile) {
             String fileName = file.getOriginalFilename();
@@ -106,7 +103,7 @@ public class MinioUtil {
     /**
      * 下载文件
      */
-    public ResponseEntity<byte[]> download(String fileName) {
+    public ResponseEntity<byte[]> download(String bucketName, String fileName) {
         ResponseEntity<byte[]> responseEntity = null;
         InputStream in = null;
         ByteArrayOutputStream out = null;
