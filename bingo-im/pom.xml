@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.bingo</groupId>
-    <artifactId>bingo-chat</artifactId>
+    <artifactId>bingo-im</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>

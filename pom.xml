@@ -11,11 +11,10 @@
     </parent>
 
     <modules>
-        <module>bingo-chat</module>
         <module>bingo-common</module>
         <module>bingo-community</module>
+        <module>bingo-im</module>
         <module>bingo-party</module>
-        <module>bingo-shop</module>
         <module>bingo-user</module>
     </modules>
 

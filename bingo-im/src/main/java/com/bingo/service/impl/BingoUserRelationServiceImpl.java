@@ -2,7 +2,6 @@ package com.bingo.service.impl;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bingo.feign.ChatUserFeign;
 import com.bingo.mapper.BingoUserRelationMapper;
 import com.bingo.pojo.po.BingoFriendChat;
 import com.bingo.pojo.po.BingoUserRelation;
