@@ -41,6 +41,7 @@
         <spring-kafka.version>2.3.5.RELEASE</spring-kafka.version>
         <elasticsearch.version>7.4.2</elasticsearch.version>
         <netty.version>4.1.45.Final</netty.version>
+        <minio.version>8.0.3</minio.version>
     </properties>
 
     <dependencyManagement>
@@ -75,6 +76,13 @@
                 <groupId>org.springframework.kafka</groupId>
                 <artifactId>spring-kafka</artifactId>
                 <version>${spring-kafka.version}</version>
+            </dependency>
+
+            <!--MinIO-->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
             </dependency>
 
             <!--Nacos-->

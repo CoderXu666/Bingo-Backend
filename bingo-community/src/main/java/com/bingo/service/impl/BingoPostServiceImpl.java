@@ -3,7 +3,7 @@ package com.bingo.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bingo.feign.CommunityUserFeign;
+import com.bingo.feign.UserFeign;
 import com.bingo.kafka.KafkaProducer;
 import com.bingo.mapper.BingoPostMapper;
 import com.bingo.pojo.common.PageParam;
@@ -55,7 +55,7 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
     @Autowired
     private RestHighLevelClient restHighLevelClient;
     @Autowired
-    private CommunityUserFeign userFeign;
+    private UserFeign userFeign;
 
 
     /**

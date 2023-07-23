@@ -20,6 +20,7 @@ spring:
           - data-id: bingo_redis.yml
           - data-id: bingo_kafka.yml
           - data-id: bingo_sharding_jdbc.yml
+          - data-id: bingo_minio.yml
 #          - data-id: bingo_elasticsearch.yml
 
 xxl:

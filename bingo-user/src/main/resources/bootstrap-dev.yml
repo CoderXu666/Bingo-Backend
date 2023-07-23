@@ -7,10 +7,11 @@ spring:
   main:
     # 允许覆盖数据源
     allow-bean-definition-overriding: true
+  # 配置文件上传大小限制
   servlet:
     multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
+      max-file-size: 100MB
+      max-request-size: 100MB
   cloud:
     nacos:
       discovery:
@@ -25,19 +26,8 @@ spring:
           - data-id: bingo_redis.yml
           - data-id: bingo_kafka.yml
           - data-id: bingo_sharding_jdbc.yml
+          - data-id: bingo_minio.yml
 #          - data-id: bingo_elasticsearch.yml
-
-xxl:
-  job:
-    admin:
-      addresses: http://101.42.13.186:8800/xxl-job-admin/
-      accessToken: Lpoms_xxljob_default_token
-    executor:
-      appname: bingo-executor
-      address: http://101.42.13.186:9999
-      logpath: logs/xxl-job/jobhandler
-      logretentiondays: 7
-      port: 9999
 
 mybatis-plus:
   configuration:

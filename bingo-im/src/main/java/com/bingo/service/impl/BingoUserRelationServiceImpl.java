@@ -2,6 +2,7 @@ package com.bingo.service.impl;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoUserRelationMapper;
 import com.bingo.pojo.po.BingoFriendChat;
 import com.bingo.pojo.po.BingoUserRelation;
@@ -28,7 +29,7 @@ import java.util.stream.Collectors;
 @Service
 public class BingoUserRelationServiceImpl extends ServiceImpl<BingoUserRelationMapper, BingoUserRelation> implements BingoUserRelationService {
     @Autowired
-    private ChatUserFeign userFeign;
+    private UserFeign userFeign;
     @Autowired
     private BingoUserRelationStore relationStore;
     @Autowired

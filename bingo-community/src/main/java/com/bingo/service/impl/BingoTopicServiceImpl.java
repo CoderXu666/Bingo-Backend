@@ -2,7 +2,7 @@ package com.bingo.service.impl;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bingo.feign.TopicUserFeign;
+import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoTopicMapper;
 import com.bingo.pojo.dto.TopicDTO;
 import com.bingo.pojo.po.BingoTopic;
@@ -31,7 +31,7 @@ public class BingoTopicServiceImpl extends ServiceImpl<BingoTopicMapper, BingoTo
     @Autowired
     private BingoTopicStore topicStore;
     @Autowired
-    private TopicUserFeign userFeign;
+    private UserFeign userFeign;
 
     /**
      * 用户创建话题
@@ -74,8 +74,8 @@ public class BingoTopicServiceImpl extends ServiceImpl<BingoTopicMapper, BingoTo
         BingoUserVO userVO = feignResponse.getData();
 
         BingoTopicVO topicVO = new BingoTopicVO();
-        BeanUtils.copyProperties(userVO,topicVO);
-        BeanUtils.copyProperties(topic,topicVO);
+        BeanUtils.copyProperties(userVO, topicVO);
+        BeanUtils.copyProperties(topic, topicVO);
         return topicVO;
     }
 }

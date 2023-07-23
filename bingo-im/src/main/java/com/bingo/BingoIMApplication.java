@@ -12,7 +12,6 @@ import org.springframework.context.annotation.ComponentScan;
  * @Author 徐志斌
  * @Date: 2023/5/27 17:23
  * @Version 1.0
- * @Description: BingoChatApplication
  */
 @EnableCaching
 @EnableFeignClients
@@ -20,8 +19,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan("com.bingo.*")
 @MapperScan("com.bingo.mapper")
 @SpringBootApplication
-public class BingoChatApplication {
+public class BingoIMApplication {
     public static void main(String[] args) {
-        SpringApplication.run(BingoChatApplication.class);
+        SpringApplication.run(BingoIMApplication.class);
     }
 }
