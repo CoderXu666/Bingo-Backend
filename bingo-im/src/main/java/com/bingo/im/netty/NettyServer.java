@@ -1,17 +1,10 @@
-package com.bingo.im;
+package com.bingo.im.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelPipeline;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.http.HttpObjectAggregator;
-import io.netty.handler.codec.http.HttpServerCodec;
-import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
-import io.netty.handler.stream.ChunkedWriteHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,17 +17,26 @@ import javax.annotation.PreDestroy;
  * @Date: 2023/5/28 19:36
  * @Version 1.0
  * @Description: Netty服务器(用于聊天)
+ * ------------------------------------------------------------
+ * 服务端流程：
+ * 1.创建Netty服务端
+ * 2.创建Netty Channel初始化Handler
+ * 3.创建Netty Channel消息Handler
  */
 @Slf4j
 @Component
-public class IMChatServer {
+public class NettyServer {
     @Autowired
-    private ChatHandler chatHandler;
+    private NettyServerChannelInitHandler initializerHandler;
+
+    /**
+     * boss接受客户端连接等事件，work处理boss接收的事件
+     */
     private EventLoopGroup bossGroup;
     private EventLoopGroup workGroup;
 
     /**
-     * 启动 IM Server(通过新线程启动Netty Server)
+     * 启动 Netty Server
      */
     @PostConstruct
     private void init() {
@@ -64,7 +66,6 @@ public class IMChatServer {
      * Netty Chat Server启动
      */
     private void start() throws InterruptedException {
-        // 两个EventLoopGroup：boss负责接受客户端连接等事件,work负责处理boss接收到的事件
         bossGroup = new NioEventLoopGroup();
         workGroup = new NioEventLoopGroup();
 
@@ -74,18 +75,7 @@ public class IMChatServer {
             server.group(bossGroup, workGroup);
             server.channel(NioServerSocketChannel.class);
             // 为每个连接成功的Channel绑定子处理器
-            server.childHandler(new ChannelInitializer<SocketChannel>() {
-                @Override
-                protected void initChannel(SocketChannel channel) {
-                    ChannelPipeline pipeline = channel.pipeline();
-                    pipeline.addLast(new HttpServerCodec());     // WebSocket基于http协议
-                    pipeline.addLast(new ChunkedWriteHandler()); // 写大数据流的支持
-                    // HTTP数据在传输过程中是分段的，HttpObjectAggregator可以将多个段聚合
-                    pipeline.addLast(new HttpObjectAggregator(1024 * 64));
-                    pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
-                    pipeline.addLast(chatHandler); // 自定义子处理器(用于处理服务端接收到的数据)
-                }
-            });
+            server.childHandler(initializerHandler);
 
             // Netty Server绑定端口号
             ChannelFuture channelFuture = server.bind(9099).sync();

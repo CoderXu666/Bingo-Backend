@@ -1,4 +1,4 @@
-package com.bingo.aspect;
+package com.bingo.aop;
 
 import com.bingo.anno.DoubleCache;
 import com.bingo.enums.CacheType;

@@ -1,4 +1,4 @@
-package com.bingo.im;
+package com.bingo.im.netty;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -15,12 +15,12 @@ import org.springframework.stereotype.Component;
  * @Author 徐志斌
  * @Date: 2023/5/28 20:10
  * @Version 1.0
- * @Description: ChatHandler
+ * @Description: Netty服务器事件、消息处理器
  */
 @Slf4j
 @Component
 @ChannelHandler.Sharable
-public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
+public class NettyServerHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     /**
      * 作用：读取客户端的数据
      * <p>
