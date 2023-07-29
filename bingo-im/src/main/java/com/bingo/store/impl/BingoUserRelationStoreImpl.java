@@ -39,7 +39,7 @@ public class BingoUserRelationStoreImpl extends ServiceImpl<BingoUserRelationMap
      * 根据 user_id1 和 user_id2 精准查询好友关联
      */
     @Override
-    public BingoUserRelation getOneRelationByTwoId(Long userId1, Long userId2) {
+    public BingoUserRelation getRelationByTwoId(Long userId1, Long userId2) {
         QueryWrapper<BingoUserRelation> wrapper = new QueryWrapper<>();
         wrapper.eq("status", 1);
         wrapper.eq("relation", userId1 + ":" + userId2);

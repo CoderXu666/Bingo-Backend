@@ -15,12 +15,12 @@ public class FriendChatDTO {
     private Long userId2;
 
     /**
-     * 聊天类型（0：文字/图片、1：表情包、2：语音/视频）
+     * 消息类型
      */
     private Integer chatType;
 
     /**
-     * 聊天内容
+     * 消息内容
      */
     private String chatContent;
 }
