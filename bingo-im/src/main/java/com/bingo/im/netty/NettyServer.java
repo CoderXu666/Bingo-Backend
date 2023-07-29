@@ -16,7 +16,7 @@ import javax.annotation.PreDestroy;
  * @Author 徐志斌
  * @Date: 2023/5/28 19:36
  * @Version 1.0
- * @Description: Netty服务器(用于聊天)
+ * @Description: Netty服务器(用于好友聊天)
  * ------------------------------------------------------------
  * 服务端流程：
  * 1.创建Netty服务端

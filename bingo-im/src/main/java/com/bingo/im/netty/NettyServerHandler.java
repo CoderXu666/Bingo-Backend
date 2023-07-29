@@ -2,7 +2,6 @@ package com.bingo.im.netty;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.bingo.config.ChatChannelConfig;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -31,7 +30,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<TextWebSocke
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
         JSONObject msgJson = JSON.parseObject(msg.text());
         Long userId = msgJson.getLong("userId");
-        ChatChannelConfig.getUserChannelMap().put(userId, ctx.channel());
+        NettyChannelRelation.getUserChannelMap().put(userId, ctx.channel());
         AttributeKey<Long> key = AttributeKey.valueOf("userId");
         // 相当于为channel做个标识，用于removeUserId()
         ctx.channel().attr(key).setIfAbsent(userId);
@@ -42,7 +41,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<TextWebSocke
      */
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) {
-        ChatChannelConfig.getChannelGroup().add(ctx.channel());
+        NettyChannelRelation.getChannelGroup().add(ctx.channel());
     }
 
     /**
@@ -50,7 +49,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<TextWebSocke
      */
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) {
-        ChatChannelConfig.getChannelGroup().remove(ctx.channel());
+        NettyChannelRelation.getChannelGroup().remove(ctx.channel());
         removeUserId(ctx);
     }
 
@@ -60,6 +59,6 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<TextWebSocke
     private void removeUserId(ChannelHandlerContext ctx) {
         AttributeKey<Long> key = AttributeKey.valueOf("userId");
         Long userId = ctx.channel().attr(key).get();
-        ChatChannelConfig.getUserChannelMap().remove(userId);
+        NettyChannelRelation.getUserChannelMap().remove(userId);
     }
 }

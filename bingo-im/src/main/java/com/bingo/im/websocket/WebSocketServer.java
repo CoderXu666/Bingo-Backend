@@ -1,4 +1,4 @@
-package com.bingo.im;
+package com.bingo.im.websocket;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @ServerEndpoint("/msgServer/{userId}")
 @Component
 @Scope("prototype")
-public class IMVideoServer {
+public class WebSocketServer {
     /**
      * concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
      */

@@ -28,6 +28,9 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @Author 徐志斌
+ * @Date: 2023/5/20 21:21
+ * @Version 1.0
+ * @Description: 两级缓存切面类
  */
 @Slf4j
 @Aspect
@@ -113,7 +116,6 @@ public class CacheAspect {
         // 解析表达式
         Expression expression = parser.parseExpression(elString, new TemplateParserContext());
         // 使用Expression.getValue()获取表达式的值，这里传入了Evaluation上下文
-        String value = expression.getValue(context, String.class);
-        return value;
+        return expression.getValue(context, String.class);
     }
 }

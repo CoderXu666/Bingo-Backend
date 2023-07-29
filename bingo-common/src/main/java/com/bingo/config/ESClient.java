@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Configuration;
  * @Author 徐志斌
  * @Date: 2023/5/20 21:21
  * @Version 1.0
- * @Description: RestHighLevelClient
+ * @Description: RestHighLevelClient: ES操作客户端
  */
 @Configuration
-public class RestHighLevelClientConfig {
+public class ESClient {
     public static final RequestOptions COMMON_OPTIONS;
 
     static {
