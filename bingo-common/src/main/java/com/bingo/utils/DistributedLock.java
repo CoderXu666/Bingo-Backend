@@ -12,11 +12,11 @@ import java.util.concurrent.TimeUnit;
  * @Author 徐志斌
  * @Date: 2023/5/11 22:15
  * @Version 1.0
- * @Description: DistributedRedisLock
+ * @Description: DistributedLock
  */
 @Slf4j
 @Component
-public class DistributedRedisLock {
+public class DistributedLock {
     @Autowired
     private RedissonClient redissonClient;
 
@@ -25,16 +25,16 @@ public class DistributedRedisLock {
      */
     public Boolean lock(String lockKey) {
         if (redissonClient == null) {
-            log.info("DistributedRedisLock redissonClient is null");
+            log.info("DistributedLock redissonClient is null");
             return false;
         }
         try {
             RLock lock = redissonClient.getLock(lockKey);
             lock.lock(15, TimeUnit.SECONDS);
-            log.info("Thread [{}] DistributedRedisLock lock [{}] success", Thread.currentThread().getName(), lockKey);
+            log.info("Thread [{}] DistributedLock lock [{}] success", Thread.currentThread().getName(), lockKey);
             return true;
         } catch (Exception e) {
-            log.error("DistributedRedisLock lock [{}] Exception:", lockKey, e);
+            log.error("DistributedLock lock [{}] Exception:", lockKey, e);
             return false;
         }
     }
@@ -44,16 +44,16 @@ public class DistributedRedisLock {
      */
     public Boolean unlock(String lockKey) {
         if (redissonClient == null) {
-            log.info("DistributedRedisLock redissonClient is null");
+            log.info("DistributedLock redissonClient is null");
             return false;
         }
         try {
             RLock lock = redissonClient.getLock(lockKey);
             lock.unlock();
-            log.info("Thread [{}] DistributedRedisLock unlock [{}] success", Thread.currentThread().getName(), lockKey);
+            log.info("Thread [{}] DistributedLock unlock [{}] success", Thread.currentThread().getName(), lockKey);
             return true;
         } catch (Exception e) {
-            log.error("DistributedRedisLock unlock [{}] Exception:", lockKey, e);
+            log.error("DistributedLock unlock [{}] Exception:", lockKey, e);
             return false;
         }
     }

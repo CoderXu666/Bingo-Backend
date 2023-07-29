@@ -19,7 +19,6 @@ import java.util.Random;
 public class KaptchaConfig {
     @Bean
     public DefaultKaptcha getDefaultKaptcha() {
-        DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
         Properties properties = new Properties();
         properties.setProperty("kaptcha.border", "no");
         properties.setProperty("kaptcha.textproducer.char.string", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890");
@@ -32,8 +31,8 @@ public class KaptchaConfig {
         properties.setProperty("kaptcha.image.height", "41");
         properties.setProperty("kaptcha.obscurificator.impl", "com.google.code.kaptcha.impl.WaterRipple");
         properties.setProperty("kaptcha.noise.impl", "com.google.code.kaptcha.impl.NoNoise");
-        Config config = new Config(properties);
-        defaultKaptcha.setConfig(config);
+        DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
+        defaultKaptcha.setConfig(new Config(properties));
         return defaultKaptcha;
     }
 }

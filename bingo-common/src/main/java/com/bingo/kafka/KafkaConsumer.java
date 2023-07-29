@@ -1,13 +1,13 @@
 package com.bingo.kafka;
 
 import com.alibaba.fastjson.JSON;
-import com.bingo.config.ESClient;
 import com.bingo.pojo.constant.ESConstant;
 import com.bingo.pojo.constant.MQTopicConstant;
 import com.bingo.pojo.po.BingoPost;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class KafkaConsumer {
             IndexRequest request = new IndexRequest(ESConstant.POST_INDEX)
                     .id(bingoPost.getId().toString())
                     .source(JSON.toJSONString(bingoPost), XContentType.JSON);
-            IndexResponse response = esClient.index(request, ESClient.COMMON_OPTIONS);
+            IndexResponse response = esClient.index(request, RequestOptions.DEFAULT);
             return response.getId();
         } catch (Exception e) {
             log.error("保存帖子ES数据报错：{}", e.getMessage());

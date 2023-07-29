@@ -43,7 +43,7 @@ public class CacheAspect {
     private RedisTemplate redisTemplate;
 
     /**
-     * 切入点：注解
+     * 切入点：DoubleCache注解
      */
     @Pointcut("@annotation(com.bingo.anno.DoubleCache)")
     public void cacheAspect() {
@@ -110,7 +110,7 @@ public class CacheAspect {
         elString = String.format("#{%s}", elString);
         // 创建表达式解析器
         ExpressionParser parser = new SpelExpressionParser();
-        // 通过evaluationContext.setVariable可以在上下文中设定变量。
+        // 通过evaluationContext.setVariable可以在上下文中设定变量
         EvaluationContext context = new StandardEvaluationContext();
         map.entrySet().forEach(entry -> context.setVariable(entry.getKey(), entry.getValue()));
         // 解析表达式
