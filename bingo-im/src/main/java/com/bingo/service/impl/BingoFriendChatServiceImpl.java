@@ -5,7 +5,6 @@ import com.bingo.mapper.BingoFriendChatMapper;
 import com.bingo.pojo.dto.FriendChatDTO;
 import com.bingo.pojo.po.BingoFriendChat;
 import com.bingo.pojo.po.BingoUserRelation;
-import com.bingo.pojo.vo.ChatContentVO;
 import com.bingo.service.BingoFriendChatService;
 import com.bingo.store.BingoFriendChatStore;
 import com.bingo.store.BingoUserRelationStore;
@@ -13,15 +12,12 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * <p>
  * 服务实现类
  * </p>
  *
- * @author 周英俊
+ * @author 徐志斌
  * @since 2023-07-16
  */
 @Service
@@ -37,13 +33,14 @@ public class BingoFriendChatServiceImpl extends ServiceImpl<BingoFriendChatMappe
      */
     @Override
     public Boolean saveFriendChat(FriendChatDTO friendChatDTO) throws Exception {
+        // 发送者、接收者、消息类型、消息内容
         Long userId1 = friendChatDTO.getUserId1();
         Long userId2 = friendChatDTO.getUserId2();
         Integer chatType = friendChatDTO.getChatType();
         String chatContent = friendChatDTO.getChatContent();
 
         // 校验双方是否是好友
-        BingoUserRelation relation = relationStore.getOneRelationByTwoId(userId1, userId2);
+        BingoUserRelation relation = relationStore.getRelationByTwoId(userId1, userId2);
         if (ObjectUtils.isEmpty(relation)) {
             throw new Exception("您还不是对方好友，发送信息失败");
         }
@@ -61,34 +58,18 @@ public class BingoFriendChatServiceImpl extends ServiceImpl<BingoFriendChatMappe
      * 删除好友消息
      */
     @Override
-    public Boolean deleteFriendChat(Long id) {
-        return friendChatStore.deleteFriendChat(id);
-    }
+    public Boolean recallMessage(FriendChatDTO chatDTO) throws Exception {
+        // 发送者、接收者
+        Long userId1 = chatDTO.getUserId1();
+        Long userId2 = chatDTO.getUserId2();
 
-    /**
-     * 查询用户聊天记录
-     */
-    @Override
-    public List<ChatContentVO> getChatContentByUserId(Long userId1, Long userId2) throws Exception {
-        // 判断双方是否是好友
-        BingoUserRelation relation = relationStore.getOneRelationByTwoId(userId1, userId2);
+        // 查询双方是否是好友
+        BingoUserRelation relation = relationStore.getRelationByTwoId(userId1, userId2);
         if (ObjectUtils.isEmpty(relation)) {
-            throw new Exception("对方已不是您的好友，聊天记录不存在");
+            throw new Exception("对方不是您的好友");
         }
 
-        // 查询聊天记录
-        List<ChatContentVO> resultList = new ArrayList<>();
-        List<BingoFriendChat> chatContents = friendChatStore.getContentsByRelation(relation.getRelation());
-        for (BingoFriendChat chatContent : chatContents) {
-            ChatContentVO chatContentVO = new ChatContentVO();
-            chatContentVO.setUserId(chatContent.getUserId());
-//            chatContentVO.setAvatarUrl();
-//            chatContentVO.setNickName();
-            chatContentVO.setChatContent(chatContent.getChatContent());
-            chatContentVO.setCreateTime(chatContent.getCreateTime());
-            resultList.add(chatContentVO);
-        }
-
-        return resultList;
+        // 删除消息
+        return friendChatStore.recallMessage(relation.getRelation(), userId1);
     }
 }

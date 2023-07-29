@@ -6,14 +6,17 @@ import com.bingo.pojo.dto.FriendChatDTO;
 import com.bingo.pojo.resp.R;
 import com.bingo.service.BingoFriendChatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
  * 前端控制器
  * </p>
  *
- * @author 周英俊
+ * @author 徐志斌
  * @since 2023-07-16
  */
 @RestController
@@ -33,12 +36,12 @@ public class BingoFriendChatController {
     }
 
     /**
-     * 删除好友消息
+     * 撤销消息
      */
-    @DeleteMapping("/delete")
-    public R deleteFriendChat(Long id) {
-        friendChatService.deleteFriendChat(id);
-        return R.out(RespCodeEnum.SUCCESS, "删除成功");
+    @PostMapping("/recall")
+    public R recallMessage(@RequestBody FriendChatDTO friendChatDTO) throws Exception {
+        friendChatService.recallMessage(friendChatDTO);
+        return R.out(RespCodeEnum.SUCCESS, "撤销成功");
     }
 }
 

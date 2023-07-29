@@ -11,13 +11,13 @@ import java.util.List;
  * 服务类
  * </p>
  *
- * @author 周英俊
+ * @author 徐志斌
  * @since 2023-07-16
  */
 public interface BingoFriendChatStore extends IService<BingoFriendChat> {
     Boolean saveFriendChat(BingoFriendChat bingoFriendChat);
 
-    Boolean deleteFriendChat(Long id);
+    Boolean recallMessage(String relation, Long userId);
 
     List<BingoFriendChat> getContentsByRelation(String relation);
 }

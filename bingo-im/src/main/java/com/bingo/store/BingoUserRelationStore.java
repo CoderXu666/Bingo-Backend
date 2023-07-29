@@ -16,7 +16,7 @@ import java.util.List;
 public interface BingoUserRelationStore extends IService<BingoUserRelation> {
     List<BingoUserRelation> getRelationsById(Long userId);
 
-    BingoUserRelation getOneRelationByTwoId(Long userId1, Long userId2);
+    BingoUserRelation getRelationByTwoId(Long userId1, Long userId2);
 
     Boolean deleteById(Long userId, Long friendId) throws Exception;
 }

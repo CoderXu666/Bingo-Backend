@@ -57,7 +57,7 @@ public class BingoUserRelationServiceImpl extends ServiceImpl<BingoUserRelationM
 
         // 查询好友聊天记录
         for (BingoUserVO userVO : userVOList) {
-            BingoUserRelation relation = relationStore.getOneRelationByTwoId(userId, userVO.getId());
+            BingoUserRelation relation = relationStore.getRelationByTwoId(userId, userVO.getId());
             List<BingoFriendChat> chatList = chatStore.getContentsByRelation(relation.getRelation());
             userVO.setChatContentList(chatList);
         }
