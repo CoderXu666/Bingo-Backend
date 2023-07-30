@@ -20,12 +20,15 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -63,6 +66,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
 
     /**
      * 获取验证码图片
+     * 思路：生成验证码内容通过保存到当前客户端Cookie中
      */
     @Override
     public void generateCode(HttpServletRequest request, HttpServletResponse response) {
@@ -77,7 +81,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         String verifyCode = defaultKaptcha.createText();
         BufferedImage image = defaultKaptcha.createImage(verifyCode);
 
-//        // Cookie不存在，那就重新生成Cookie，赋值Redis
+//        // 判断是否是首次生成验证码
 //        String captchaKey = "captcha_key";
 //        Cookie[] cookies = request.getCookies();
 //        if (ObjectUtils.isEmpty(cookies)) {
