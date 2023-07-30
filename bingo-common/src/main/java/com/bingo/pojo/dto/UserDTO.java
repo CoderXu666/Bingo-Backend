@@ -12,7 +12,7 @@ import lombok.Data;
  * @since 2023-03-01
  */
 @Data
-public class LoginUserDTO {
+public class UserDTO {
     /**
      * 账号id
      */
@@ -26,7 +26,12 @@ public class LoginUserDTO {
     /**
      * 邮箱
      */
-    private String email;
+    private String nickName;
+
+    /**
+     * 性别
+     */
+    private Integer gender;
 
     /**
      * 验证码

@@ -3,7 +3,7 @@ package com.bingo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoUserMapper;
-import com.bingo.pojo.dto.LoginUserDTO;
+import com.bingo.pojo.dto.UserDTO;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoUserService;
@@ -153,10 +153,12 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 注册
      */
     @Override
-    public Boolean register(LoginUserDTO userDTO) throws Exception {
+    public Boolean register(UserDTO userDTO) throws Exception {
         String accountId = userDTO.getAccountId();
         String passWord = userDTO.getPassWord();
-        String email = userDTO.getEmail();
+        String nickName = userDTO.getNickName();
+        Integer gender = userDTO.getGender();
+        String captcha = userDTO.getCaptcha();
 
         // TODO: 入参校验：JSR 303
 
@@ -166,12 +168,14 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
             throw new Exception("该账号已存在，换个试试~");
         }
 
+        // 校验验证码
+        redisTemplate.opsForValue().get("");
+
         // 保存账号信息
         BingoUser user = new BingoUser();
         user.setAccountId(accountId);
         user.setPassWord(AESUtil.encrypt(passWord));
-        user.setSignature("这个人是个懒蛋，未设置个性签名");
-        user.setEmail(email);
+        user.setSignature("这个人是个懒猪，没有设置个性签名");
         return userStore.save(user);
     }
 
@@ -179,7 +183,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 登录
      */
     @Override
-    public String login(LoginUserDTO userDTO) throws Exception {
+    public String login(UserDTO userDTO) throws Exception {
         String accountId = userDTO.getAccountId();
         String passWord = userDTO.getPassWord();
 

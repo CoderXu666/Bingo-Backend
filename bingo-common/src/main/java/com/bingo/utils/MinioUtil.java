@@ -64,40 +64,41 @@ public class MinioUtil {
     /**
      * 上传文件
      */
-    public List<String> upload(MultipartFile[] multipartFile, String bucketName) {
-        List<String> names = new ArrayList<>(multipartFile.length);
-        for (MultipartFile file : multipartFile) {
-            String fileName = file.getOriginalFilename();
-            String[] split = fileName.split("\\.");
-            if (split.length > 1) {
-                fileName = split[0] + "_" + System.currentTimeMillis() + "." + split[1];
-            } else {
-                fileName = fileName + System.currentTimeMillis();
-            }
-            InputStream in = null;
-            try {
-                in = file.getInputStream();
-                minioClient.putObject(PutObjectArgs.builder()
-                        .bucket(bucketName)
-                        .object(fileName)
-                        .stream(in, in.available(), -1)
-                        .contentType(file.getContentType())
-                        .build()
-                );
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (in != null) {
-                    try {
-                        in.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+    public String upload(MultipartFile file, String bucketName) {
+        String fileName = file.getOriginalFilename();
+        String[] split = fileName.split("\\.");
+        if (split.length > 1) {
+            fileName = split[0] + "_" + System.currentTimeMillis() + "." + split[1];
+        } else {
+            fileName = fileName + System.currentTimeMillis();
+        }
+        InputStream in = null;
+        try {
+            in = file.getInputStream();
+            minioClient.putObject(PutObjectArgs.builder()
+                    .bucket(bucketName)
+                    .object(fileName)
+                    .stream(in, in.available(), -1)
+                    .contentType(file.getContentType())
+                    .build()
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-            names.add(fileName);
         }
-        return names;
+        StringBuffer url = new StringBuffer();
+        url.append("http://");
+        url.append("101.42.13.186:9000/");
+        url.append("avatar-bucket/");
+        url.append(fileName);
+        return url.toString();
     }
 
     /**

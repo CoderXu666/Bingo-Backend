@@ -2,13 +2,15 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.dto.LoginUserDTO;
+import com.bingo.pojo.dto.UserDTO;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.resp.R;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoUserService;
+import com.bingo.utils.MinioUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +29,8 @@ import java.util.List;
 public class BingoUserController {
     @Autowired
     private BingoUserService userService;
+    @Autowired
+    private MinioUtil minioUtil;
 
     /**
      * 根据userId查询用户信息
@@ -41,7 +45,7 @@ public class BingoUserController {
      * 注册
      */
     @PostMapping("/register")
-    public R register(@RequestBody LoginUserDTO userDTO) throws Exception {
+    public R register(@RequestBody UserDTO userDTO) throws Exception {
         userService.register(userDTO);
         return R.out(RespCodeEnum.SUCCESS, "操作成功");
     }
@@ -50,7 +54,7 @@ public class BingoUserController {
      * 登录
      */
     @PostMapping("/login")
-    public R login(@RequestBody LoginUserDTO userDTO) throws Exception {
+    public R login(@RequestBody UserDTO userDTO) throws Exception {
         userService.login(userDTO);
         return R.out(RespCodeEnum.SUCCESS, "操作成功");
     }
@@ -80,6 +84,17 @@ public class BingoUserController {
     public R getUserInfoByIds(List<Long> ids) {
         List<BingoUserVO> userList = userService.getUserByIds(ids);
         return R.out(RespCodeEnum.SUCCESS, userList);
+    }
+
+    /**
+     * 上传头像
+     * <p>
+     * 访问URL：http://101.42.13.186:9000/avatar-bucket/1687483809516_1690621557315.jpg
+     */
+    @PostMapping("/upload_avatar")
+    public R uploadAvatar(MultipartFile file) {
+        String avatarUrl = minioUtil.upload(file, "avatar-bucket");
+        return R.out(RespCodeEnum.SUCCESS, avatarUrl);
     }
 }
 
