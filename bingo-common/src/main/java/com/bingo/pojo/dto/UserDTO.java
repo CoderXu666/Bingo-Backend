@@ -24,7 +24,7 @@ public class UserDTO {
     private String passWord;
 
     /**
-     * 邮箱
+     * 昵称
      */
     private String nickName;
 

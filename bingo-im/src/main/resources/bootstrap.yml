@@ -1,3 +1,7 @@
+server:
+  servlet:
+    context-path: /im
+
 spring:
   profiles:
     active: dev

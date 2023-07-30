@@ -156,8 +156,6 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     public Boolean register(UserDTO userDTO) throws Exception {
         String accountId = userDTO.getAccountId();
         String passWord = userDTO.getPassWord();
-        String nickName = userDTO.getNickName();
-        Integer gender = userDTO.getGender();
         String captcha = userDTO.getCaptcha();
 
         // TODO: 入参校验：JSR 303
@@ -169,13 +167,15 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         }
 
         // 校验验证码
-        redisTemplate.opsForValue().get("");
+        String redisCaptcha = (String) redisTemplate.opsForValue().get("");
+        if (!captcha.equalsIgnoreCase(redisCaptcha)) {
+            throw new Exception("验证码错误，请重试");
+        }
 
         // 保存账号信息
         BingoUser user = new BingoUser();
-        user.setAccountId(accountId);
+        BeanUtils.copyProperties(userDTO, user);
         user.setPassWord(AESUtil.encrypt(passWord));
-        user.setSignature("这个人是个懒猪，没有设置个性签名");
         return userStore.save(user);
     }
 
@@ -191,7 +191,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
 
         // 判断用户账号是否存在
         BingoUser userInfo = userStore.findByAccountId(accountId);
-        if (ObjectUtils.isNotEmpty(userInfo)) {
+        if (ObjectUtils.isEmpty(userInfo)) {
             throw new Exception("该用户账号不存在，请重试");
         }
 

@@ -25,7 +25,7 @@ import java.util.List;
  * @since 2023-03-01
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/customer")
 public class BingoUserController {
     @Autowired
     private BingoUserService userService;

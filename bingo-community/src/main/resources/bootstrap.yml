@@ -1,3 +1,7 @@
+server:
+  servlet:
+    context-path: /community
+
 spring:
   profiles:
     active: dev
