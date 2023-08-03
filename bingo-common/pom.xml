@@ -58,6 +58,12 @@
             <artifactId>spring-kafka</artifactId>
         </dependency>
 
+        <!--ip2region-->
+        <dependency>
+            <groupId>org.lionsoul</groupId>
+            <artifactId>ip2region</artifactId>
+        </dependency>
+
         <!--Netty-->
         <dependency>
             <groupId>io.netty</groupId>

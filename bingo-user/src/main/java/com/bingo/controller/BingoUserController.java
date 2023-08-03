@@ -7,6 +7,7 @@ import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.resp.R;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoUserService;
+import com.bingo.utils.IpUtil;
 import com.bingo.utils.MinioUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -95,6 +96,13 @@ public class BingoUserController {
     public R uploadAvatar(MultipartFile file) {
         String avatarUrl = minioUtil.upload(file, "avatar-bucket");
         return R.out(RespCodeEnum.SUCCESS, avatarUrl);
+    }
+
+    @GetMapping("/test")
+    public String getInfo(HttpServletRequest request) throws Exception {
+        String ipAddress = IpUtil.getIpAddress(request);
+        String cityInfo = IpUtil.getCityInfo(ipAddress);
+        return cityInfo;
     }
 }
 

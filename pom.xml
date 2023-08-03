@@ -78,6 +78,13 @@
                 <version>${spring-kafka.version}</version>
             </dependency>
 
+            <!--ip2region-->
+            <dependency>
+                <groupId>org.lionsoul</groupId>
+                <artifactId>ip2region</artifactId>
+                <version>1.7.2</version>
+            </dependency>
+
             <!--MinIO-->
             <dependency>
                 <groupId>io.minio</groupId>
