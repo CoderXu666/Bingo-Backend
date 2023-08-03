@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -64,9 +63,7 @@ public class BingoEmojiServiceImpl extends ServiceImpl<BingoEmojiMapper, BingoEm
      * 表情包展示（按照最新时间排序）
      */
     @Override
-    public List findEmojiByUserId(Long userId) {
-        List<BingoEmoji> emojiList = bingoEmojiStore.findEmojiByUserId(userId);
-        List<String> lists = emojiList.stream().map(item -> item.getEmojiUrl()).collect(Collectors.toList());
-        return lists;
+    public List<BingoEmoji> findEmojiByUserId(Long userId) {
+        return bingoEmojiStore.findEmojiByUserId(userId);
     }
 }
