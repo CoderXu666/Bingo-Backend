@@ -1,10 +1,10 @@
 package com.bingo.utils;
 
-import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.lionsoul.ip2region.xdb.Searcher;
 
-import java.io.File;
-import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -14,35 +14,26 @@ import java.util.Objects;
  * @Description: ip2region：https://github.com/lionsoul2014/ip2region
  */
 public class AddressUtil {
-
     /**
-     * 当前记录地址的本地DB
+     * 根据 IP 查询登录来源
      */
-    private static final String TEMP_FILE_DIR = "/home/admin/app/";
-
-    /**
-     * 根据IP地址查询登录来源
-     */
-    public static String getCityInfo(String ip) {
-        try {
-            String dbPath = Objects.requireNonNull(AddressUtil.class.getResource("/ip2region/ip2region.xdb")).getPath();
-            File file = new File(dbPath);
-            //如果当前文件不存在，则从缓存中复制一份
-            if (!file.exists()) {
-                dbPath = TEMP_FILE_DIR + "ip.db";
-                System.out.println(MessageFormat.format("当前目录为:[{0}]", dbPath));
-                file = new File(dbPath);
-                FileUtils.copyInputStreamToFile(Objects.requireNonNull(AddressUtil.class.getClassLoader().getResourceAsStream("classpath:ip2region/ip2region.xdb")), file);
-            }
-            //创建查询对象
-            Searcher searcher = Searcher.newWithFileOnly(dbPath);
-            //开始查询
-            return searcher.searchByStr(ip);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static Map<String, Object> getCityInfo(String ip) throws Exception {
+        Map<String, Object> resultMap = new HashMap<>();
+        String dbPath = Objects.requireNonNull(AddressUtil.class.getResource("/ip2region/ip2region.xdb")).getPath();
+        Searcher searcher = Searcher.newWithFileOnly(dbPath);
+        String cityInfo = searcher.searchByStr(ip);
+        if (StringUtils.isNotEmpty(cityInfo)) {
+            String[] infoArr = cityInfo.split("\\|");
+            String country = infoArr[0];
+            String province = infoArr[2];
+            String city = infoArr[3];
+            resultMap.put("country", country);
+            resultMap.put("province", province);
+            resultMap.put("city", city);
+            return resultMap;
+        } else {
+            return null;
         }
-        //默认返回空字符串
-        return "";
     }
 }
 

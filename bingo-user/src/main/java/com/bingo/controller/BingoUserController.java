@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -98,10 +99,12 @@ public class BingoUserController {
         return R.out(RespCodeEnum.SUCCESS, avatarUrl);
     }
 
+
+    // 测试专用
     @GetMapping("/test")
     public String getInfo(HttpServletRequest request) throws Exception {
-        String cityInfo1 = AddressUtil.getCityInfo("39.156.66.10");
-        String cityInfo2 = AddressUtil.getCityInfo("101.42.13.186");
+        Map<String, Object> cityInfo1 = AddressUtil.getCityInfo("39.156.66.10");
+        Map<String, Object> cityInfo2 = AddressUtil.getCityInfo("101.42.13.186");
         return cityInfo1 + ":" + cityInfo2;
     }
 }

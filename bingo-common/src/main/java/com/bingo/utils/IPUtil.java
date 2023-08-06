@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Description: 根据 HttpServletRequest 获取 ip 地址
  */
 @Slf4j
-public class IpUtil {
+public class IPUtil {
     /**
      * 获取ip地址
      */
