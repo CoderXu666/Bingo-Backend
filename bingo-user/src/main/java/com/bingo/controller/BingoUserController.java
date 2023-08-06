@@ -7,7 +7,7 @@ import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.resp.R;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoUserService;
-import com.bingo.utils.IpUtil;
+import com.bingo.utils.AddressUtil;
 import com.bingo.utils.MinioUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -100,9 +100,9 @@ public class BingoUserController {
 
     @GetMapping("/test")
     public String getInfo(HttpServletRequest request) throws Exception {
-        String ipAddress = IpUtil.getIpAddress(request);
-        String cityInfo = IpUtil.getCityInfo(ipAddress);
-        return cityInfo;
+        String cityInfo1 = AddressUtil.getCityInfo("39.156.66.10");
+        String cityInfo2 = AddressUtil.getCityInfo("101.42.13.186");
+        return cityInfo1 + ":" + cityInfo2;
     }
 }
 
