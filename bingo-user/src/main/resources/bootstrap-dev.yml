@@ -27,7 +27,21 @@ spring:
           - data-id: bingo_kafka.yml
           - data-id: bingo_sharding_jdbc.yml
           - data-id: bingo_minio.yml
-#          - data-id: bingo_elasticsearch.yml
+  #          - data-id: bingo_elasticsearch.yml
+
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: 1262254123@qq.com
+    # 注意：不是密码，是授权码
+    password: ocebnufztunlbagc
+    default-encoding: UTF-8
+    properties:
+      mail:
+        debug: true
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
 
 mybatis-plus:
   configuration:

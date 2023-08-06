@@ -2,21 +2,22 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
+import com.bingo.pojo.dto.EmailDTO;
 import com.bingo.pojo.dto.UserDTO;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.resp.R;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoUserService;
-import com.bingo.utils.AddressUtil;
 import com.bingo.utils.MinioUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -33,6 +34,8 @@ public class BingoUserController {
     private BingoUserService userService;
     @Autowired
     private MinioUtil minioUtil;
+    @Autowired
+    private JavaMailSender mailSender;
 
     /**
      * 根据userId查询用户信息
@@ -79,6 +82,15 @@ public class BingoUserController {
     }
 
     /**
+     * 发送邮件
+     */
+    @PostMapping("/send_email")
+    public R sendEmail(@RequestBody EmailDTO emailDTO) {
+        userService.sendEmail(emailDTO);
+        return R.out(RespCodeEnum.SUCCESS, "邮件发送成功");
+    }
+
+    /**
      * 根据ids批量查询用户信息
      * postman前端传参数不要声明变量名，否则调用不通，例如：[1,2,3]
      */
@@ -94,7 +106,7 @@ public class BingoUserController {
      * 访问URL：http://101.42.13.186:9000/avatar-bucket/1687483809516_1690621557315.jpg
      */
     @PostMapping("/upload_avatar")
-    public R uploadAvatar(MultipartFile file) {
+    public R uploadAvatar(MultipartFile file, UserDTO userDTO) {
         String avatarUrl = minioUtil.upload(file, "avatar-bucket");
         return R.out(RespCodeEnum.SUCCESS, avatarUrl);
     }
@@ -102,10 +114,16 @@ public class BingoUserController {
 
     // 测试专用
     @GetMapping("/test")
-    public String getInfo(HttpServletRequest request) throws Exception {
-        Map<String, Object> cityInfo1 = AddressUtil.getCityInfo("39.156.66.10");
-        Map<String, Object> cityInfo2 = AddressUtil.getCityInfo("101.42.13.186");
-        return cityInfo1 + ":" + cityInfo2;
+    public void getInfo() {
+        //简单邮件
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom("1262254123@qq.com");
+        simpleMailMessage.setTo("1262254123@qq.com");
+        simpleMailMessage.setCc("1262254123@qq.com");
+        simpleMailMessage.setSubject("BugBugBug");
+        simpleMailMessage.setText("唐三金揍艳茹，嘎嘎狠！");
+        mailSender.send(simpleMailMessage);
+        System.out.println("发送成功....");
     }
 }
 

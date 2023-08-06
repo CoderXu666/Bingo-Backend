@@ -32,6 +32,7 @@
         <nacos.version>2.2.4.RELEASE</nacos.version>
         <feign.version>2.2.4.RELEASE</feign.version>
         <websocket.version>2.2.4.RELEASE</websocket.version>
+        <email.version>2.2.4.RELEASE</email.version>
         <sentinel.version>1.8.0</sentinel.version>
         <mybatis.plus.version>3.0.5</mybatis.plus.version>
         <mysql.version>8.0.16</mysql.version>
@@ -78,6 +79,13 @@
                 <version>${spring-kafka.version}</version>
             </dependency>
 
+            <!--Email-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-mail</artifactId>
+                <version>2.2.4.RELEASE</version>
+            </dependency>
+
             <!--ip2region-->
             <dependency>
                 <groupId>org.lionsoul</groupId>
@@ -85,7 +93,7 @@
                 <version>2.6.3</version>
             </dependency>
 
-            <!-- 用于读取ip2region.xdb文件使用 -->
+            <!-- 用于读取ip2region.xdb -->
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
@@ -214,18 +222,6 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>1.1.20</version>
-            </dependency>
-
-            <!--OSS-->
-            <dependency>
-                <groupId>com.aliyun.oss</groupId>
-                <artifactId>aliyun-sdk-oss</artifactId>
-                <version>3.15.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity-engine-core</artifactId>
-                <version>2.3</version>
             </dependency>
 
             <!--vod-->

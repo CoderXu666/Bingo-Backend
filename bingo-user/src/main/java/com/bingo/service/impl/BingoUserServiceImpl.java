@@ -3,6 +3,7 @@ package com.bingo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoUserMapper;
+import com.bingo.pojo.dto.EmailDTO;
 import com.bingo.pojo.dto.UserDTO;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.vo.BingoUserVO;
@@ -12,9 +13,12 @@ import com.bingo.utils.AESUtil;
 import com.bingo.utils.JWTUtil;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,6 +48,8 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     private DefaultKaptcha defaultKaptcha;
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    private JavaMailSender mailSender;
 
     /**
      * 根据Id查询用户信息
@@ -181,14 +188,25 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     }
 
     /**
-     * 登录
+     * 登录功能
+     * 为什么先校验验证码：如果验证码不正确，就会需要
      */
     @Override
     public String login(UserDTO userDTO) throws Exception {
         String accountId = userDTO.getAccountId();
         String passWord = userDTO.getPassWord();
+        String captcha = userDTO.getCaptcha();
 
         // TODO JSR 303检验
+
+        // 判断验证码是否正确
+        String captchaKey = (String) redisTemplate.opsForValue().get("captcha_key");
+        if (StringUtils.isEmpty(captcha)) {
+            throw new Exception("验证码生成异常，请重新刷新页面");
+        }
+        if (!captcha.equalsIgnoreCase(captchaKey)) {
+            throw new Exception("验证码不正确，请重新输入");
+        }
 
         // 判断用户账号是否存在
         BingoUser userInfo = userStore.findByAccountId(accountId);
@@ -205,5 +223,28 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
 
         // 生成Token
         return JWTUtil.generateToken(accountId);
+    }
+
+    /**
+     * 发送邮件
+     */
+    @Override
+    public void sendEmail(EmailDTO emailDTO) {
+        String toEmail = emailDTO.getToEmail();
+        String subject = emailDTO.getSubject();
+        String text = emailDTO.getText();
+
+        // 1.简单发送
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setFrom("1262254123@qq.com");
+        mailMessage.setTo(toEmail);
+        mailMessage.setSubject(subject);
+        mailMessage.setText(text);
+        mailMessage.setSentDate(new Date());
+
+        // 2.复杂发送
+
+
+        mailSender.send(mailMessage);
     }
 }
