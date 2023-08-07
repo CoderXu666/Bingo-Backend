@@ -10,8 +10,6 @@ import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoUserService;
 import com.bingo.utils.MinioUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,8 +32,6 @@ public class BingoUserController {
     private BingoUserService userService;
     @Autowired
     private MinioUtil minioUtil;
-    @Autowired
-    private JavaMailSender mailSender;
 
     /**
      * 根据userId查询用户信息
@@ -115,15 +111,7 @@ public class BingoUserController {
     // 测试专用
     @GetMapping("/test")
     public void getInfo() {
-        //简单邮件
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("1262254123@qq.com");
-        simpleMailMessage.setTo("1262254123@qq.com");
-        simpleMailMessage.setCc("1262254123@qq.com");
-        simpleMailMessage.setSubject("BugBugBug");
-        simpleMailMessage.setText("唐三金揍艳茹，嘎嘎狠！");
-        mailSender.send(simpleMailMessage);
-        System.out.println("发送成功....");
+
     }
 }
 
