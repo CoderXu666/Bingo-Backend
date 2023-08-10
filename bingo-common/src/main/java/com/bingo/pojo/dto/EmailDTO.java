@@ -18,8 +18,4 @@ public class EmailDTO {
      * 主题
      */
     private String subject;
-    /**
-     * 消息内容
-     */
-    private String text;
 }

@@ -11,6 +11,7 @@ import com.bingo.service.BingoUserService;
 import com.bingo.store.BingoUserStore;
 import com.bingo.utils.AESUtil;
 import com.bingo.utils.JWTUtil;
+import com.bingo.utils.RandomUtil;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -31,6 +32,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -164,20 +166,26 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     public Boolean register(UserDTO userDTO) throws Exception {
         String accountId = userDTO.getAccountId();
         String passWord = userDTO.getPassWord();
+        String email = userDTO.getEmail();
         String captcha = userDTO.getCaptcha();
 
         // TODO: 入参校验：JSR 303
+
+        // 验证码是否过期
+        String code = (String) redisTemplate.opsForValue().get(email);
+        if (StringUtils.isEmpty(code)) {
+            throw new Exception("验证码已失效，请重新发送");
+        }
+
+        // 验证码输入是否正确
+        if (!captcha.equalsIgnoreCase(code)) {
+            throw new Exception("您输入的验证码有误，请重试");
+        }
 
         // 判断账号是否注册过
         BingoUser userInfo = userStore.findByAccountId(accountId);
         if (ObjectUtils.isNotEmpty(userInfo)) {
             throw new Exception("该账号已存在，换个试试~");
-        }
-
-        // 校验验证码
-        String redisCaptcha = (String) redisTemplate.opsForValue().get("");
-        if (!captcha.equalsIgnoreCase(redisCaptcha)) {
-            throw new Exception("验证码错误，请重试");
         }
 
         // 保存账号信息
@@ -232,19 +240,20 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     public void sendEmail(EmailDTO emailDTO) {
         String toEmail = emailDTO.getToEmail();
         String subject = emailDTO.getSubject();
-        String text = emailDTO.getText();
 
-        // 1.简单发送
+        // 生成邮箱验证码
+        String code = RandomUtil.generateCode(6);
+
+        // 发送邮件
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom("1262254123@qq.com");
         mailMessage.setTo(toEmail);
         mailMessage.setSubject(subject);
-        mailMessage.setText(text);
+        mailMessage.setText("欢迎使用Bingo平台，您的验证码为：" + code + "，3分钟内自动过期~");
         mailMessage.setSentDate(new Date());
-
-        // 2.复杂发送
-
-
         mailSender.send(mailMessage);
+
+        // 保存 Email 验证码
+        redisTemplate.opsForValue().set(toEmail, code, 1, TimeUnit.MINUTES);
     }
 }
