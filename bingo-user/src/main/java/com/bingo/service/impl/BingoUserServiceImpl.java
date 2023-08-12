@@ -3,7 +3,6 @@ package com.bingo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoUserMapper;
-import com.bingo.pojo.dto.EmailDTO;
 import com.bingo.pojo.dto.UserDTO;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.vo.BingoUserVO;
@@ -237,9 +236,10 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 发送邮件
      */
     @Override
-    public void sendEmail(EmailDTO emailDTO) {
-        String toEmail = emailDTO.getToEmail();
-        String subject = emailDTO.getSubject();
+    public void sendEmail(String email) throws Exception {
+        if (StringUtils.isEmpty(email)) {
+            throw new Exception("验证码为空，请重试");
+        }
 
         // 生成邮箱验证码
         String code = RandomUtil.generateCode(6);
@@ -247,13 +247,13 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         // 发送邮件
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom("1262254123@qq.com");
-        mailMessage.setTo(toEmail);
-        mailMessage.setSubject(subject);
+        mailMessage.setTo(email);
+        mailMessage.setSubject("Bingo注册验证");
         mailMessage.setText("欢迎使用Bingo平台，您的验证码为：" + code + "，3分钟内自动过期~");
         mailMessage.setSentDate(new Date());
         mailSender.send(mailMessage);
 
         // 保存 Email 验证码
-        redisTemplate.opsForValue().set(toEmail, code, 1, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(email, code, 1, TimeUnit.MINUTES);
     }
 }

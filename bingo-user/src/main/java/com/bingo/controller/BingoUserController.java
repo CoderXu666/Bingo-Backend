@@ -2,7 +2,6 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.dto.EmailDTO;
 import com.bingo.pojo.dto.UserDTO;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.resp.R;
@@ -81,8 +80,8 @@ public class BingoUserController {
      * 发送邮件
      */
     @PostMapping("/send_email")
-    public R sendEmail(@RequestBody EmailDTO emailDTO) {
-        userService.sendEmail(emailDTO);
+    public R sendEmail(String email) throws Exception {
+        userService.sendEmail(email);
         return R.out(RespCodeEnum.SUCCESS, "邮件发送成功");
     }
 
@@ -102,7 +101,7 @@ public class BingoUserController {
      * 访问URL：http://101.42.13.186:9000/avatar-bucket/1687483809516_1690621557315.jpg
      */
     @PostMapping("/upload_avatar")
-    public R uploadAvatar(MultipartFile file, UserDTO userDTO) {
+    public R uploadAvatar(MultipartFile file) {
         String avatarUrl = minioUtil.upload(file, "avatar-bucket");
         return R.out(RespCodeEnum.SUCCESS, avatarUrl);
     }

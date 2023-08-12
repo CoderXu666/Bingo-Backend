@@ -2,7 +2,6 @@ package com.bingo.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bingo.pojo.dto.EmailDTO;
 import com.bingo.pojo.dto.UserDTO;
 import com.bingo.pojo.po.BingoUser;
 import com.bingo.pojo.vo.BingoUserVO;
@@ -32,5 +31,5 @@ public interface BingoUserService extends IService<BingoUser> {
 
     String login(UserDTO userDTO) throws Exception;
 
-    void sendEmail(EmailDTO emailDTO);
+    void sendEmail(String email) throws Exception;
 }
