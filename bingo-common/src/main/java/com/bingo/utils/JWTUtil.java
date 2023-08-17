@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -38,11 +39,11 @@ public class JWTUtil {
      * 解析 Token
      */
     public static Map<String, String> resolveToken(String token) {
+        Map<String, String> resultMap = new HashMap<>();
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token);
         Claims claims = claimsJws.getBody();
-        String productCode = (String) claims.get("productCode");
-        String accountId = (String) claims.get("accountId");
-        String customerId = (String) claims.get("customerId");
-        return null;
+        String userId = (String) claims.get("userId");
+        resultMap.put("userId", userId);
+        return resultMap;
     }
 }
