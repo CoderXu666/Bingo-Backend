@@ -29,6 +29,11 @@ public class UserDTO {
     private String passWord;
 
     /**
+     * 头像
+     */
+    private String avatarUrl;
+
+    /**
      * 昵称
      */
     private String nickName;

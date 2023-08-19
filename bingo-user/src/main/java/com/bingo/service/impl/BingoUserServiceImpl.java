@@ -77,21 +77,20 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      */
     @Override
     public void generateCode(HttpServletRequest request, HttpServletResponse response) {
-        // 定义response输出类型为image/jpeg
         response.setDateHeader("Expires", 0);
         response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
         response.addHeader("Cache-Control", "post-check=0, pre-check=0");
         response.setHeader("Pragma", "no-cache");
         response.setContentType("image/jpeg");
 
-        // 生成验证码图片
+        // 生成验证码图片、内容
         String verifyCode = defaultKaptcha.createText();
         BufferedImage image = defaultKaptcha.createImage(verifyCode);
 
         // Cookie没有CaptchaKey，赋值Cookie和Redis
         if (!CookieUtil.hasCookie(request, captchaKey)) {
             String uuid = UUID.randomUUID().toString();
-            CookieUtil.addCookie(request, response, captchaKey, uuid, true, -1, "/");
+            CookieUtil.addCookie(response, captchaKey, uuid, false, -1, "/");
             redisTemplate.opsForValue().set(uuid, verifyCode, 3, TimeUnit.MINUTES);
         }
 
@@ -186,6 +185,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         String accountId = userDTO.getAccountId();
         String passWord = userDTO.getPassWord();
         String captcha = userDTO.getCaptcha();
+        String captchaKey = userDTO.getCaptchaKey();
 
         // 判断验证码是否正确
         String captchaVal = (String) redisTemplate.opsForValue().get(captchaKey);

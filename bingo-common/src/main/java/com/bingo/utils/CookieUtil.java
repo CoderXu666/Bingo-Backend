@@ -28,7 +28,7 @@ public class CookieUtil {
     }
 
     /**
-     * 设置 Cookie 中的某个值
+     * 更新已存在 Cookie 数据
      */
     public static void setValue(HttpServletRequest request, HttpServletResponse response, String key, String value) {
         Cookie[] cookies = request.getCookies();
@@ -61,13 +61,11 @@ public class CookieUtil {
     /**
      * 新增 Cookie 信息
      */
-    public static void addCookie(HttpServletRequest request, HttpServletResponse response, String key, String value, boolean secure, int expiry, String path) {
+    public static void addCookie(HttpServletResponse response, String key, String value, boolean secure, int expiry, String path) {
         Cookie cookie = new Cookie(key, value);
-        if (hasCookie(request, key)) {
-            cookie.setValue(value);
-        }
-        cookie.setSecure(secure);
-        cookie.setMaxAge(expiry);
+        cookie.setValue(value);
+//        cookie.setSecure(secure);
+//        cookie.setMaxAge(expiry);
         cookie.setPath(path);
         response.addCookie(cookie);
     }
