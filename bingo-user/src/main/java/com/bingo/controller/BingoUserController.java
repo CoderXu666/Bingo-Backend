@@ -98,7 +98,7 @@ public class BingoUserController {
      * 根据ids批量查询用户信息
      * postman前端传参数不要声明变量名，否则调用不通，例如：[1,2,3]
      */
-    @PostMapping("/get_list")
+    @PostMapping("/list_by_ids")
     public R getUserInfoByIds(List<Long> ids) {
         List<BingoUserVO> userList = userService.getUserByIds(ids);
         return R.out(RespCodeEnum.SUCCESS, userList);

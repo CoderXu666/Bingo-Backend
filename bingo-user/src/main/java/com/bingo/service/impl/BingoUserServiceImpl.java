@@ -171,7 +171,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
 
         // TODO: 入参校验：JSR 303
 
-        // 验证码是否过期
+        // 邮箱验证码是否过期
         String code = (String) redisTemplate.opsForValue().get(email);
         if (StringUtils.isEmpty(code)) {
             throw new Exception("验证码已失效，请重新发送");
@@ -259,8 +259,8 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         mailMessage.setSentDate(new Date());
         mailSender.send(mailMessage);
 
-        // 保存 Email 验证码
-        redisTemplate.opsForValue().set(email, code, 1, TimeUnit.MINUTES);
+        // 保存 Email 验证码（3分钟后自动过期）
+        redisTemplate.opsForValue().set(email, code, 3, TimeUnit.MINUTES);
     }
 
     /**
