@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -229,7 +230,12 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         }
 
         // 生成Token
-        return JWTUtil.generateToken(accountId);
+        Long userId = userInfo.getId();
+        String token = JWTUtil.generateToken(userId);
+        if (StringUtils.isEmpty(token)) {
+            throw new Exception("生成Token用户信息异常");
+        }
+        return token;
     }
 
     /**
@@ -255,5 +261,19 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
 
         // 保存 Email 验证码
         redisTemplate.opsForValue().set(email, code, 1, TimeUnit.MINUTES);
+    }
+
+    /**
+     * 解析Token
+     */
+    @Override
+    public BingoUser resolveToken(String token) throws Exception {
+        Map<String, Object> resultMap = JWTUtil.resolveToken(token);
+        Long userId = (Long) resultMap.get("user_id");
+        BingoUser userInfo = userStore.findById(userId);
+        if (ObjectUtils.isEmpty(userInfo)) {
+            throw new Exception("没有查询到该user_id的用户信息");
+        }
+        return userInfo;
     }
 }

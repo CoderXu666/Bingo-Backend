@@ -42,7 +42,7 @@ public class BingoUserController {
     }
 
     /**
-     * 注册
+     * 注册功能
      */
     @PostMapping("/register")
     public R register(@RequestBody UserDTO userDTO) throws Exception {
@@ -51,12 +51,21 @@ public class BingoUserController {
     }
 
     /**
-     * 登录
+     * 登录功能
      */
     @PostMapping("/login")
     public R login(@RequestBody UserDTO userDTO) throws Exception {
-        userService.login(userDTO);
-        return R.out(RespCodeEnum.SUCCESS, "操作成功");
+        String token = userService.login(userDTO);
+        return R.out(RespCodeEnum.SUCCESS, token);
+    }
+
+    /**
+     * 解析Token
+     */
+    @GetMapping("/resolve_token")
+    public R resolveToken(String token) throws Exception {
+        BingoUser userInfo = userService.resolveToken(token);
+        return R.out(RespCodeEnum.SUCCESS, userInfo);
     }
 
     /**

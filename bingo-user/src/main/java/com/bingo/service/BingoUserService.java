@@ -32,4 +32,6 @@ public interface BingoUserService extends IService<BingoUser> {
     String login(UserDTO userDTO) throws Exception;
 
     void sendEmail(String email) throws Exception;
+
+    BingoUser resolveToken(String token) throws Exception;
 }

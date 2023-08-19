@@ -22,14 +22,14 @@ public class JWTUtil {
     /**
      * 生成 Token
      */
-    public static String generateToken(String userId) {
+    public static String generateToken(Long userId) {
         String JwtToken = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setHeaderParam("alg", "HS256")
                 .setSubject("Bingo")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
-                .claim("userId", userId)
+                .claim("user_id", userId)
                 .signWith(SignatureAlgorithm.HS256, JWT_SECRET)
                 .compact();
         return JwtToken;
@@ -38,12 +38,12 @@ public class JWTUtil {
     /**
      * 解析 Token
      */
-    public static Map<String, String> resolveToken(String token) {
-        Map<String, String> resultMap = new HashMap<>();
+    public static Map<String, Object> resolveToken(String token) {
+        Map<String, Object> resultMap = new HashMap<>();
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token);
         Claims claims = claimsJws.getBody();
-        String userId = (String) claims.get("userId");
-        resultMap.put("userId", userId);
+        Long userId = (Long) claims.get("user_id");
+        resultMap.put("user_id", userId);
         return resultMap;
     }
 }
