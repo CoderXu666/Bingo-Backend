@@ -19,7 +19,7 @@ public class GlobalException {
      * 兜底异常
      */
     @ExceptionHandler(Exception.class)
-    public R bindException(Exception e ) {
+    public R bindException(Exception e) {
         log.error("--------------------Exception异常：{}--------------------", e.getMessage());
         return R.out(RespCodeEnum.FAIL, e.getMessage());
     }

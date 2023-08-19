@@ -24,14 +24,12 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -71,8 +69,14 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     }
 
     /**
-     * 获取验证码图片
-     * 思路：生成验证码内容通过保存到当前客户端Cookie中
+     * 生成验证码图片
+     * ---------------------------------------------
+     * Cookie结构：K(标识) V(客户端身份uuid)
+     * Redis结构：K(客户端身份uuid) V(验证码值)
+     * ---------------------------------------------
+     * 1.生成验证码同时，将客户端身份uuid传到请求中
+     * 2.将验证码数据存入到Redis中
+     * ---------------------------------------------
      */
     @Override
     public void generateCode(HttpServletRequest request, HttpServletResponse response) {
@@ -87,35 +91,35 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         String verifyCode = defaultKaptcha.createText();
         BufferedImage image = defaultKaptcha.createImage(verifyCode);
 
-//        // 判断是否是首次生成验证码
-//        String captchaKey = "captcha_key";
-//        Cookie[] cookies = request.getCookies();
-//        if (ObjectUtils.isEmpty(cookies)) {
-//            String uuid = UUID.randomUUID().toString();
-//            Cookie cookie = new Cookie(captchaKey, uuid);
-//            cookie.setPath("/");
-//            response.addCookie(cookie);
-//            redisTemplate.opsForValue().set(uuid, verifyCode, 3, TimeUnit.MINUTES);
-//        }
-//
-//        // Cookie存在，不生成Cookie，重新生成验证码赋值Redis即可
-//        else {
-//            boolean hasCaptchaKeyFlag = false;
-//            for (Cookie cookie : cookies) {
-//                if (cookie.getName().equals(captchaKey)) {
-//                    redisTemplate.opsForValue().set(cookie.getValue(), verifyCode, 3, TimeUnit.MINUTES);
-//                    hasCaptchaKeyFlag = true;
-//                }
-//            }
-//            // 特殊情况，偶尔复现
-//            if (!hasCaptchaKeyFlag) {
-//                String uuid = UUID.randomUUID().toString();
-//                Cookie cookie = new Cookie(captchaKey, uuid);
-//                cookie.setPath("/");
-//                response.addCookie(cookie);
-//                redisTemplate.opsForValue().set(uuid, verifyCode, 3, TimeUnit.MINUTES);
-//            }
-//        }
+
+        // 判断是否是首次生成验证码
+        // UUID：用于标识当前客户端身份
+        String uuid = UUID.randomUUID().toString();
+        Cookie[] cookies = request.getCookies();
+        if (ObjectUtils.isEmpty(cookies)) {
+            Cookie cookie = new Cookie("bingo_captcha", uuid);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+            redisTemplate.opsForValue().set(uuid, verifyCode, 3, TimeUnit.MINUTES);
+        }
+        // Cookie存在，不生成Cookie，重新生成验证码赋值Redis即可
+        else {
+            boolean hasCaptchaKeyFlag = false;
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("bingo_captcha")) {
+                    redisTemplate.opsForValue().set(cookie.getValue(), verifyCode, 3, TimeUnit.MINUTES);
+                    hasCaptchaKeyFlag = true;
+                }
+            }
+            // 特殊情况，偶尔复现
+            if (!hasCaptchaKeyFlag) {
+                Cookie cookie = new Cookie("bingo_captcha", uuid);
+                cookie.setPath("/");
+                response.addCookie(cookie);
+                redisTemplate.opsForValue().set(uuid, verifyCode, 3, TimeUnit.MINUTES);
+            }
+        }
+
 
         // 将图片输出到页面
         ServletOutputStream outputStream = null;
@@ -169,8 +173,6 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         String email = userDTO.getEmail();
         String captcha = userDTO.getCaptcha();
 
-        // TODO: 入参校验：JSR 303
-
         // 邮箱验证码是否过期
         String code = (String) redisTemplate.opsForValue().get(email);
         if (StringUtils.isEmpty(code)) {
@@ -205,10 +207,8 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         String passWord = userDTO.getPassWord();
         String captcha = userDTO.getCaptcha();
 
-        // TODO JSR 303检验
-
         // 判断验证码是否正确
-        String captchaKey = (String) redisTemplate.opsForValue().get("captcha_key");
+        String captchaKey = (String) redisTemplate.opsForValue().get("bingo_captcha");
         if (StringUtils.isEmpty(captcha)) {
             throw new Exception("验证码生成异常，请重新刷新页面");
         }
