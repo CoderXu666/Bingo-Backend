@@ -9,6 +9,7 @@ import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoUserService;
 import com.bingo.store.BingoUserStore;
 import com.bingo.utils.AESUtil;
+import com.bingo.utils.CookieUtil;
 import com.bingo.utils.JWTUtil;
 import com.bingo.utils.RandomUtil;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
@@ -24,7 +25,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
@@ -48,8 +48,9 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     private DefaultKaptcha defaultKaptcha;
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
-    @Autowired
+    @Resource
     private JavaMailSender mailSender;
+    private static final String captchaKey = "bingo_captcha";
 
     /**
      * 根据Id查询用户信息
@@ -71,7 +72,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     /**
      * 生成验证码图片
      * ---------------------------------------------
-     * Cookie结构：K(标识) V(客户端身份uuid)
+     * Cookie结构：K("captcha_key") V(客户端身份uuid)
      * Redis结构：K(客户端身份uuid) V(验证码值)
      * ---------------------------------------------
      * 1.生成验证码同时，将客户端身份uuid传到请求中
@@ -91,35 +92,12 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         String verifyCode = defaultKaptcha.createText();
         BufferedImage image = defaultKaptcha.createImage(verifyCode);
 
-
-        // 判断是否是首次生成验证码
-        // UUID：用于标识当前客户端身份
+        // 身份标识UUID、验证码值存入Cookie和Redis
         String uuid = UUID.randomUUID().toString();
-        Cookie[] cookies = request.getCookies();
-        if (ObjectUtils.isEmpty(cookies)) {
-            Cookie cookie = new Cookie("bingo_captcha", uuid);
-            cookie.setPath("/");
-            response.addCookie(cookie);
-            redisTemplate.opsForValue().set(uuid, verifyCode, 3, TimeUnit.MINUTES);
+        if (!CookieUtil.hasCookie(request, captchaKey)) {
+            CookieUtil.addCookie(request, response, captchaKey, uuid, true, -1, "/");
         }
-        // Cookie存在，不生成Cookie，重新生成验证码赋值Redis即可
-        else {
-            boolean hasCaptchaKeyFlag = false;
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("bingo_captcha")) {
-                    redisTemplate.opsForValue().set(cookie.getValue(), verifyCode, 3, TimeUnit.MINUTES);
-                    hasCaptchaKeyFlag = true;
-                }
-            }
-            // 特殊情况，偶尔复现
-            if (!hasCaptchaKeyFlag) {
-                Cookie cookie = new Cookie("bingo_captcha", uuid);
-                cookie.setPath("/");
-                response.addCookie(cookie);
-                redisTemplate.opsForValue().set(uuid, verifyCode, 3, TimeUnit.MINUTES);
-            }
-        }
-
+        redisTemplate.opsForValue().set(uuid, verifyCode, 3, TimeUnit.MINUTES);
 
         // 将图片输出到页面
         ServletOutputStream outputStream = null;
@@ -208,11 +186,11 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         String captcha = userDTO.getCaptcha();
 
         // 判断验证码是否正确
-        String captchaKey = (String) redisTemplate.opsForValue().get("bingo_captcha");
+        String captchaVal = (String) redisTemplate.opsForValue().get(captchaKey);
         if (StringUtils.isEmpty(captcha)) {
             throw new Exception("验证码生成异常，请重新刷新页面");
         }
-        if (!captcha.equalsIgnoreCase(captchaKey)) {
+        if (!captcha.equalsIgnoreCase(captchaVal)) {
             throw new Exception("验证码不正确，请重新输入");
         }
 

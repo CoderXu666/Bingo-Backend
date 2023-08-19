@@ -14,6 +14,11 @@ import lombok.Data;
 @Data
 public class UserDTO {
     /**
+     * 验证码key
+     */
+    private String captchaKey;
+
+    /**
      * 账号id
      */
     private String accountId;
