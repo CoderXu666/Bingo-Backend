@@ -59,13 +59,9 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     public BingoUserVO findById(Long id) {
         BingoUserVO userVO = new BingoUserVO();
         BingoUser userInfo = userStore.findById(id);
-//        BingoUserStatistics userStatistics = userStatisticsStore.findUserSta(id);
         if (ObjectUtils.isNotEmpty(userInfo)) {
             BeanUtils.copyProperties(userInfo, userVO);
         }
-//        if (ObjectUtils.isNotEmpty(userStatistics)) {
-//            BeanUtils.copyProperties(userStatistics, userVO);
-//        }
         return userVO;
     }
 
@@ -92,12 +88,18 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         String verifyCode = defaultKaptcha.createText();
         BufferedImage image = defaultKaptcha.createImage(verifyCode);
 
-        // 身份标识UUID、验证码值存入Cookie和Redis
-        String uuid = UUID.randomUUID().toString();
+        // Cookie没有CaptchaKey，赋值Cookie和Redis
         if (!CookieUtil.hasCookie(request, captchaKey)) {
+            String uuid = UUID.randomUUID().toString();
             CookieUtil.addCookie(request, response, captchaKey, uuid, true, -1, "/");
+            redisTemplate.opsForValue().set(uuid, verifyCode, 3, TimeUnit.MINUTES);
         }
-        redisTemplate.opsForValue().set(uuid, verifyCode, 3, TimeUnit.MINUTES);
+
+        // Cookie有CaptchaKey，重新赋值Redis
+        else {
+            String uuid = CookieUtil.getValue(request, captchaKey);
+            redisTemplate.opsForValue().set(uuid, verifyCode, 3, TimeUnit.MINUTES);
+        }
 
         // 将图片输出到页面
         ServletOutputStream outputStream = null;

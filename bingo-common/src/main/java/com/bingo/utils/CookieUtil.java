@@ -59,7 +59,7 @@ public class CookieUtil {
     }
 
     /**
-     * 写入 Cookie
+     * 新增 Cookie 信息
      */
     public static void addCookie(HttpServletRequest request, HttpServletResponse response, String key, String value, boolean secure, int expiry, String path) {
         Cookie cookie = new Cookie(key, value);
@@ -68,6 +68,7 @@ public class CookieUtil {
         }
         cookie.setSecure(secure);
         cookie.setMaxAge(expiry);
+        cookie.setPath(path);
         response.addCookie(cookie);
     }
 
