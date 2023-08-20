@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
  * @Author 徐志斌
  * @Date: 2023/5/20 21:21
  * @Version 1.0
- * @Description: 两级缓存切面类
+ * @Description: 两级缓存AOP
  */
 @Slf4j
 @Aspect
@@ -108,14 +108,10 @@ public class CacheAspect {
      */
     public static String parse(String elString, TreeMap<String, Object> map) {
         elString = String.format("#{%s}", elString);
-        // 创建表达式解析器
         ExpressionParser parser = new SpelExpressionParser();
-        // 通过evaluationContext.setVariable可以在上下文中设定变量
         EvaluationContext context = new StandardEvaluationContext();
         map.entrySet().forEach(entry -> context.setVariable(entry.getKey(), entry.getValue()));
-        // 解析表达式
         Expression expression = parser.parseExpression(elString, new TemplateParserContext());
-        // 使用Expression.getValue()获取表达式的值，这里传入了Evaluation上下文
         return expression.getValue(context, String.class);
     }
 }
