@@ -1,8 +1,8 @@
+spring:
+  profiles:
+    active: dev
+
 server:
   port: 10002
   servlet:
     context-path: /community
-
-spring:
-  profiles:
-    active: dev

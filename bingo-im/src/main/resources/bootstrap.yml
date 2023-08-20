@@ -1,8 +1,7 @@
+spring:
+  profiles:
+    active: dev
 server:
   port: 10003
   servlet:
     context-path: /im
-
-spring:
-  profiles:
-    active: dev
