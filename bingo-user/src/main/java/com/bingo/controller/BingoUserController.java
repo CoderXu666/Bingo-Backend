@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -120,9 +119,9 @@ public class BingoUserController {
      * 移除头像
      */
     @DeleteMapping("/remove_avatar")
-    public R removeAvatar(String objectName) {
-        minioUtil.removeObjects("avatar-bucket", Arrays.asList(objectName));
-        return R.out(RespCodeEnum.SUCCESS, "移除头像成功");
+    public R removeAvatar(String objectName) throws Exception {
+        minioUtil.removeObject("avatar-bucket", objectName);
+        return R.out(RespCodeEnum.SUCCESS, "移除成功");
     }
 
 

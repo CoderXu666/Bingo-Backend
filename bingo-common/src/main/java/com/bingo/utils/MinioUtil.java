@@ -1,7 +1,6 @@
 package com.bingo.utils;
 
 import io.minio.*;
-import io.minio.messages.DeleteObject;
 import io.minio.messages.Item;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @Author 徐志斌
@@ -160,10 +158,9 @@ public class MinioUtil {
     }
 
     /**
-     * 批量删除文件对象
+     * 删除文件对象
      */
-    public void removeObjects(String bucketName, List<String> objList) {
-        List<DeleteObject> objNames = objList.stream().map(item -> new DeleteObject(item)).collect(Collectors.toList());
-        minioClient.removeObjects(RemoveObjectsArgs.builder().bucket(bucketName).objects(objNames).build());
+    public void removeObject(String bucketName, String objName) throws Exception {
+        minioClient.removeObject(RemoveObjectArgs.builder().bucket(bucketName).object(objName).build());
     }
 }

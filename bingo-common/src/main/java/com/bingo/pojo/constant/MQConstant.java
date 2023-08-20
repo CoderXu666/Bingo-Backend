@@ -4,9 +4,9 @@ package com.bingo.pojo.constant;
  * @Author 徐志斌
  * @Date: 2023/5/14 14:30
  * @Version 1.0
- * @Description: MQTopicConstant
+ * @Description: MQConstant
  */
-public class MQTopicConstant {
+public class MQConstant {
     /**
      * 帖子主题
      */

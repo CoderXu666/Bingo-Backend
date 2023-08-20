@@ -8,7 +8,7 @@ import com.bingo.kafka.KafkaProducer;
 import com.bingo.mapper.BingoPostMapper;
 import com.bingo.pojo.common.PageParam;
 import com.bingo.pojo.constant.ESConstant;
-import com.bingo.pojo.constant.MQTopicConstant;
+import com.bingo.pojo.constant.MQConstant;
 import com.bingo.pojo.dto.LikeDTO;
 import com.bingo.pojo.dto.PostDTO;
 import com.bingo.pojo.dto.SearchDTO;
@@ -69,7 +69,7 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
         postStore.savePost(bingoPost);
 
         // 消息发送MQ，同步ES
-        kafkaProducer.sendMessage(MQTopicConstant.COMMUNITY_POST_TOPIC, JSON.toJSONString(bingoPost));
+        kafkaProducer.sendMessage(MQConstant.COMMUNITY_POST_TOPIC, JSON.toJSONString(bingoPost));
 
         return true;
     }
@@ -107,7 +107,7 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
         }
 
         // 消息发送给MQ，同步MySQL
-//        kafkaProducer.sendMessage(MQTopicConstant.POST_LIKE, JSON.toJSONString());
+//        kafkaProducer.sendMessage(MQConstant.POST_LIKE, JSON.toJSONString());
 
         return null;
     }
