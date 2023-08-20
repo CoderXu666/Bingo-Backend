@@ -9,7 +9,7 @@ import com.bingo.pojo.po.BingoTopicComment;
  *  Mapper 接口
  * </p>
  *
- * @author 周英俊
+ * @author 徐志斌
  * @since 2023-07-01
  */
 public interface BingoTopicCommentMapper extends BaseMapper<BingoTopicComment> {

@@ -12,7 +12,7 @@ import java.util.List;
  * 服务类
  * </p>
  *
- * @author 周英俊
+ * @author 徐志斌
  * @since 2023-07-09
  */
 public interface BingoFollowRelationService extends IService<BingoFollowRelation> {

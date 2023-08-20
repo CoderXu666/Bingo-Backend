@@ -9,7 +9,7 @@ import com.bingo.pojo.po.BingoTopicComment;
  *  服务类
  * </p>
  *
- * @author 周英俊
+ * @author 徐志斌
  * @since 2023-07-01
  */
 public interface BingoTopicCommentStore extends IService<BingoTopicComment> {

@@ -13,7 +13,7 @@ import java.util.Date;
  * 用户关注关联表
  * </p>
  *
- * @author 周英俊
+ * @author 徐志斌
  * @since 2023-07-10
  */
 @Data

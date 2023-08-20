@@ -9,7 +9,7 @@ import com.bingo.pojo.po.BingoGroupInfo;
  *  Mapper 接口
  * </p>
  *
- * @author 周英俊
+ * @author 徐志斌
  * @since 2023-07-13
  */
 public interface BingoGroupInfoMapper extends BaseMapper<BingoGroupInfo> {
