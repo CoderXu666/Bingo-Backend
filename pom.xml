@@ -16,6 +16,7 @@
         <module>bingo-im</module>
         <module>bingo-party</module>
         <module>bingo-user</module>
+        <module>bingo-recharge</module>
     </modules>
 
     <groupId>com.bingo</groupId>

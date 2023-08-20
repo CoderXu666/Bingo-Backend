@@ -1,4 +1,5 @@
 server:
+  port: 10004
   servlet:
     context-path: /party
 

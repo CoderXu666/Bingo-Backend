@@ -1,6 +1,3 @@
-server:
-  port: 10003
-
 spring:
   application:
     name: bingo-chat
