@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @Author: 徐志斌
- * @CreateDate: 2023/3/4
+ * @CreateDate: 2023/8/20
  * @Version: 1.0
  */
 @EnableFeignClients
@@ -17,8 +17,8 @@ import org.springframework.context.annotation.ComponentScan;
 @MapperScan("com.bingo.mapper")
 @EnableDiscoveryClient
 @SpringBootApplication
-public class BingoPartyApplication {
+public class BingoRechargeApplication {
     public static void main(String[] args) {
-        SpringApplication.run(BingoPartyApplication.class);
+        SpringApplication.run(BingoRechargeApplication.class, args);
     }
 }

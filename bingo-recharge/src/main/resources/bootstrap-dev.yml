@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: bingo-community
+  main:
+    # 允许覆盖数据源
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 101.42.13.186:8848
+        namespace: bingo-namespace
+      config:
+        server-addr: 101.42.13.186:8848
+        namespace: bingo-namespace
+        file-extension: yml
+        shared-configs:
+          - data-id: bingo_mysql.yml
+          - data-id: bingo_redis.yml
+          - data-id: bingo_kafka.yml
+          - data-id: bingo_sharding_jdbc.yml
+#          - data-id: bingo_elasticsearch.yml
+
+xxl:
+  job:
+    admin:
+      addresses: http://101.42.13.186:8800/xxl-job-admin/
+      userName: admin
+      password: 123456
+    accessToken: Lpoms_xxljob_default_token
+    executor:
+      appname: bingo
+      address: http://101.42.13.186:9999
+      ip: 101.42.13.186
+      port: 9999
+      logpath: logs/xxl-job/jobhandler
+      logretentiondays: 7
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+

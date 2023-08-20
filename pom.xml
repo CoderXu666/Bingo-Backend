@@ -15,6 +15,7 @@
         <module>bingo-community</module>
         <module>bingo-im</module>
         <module>bingo-party</module>
+        <module>bingo-recharge</module>
         <module>bingo-user</module>
     </modules>
 
