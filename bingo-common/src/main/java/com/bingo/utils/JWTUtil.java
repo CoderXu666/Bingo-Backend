@@ -17,7 +17,7 @@ import java.util.Map;
  * @Description: JWTUtil
  */
 public class JWTUtil {
-    public static final long EXPIRE = 1000;
+    public static final long EXPIRE = 86400000;
     public static final String JWT_SECRET = "Bingo_XuZhiBin_666";
 
     /**
