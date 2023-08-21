@@ -1,18 +1,22 @@
 package com.bingo.config;
 
+import com.bingo.interceptor.LoginInterceptor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,8 +25,28 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
+    @Autowired
+    private LoginInterceptor loginInterceptor;
+
     /**
-     * 解决前后端跨域问题
+     * 拦截器配置
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        List<String> excludePathList = Arrays.asList(
+                "/customer/login",
+                "/customer/register",
+                "/customer/resolve_token",
+                "/customer/captcha"
+        );
+        registry.addInterceptor(loginInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns(excludePathList);
+    }
+
+
+    /**
+     * 前后端跨域问题
      */
     @Override
     public void addCorsMappings(CorsRegistry registry) {

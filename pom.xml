@@ -147,12 +147,6 @@
                 <version>${sentinel.version}</version>
             </dependency>
 
-            <!--JSR 303-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-validation</artifactId>
-            </dependency>
-
             <!--XXL-JOB-->
             <dependency>
                 <groupId>com.xuxueli</groupId>

@@ -52,6 +52,8 @@ public class BingoUserController {
 
     /**
      * 登录功能
+     * 1.登录成功后，将token信息保存到客户端的localStorage（使用Cookie也可以）
+     * 2.将token信息通过请求拦截器存入到请求头中，每次发起后端请求都通过后端拦截器校验
      */
     @PostMapping("/login")
     public R login(@RequestBody UserDTO userDTO) throws Exception {
@@ -60,7 +62,7 @@ public class BingoUserController {
     }
 
     /**
-     * 解析Token
+     * 解析Token拿到用户信息
      */
     @GetMapping("/resolve_token")
     public R resolveToken(String token) throws Exception {

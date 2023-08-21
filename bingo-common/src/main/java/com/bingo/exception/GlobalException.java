@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalException {
     /**
-     * 兜底异常
+     * 所有异常
      */
     @ExceptionHandler(Exception.class)
     public R bindException(Exception e) {
