@@ -14,7 +14,7 @@ import lombok.Setter;
 public enum RespCodeEnum {
     SUCCESS(200, "操作成功"),
     FAIL(500, "操作失败"),
-    ;
+    TOKEN_EXPIRED(501, "Token过期");
 
     @Getter
     @Setter

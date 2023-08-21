@@ -13,12 +13,15 @@ import javax.servlet.http.HttpServletResponse;
  * @Date: 2023/8/21 20:58
  * @Version 1.0
  * @Description: 登录状态-请求拦截器
+ * ----------------------------------------------------------
+ * 理解：前端会调用JWTUtil.resolveToken()，这里为何还要检验每个请求呢？
+ * 因为有些请求根本就不会调用JWTUtil.resolveToken()，所以状态失效了，还可以继续正常使用
  */
 @Slf4j
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 跨域请求先发一个option请求（放行）
         if (request.getMethod().equals("OPTIONS")) {
             response.setStatus(HttpServletResponse.SC_OK);
@@ -31,7 +34,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             log.info("登录Token校验通过：SUCCESS");
             return true;
         } else {
-            log.error("登录Token校验失败：FAIL");
+            log.error("登录Token已过期：FAIL");
             return false;
         }
     }
