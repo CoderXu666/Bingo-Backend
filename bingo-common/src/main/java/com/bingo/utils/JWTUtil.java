@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -20,7 +21,7 @@ public class JWTUtil {
     public static final String JWT_SECRET = "Bingo_XuZhiBin_666";
 
     /**
-     * 生成 Token
+     * 根据 user_id 生成 Token
      */
     public static String generateToken(Long userId) {
         String JwtToken = Jwts.builder()
@@ -36,7 +37,7 @@ public class JWTUtil {
     }
 
     /**
-     * 解析 Token
+     * 解析 Token 获取 user_id
      */
     public static Map<String, Object> resolveToken(String token) {
         Map<String, Object> resultMap = new HashMap<>();
@@ -45,5 +46,21 @@ public class JWTUtil {
         Long userId = (Long) claims.get("user_id");
         resultMap.put("user_id", userId);
         return resultMap;
+    }
+
+    /**
+     * 校验 Token 是否过期
+     */
+    public static boolean checkToken(String jwtToken) {
+        if (StringUtils.isEmpty(jwtToken)) {
+            return false;
+        }
+        try {
+            Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(jwtToken);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

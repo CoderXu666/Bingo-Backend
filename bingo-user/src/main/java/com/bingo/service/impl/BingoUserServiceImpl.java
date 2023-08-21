@@ -178,7 +178,8 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
 
     /**
      * 登录功能
-     * 为什么先校验验证码：如果验证码不正确，就会需要
+     * 1.登录成功后，将token信息保存到客户端的localStorage（使用Cookie也可以）
+     * 2.请求拦截器：将localStorage中的token信息通过存入到请求头中，每次后端请求都通过拦截器校验Token是否过期
      */
     @Override
     public String login(UserDTO userDTO) throws Exception {
