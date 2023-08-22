@@ -4,7 +4,7 @@ package com.bingo.store.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoUserRelationMapper;
-import com.bingo.pojo.po.BingoUserRelation;
+import com.bingo.pojo.po.BingoChatFriend;
 import com.bingo.store.BingoUserRelationStore;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +20,14 @@ import java.util.List;
  * @since 2023-05-27
  */
 @Service
-public class BingoUserRelationStoreImpl extends ServiceImpl<BingoUserRelationMapper, BingoUserRelation> implements BingoUserRelationStore {
+public class BingoUserRelationStoreImpl extends ServiceImpl<BingoUserRelationMapper, BingoChatFriend> implements BingoUserRelationStore {
 
     /**
      * 根据user_id查询当前用户的好友关联标识
      */
     @Override
-    public List<BingoUserRelation> getRelationsById(Long id) {
-        QueryWrapper<BingoUserRelation> wrapper = new QueryWrapper<>();
+    public List<BingoChatFriend> getRelationsById(Long id) {
+        QueryWrapper<BingoChatFriend> wrapper = new QueryWrapper<>();
         wrapper.eq("status", 1);
         wrapper.like("relation", id);
         wrapper.orderByDesc("create_time");
@@ -39,8 +39,8 @@ public class BingoUserRelationStoreImpl extends ServiceImpl<BingoUserRelationMap
      * 根据 user_id1 和 user_id2 精准查询好友关联
      */
     @Override
-    public BingoUserRelation getRelationByTwoId(Long userId1, Long userId2) {
-        QueryWrapper<BingoUserRelation> wrapper = new QueryWrapper<>();
+    public BingoChatFriend getRelationByTwoId(Long userId1, Long userId2) {
+        QueryWrapper<BingoChatFriend> wrapper = new QueryWrapper<>();
         wrapper.eq("status", 1);
         wrapper.eq("relation", userId1 + ":" + userId2);
         wrapper.or().eq("relation", userId2 + ":" + userId1);
@@ -53,18 +53,18 @@ public class BingoUserRelationStoreImpl extends ServiceImpl<BingoUserRelationMap
      */
     @Override
     public Boolean deleteById(Long userId, Long friendId) throws Exception {
-//        BingoUserRelation relation = null;
+//        BingoChatFriend relation = null;
 //        List<Long> friendList = this.getListById(userId);
 //        for (Long id : friendList) {
 //            if (friendId.equals(id)) {
-//                QueryWrapper<BingoUserRelation> wrapper1 = new QueryWrapper();
+//                QueryWrapper<BingoChatFriend> wrapper1 = new QueryWrapper();
 //                wrapper1.eq("user1", friendId);
 //                wrapper1.eq("user2", userId);
-//                BingoUserRelation userInfo1 = this.getOne(wrapper1);
-//                QueryWrapper<BingoUserRelation> wrapper2 = new QueryWrapper();
+//                BingoChatFriend userInfo1 = this.getOne(wrapper1);
+//                QueryWrapper<BingoChatFriend> wrapper2 = new QueryWrapper();
 //                wrapper2.eq("user1", userId);
 //                wrapper2.eq("user2", friendId);
-//                BingoUserRelation userInfo2 = this.getOne(wrapper2);
+//                BingoChatFriend userInfo2 = this.getOne(wrapper2);
 //                if (ObjectUtils.isEmpty(userInfo1)) {
 //                    relation = userInfo2;
 //                } else {

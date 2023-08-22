@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoFriendChatMapper;
 import com.bingo.pojo.dto.FriendChatDTO;
 import com.bingo.pojo.po.BingoFriendChat;
-import com.bingo.pojo.po.BingoUserRelation;
+import com.bingo.pojo.po.BingoChatFriend;
 import com.bingo.service.BingoFriendChatService;
 import com.bingo.store.BingoFriendChatStore;
 import com.bingo.store.BingoUserRelationStore;
@@ -40,7 +40,7 @@ public class BingoFriendChatServiceImpl extends ServiceImpl<BingoFriendChatMappe
         String chatContent = friendChatDTO.getChatContent();
 
         // 校验双方是否是好友
-        BingoUserRelation relation = relationStore.getRelationByTwoId(userId1, userId2);
+        BingoChatFriend relation = relationStore.getRelationByTwoId(userId1, userId2);
         if (ObjectUtils.isEmpty(relation)) {
             throw new Exception("您还不是对方好友，发送信息失败");
         }
@@ -64,7 +64,7 @@ public class BingoFriendChatServiceImpl extends ServiceImpl<BingoFriendChatMappe
         Long userId2 = chatDTO.getUserId2();
 
         // 查询双方是否是好友
-        BingoUserRelation relation = relationStore.getRelationByTwoId(userId1, userId2);
+        BingoChatFriend relation = relationStore.getRelationByTwoId(userId1, userId2);
         if (ObjectUtils.isEmpty(relation)) {
             throw new Exception("对方不是您的好友");
         }

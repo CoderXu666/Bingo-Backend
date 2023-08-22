@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -17,8 +17,8 @@ import java.time.LocalDateTime;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("bingo_user_relation")
-public class BingoUserRelation implements Serializable {
+@TableName("bingo_chat_friend")
+public class BingoChatFriend implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,10 +29,16 @@ public class BingoUserRelation implements Serializable {
     private Long id;
 
     /**
-     * 好友关系
+     * 用户id
      */
-    @TableField("relation")
-    private String relation;
+    @TableField("user_id1")
+    private Long userId1;
+
+    /**
+     * 好友id
+     */
+    @TableField("user_id2")
+    private Long userId2;
 
     /**
      * 申请状态
@@ -44,7 +50,7 @@ public class BingoUserRelation implements Serializable {
      * 创建时间
      */
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 删除标识
