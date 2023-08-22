@@ -1,6 +1,5 @@
 package com.bingo.store.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoChatFriendRecordMapper;
@@ -40,15 +39,11 @@ public class BingoChatFriendRecordStoreImpl extends ServiceImpl<BingoChatFriendR
         return this.remove(wrapper);
     }
 
-
     /**
      * 查询好友聊天记录消息
      */
     @Override
-    public List<BingoChatFriendRecord> getContentsByRelation(String relation) {
-        QueryWrapper<BingoChatFriendRecord> wrapper = new QueryWrapper<>();
-        wrapper.eq("relation", relation);
-        wrapper.orderByAsc("create_time");
-        return this.list(wrapper);
+    public List<BingoChatFriendRecord> getChatRecordList(Long userId, List<Long> userIds) {
+        return null;
     }
 }

@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoChatFriendMapper;
 import com.bingo.pojo.po.BingoChatFriend;
-import com.bingo.pojo.resp.FeignResponse;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoChatFriendService;
 import com.bingo.store.BingoChatFriendRecordStore;
@@ -43,11 +42,10 @@ public class BingoChatFriendServiceImpl extends ServiceImpl<BingoChatFriendMappe
         List<Long> friendIds = friendStore.getFriendsById(userId);
 
         // 查询好友信息
-        FeignResponse<List<BingoUserVO>> feignResp = userFeign.getUserInfoByIds(friendIds);
-        List<BingoUserVO> userVOList = feignResp.getData();
+        List<BingoUserVO> userInfoList = userFeign.getUserInfoByIds(friendIds).getData();
 
         // 查询聊天信息
-//        friendRecordStore.getContentsByRelation()
+        friendRecordStore.getChatRecordList(userId, friendIds);
 
         return null;
     }

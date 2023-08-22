@@ -29,7 +29,6 @@ public class BingoChatFriendController {
 
     /**
      * 根据 user_id 查询好友列表（包含聊天记录）
-     * 查询聊天记录，每个用户展示20条
      */
     @GetMapping("/list")
     public R getListById(Long id) {

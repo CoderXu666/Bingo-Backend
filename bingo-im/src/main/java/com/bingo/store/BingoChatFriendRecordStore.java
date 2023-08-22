@@ -19,5 +19,5 @@ public interface BingoChatFriendRecordStore extends IService<BingoChatFriendReco
 
     Boolean recallMessage(String relation, Long userId);
 
-    List<BingoChatFriendRecord> getContentsByRelation(String relation);
+    List<BingoChatFriendRecord> getChatRecordList(Long userId, List<Long> userIds);
 }
