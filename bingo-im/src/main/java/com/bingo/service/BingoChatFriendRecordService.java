@@ -13,7 +13,7 @@ import com.bingo.pojo.po.BingoChatFriendRecord;
  * @author 徐志斌
  * @since 2023-07-16
  */
-public interface BingoFriendChatService extends IService<BingoChatFriendRecord> {
+public interface BingoChatFriendRecordService extends IService<BingoChatFriendRecord> {
     Boolean saveFriendChat(FriendChatDTO chatDTO) throws Exception;
 
     Boolean recallMessage(FriendChatDTO chatDTO) throws Exception;

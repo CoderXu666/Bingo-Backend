@@ -12,6 +12,6 @@ import com.bingo.pojo.po.BingoChatFriend;
  * @author 徐志斌
  * @since 2023-05-27
  */
-public interface BingoUserRelationMapper extends BaseMapper<BingoChatFriend> {
+public interface BingoChatFriendMapper extends BaseMapper<BingoChatFriend> {
 
 }

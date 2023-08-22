@@ -3,9 +3,9 @@ package com.bingo.store.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bingo.mapper.BingoFriendChatMapper;
+import com.bingo.mapper.BingoChatFriendRecordMapper;
 import com.bingo.pojo.po.BingoChatFriendRecord;
-import com.bingo.store.BingoFriendChatStore;
+import com.bingo.store.BingoChatFriendRecordStore;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,14 +19,14 @@ import java.util.List;
  * @since 2023-07-16
  */
 @Service
-public class BingoFriendChatStoreImpl extends ServiceImpl<BingoFriendChatMapper, BingoChatFriendRecord> implements BingoFriendChatStore {
+public class BingoChatFriendRecordStoreImpl extends ServiceImpl<BingoChatFriendRecordMapper, BingoChatFriendRecord> implements BingoChatFriendRecordStore {
 
     /**
      * 好友发送消息
      */
     @Override
-    public Boolean saveFriendChat(BingoChatFriendRecord bingoFriendChat) {
-        return this.save(bingoFriendChat);
+    public Boolean saveFriendChat(BingoChatFriendRecord BingoChatFriendRecord) {
+        return this.save(BingoChatFriendRecord);
     }
 
     /**

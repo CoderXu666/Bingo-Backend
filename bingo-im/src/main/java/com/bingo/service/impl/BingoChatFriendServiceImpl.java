@@ -3,12 +3,12 @@ package com.bingo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.feign.UserFeign;
-import com.bingo.mapper.BingoUserRelationMapper;
+import com.bingo.mapper.BingoChatFriendMapper;
 import com.bingo.pojo.po.BingoChatFriend;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoChatFriendService;
-import com.bingo.store.BingoFriendChatStore;
 import com.bingo.store.BingoChatFriendStore;
+import com.bingo.store.BingoChatFriendRecordStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,13 +24,13 @@ import java.util.List;
  * @since 2023-05-27
  */
 @Service
-public class BingoUserRelationServiceImpl extends ServiceImpl<BingoUserRelationMapper, BingoChatFriend> implements BingoChatFriendService {
+public class BingoChatFriendServiceImpl extends ServiceImpl<BingoChatFriendMapper, BingoChatFriend> implements BingoChatFriendService {
     @Autowired
     private UserFeign userFeign;
     @Autowired
     private BingoChatFriendStore relationStore;
     @Autowired
-    private BingoFriendChatStore chatStore;
+    private BingoChatFriendRecordStore chatStore;
 
 
     /**

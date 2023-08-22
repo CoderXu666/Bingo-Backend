@@ -1,12 +1,12 @@
 package com.bingo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bingo.mapper.BingoFriendChatMapper;
+import com.bingo.mapper.BingoChatFriendRecordMapper;
 import com.bingo.pojo.dto.FriendChatDTO;
-import com.bingo.pojo.po.BingoChatFriendRecord;
 import com.bingo.pojo.po.BingoChatFriend;
-import com.bingo.service.BingoFriendChatService;
-import com.bingo.store.BingoFriendChatStore;
+import com.bingo.pojo.po.BingoChatFriendRecord;
+import com.bingo.service.BingoChatFriendRecordService;
+import com.bingo.store.BingoChatFriendRecordStore;
 import com.bingo.store.BingoChatFriendStore;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +21,10 @@ import org.springframework.stereotype.Service;
  * @since 2023-07-16
  */
 @Service
-public class BingoFriendChatServiceImpl extends ServiceImpl<BingoFriendChatMapper, BingoChatFriendRecord> implements BingoFriendChatService {
+public class BingoChatFriendRecordServiceImpl extends ServiceImpl<BingoChatFriendRecordMapper, BingoChatFriendRecord> implements BingoChatFriendRecordService {
 
     @Autowired
-    private BingoFriendChatStore friendChatStore;
+    private BingoChatFriendRecordStore friendChatStore;
     @Autowired
     private BingoChatFriendStore relationStore;
 
@@ -50,7 +50,6 @@ public class BingoFriendChatServiceImpl extends ServiceImpl<BingoFriendChatMappe
         friendChat.setUserId(userId1);
         friendChat.setChatType(chatType);
         friendChat.setChatContent(chatContent);
-        friendChat.setRelation(relation.getRelation());
         return friendChatStore.saveFriendChat(friendChat);
     }
 
@@ -70,6 +69,6 @@ public class BingoFriendChatServiceImpl extends ServiceImpl<BingoFriendChatMappe
         }
 
         // 删除消息
-        return friendChatStore.recallMessage(relation.getRelation(), userId1);
+        return friendChatStore.recallMessage(null, userId1);
     }
 }

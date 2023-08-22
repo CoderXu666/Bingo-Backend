@@ -14,8 +14,8 @@ import java.util.List;
  * @author 徐志斌
  * @since 2023-07-16
  */
-public interface BingoFriendChatStore extends IService<BingoChatFriendRecord> {
-    Boolean saveFriendChat(BingoChatFriendRecord bingoFriendChat);
+public interface BingoChatFriendRecordStore extends IService<BingoChatFriendRecord> {
+    Boolean saveFriendChat(BingoChatFriendRecord BingoChatFriendRecord);
 
     Boolean recallMessage(String relation, Long userId);
 

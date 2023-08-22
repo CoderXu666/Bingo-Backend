@@ -6,12 +6,12 @@ import com.bingo.pojo.po.BingoChatFriendRecord;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author 徐志斌
  * @since 2023-07-16
  */
-public interface BingoFriendChatMapper extends BaseMapper<BingoChatFriendRecord> {
+public interface BingoChatFriendRecordMapper extends BaseMapper<BingoChatFriendRecord> {
 
 }
