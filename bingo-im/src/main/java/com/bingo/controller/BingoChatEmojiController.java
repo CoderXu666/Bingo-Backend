@@ -3,9 +3,9 @@ package com.bingo.controller;
 
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.dto.EmojiDTO;
-import com.bingo.pojo.po.BingoEmoji;
+import com.bingo.pojo.po.BingoChatEmoji;
 import com.bingo.pojo.resp.R;
-import com.bingo.service.BingoEmojiService;
+import com.bingo.service.BingoChatEmojiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +21,9 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/emoji")
-public class BingoEmojiController {
+public class BingoChatEmojiController {
     @Autowired
-    private BingoEmojiService emojiService;
+    private BingoChatEmojiService emojiService;
 
     /**
      * 保存一張表情包
@@ -48,7 +48,7 @@ public class BingoEmojiController {
      */
     @GetMapping("/find")
     public R findEmojiByUserId(Long userId) {
-        List<BingoEmoji> emojiUrl = emojiService.findEmojiByUserId(userId);
+        List<BingoChatEmoji> emojiUrl = emojiService.findEmojiByUserId(userId);
         return R.out(RespCodeEnum.SUCCESS, emojiUrl);
     }
 }

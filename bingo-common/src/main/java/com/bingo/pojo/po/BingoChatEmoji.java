@@ -20,8 +20,8 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("bingo_emoji")
-public class BingoEmoji implements Serializable {
+@TableName("bingo_chat_emoji")
+public class BingoChatEmoji implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

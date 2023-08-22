@@ -2,7 +2,7 @@ package com.bingo.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.bingo.pojo.po.BingoEmoji;
+import com.bingo.pojo.po.BingoChatEmoji;
 
 /**
  * <p>
@@ -12,6 +12,6 @@ import com.bingo.pojo.po.BingoEmoji;
  * @author 徐志斌
  * @since 2023-07-18
  */
-public interface BingoEmojiMapper extends BaseMapper<BingoEmoji> {
+public interface BingoEmojiMapper extends BaseMapper<BingoChatEmoji> {
 
 }

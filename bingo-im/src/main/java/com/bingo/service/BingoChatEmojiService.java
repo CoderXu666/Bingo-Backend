@@ -2,7 +2,7 @@ package com.bingo.service;
 
 
 import com.bingo.pojo.dto.EmojiDTO;
-import com.bingo.pojo.po.BingoEmoji;
+import com.bingo.pojo.po.BingoChatEmoji;
 
 import java.util.List;
 
@@ -14,10 +14,10 @@ import java.util.List;
  * @author 徐志斌
  * @since 2023-07-18
  */
-public interface BingoEmojiService {
+public interface BingoChatEmojiService {
     Boolean saveEmoji(EmojiDTO emojiDTO);
 
     Boolean deleteEmojiById(Long id);
 
-    List<BingoEmoji> findEmojiByUserId(Long userId);
+    List<BingoChatEmoji> findEmojiByUserId(Long userId);
 }

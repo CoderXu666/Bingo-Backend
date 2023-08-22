@@ -2,7 +2,7 @@ package com.bingo.store;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bingo.pojo.po.BingoEmoji;
+import com.bingo.pojo.po.BingoChatEmoji;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ import java.util.List;
  * @author 徐志斌
  * @since 2023-07-18
  */
-public interface BingoEmojiStore extends IService<BingoEmoji> {
+public interface BingoChatEmojiStore extends IService<BingoChatEmoji> {
 
-    Boolean saveEmoji(BingoEmoji bingoEmoji);
+    Boolean saveEmoji(BingoChatEmoji bingoEmoji);
 
     Boolean deleteEmojiById(Long id);
 

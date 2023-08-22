@@ -3,8 +3,8 @@ package com.bingo.store.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoEmojiMapper;
-import com.bingo.pojo.po.BingoEmoji;
-import com.bingo.store.BingoEmojiStore;
+import com.bingo.pojo.po.BingoChatEmoji;
+import com.bingo.store.BingoChatEmojiStore;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,13 +18,13 @@ import java.util.List;
  * @since 2023-07-18
  */
 @Service
-public class BingoEmojiStoreImpl extends ServiceImpl<BingoEmojiMapper, BingoEmoji> implements BingoEmojiStore {
+public class BingoEmojiStoreImpl extends ServiceImpl<BingoEmojiMapper, BingoChatEmoji> implements BingoChatEmojiStore {
 
     /**
      * 保存一張表情包
      */
     @Override
-    public Boolean saveEmoji(BingoEmoji bingoEmoji) {
+    public Boolean saveEmoji(BingoChatEmoji bingoEmoji) {
         return this.save(bingoEmoji);
     }
 
@@ -41,7 +41,7 @@ public class BingoEmojiStoreImpl extends ServiceImpl<BingoEmojiMapper, BingoEmoj
      */
     @Override
     public List findEmojiByUserId(Long userId) {
-        QueryWrapper<BingoEmoji> queryWrapper = new QueryWrapper();
+        QueryWrapper<BingoChatEmoji> queryWrapper = new QueryWrapper();
         queryWrapper.eq("user_id", userId);
         queryWrapper.orderByDesc("create_time");
         return this.list(queryWrapper);
