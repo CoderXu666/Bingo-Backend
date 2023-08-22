@@ -5,10 +5,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoChatFriendMapper;
 import com.bingo.pojo.po.BingoChatFriend;
+import com.bingo.pojo.resp.FeignResponse;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoChatFriendService;
-import com.bingo.store.BingoChatFriendStore;
 import com.bingo.store.BingoChatFriendRecordStore;
+import com.bingo.store.BingoChatFriendStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +29,9 @@ public class BingoChatFriendServiceImpl extends ServiceImpl<BingoChatFriendMappe
     @Autowired
     private UserFeign userFeign;
     @Autowired
-    private BingoChatFriendStore relationStore;
+    private BingoChatFriendStore friendStore;
     @Autowired
-    private BingoChatFriendRecordStore chatStore;
+    private BingoChatFriendRecordStore friendRecordStore;
 
 
     /**
@@ -38,6 +39,16 @@ public class BingoChatFriendServiceImpl extends ServiceImpl<BingoChatFriendMappe
      */
     @Override
     public List<BingoUserVO> getListById(Long userId) {
+        // 查询好友id
+        List<Long> friendIds = friendStore.getFriendsById(userId);
+
+        // 查询好友信息
+        FeignResponse<List<BingoUserVO>> feignResp = userFeign.getUserInfoByIds(friendIds);
+        List<BingoUserVO> userVOList = feignResp.getData();
+
+        // 查询聊天信息
+//        friendRecordStore.getContentsByRelation()
+
         return null;
     }
 
@@ -47,8 +58,7 @@ public class BingoChatFriendServiceImpl extends ServiceImpl<BingoChatFriendMappe
      */
     @Override
     public Boolean deleteById(Long userId, Long friendId) throws Exception {
-        Boolean isSuccess = relationStore.deleteById(userId, friendId);
-        return isSuccess;
+        return friendStore.deleteById(userId, friendId);
     }
 
     /**

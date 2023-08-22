@@ -20,18 +20,14 @@ import java.util.List;
  * @since 2023-05-27
  */
 @Service
-public class BingoUserRelationStoreImpl extends ServiceImpl<BingoChatFriendMapper, BingoChatFriend> implements BingoChatFriendStore {
+public class BingoChatFriendStoreImpl extends ServiceImpl<BingoChatFriendMapper, BingoChatFriend> implements BingoChatFriendStore {
 
     /**
-     * 根据user_id查询当前用户的好友关联标识
+     * 根据user_id查询当前用户的好友id
      */
     @Override
-    public List<BingoChatFriend> getRelationsById(Long id) {
-        QueryWrapper<BingoChatFriend> wrapper = new QueryWrapper<>();
-        wrapper.eq("status", 1);
-        wrapper.like("relation", id);
-        wrapper.orderByDesc("create_time");
-        return this.list(wrapper);
+    public List<Long> getFriendsById(Long id) {
+        return baseMapper.getFriendsById(id);
     }
 
 
