@@ -2,9 +2,9 @@ package com.bingo.store.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bingo.mapper.BingoNoticeLogMapper;
-import com.bingo.pojo.po.BingoNoticeLog;
-import com.bingo.store.BingoNoticeLogStore;
+import com.bingo.mapper.BingoSystemNoticeMapper;
+import com.bingo.pojo.po.BingoSystemNotice;
+import com.bingo.store.BingoSystemNoticeStore;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,17 +18,17 @@ import java.util.List;
  * @since 2023-06-04
  */
 @Service
-public class BingoNoticeLogStoreImpl extends ServiceImpl<BingoNoticeLogMapper, BingoNoticeLog> implements BingoNoticeLogStore {
+public class BingoSystemNoticeStoreImpl extends ServiceImpl<BingoSystemNoticeMapper, BingoSystemNotice> implements BingoSystemNoticeStore {
 
     /**
      * 根据Id,通知类型查询用用户的通知
      */
     @Override
-    public List<BingoNoticeLog> findByIdAndType(Long id, Integer type) {
-        QueryWrapper<BingoNoticeLog> queryWrapper = new QueryWrapper<>();
+    public List<BingoSystemNotice> findByIdAndType(Long id, Integer type) {
+        QueryWrapper<BingoSystemNotice> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id", id);
         queryWrapper.eq("notice_type", type);
-        List<BingoNoticeLog> list = this.list(queryWrapper);
+        List<BingoSystemNotice> list = this.list(queryWrapper);
         return list;
     }
 
@@ -36,7 +36,7 @@ public class BingoNoticeLogStoreImpl extends ServiceImpl<BingoNoticeLogMapper, B
      * 保存用户通知
      */
     @Override
-    public Boolean saveNotice(BingoNoticeLog noticeLog) {
+    public Boolean saveNotice(BingoSystemNotice noticeLog) {
         return this.save(noticeLog);
     }
 }

@@ -2,9 +2,9 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.po.BingoNoticeLog;
+import com.bingo.pojo.po.BingoSystemNotice;
 import com.bingo.pojo.resp.R;
-import com.bingo.service.BingoNoticeLogService;
+import com.bingo.service.BingoSystemNoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,24 +20,24 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/notice")
-public class BingoNoticeLogController {
+public class BingoSystemNoticeController {
     @Autowired
-    private BingoNoticeLogService noticeLogService;
+    private BingoSystemNoticeService noticeLogService;
 
     /**
      * 根据Id,通知类型查询用户的通知
      */
     @GetMapping("/find")
     public R find(Long id, Integer type) {
-        List<BingoNoticeLog> bingoNoticeLog = noticeLogService.findByIdAndType(id, type);
-        return R.out(RespCodeEnum.SUCCESS, bingoNoticeLog);
+        List<BingoSystemNotice> BingoSystemNotice = noticeLogService.findByIdAndType(id, type);
+        return R.out(RespCodeEnum.SUCCESS, BingoSystemNotice);
     }
 
     /**
      * 保存用户通知
      */
     @PostMapping("/save")
-    public R saveNotice(@RequestBody BingoNoticeLog noticeLog) {
+    public R saveNotice(@RequestBody BingoSystemNotice noticeLog) {
         noticeLogService.saveNotice(noticeLog);
         return R.out(RespCodeEnum.SUCCESS, "操作成功");
     }

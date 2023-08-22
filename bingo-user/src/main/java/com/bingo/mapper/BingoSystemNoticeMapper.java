@@ -2,7 +2,7 @@ package com.bingo.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.bingo.pojo.po.BingoNoticeLog;
+import com.bingo.pojo.po.BingoSystemNotice;
 
 /**
  * <p>
@@ -12,6 +12,6 @@ import com.bingo.pojo.po.BingoNoticeLog;
  * @author 徐志斌
  * @since 2023-06-04
  */
-public interface BingoNoticeLogMapper extends BaseMapper<BingoNoticeLog> {
+public interface BingoSystemNoticeMapper extends BaseMapper<BingoSystemNotice> {
 
 }
