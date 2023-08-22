@@ -5,18 +5,15 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoUserRelationMapper;
 import com.bingo.pojo.po.BingoChatFriend;
-import com.bingo.pojo.po.BingoFriendChat;
-import com.bingo.pojo.resp.FeignResponse;
 import com.bingo.pojo.vo.BingoUserVO;
 import com.bingo.service.BingoChatFriendService;
 import com.bingo.store.BingoFriendChatStore;
-import com.bingo.store.BingoUserRelationStore;
+import com.bingo.store.BingoChatFriendStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -31,7 +28,7 @@ public class BingoUserRelationServiceImpl extends ServiceImpl<BingoUserRelationM
     @Autowired
     private UserFeign userFeign;
     @Autowired
-    private BingoUserRelationStore relationStore;
+    private BingoChatFriendStore relationStore;
     @Autowired
     private BingoFriendChatStore chatStore;
 
@@ -41,28 +38,7 @@ public class BingoUserRelationServiceImpl extends ServiceImpl<BingoUserRelationM
      */
     @Override
     public List<BingoUserVO> getListById(Long userId) {
-        // 查询好友关联标识(userId : userId)
-        List<BingoChatFriend> relations = relationStore.getRelationsById(userId);
-        List<String> relationList = relations.stream().map(item -> item.getRelation()).collect(Collectors.toList());
-
-        // 处理关系，根据冒号分割，拼接成一个user_id列表
-        List<Long> ids = this.splitByColon(relationList);
-
-        // 去掉当前用户本身的id
-        ids = ids.stream().filter(item -> !item.equals(userId)).collect(Collectors.toList());
-
-        // 根据 user_id 集合查询用户信息
-        FeignResponse<List<BingoUserVO>> feignResponse = userFeign.getUserInfoByIds(ids);
-        List<BingoUserVO> userVOList = feignResponse.getData();
-
-        // 查询好友聊天记录
-        for (BingoUserVO userVO : userVOList) {
-            BingoChatFriend relation = relationStore.getRelationByTwoId(userId, userVO.getId());
-            List<BingoFriendChat> chatList = chatStore.getContentsByRelation(relation.getRelation());
-            userVO.setChatContentList(chatList);
-        }
-
-        return userVOList;
+        return null;
     }
 
 

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoFriendChatMapper;
-import com.bingo.pojo.po.BingoFriendChat;
+import com.bingo.pojo.po.BingoChatFriendRecord;
 import com.bingo.store.BingoFriendChatStore;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +19,13 @@ import java.util.List;
  * @since 2023-07-16
  */
 @Service
-public class BingoFriendChatStoreImpl extends ServiceImpl<BingoFriendChatMapper, BingoFriendChat> implements BingoFriendChatStore {
+public class BingoFriendChatStoreImpl extends ServiceImpl<BingoFriendChatMapper, BingoChatFriendRecord> implements BingoFriendChatStore {
 
     /**
      * 好友发送消息
      */
     @Override
-    public Boolean saveFriendChat(BingoFriendChat bingoFriendChat) {
+    public Boolean saveFriendChat(BingoChatFriendRecord bingoFriendChat) {
         return this.save(bingoFriendChat);
     }
 
@@ -34,7 +34,7 @@ public class BingoFriendChatStoreImpl extends ServiceImpl<BingoFriendChatMapper,
      */
     @Override
     public Boolean recallMessage(String relation, Long userId) {
-        UpdateWrapper<BingoFriendChat> wrapper = new UpdateWrapper<>();
+        UpdateWrapper<BingoChatFriendRecord> wrapper = new UpdateWrapper<>();
         wrapper.eq("relation", relation);
         wrapper.eq("user_id", userId);
         return this.remove(wrapper);
@@ -45,8 +45,8 @@ public class BingoFriendChatStoreImpl extends ServiceImpl<BingoFriendChatMapper,
      * 查询好友聊天记录消息
      */
     @Override
-    public List<BingoFriendChat> getContentsByRelation(String relation) {
-        QueryWrapper<BingoFriendChat> wrapper = new QueryWrapper<>();
+    public List<BingoChatFriendRecord> getContentsByRelation(String relation) {
+        QueryWrapper<BingoChatFriendRecord> wrapper = new QueryWrapper<>();
         wrapper.eq("relation", relation);
         wrapper.orderByAsc("create_time");
         return this.list(wrapper);

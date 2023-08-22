@@ -17,8 +17,8 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("bingo_friend_chat")
-public class BingoFriendChat implements Serializable {
+@TableName("bingo_chat_friend_record")
+public class BingoChatFriendRecord implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

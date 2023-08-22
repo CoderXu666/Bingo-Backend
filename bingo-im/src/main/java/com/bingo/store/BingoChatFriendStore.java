@@ -13,7 +13,7 @@ import java.util.List;
  * @author 徐志斌
  * @since 2023-05-27
  */
-public interface BingoUserRelationStore extends IService<BingoChatFriend> {
+public interface BingoChatFriendStore extends IService<BingoChatFriend> {
     List<BingoChatFriend> getRelationsById(Long userId);
 
     BingoChatFriend getRelationByTwoId(Long userId1, Long userId2);

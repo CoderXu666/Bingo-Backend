@@ -1,6 +1,6 @@
 package com.bingo.pojo.vo;
 
-import com.bingo.pojo.po.BingoFriendChat;
+import com.bingo.pojo.po.BingoChatFriendRecord;
 import lombok.Data;
 
 import java.util.Date;
@@ -61,7 +61,7 @@ public class BingoUserVO {
     /**
      * 聊天记录
      */
-    private List<BingoFriendChat> chatContentList;
+    private List<BingoChatFriendRecord> chatContentList;
 
     /**
      * 创建时间

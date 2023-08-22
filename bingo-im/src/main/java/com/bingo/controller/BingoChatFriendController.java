@@ -25,14 +25,14 @@ import java.util.List;
 @RequestMapping("/relation")
 public class BingoChatFriendController {
     @Autowired
-    private BingoChatFriendService relationService;
+    private BingoChatFriendService friendService;
 
     /**
-     * 根据 user_id 查询当前用户的好友列表，顺带查询聊天记录
+     * 根据 user_id 查询好友列表（包含聊天记录）
      */
     @GetMapping("/list")
     public R getListById(Long id) {
-        List<BingoUserVO> friendList = relationService.getListById(id);
+        List<BingoUserVO> friendList = friendService.getListById(id);
         return R.out(RespCodeEnum.SUCCESS, friendList);
     }
 
@@ -41,7 +41,7 @@ public class BingoChatFriendController {
      */
     @DeleteMapping("/delete")
     public R deleteById(Long userId, Long friendId) throws Exception {
-        relationService.deleteById(userId, friendId);
+        friendService.deleteById(userId, friendId);
         return R.out(RespCodeEnum.SUCCESS, "操作成功");
     }
 }

@@ -2,7 +2,7 @@ package com.bingo.store;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bingo.pojo.po.BingoFriendChat;
+import com.bingo.pojo.po.BingoChatFriendRecord;
 
 import java.util.List;
 
@@ -14,10 +14,10 @@ import java.util.List;
  * @author 徐志斌
  * @since 2023-07-16
  */
-public interface BingoFriendChatStore extends IService<BingoFriendChat> {
-    Boolean saveFriendChat(BingoFriendChat bingoFriendChat);
+public interface BingoFriendChatStore extends IService<BingoChatFriendRecord> {
+    Boolean saveFriendChat(BingoChatFriendRecord bingoFriendChat);
 
     Boolean recallMessage(String relation, Long userId);
 
-    List<BingoFriendChat> getContentsByRelation(String relation);
+    List<BingoChatFriendRecord> getContentsByRelation(String relation);
 }
