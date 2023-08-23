@@ -3,15 +3,10 @@ package com.bingo.controller;
 
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.resp.R;
-import com.bingo.pojo.vo.BingoUserVO;
-import com.bingo.service.BingoChatFriendService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * <p>
@@ -24,16 +19,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/relation")
 public class BingoChatFriendController {
-    @Autowired
-    private BingoChatFriendService friendService;
 
     /**
      * 根据 user_id 查询好友列表（包含聊天记录）
      */
     @GetMapping("/list")
     public R getListById(Long id) {
-        List<BingoUserVO> friendList = friendService.getListById(id);
-        return R.out(RespCodeEnum.SUCCESS, friendList);
+        return R.out(RespCodeEnum.SUCCESS, null);
     }
 
     /**
@@ -41,7 +33,6 @@ public class BingoChatFriendController {
      */
     @DeleteMapping("/delete")
     public R deleteById(Long userId, Long friendId) throws Exception {
-        friendService.deleteById(userId, friendId);
         return R.out(RespCodeEnum.SUCCESS, "操作成功");
     }
 }
