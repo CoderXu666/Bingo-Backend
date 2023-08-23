@@ -29,28 +29,40 @@ public class BingoChatFriendRecord implements Serializable {
     private Long id;
 
     /**
-     * 好友标识（userId1:userId2）
+     * 发送者id
+     */
+    @TableField("user_id1")
+    private Long userId1;
+
+    /**
+     * 接收者id/群聊id
+     */
+    @TableField("user_id2")
+    private Long userId2;
+
+    /**
+     * 关联标识（user_id1:user_id2）
      */
     @TableField("relation")
     private String relation;
-
-    /**
-     * 用户ID（关联用户ID: 发送者）
-     */
-    @TableField("user_id")
-    private Long userId;
-
-    /**
-     * 聊天类型（0：文字/图片、1：表情包、2：语音/视频）
-     */
-    @TableField("chat_type")
-    private Integer chatType;
 
     /**
      * 聊天内容
      */
     @TableField("chat_content")
     private String chatContent;
+
+    /**
+     * 消息类型（0：文字、1：表情包、2：文件（图片等）4：语音/视频）、5：内容分享
+     */
+    @TableField("chat_type")
+    private Integer chatType;
+
+    /**
+     * 发送状态（0：成功，1：失败）
+     */
+    @TableField("status")
+    private Integer status;
 
     /**
      * 创建时间

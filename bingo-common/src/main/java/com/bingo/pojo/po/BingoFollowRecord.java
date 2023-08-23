@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -30,34 +29,28 @@ public class BingoFollowRecord implements Serializable {
     private Long id;
 
     /**
-     * 用户1（关联用户2主键ID）
+     * 关注者
      */
     @TableField("user_id1")
     private Long userId1;
 
     /**
-     * 用户2（关联用户2主键ID）
+     * 被关注者
      */
     @TableField("user_id2")
     private Long userId2;
 
     /**
-     * 是否关注标识（0已关注、1未关注）
+     * 最新消息时间（排序）
      */
-    @TableField("follow_mark")
-    private Boolean followMark;
+    @TableField("receive_time")
+    private Date receiveTime;
 
     /**
      * 创建时间
      */
     @TableField("create_time")
     private Date createTime;
-
-    /**
-     * 创建时间
-     */
-    @TableField("update_time")
-    private Date updateTime;
 
     /**
      * 删除标识

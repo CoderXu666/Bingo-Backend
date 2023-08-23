@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @Slf4j
 @RestControllerAdvice
-public class GlobalException {
+public class GlobalExceptionHandler {
     /**
      * JWT Token过期解析异常
      */

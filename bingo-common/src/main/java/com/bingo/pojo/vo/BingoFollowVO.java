@@ -2,8 +2,6 @@ package com.bingo.pojo.vo;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class BingoFollowVO {
     /**

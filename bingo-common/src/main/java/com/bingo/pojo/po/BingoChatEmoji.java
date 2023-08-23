@@ -1,9 +1,6 @@
 package com.bingo.pojo.po;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -48,4 +45,11 @@ public class BingoChatEmoji implements Serializable {
      */
     @TableField("create_time")
     private Date createTime;
+
+    /**
+     * 删除标识
+     */
+    @TableField("deleted")
+    @TableLogic
+    private Boolean deleted;
 }

@@ -35,28 +35,16 @@ public class BingoUser implements Serializable {
     private String accountId;
 
     /**
-     * 用户名
-     */
-    @TableField("nick_name")
-    private String nickName;
-
-    /**
      * 密码
      */
     @TableField("pass_word")
     private String passWord;
 
     /**
-     * 头像
+     * 用户名
      */
-    @TableField("avatar_url")
-    private String avatarUrl;
-
-    /**
-     * 个性签名
-     */
-    @TableField("signature")
-    private String signature;
+    @TableField("nick_name")
+    private String nickName;
 
     /**
      * 性别
@@ -65,16 +53,22 @@ public class BingoUser implements Serializable {
     private Integer gender;
 
     /**
-     * 地区
+     * 头像
      */
-    @TableField("location")
-    private String location;
+    @TableField("avatar_url")
+    private String avatarUrl;
 
     /**
      * 邮箱
      */
     @TableField("email")
     private String email;
+
+    /**
+     * 地区
+     */
+    @TableField("location")
+    private String location;
 
     /**
      * 创建时间
