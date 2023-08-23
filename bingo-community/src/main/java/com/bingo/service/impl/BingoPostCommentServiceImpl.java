@@ -2,7 +2,6 @@ package com.bingo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoPostCommentMapper;
-import com.bingo.pojo.po.BingoPostComment;
 import com.bingo.service.BingoPostCommentService;
 import com.bingo.store.BingoPostCommentStore;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,7 +3,6 @@ package com.bingo.store.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bingo.mapper.BingoFollowRelationMapper;
 import com.bingo.pojo.po.BingoFollowRelation;
 import com.bingo.store.BingoFollowRelationStore;
 import org.springframework.stereotype.Service;

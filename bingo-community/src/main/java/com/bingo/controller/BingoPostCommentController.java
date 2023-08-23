@@ -2,7 +2,6 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.po.BingoPostComment;
 import com.bingo.pojo.resp.R;
 import com.bingo.service.BingoPostCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
