@@ -26,7 +26,7 @@ public class BingoChatEmojiController {
     private BingoChatEmojiService emojiService;
 
     /**
-     * 保存一張表情包
+     * 保存表情包
      */
     @PostMapping("/save")
     public R saveEmoji(@RequestBody EmojiDTO emojiDTO) {
@@ -35,7 +35,7 @@ public class BingoChatEmojiController {
     }
 
     /**
-     * 刪除一張表情包
+     * 刪除表情包
      */
     @DeleteMapping("/delete")
     public R deleteEmojiById(Long id) {

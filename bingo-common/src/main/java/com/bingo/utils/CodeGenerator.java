@@ -50,7 +50,7 @@ public class CodeGenerator {
          * 第四步：   策略设置
          */
         StrategyConfig strategyConfig = new StrategyConfig();
-        strategyConfig.setInclude("bingo_group_chat");
+        strategyConfig.setInclude("bingo_follow_record");
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setEntityLombokModel(true);
