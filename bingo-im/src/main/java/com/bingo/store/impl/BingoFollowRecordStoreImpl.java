@@ -6,6 +6,8 @@ import com.bingo.pojo.po.BingoFollowRecord;
 import com.bingo.store.BingoFollowRecordStore;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户关注表 服务实现类
@@ -16,5 +18,27 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class BingoFollowRecordStoreImpl extends ServiceImpl<BingoFollowRecordMapper, BingoFollowRecord> implements BingoFollowRecordStore {
+    /**
+     * 查询互关好友id
+     */
+    @Override
+    public List<BingoFollowRecord> getFriendList(Long userId) {
+        return null;
+    }
 
+    /**
+     * 查询关注用户id
+     */
+    @Override
+    public List<BingoFollowRecord> getFollowList(Long userId) {
+        return null;
+    }
+
+    /**
+     * 查询粉丝id
+     */
+    @Override
+    public List<BingoFollowRecord> getFanList(Long userId) {
+        return null;
+    }
 }
