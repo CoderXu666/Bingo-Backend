@@ -42,7 +42,7 @@ public class CodeGenerator {
          */
         PackageConfig packageConfig = new PackageConfig();
         packageConfig.setParent("com.bingo");
-        packageConfig.setEntity("entity");
+        packageConfig.setEntity("pojo");
         packageConfig.setMapper("mapper");
         autoGenerator.setPackageInfo(packageConfig);
 
@@ -50,7 +50,7 @@ public class CodeGenerator {
          * 第四步：   策略设置
          */
         StrategyConfig strategyConfig = new StrategyConfig();
-        strategyConfig.setInclude("bingo_follow_record");
+        strategyConfig.setInclude("bingo_chat_send_record");
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setEntityLombokModel(true);
