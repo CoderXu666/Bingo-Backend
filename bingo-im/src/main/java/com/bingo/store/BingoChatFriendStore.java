@@ -1,7 +1,6 @@
 package com.bingo.store;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bingo.pojo.po.BingoChatFriend;
 
 import java.util.List;
 

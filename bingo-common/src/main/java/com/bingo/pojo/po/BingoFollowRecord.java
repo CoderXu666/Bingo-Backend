@@ -5,46 +5,47 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
  * <p>
- *
+ * 用户关注关联表
  * </p>
  *
  * @author 徐志斌
- * @since 2023-05-27
+ * @since 2023-07-10
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("bingo_chat_friend")
-public class BingoChatFriend implements Serializable {
+@TableName("bingo_follow_record")
+public class BingoFollowRecord implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键id
+     * 主键ID
      */
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
     /**
-     * 用户id
+     * 用户1（关联用户2主键ID）
      */
     @TableField("user_id1")
     private Long userId1;
 
     /**
-     * 好友id
+     * 用户2（关联用户2主键ID）
      */
     @TableField("user_id2")
     private Long userId2;
 
     /**
-     * 申请状态
+     * 是否关注标识（0已关注、1未关注）
      */
-    @TableField("status")
-    private Integer status;
+    @TableField("follow_mark")
+    private Boolean followMark;
 
     /**
      * 创建时间
@@ -53,10 +54,17 @@ public class BingoChatFriend implements Serializable {
     private Date createTime;
 
     /**
+     * 创建时间
+     */
+    @TableField("update_time")
+    private Date updateTime;
+
+    /**
      * 删除标识
      */
     @TableField("deleted")
     @TableLogic
     private Boolean deleted;
+
 
 }

@@ -4,7 +4,6 @@ package com.bingo.store.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoChatFriendMapper;
-import com.bingo.pojo.po.BingoChatFriend;
 import com.bingo.store.BingoChatFriendStore;
 import org.springframework.stereotype.Service;
 

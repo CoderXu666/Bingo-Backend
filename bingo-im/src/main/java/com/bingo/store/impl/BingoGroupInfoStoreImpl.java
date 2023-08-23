@@ -3,7 +3,6 @@ package com.bingo.store.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoGroupInfoMapper;
-import com.bingo.pojo.po.BingoGroupInfo;
 import com.bingo.store.BingoGroupInfoStore;
 import org.springframework.stereotype.Service;
 

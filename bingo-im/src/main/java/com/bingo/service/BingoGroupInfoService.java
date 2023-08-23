@@ -3,7 +3,6 @@ package com.bingo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bingo.pojo.dto.GroupInfoDTO;
-import com.bingo.pojo.po.BingoGroupInfo;
 
 /**
  * <p>

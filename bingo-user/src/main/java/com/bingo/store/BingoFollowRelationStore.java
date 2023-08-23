@@ -2,7 +2,7 @@ package com.bingo.store;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bingo.pojo.po.BingoFollowRelation;
+import com.bingo.pojo.po.BingoFollowRecord;
 
 import java.util.List;
 
@@ -14,13 +14,13 @@ import java.util.List;
  * @author 徐志斌
  * @since 2023-07-09
  */
-public interface BingoFollowRelationStore extends IService<BingoFollowRelation> {
+public interface BingoFollowRecordStore extends IService<BingoFollowRecord> {
 
-    Boolean saveFollow(BingoFollowRelation bingoFollowRelation);
+    Boolean saveFollow(BingoFollowRecord BingoFollowRecord);
 
-    List<BingoFollowRelation> findFollowList(Long userId);
+    List<BingoFollowRecord> findFollowList(Long userId);
 
-    BingoFollowRelation getOneFollow(Long userId1, Long userId2);
+    BingoFollowRecord getOneFollow(Long userId1, Long userId2);
 
-    Boolean updateFollow(BingoFollowRelation bingoFollowRelation);
+    Boolean updateFollow(BingoFollowRecord BingoFollowRecord);
 }

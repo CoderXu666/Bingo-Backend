@@ -4,7 +4,6 @@ package com.bingo.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoGroupInfoMapper;
 import com.bingo.pojo.dto.GroupInfoDTO;
-import com.bingo.pojo.po.BingoGroupInfo;
 import com.bingo.service.BingoGroupInfoService;
 import com.bingo.store.BingoGroupInfoStore;
 import org.springframework.beans.BeanUtils;

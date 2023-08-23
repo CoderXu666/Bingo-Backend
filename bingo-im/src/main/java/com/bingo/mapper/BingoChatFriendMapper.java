@@ -2,7 +2,6 @@ package com.bingo.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.bingo.pojo.po.BingoChatFriend;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

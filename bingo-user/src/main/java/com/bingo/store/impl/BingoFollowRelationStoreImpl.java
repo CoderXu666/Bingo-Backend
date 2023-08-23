@@ -3,8 +3,8 @@ package com.bingo.store.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bingo.pojo.po.BingoFollowRelation;
-import com.bingo.store.BingoFollowRelationStore;
+import com.bingo.pojo.po.BingoFollowRecord;
+import com.bingo.store.BingoFollowRecordStore;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,22 +18,22 @@ import java.util.List;
  * @since 2023-07-09
  */
 @Service
-public class BingoFollowRelationStoreImpl extends ServiceImpl<BingoFollowRelationMapper, BingoFollowRelation> implements BingoFollowRelationStore {
+public class BingoFollowRecordStoreImpl extends ServiceImpl<BingoFollowRecordMapper, BingoFollowRecord> implements BingoFollowRecordStore {
 
     /**
      * 关注用户
      */
     @Override
-    public Boolean saveFollow(BingoFollowRelation bingoFollowRelation) {
-        return this.save(bingoFollowRelation);
+    public Boolean saveFollow(BingoFollowRecord BingoFollowRecord) {
+        return this.save(BingoFollowRecord);
     }
 
     /**
      * 查询用户的关注列表
      */
     @Override
-    public List<BingoFollowRelation> findFollowList(Long userId) {
-        QueryWrapper<BingoFollowRelation> queryWrapper = new QueryWrapper<>();
+    public List<BingoFollowRecord> findFollowList(Long userId) {
+        QueryWrapper<BingoFollowRecord> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_id1", userId);
         queryWrapper.orderByDesc("create_time");
         return this.list(queryWrapper);
@@ -43,8 +43,8 @@ public class BingoFollowRelationStoreImpl extends ServiceImpl<BingoFollowRelatio
      * 查询是否关注该用户
      */
     @Override
-    public BingoFollowRelation getOneFollow(Long userId1, Long userId2) {
-        QueryWrapper<BingoFollowRelation> queryWrapper = new QueryWrapper();
+    public BingoFollowRecord getOneFollow(Long userId1, Long userId2) {
+        QueryWrapper<BingoFollowRecord> queryWrapper = new QueryWrapper();
         queryWrapper.eq("user_id1", userId1);
         queryWrapper.eq("user_id2", userId2);
         return this.getOne(queryWrapper);
@@ -54,8 +54,8 @@ public class BingoFollowRelationStoreImpl extends ServiceImpl<BingoFollowRelatio
      * 关注、取消关注
      */
     @Override
-    public Boolean updateFollow(BingoFollowRelation bingoFollowRelation) {
-        return this.updateById(bingoFollowRelation);
+    public Boolean updateFollow(BingoFollowRecord BingoFollowRecord) {
+        return this.updateById(BingoFollowRecord);
 
     }
 }

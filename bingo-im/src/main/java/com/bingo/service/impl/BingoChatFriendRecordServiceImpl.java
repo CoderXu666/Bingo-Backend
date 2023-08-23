@@ -3,7 +3,6 @@ package com.bingo.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoChatFriendRecordMapper;
 import com.bingo.pojo.dto.FriendChatDTO;
-import com.bingo.pojo.po.BingoChatFriend;
 import com.bingo.pojo.po.BingoChatFriendRecord;
 import com.bingo.service.BingoChatFriendRecordService;
 import com.bingo.store.BingoChatFriendRecordStore;
