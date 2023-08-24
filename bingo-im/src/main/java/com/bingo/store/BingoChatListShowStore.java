@@ -1,7 +1,7 @@
 package com.bingo.store;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bingo.pojo.po.BingoChatListShow;
+import com.bingo.pojo.po.im.BingoChatListShow;
 
 /**
  * <p>

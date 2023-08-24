@@ -2,8 +2,8 @@ package com.bingo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoEmojiMapper;
-import com.bingo.pojo.dto.EmojiDTO;
-import com.bingo.pojo.po.BingoChatEmoji;
+import com.bingo.pojo.dto.im.EmojiDTO;
+import com.bingo.pojo.po.im.BingoChatEmoji;
 import com.bingo.service.BingoChatEmojiService;
 import com.bingo.store.BingoChatEmojiStore;
 import org.springframework.beans.BeanUtils;

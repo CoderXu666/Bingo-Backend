@@ -1,6 +1,6 @@
-package com.bingo.pojo.vo;
+package com.bingo.pojo.vo.user;
 
-import com.bingo.pojo.BingoChatSendRecord;
+import com.bingo.pojo.po.im.BingoChatSendRecord;
 import lombok.Data;
 
 import java.util.Date;

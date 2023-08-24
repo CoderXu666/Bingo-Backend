@@ -1,6 +1,6 @@
 package com.bingo.store;
 
-import com.bingo.pojo.BingoChatSendRecord;
+import com.bingo.pojo.po.im.BingoChatSendRecord;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

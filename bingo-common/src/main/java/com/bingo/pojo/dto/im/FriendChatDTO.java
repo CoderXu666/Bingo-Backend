@@ -1,4 +1,4 @@
-package com.bingo.pojo.dto;
+package com.bingo.pojo.dto.im;
 
 import lombok.Data;
 

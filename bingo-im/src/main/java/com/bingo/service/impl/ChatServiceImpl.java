@@ -1,7 +1,7 @@
 package com.bingo.service.impl;
 
 import com.bingo.im.netty.NettyChannelRelation;
-import com.bingo.pojo.dto.ChatMsgDTO;
+import com.bingo.pojo.dto.im.ChatMsgDTO;
 import com.bingo.service.ChatService;
 import io.netty.channel.Channel;
 import io.netty.channel.group.ChannelGroup;

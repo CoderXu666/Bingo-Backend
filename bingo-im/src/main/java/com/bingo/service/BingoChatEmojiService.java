@@ -1,8 +1,8 @@
 package com.bingo.service;
 
 
-import com.bingo.pojo.dto.EmojiDTO;
-import com.bingo.pojo.po.BingoChatEmoji;
+import com.bingo.pojo.dto.im.EmojiDTO;
+import com.bingo.pojo.po.im.BingoChatEmoji;
 
 import java.util.List;
 

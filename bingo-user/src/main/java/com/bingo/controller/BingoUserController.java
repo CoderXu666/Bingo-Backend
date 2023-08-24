@@ -2,10 +2,10 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.dto.UserDTO;
-import com.bingo.pojo.po.BingoUser;
+import com.bingo.pojo.dto.user.UserDTO;
+import com.bingo.pojo.po.user.BingoUser;
 import com.bingo.pojo.resp.R;
-import com.bingo.pojo.vo.BingoUserVO;
+import com.bingo.pojo.vo.user.BingoUserVO;
 import com.bingo.service.BingoUserService;
 import com.bingo.utils.MinioUtil;
 import org.springframework.beans.factory.annotation.Autowired;

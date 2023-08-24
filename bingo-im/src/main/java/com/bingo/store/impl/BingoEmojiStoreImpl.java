@@ -3,7 +3,7 @@ package com.bingo.store.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoEmojiMapper;
-import com.bingo.pojo.po.BingoChatEmoji;
+import com.bingo.pojo.po.im.BingoChatEmoji;
 import com.bingo.store.BingoChatEmojiStore;
 import org.springframework.stereotype.Service;
 

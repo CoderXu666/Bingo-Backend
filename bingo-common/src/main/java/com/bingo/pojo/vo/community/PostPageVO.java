@@ -1,10 +1,11 @@
-package com.bingo.pojo.vo;
+package com.bingo.pojo.vo.community;
 
 import lombok.Data;
 import java.util.Date;
 
 @Data
-public class BingoTopicVO {
+public class PostPageVO {
+
     /**
      * 用户id
      */
@@ -21,34 +22,34 @@ public class BingoTopicVO {
     private String userName;
 
     /**
-     * 话题内容
+     * 帖子文案
      */
-    private String topicContent;
+    private String postFont;
 
     /**
-     * 话题图片
+     * 帖子图片/视频链接
      */
-    private String topicPicture;
+    private String postUrl;
 
     /**
-     * 话题标签
+     * 关联话题（#坤坤）
      */
-    private String topicTag;
+    private String postTopic;
 
     /**
-     * 话题点赞数
+     * 点赞数
      */
-    private Integer likeCount;
+    private Long likeCount;
 
     /**
-     * 话题转发数
+     * 评论数
      */
-    private Integer forwardCount;
+    private Long commentCount;
 
     /**
-     * 话题评论数
+     * 转发数
      */
-    private Integer commentCount;
+    private Long forwardCount;
 
     /**
      * 创建时间

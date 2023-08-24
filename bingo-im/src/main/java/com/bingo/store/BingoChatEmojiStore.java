@@ -2,7 +2,7 @@ package com.bingo.store;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bingo.pojo.po.BingoChatEmoji;
+import com.bingo.pojo.po.im.BingoChatEmoji;
 
 import java.util.List;
 

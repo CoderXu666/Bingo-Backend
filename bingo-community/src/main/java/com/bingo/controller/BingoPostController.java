@@ -2,11 +2,11 @@ package com.bingo.controller;
 
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.common.PageParam;
-import com.bingo.pojo.dto.LikeDTO;
-import com.bingo.pojo.dto.PostDTO;
+import com.bingo.pojo.dto.community.LikeDTO;
+import com.bingo.pojo.dto.community.PostDTO;
 import com.bingo.pojo.dto.SearchDTO;
-import com.bingo.pojo.vo.PostPageVO;
-import com.bingo.pojo.vo.PostVO;
+import com.bingo.pojo.vo.community.PostPageVO;
+import com.bingo.pojo.vo.community.PostVO;
 import com.bingo.pojo.resp.R;
 import com.bingo.service.BingoPostService;
 import lombok.extern.slf4j.Slf4j;

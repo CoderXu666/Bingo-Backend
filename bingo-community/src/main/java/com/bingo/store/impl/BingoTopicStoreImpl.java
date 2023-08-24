@@ -3,7 +3,7 @@ package com.bingo.store.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoTopicMapper;
-import com.bingo.pojo.po.BingoTopic;
+import com.bingo.pojo.po.community.BingoTopic;
 import com.bingo.store.BingoTopicStore;
 import org.springframework.stereotype.Service;
 

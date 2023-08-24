@@ -2,9 +2,12 @@ package com.bingo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoChatListShowMapper;
-import com.bingo.pojo.po.BingoChatListShow;
+import com.bingo.pojo.po.im.BingoChatListShow;
+import com.bingo.pojo.vo.user.BingoUserVO;
 import com.bingo.service.BingoChatListShowService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +19,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class BingoChatListShowServiceImpl extends ServiceImpl<BingoChatListShowMapper, BingoChatListShow> implements BingoChatListShowService {
-
+    /**
+     * 查询聊天列表
+     */
+    @Override
+    public List<BingoUserVO> getChatList(String userId) {
+        return null;
+    }
 }

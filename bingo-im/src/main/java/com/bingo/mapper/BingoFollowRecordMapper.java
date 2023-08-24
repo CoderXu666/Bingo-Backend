@@ -1,7 +1,7 @@
 package com.bingo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.bingo.pojo.po.BingoFollowRecord;
+import com.bingo.pojo.po.community.BingoFollowRecord;
 
 /**
  * <p>

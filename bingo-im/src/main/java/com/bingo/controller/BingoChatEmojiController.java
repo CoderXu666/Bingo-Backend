@@ -2,8 +2,8 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.dto.EmojiDTO;
-import com.bingo.pojo.po.BingoChatEmoji;
+import com.bingo.pojo.dto.im.EmojiDTO;
+import com.bingo.pojo.po.im.BingoChatEmoji;
 import com.bingo.pojo.resp.R;
 import com.bingo.service.BingoChatEmojiService;
 import org.springframework.beans.factory.annotation.Autowired;

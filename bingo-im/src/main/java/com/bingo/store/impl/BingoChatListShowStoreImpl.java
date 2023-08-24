@@ -2,7 +2,7 @@ package com.bingo.store.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoChatListShowMapper;
-import com.bingo.pojo.po.BingoChatListShow;
+import com.bingo.pojo.po.im.BingoChatListShow;
 import com.bingo.store.BingoChatListShowStore;
 import org.springframework.stereotype.Service;
 

@@ -3,7 +3,7 @@ package com.bingo.kafka;
 import com.alibaba.fastjson.JSON;
 import com.bingo.pojo.constant.ESConstant;
 import com.bingo.pojo.constant.MQConstant;
-import com.bingo.pojo.po.BingoPost;
+import com.bingo.pojo.po.community.BingoPost;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;

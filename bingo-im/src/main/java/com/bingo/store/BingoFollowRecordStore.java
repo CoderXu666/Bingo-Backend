@@ -1,7 +1,7 @@
 package com.bingo.store;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bingo.pojo.po.BingoFollowRecord;
+import com.bingo.pojo.po.community.BingoFollowRecord;
 
 import java.util.List;
 

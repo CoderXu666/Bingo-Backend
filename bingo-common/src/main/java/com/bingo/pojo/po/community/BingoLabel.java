@@ -1,4 +1,4 @@
-package com.bingo.pojo.po;
+package com.bingo.pojo.po.community;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -13,44 +13,26 @@ import java.util.Date;
  * </p>
  *
  * @author 徐志斌
- * @since 2023-05-13
+ * @since 2023-07-01
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("bingo_post")
-public class BingoPost implements Serializable {
+@TableName("bingo_label")
+public class BingoLabel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键id
+     * 主键ID
      */
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
     /**
-     * 账号
+     * 标签内容
      */
-    @TableField("user_id")
-    private String userId;
-
-    /**
-     * 帖子文案
-     */
-    @TableField("post_font")
-    private String postFont;
-
-    /**
-     * 帖子图片/视频链接
-     */
-    @TableField("post_url")
-    private String postUrl;
-
-    /**
-     * 关联话题（#坤坤）
-     */
-    @TableField("post_topic")
-    private String postTopic;
+    @TableField("label_content")
+    private String labelContent;
 
     /**
      * 创建时间
@@ -59,16 +41,17 @@ public class BingoPost implements Serializable {
     private Date createTime;
 
     /**
-     * 修改时间
+     * 更新时间
      */
     @TableField("update_time")
     private Date updateTime;
 
     /**
-     * 删除标识（0未删除、1已删除）
+     * 删除标识
      */
     @TableField("deleted")
     @TableLogic
     private Boolean deleted;
+
 
 }

@@ -1,4 +1,4 @@
-package com.bingo.pojo.po;
+package com.bingo.pojo.po.community;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -13,32 +13,44 @@ import java.util.Date;
  * </p>
  *
  * @author 徐志斌
- * @since 2023-07-18
+ * @since 2023-05-13
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("bingo_chat_emoji")
-public class BingoChatEmoji implements Serializable {
+@TableName("bingo_post")
+public class BingoPost implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键ID
+     * 主键id
      */
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
     /**
-     * 用户ID（关联用户ID）
+     * 账号
      */
     @TableField("user_id")
-    private Long userId;
+    private String userId;
 
     /**
-     * 表情包
+     * 帖子文案
      */
-    @TableField("emoji_url")
-    private String emojiUrl;
+    @TableField("post_font")
+    private String postFont;
+
+    /**
+     * 帖子图片/视频链接
+     */
+    @TableField("post_url")
+    private String postUrl;
+
+    /**
+     * 关联话题（#坤坤）
+     */
+    @TableField("post_topic")
+    private String postTopic;
 
     /**
      * 创建时间
@@ -47,9 +59,16 @@ public class BingoChatEmoji implements Serializable {
     private Date createTime;
 
     /**
-     * 删除标识
+     * 修改时间
+     */
+    @TableField("update_time")
+    private Date updateTime;
+
+    /**
+     * 删除标识（0未删除、1已删除）
      */
     @TableField("deleted")
     @TableLogic
     private Boolean deleted;
+
 }

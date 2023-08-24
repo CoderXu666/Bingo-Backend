@@ -1,7 +1,10 @@
 package com.bingo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bingo.pojo.po.BingoChatListShow;
+import com.bingo.pojo.po.im.BingoChatListShow;
+import com.bingo.pojo.vo.user.BingoUserVO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.bingo.pojo.po.BingoChatListShow;
  */
 public interface BingoChatListShowService extends IService<BingoChatListShow> {
 
+    List<BingoUserVO> getChatList(String userId);
 }

@@ -2,8 +2,7 @@ package com.bingo.store;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bingo.pojo.dto.TopicDTO;
-import com.bingo.pojo.po.BingoTopic;
+import com.bingo.pojo.po.community.BingoTopic;
 
 /**
  * <p>

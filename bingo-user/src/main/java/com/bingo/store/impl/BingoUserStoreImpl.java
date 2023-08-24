@@ -4,7 +4,7 @@ package com.bingo.store.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoUserMapper;
-import com.bingo.pojo.po.BingoUser;
+import com.bingo.pojo.po.user.BingoUser;
 import com.bingo.store.BingoUserStore;
 import org.springframework.stereotype.Service;
 

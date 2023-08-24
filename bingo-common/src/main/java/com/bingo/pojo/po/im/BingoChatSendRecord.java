@@ -1,4 +1,4 @@
-package com.bingo.pojo;
+package com.bingo.pojo.po.im;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;

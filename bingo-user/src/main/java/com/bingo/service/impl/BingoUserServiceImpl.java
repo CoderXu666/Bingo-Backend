@@ -3,9 +3,9 @@ package com.bingo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoUserMapper;
-import com.bingo.pojo.dto.UserDTO;
-import com.bingo.pojo.po.BingoUser;
-import com.bingo.pojo.vo.BingoUserVO;
+import com.bingo.pojo.dto.user.UserDTO;
+import com.bingo.pojo.po.user.BingoUser;
+import com.bingo.pojo.vo.user.BingoUserVO;
 import com.bingo.service.BingoUserService;
 import com.bingo.store.BingoUserStore;
 import com.bingo.utils.AESUtil;

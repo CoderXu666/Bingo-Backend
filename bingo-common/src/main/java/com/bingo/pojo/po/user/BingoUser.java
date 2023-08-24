@@ -1,4 +1,4 @@
-package com.bingo.pojo.po;
+package com.bingo.pojo.po.user;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -13,62 +13,62 @@ import java.util.Date;
  * </p>
  *
  * @author 徐志斌
- * @since 2023-07-01
+ * @since 2023-03-01
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("bingo_topic")
-public class BingoTopic implements Serializable {
+@TableName("bingo_user")
+public class BingoUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键ID
+     * 主键Id
      */
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
     /**
-     * 关联用户ID
+     * 账号id
      */
-    @TableField("user_id")
-    private Long userId;
+    @TableField("account_id")
+    private String accountId;
 
     /**
-     * 话题内容
+     * 密码
      */
-    @TableField("topic_content")
-    private String topicContent;
+    @TableField("pass_word")
+    private String passWord;
 
     /**
-     * 话题图片
+     * 用户名
      */
-    @TableField("topic_picture")
-    private String topicPicture;
+    @TableField("nick_name")
+    private String nickName;
 
     /**
-     * 话题标签
+     * 性别
      */
-    @TableField("topic_tag")
-    private String topicTag;
+    @TableField("gender")
+    private Integer gender;
 
     /**
-     * 话题点赞数
+     * 头像
      */
-    @TableField("like_count")
-    private Integer likeCount;
+    @TableField("avatar_url")
+    private String avatarUrl;
 
     /**
-     * 话题转发数
+     * 邮箱
      */
-    @TableField("forward_count")
-    private Integer forwardCount;
+    @TableField("email")
+    private String email;
 
     /**
-     * 话题评论数
+     * 地区
      */
-    @TableField("comment_count")
-    private Integer commentCount;
+    @TableField("location")
+    private String location;
 
     /**
      * 创建时间
@@ -83,11 +83,10 @@ public class BingoTopic implements Serializable {
     private Date updateTime;
 
     /**
-     * 删除标识
+     * 删除标识(未删除:0 已删除:1)
      */
     @TableField("deleted")
     @TableLogic
     private Boolean deleted;
-
 
 }

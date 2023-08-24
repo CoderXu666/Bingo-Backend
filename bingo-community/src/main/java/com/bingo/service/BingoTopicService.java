@@ -2,9 +2,9 @@ package com.bingo.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bingo.pojo.dto.TopicDTO;
-import com.bingo.pojo.po.BingoTopic;
-import com.bingo.pojo.vo.BingoTopicVO;
+import com.bingo.pojo.dto.community.TopicDTO;
+import com.bingo.pojo.po.community.BingoTopic;
+import com.bingo.pojo.vo.community.BingoTopicVO;
 
 /**
  * <p>

@@ -2,7 +2,7 @@ package com.bingo.store.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoFollowRecordMapper;
-import com.bingo.pojo.po.BingoFollowRecord;
+import com.bingo.pojo.po.community.BingoFollowRecord;
 import com.bingo.store.BingoFollowRecordStore;
 import org.springframework.stereotype.Service;
 

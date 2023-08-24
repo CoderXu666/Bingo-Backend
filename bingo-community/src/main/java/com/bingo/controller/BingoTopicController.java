@@ -2,9 +2,9 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.dto.TopicDTO;
+import com.bingo.pojo.dto.community.TopicDTO;
 import com.bingo.pojo.resp.R;
-import com.bingo.pojo.vo.BingoTopicVO;
+import com.bingo.pojo.vo.community.BingoTopicVO;
 import com.bingo.service.BingoTopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

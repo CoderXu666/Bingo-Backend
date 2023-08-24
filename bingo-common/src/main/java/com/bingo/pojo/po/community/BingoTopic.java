@@ -1,4 +1,4 @@
-package com.bingo.pojo.po;
+package com.bingo.pojo.po.community;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -13,62 +13,62 @@ import java.util.Date;
  * </p>
  *
  * @author 徐志斌
- * @since 2023-03-01
+ * @since 2023-07-01
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("bingo_user")
-public class BingoUser implements Serializable {
+@TableName("bingo_topic")
+public class BingoTopic implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键Id
+     * 主键ID
      */
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
     /**
-     * 账号id
+     * 关联用户ID
      */
-    @TableField("account_id")
-    private String accountId;
+    @TableField("user_id")
+    private Long userId;
 
     /**
-     * 密码
+     * 话题内容
      */
-    @TableField("pass_word")
-    private String passWord;
+    @TableField("topic_content")
+    private String topicContent;
 
     /**
-     * 用户名
+     * 话题图片
      */
-    @TableField("nick_name")
-    private String nickName;
+    @TableField("topic_picture")
+    private String topicPicture;
 
     /**
-     * 性别
+     * 话题标签
      */
-    @TableField("gender")
-    private Integer gender;
+    @TableField("topic_tag")
+    private String topicTag;
 
     /**
-     * 头像
+     * 话题点赞数
      */
-    @TableField("avatar_url")
-    private String avatarUrl;
+    @TableField("like_count")
+    private Integer likeCount;
 
     /**
-     * 邮箱
+     * 话题转发数
      */
-    @TableField("email")
-    private String email;
+    @TableField("forward_count")
+    private Integer forwardCount;
 
     /**
-     * 地区
+     * 话题评论数
      */
-    @TableField("location")
-    private String location;
+    @TableField("comment_count")
+    private Integer commentCount;
 
     /**
      * 创建时间
@@ -83,10 +83,11 @@ public class BingoUser implements Serializable {
     private Date updateTime;
 
     /**
-     * 删除标识(未删除:0 已删除:1)
+     * 删除标识
      */
     @TableField("deleted")
     @TableLogic
     private Boolean deleted;
+
 
 }
