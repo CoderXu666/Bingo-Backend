@@ -9,42 +9,42 @@ import java.util.Date;
 
 /**
  * <p>
- *
+ * 聊天窗口列表（展示）
  * </p>
  *
  * @author 徐志斌
- * @since 2023-07-01
+ * @since 2023-08-24
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("bingo_label")
-public class BingoLabel implements Serializable {
+@TableName("bingo_chat_list_show")
+public class BingoChatListShow implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键ID
+     * 主键id
      */
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
     /**
-     * 标签内容
+     * 发送方id
      */
-    @TableField("label_content")
-    private String labelContent;
+    @TableField("user_id1")
+    private Long userId1;
 
     /**
-     * 创建时间
+     * 接收方id
      */
-    @TableField("create_time")
-    private Date createTime;
+    @TableField("user_id2")
+    private Long userId2;
 
     /**
-     * 更新时间
+     * 最新接收消息时间（显示排序）
      */
-    @TableField("update_time")
-    private Date updateTime;
+    @TableField("receive_time")
+    private Date receiveTime;
 
     /**
      * 删除标识

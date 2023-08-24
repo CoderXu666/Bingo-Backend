@@ -5,12 +5,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author 徐志斌
