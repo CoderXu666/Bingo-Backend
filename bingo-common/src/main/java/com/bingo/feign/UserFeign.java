@@ -1,6 +1,6 @@
 package com.bingo.feign;
 
-import com.bingo.pojo.vo.user.BingoUserVO;
+import com.bingo.pojo.vo.user.UserVO;
 import com.bingo.pojo.resp.FeignResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
@@ -23,11 +23,11 @@ public interface UserFeign {
      * 根据id查询用户信息
      */
     @GetMapping("/find_by_id")
-    FeignResponse<BingoUserVO> findByUserId(@RequestParam("id") Long id);
+    FeignResponse<UserVO> findByUserId(@RequestParam("id") Long id);
 
     /**
      * 根据ids批量查询用户信息
      */
     @PostMapping("/get_list")
-    FeignResponse<List<BingoUserVO>> getUserInfoByIds(@RequestParam("ids") List<Long> ids);
+    FeignResponse<List<UserVO>> getUserInfoByIds(@RequestParam("ids") List<Long> ids);
 }

@@ -5,7 +5,7 @@ import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.dto.user.UserDTO;
 import com.bingo.pojo.po.user.BingoUser;
 import com.bingo.pojo.resp.R;
-import com.bingo.pojo.vo.user.BingoUserVO;
+import com.bingo.pojo.vo.user.UserVO;
 import com.bingo.service.BingoUserService;
 import com.bingo.utils.MinioUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class BingoUserController {
      */
     @GetMapping("/find_by_id")
     public R findByUserId(Long id) {
-        BingoUserVO userVO = userService.findById(id);
+        UserVO userVO = userService.findById(id);
         return R.out(RespCodeEnum.SUCCESS, userVO);
     }
 
@@ -101,7 +101,7 @@ public class BingoUserController {
      */
     @PostMapping("/list_by_ids")
     public R getUserInfoByIds(List<Long> ids) {
-        List<BingoUserVO> userList = userService.getUserByIds(ids);
+        List<UserVO> userList = userService.getUserByIds(ids);
         return R.out(RespCodeEnum.SUCCESS, userList);
     }
 

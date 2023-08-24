@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoUserMapper;
 import com.bingo.pojo.dto.user.UserDTO;
 import com.bingo.pojo.po.user.BingoUser;
-import com.bingo.pojo.vo.user.BingoUserVO;
+import com.bingo.pojo.vo.user.UserVO;
 import com.bingo.service.BingoUserService;
 import com.bingo.store.BingoUserStore;
 import com.bingo.utils.AESUtil;
@@ -56,8 +56,8 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 根据Id查询用户信息
      */
     @Override
-    public BingoUserVO findById(Long id) {
-        BingoUserVO userVO = new BingoUserVO();
+    public UserVO findById(Long id) {
+        UserVO userVO = new UserVO();
         BingoUser userInfo = userStore.findById(id);
         if (ObjectUtils.isNotEmpty(userInfo)) {
             BeanUtils.copyProperties(userInfo, userVO);
@@ -131,11 +131,11 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 根据ids批量查询用户信息
      */
     @Override
-    public List<BingoUserVO> getUserByIds(List<Long> ids) {
+    public List<UserVO> getUserByIds(List<Long> ids) {
         List<BingoUser> userInfoList = userStore.getUserListByIds(ids);
-        List<BingoUserVO> userVOList = new ArrayList<>();
+        List<UserVO> userVOList = new ArrayList<>();
         for (BingoUser bingoUser : userInfoList) {
-            BingoUserVO userVO = new BingoUserVO();
+            UserVO userVO = new UserVO();
             BeanUtils.copyProperties(bingoUser, userVO);
             userVOList.add(userVO);
         }

@@ -3,8 +3,8 @@ package com.bingo.controller;
 
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.resp.R;
-import com.bingo.pojo.vo.user.BingoUserVO;
-import com.bingo.service.BingoChatListShowService;
+import com.bingo.pojo.vo.im.ChatShowVO;
+import com.bingo.service.BingoChatShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,16 +23,16 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/show")
-public class BingoChatListShowController {
+public class BingoChatShowController {
     @Autowired
-    private BingoChatListShowService showService;
+    private BingoChatShowService showService;
 
     /**
      * 查询聊天列表
      */
     @GetMapping("/list/{userId}")
-    public R getChatList(@PathVariable("userId") String userId) {
-        List<BingoUserVO> list = showService.getChatList(userId);
+    public R getChatList(@PathVariable("userId") Long userId) {
+        List<ChatShowVO> list = showService.getChatList(userId);
         return R.out(RespCodeEnum.SUCCESS, list);
     }
 }

@@ -8,7 +8,7 @@ import com.bingo.pojo.dto.community.TopicDTO;
 import com.bingo.pojo.po.community.BingoTopic;
 import com.bingo.pojo.resp.FeignResponse;
 import com.bingo.pojo.vo.community.BingoTopicVO;
-import com.bingo.pojo.vo.user.BingoUserVO;
+import com.bingo.pojo.vo.user.UserVO;
 import com.bingo.service.BingoTopicService;
 import com.bingo.store.BingoTopicStore;
 import lombok.SneakyThrows;
@@ -70,8 +70,8 @@ public class BingoTopicServiceImpl extends ServiceImpl<BingoTopicMapper, BingoTo
         BingoTopic topic = topicStore.findTopicById(topicId);
 
         //远程调用查询用户相关信息
-        FeignResponse<BingoUserVO> feignResponse = userFeign.findByUserId(topic.getUserId());
-        BingoUserVO userVO = feignResponse.getData();
+        FeignResponse<UserVO> feignResponse = userFeign.findByUserId(topic.getUserId());
+        UserVO userVO = feignResponse.getData();
 
         BingoTopicVO topicVO = new BingoTopicVO();
         BeanUtils.copyProperties(userVO, topicVO);

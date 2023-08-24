@@ -1,4 +1,4 @@
-package com.bingo.pojo.vo.user;
+package com.bingo.pojo.vo.im;
 
 import com.bingo.pojo.po.im.BingoChatSendRecord;
 import lombok.Data;
@@ -6,13 +6,14 @@ import lombok.Data;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @Author 徐志斌
+ * @Date: 2023/8/24 22:31
+ * @Version 1.0
+ * @Description: 聊天列表显示
+ */
 @Data
-public class BingoUserVO {
-    /**
-     * 主键Id
-     */
-    private Long id;
-
+public class ChatShowVO {
     /**
      * 账号
      */
@@ -29,19 +30,9 @@ public class BingoUserVO {
     private String avatarUrl;
 
     /**
-     * 个性签名
-     */
-    private String signature;
-
-    /**
      * 生日
      */
     private Date birthDay;
-
-    /**
-     * 电话
-     */
-    private String phone;
 
     /**
      * 性别(男:1 女:0)
@@ -54,17 +45,7 @@ public class BingoUserVO {
     private String address;
 
     /**
-     * 邮箱
-     */
-    private String email;
-
-    /**
      * 聊天记录
      */
     private List<BingoChatSendRecord> chatContentList;
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
 }

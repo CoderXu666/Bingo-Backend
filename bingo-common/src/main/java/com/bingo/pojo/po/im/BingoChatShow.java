@@ -17,8 +17,8 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("bingo_chat_list_show")
-public class BingoChatListShow implements Serializable {
+@TableName("bingo_chat_show")
+public class BingoChatShow implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
