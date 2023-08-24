@@ -21,18 +21,5 @@ import java.util.Map;
  */
 @Service
 public class BingoChatSendRecordServiceImpl extends ServiceImpl<BingoChatSendRecordMapper, BingoChatSendRecord> implements BingoChatSendRecordService {
-    @Autowired
-    private BingoChatSendRecordStore sendRecordStore;
 
-    /**
-     * 查询好友聊天记录
-     *
-     * @param userId 用户id
-     * @param ids    好友列表id
-     */
-    @Override
-    public Map<Long, List<BingoChatSendRecord>> getChatRecordByUserId(Long userId, List<Long> ids) {
-//        Map<Long, List<BingoChatSendRecord>> resultMap = new HashMap<>();
-        return null;
-    }
 }
