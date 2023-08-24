@@ -3,6 +3,8 @@ package com.bingo.store;
 import com.bingo.pojo.BingoChatSendRecord;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 好友聊天记录表 服务类
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface BingoChatSendRecordStore extends IService<BingoChatSendRecord> {
 
+    List<BingoChatSendRecord> getSendRecordList(Long userId);
 }

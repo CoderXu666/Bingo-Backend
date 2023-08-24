@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -31,17 +31,11 @@ public class BingoChatSendRecord implements Serializable {
     /**
      * 发送者id
      */
-    @TableField("user_id1")
-    private Long userId1;
+    @TableField("user_id")
+    private Long userId;
 
     /**
-     * 接收者id/群聊id
-     */
-    @TableField("user_id2")
-    private Long userId2;
-
-    /**
-     * 关联标识（user_id1:user_id2）
+     * 关联标识（user_id1:user_id2 | group_id）
      */
     @TableField("relation")
     private String relation;
@@ -53,10 +47,16 @@ public class BingoChatSendRecord implements Serializable {
     private String chatContent;
 
     /**
-     * 消息类型（0：文字、1：表情包、2：文件（图片等）4：语音/视频）、5：内容分享
+     * 目标类型（0：用户，1：群组）
      */
     @TableField("chat_type")
     private Boolean chatType;
+
+    /**
+     * 消息类型（0：文字、1：表情包、2：文件（图片等）4：语音/视频）、5：内容分享
+     */
+    @TableField("message_type")
+    private Integer messageType;
 
     /**
      * 发送状态（0：成功，1：失败）
@@ -68,7 +68,7 @@ public class BingoChatSendRecord implements Serializable {
      * 创建时间
      */
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 删除标识
@@ -76,6 +76,5 @@ public class BingoChatSendRecord implements Serializable {
     @TableField("deleted")
     @TableLogic
     private Boolean deleted;
-
 
 }
