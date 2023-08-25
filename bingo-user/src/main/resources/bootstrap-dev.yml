@@ -25,7 +25,6 @@ spring:
           - data-id: bingo_minio.yml
           - data-id: bingo_email.yml
           - data-id: bingo_sharding_jdbc.yml
-  #          - data-id: bingo_elasticsearch.yml
 
 mybatis-plus:
   configuration:
