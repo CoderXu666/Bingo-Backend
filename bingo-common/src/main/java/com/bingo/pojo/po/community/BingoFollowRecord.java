@@ -31,20 +31,14 @@ public class BingoFollowRecord implements Serializable {
     /**
      * 关注者
      */
-    @TableField("user_id1")
-    private Long userId1;
+    @TableField("user_id")
+    private Long userId;
 
     /**
      * 被关注者
      */
-    @TableField("user_id2")
-    private Long userId2;
-
-    /**
-     * 最新消息时间（排序）
-     */
-    @TableField("receive_time")
-    private Date receiveTime;
+    @TableField("goal_id")
+    private Long goalId;
 
     /**
      * 创建时间
@@ -58,6 +52,5 @@ public class BingoFollowRecord implements Serializable {
     @TableField("deleted")
     @TableLogic
     private Boolean deleted;
-
 
 }

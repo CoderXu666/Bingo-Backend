@@ -29,19 +29,25 @@ public class BingoChatShow implements Serializable {
     private Long id;
 
     /**
-     * 发送方id
+     * 用户id
      */
-    @TableField("user_id1")
-    private Long userId1;
+    @TableField("user_id")
+    private Long userId;
 
     /**
-     * 接收方id
+     * 目标id（用户/群组）
      */
-    @TableField("user_id2")
-    private Long userId2;
+    @TableField("goal_id")
+    private Long goalId;
 
     /**
-     * 最新接收消息时间（显示排序）
+     * 未读消息数量
+     */
+    @TableField("unread_count")
+    private Long unreadCount;
+
+    /**
+     * 最新接收时间（显示排序）
      */
     @TableField("receive_time")
     private Date receiveTime;
