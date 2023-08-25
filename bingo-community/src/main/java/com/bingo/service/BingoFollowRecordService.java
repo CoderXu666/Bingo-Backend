@@ -12,4 +12,5 @@ import com.bingo.pojo.po.community.BingoFollowRecord;
  * @since 2023-08-23
  */
 public interface BingoFollowRecordService extends IService<BingoFollowRecord> {
+    Boolean followUser(Long userId, Long goalId);
 }

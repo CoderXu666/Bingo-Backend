@@ -19,4 +19,6 @@ public interface BingoFollowRecordStore extends IService<BingoFollowRecord> {
     List<BingoFollowRecord> getFollowList(Long userId);
 
     List<BingoFollowRecord> getFanList(Long userId);
+
+    Boolean followUser(BingoFollowRecord followRecord);
 }

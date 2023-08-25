@@ -19,6 +19,14 @@ import java.util.List;
 @Service
 public class BingoFollowRecordStoreImpl extends ServiceImpl<BingoFollowRecordMapper, BingoFollowRecord> implements BingoFollowRecordStore {
     /**
+     * 关注用户
+     */
+    @Override
+    public Boolean followUser(BingoFollowRecord followRecord) {
+        return this.save(followRecord);
+    }
+
+    /**
      * 查询互关好友id
      */
     @Override
