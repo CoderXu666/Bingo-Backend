@@ -2,6 +2,10 @@ package com.bingo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bingo.pojo.po.community.BingoFollowRecord;
+import com.bingo.pojo.vo.user.UserVO;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -13,4 +17,10 @@ import com.bingo.pojo.po.community.BingoFollowRecord;
  */
 public interface BingoFollowRecordService extends IService<BingoFollowRecord> {
     Boolean followUser(Long userId, Long goalId);
+
+    Map<String, Object> followList(Long userId, Integer current, Integer limit);
+
+    Map<String, Object> fanList(Long goalId, Integer current, Integer limit);
+
+    Map<String, Object> friendList(Long userId, Long goalId, Integer current, Integer limit);
 }

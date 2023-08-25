@@ -1,5 +1,6 @@
 package com.bingo.store;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bingo.pojo.po.community.BingoFollowRecord;
 
@@ -19,4 +20,10 @@ public interface BingoFollowRecordStore extends IService<BingoFollowRecord> {
     BingoFollowRecord findRecordByUserIdAndGoalId(Long userId, Long goalId);
 
     Boolean removeFollowRecord(Long recordId);
+
+    Page<BingoFollowRecord> followList(Long userId, Integer current, Integer limit);
+
+    Page<BingoFollowRecord> fanList(Long goalId, Integer current, Integer limit);
+
+    Page<BingoFollowRecord> friendList(Long userId, Long goalId, Integer current, Integer limit);
 }

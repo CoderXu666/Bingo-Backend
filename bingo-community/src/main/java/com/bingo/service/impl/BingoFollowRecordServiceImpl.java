@@ -1,9 +1,12 @@
 package com.bingo.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoFollowRecordMapper;
 import com.bingo.pojo.po.community.BingoFollowLog;
 import com.bingo.pojo.po.community.BingoFollowRecord;
+import com.bingo.pojo.vo.user.UserVO;
 import com.bingo.service.BingoFollowRecordService;
 import com.bingo.store.BingoFollowLogStore;
 import com.bingo.store.BingoFollowRecordStore;
@@ -12,6 +15,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -27,6 +34,8 @@ public class BingoFollowRecordServiceImpl extends ServiceImpl<BingoFollowRecordM
     private BingoFollowRecordStore followRecordStore;
     @Autowired
     private BingoFollowLogStore followLogStore;
+    @Autowired
+    private UserFeign userFeign;
 
     /**
      * 关注用户
@@ -48,5 +57,42 @@ public class BingoFollowRecordServiceImpl extends ServiceImpl<BingoFollowRecordM
         // 存在：关注过
         followRecordStore.removeFollowRecord(record.getId());
         return followLogStore.save(new BingoFollowLog(null, userId, goalId, "DELETE", new Date()));
+    }
+
+    /**
+     * 关注列表
+     */
+    @Override
+    public Map<String, Object> followList(Long userId, Integer current, Integer limit) {
+        Page<BingoFollowRecord> recordPage = followRecordStore.followList(userId, current, limit);
+        List<Long> followIds = recordPage.getRecords().stream().map(item -> item.getUserId()).collect(Collectors.toList());
+        List<UserVO> userInfoList = userFeign.getUserInfoByIds(followIds).getData();
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("list", userInfoList);
+        resultMap.put("count", recordPage.getTotal());
+        return resultMap;
+    }
+
+    /**
+     * 粉丝列表
+     */
+    @Override
+    public Map<String, Object> fanList(Long goalId, Integer current, Integer limit) {
+        Page<BingoFollowRecord> recordPage = followRecordStore.fanList(goalId, current, limit);
+        List<Long> fanIds = recordPage.getRecords().stream().map(item -> item.getUserId()).collect(Collectors.toList());
+        List<UserVO> userInfoList = userFeign.getUserInfoByIds(fanIds).getData();
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("list", userInfoList);
+        resultMap.put("count", recordPage.getTotal());
+        return resultMap;
+    }
+
+    /**
+     * 互关列表（好友）
+     */
+    @Override
+    public Map<String, Object> friendList(Long userId, Long goalId, Integer current, Integer limit) {
+        Page<BingoFollowRecord> recordPage = followRecordStore.friendList(userId, goalId, current, limit);
+        return null;
     }
 }
