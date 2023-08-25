@@ -14,9 +14,9 @@ import java.util.List;
  * @since 2023-08-23
  */
 public interface BingoFollowRecordStore extends IService<BingoFollowRecord> {
-    Boolean followUser(BingoFollowRecord followRecord);
+    Boolean saveFollowRecord(BingoFollowRecord followRecord);
 
     BingoFollowRecord findRecordByUserIdAndGoalId(Long userId, Long goalId);
 
-    Boolean removeFollowRecordById(Long recordId);
+    Boolean removeFollowRecord(Long recordId);
 }

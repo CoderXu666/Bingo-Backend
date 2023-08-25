@@ -21,7 +21,7 @@ public class BingoFollowRecordStoreImpl extends ServiceImpl<BingoFollowRecordMap
      * 关注用户
      */
     @Override
-    public Boolean followUser(BingoFollowRecord followRecord) {
+    public Boolean saveFollowRecord(BingoFollowRecord followRecord) {
         return this.save(followRecord);
     }
 
@@ -40,7 +40,7 @@ public class BingoFollowRecordStoreImpl extends ServiceImpl<BingoFollowRecordMap
      * 取消关注（根据id）
      */
     @Override
-    public Boolean removeFollowRecordById(Long recordId) {
+    public Boolean removeFollowRecord(Long recordId) {
         return this.removeById(recordId);
     }
 }

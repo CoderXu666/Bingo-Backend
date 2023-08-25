@@ -1,13 +1,16 @@
 package com.bingo.pojo.po.community;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -18,6 +21,8 @@ import lombok.EqualsAndHashCode;
  * @since 2023-08-25
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @TableName("bingo_follow_log")
 public class BingoFollowLog implements Serializable {
@@ -46,13 +51,13 @@ public class BingoFollowLog implements Serializable {
      * 操作（ADD，DELETE）
      */
     @TableField("operation")
-    private Boolean operation;
+    private String operation;
 
     /**
      * 创建时间
      */
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
 
 }

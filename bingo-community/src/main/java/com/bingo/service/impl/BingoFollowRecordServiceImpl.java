@@ -2,12 +2,16 @@ package com.bingo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoFollowRecordMapper;
+import com.bingo.pojo.po.community.BingoFollowLog;
 import com.bingo.pojo.po.community.BingoFollowRecord;
 import com.bingo.service.BingoFollowRecordService;
+import com.bingo.store.BingoFollowLogStore;
 import com.bingo.store.BingoFollowRecordStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+
+import java.util.Date;
 
 /**
  * <p>
@@ -21,6 +25,8 @@ import org.springframework.util.ObjectUtils;
 public class BingoFollowRecordServiceImpl extends ServiceImpl<BingoFollowRecordMapper, BingoFollowRecord> implements BingoFollowRecordService {
     @Autowired
     private BingoFollowRecordStore followRecordStore;
+    @Autowired
+    private BingoFollowLogStore followLogStore;
 
     /**
      * 关注用户
@@ -35,17 +41,12 @@ public class BingoFollowRecordServiceImpl extends ServiceImpl<BingoFollowRecordM
             BingoFollowRecord followRecord = new BingoFollowRecord();
             followRecord.setUserId(userId);
             followRecord.setGoalId(goalId);
-            followRecordStore.followUser(followRecord);
-            // TODO 保存日志
-            return null;
+            followRecordStore.saveFollowRecord(followRecord);
+            return followLogStore.save(new BingoFollowLog(null, userId, goalId, "ADD", new Date()));
         }
 
-        // 存在：关注过，删除掉
-        else {
-            followRecordStore.removeFollowRecordById(record.getId());
-            // TODO 保存日志
-            return null;
-        }
-
+        // 存在：关注过
+        followRecordStore.removeFollowRecord(record.getId());
+        return followLogStore.save(new BingoFollowLog(null, userId, goalId, "DELETE", new Date()));
     }
 }
