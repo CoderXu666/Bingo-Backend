@@ -1,12 +1,11 @@
 package com.bingo.store.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoFollowRecordMapper;
 import com.bingo.pojo.po.community.BingoFollowRecord;
 import com.bingo.store.BingoFollowRecordStore;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * <p>
@@ -27,26 +26,21 @@ public class BingoFollowRecordStoreImpl extends ServiceImpl<BingoFollowRecordMap
     }
 
     /**
-     * 查询互关好友id
+     * 根据user_id和goal_id查询关注记录
      */
     @Override
-    public List<BingoFollowRecord> getFriendList(Long userId) {
-        return null;
+    public BingoFollowRecord findRecordByUserIdAndGoalId(Long userId, Long goalId) {
+        QueryWrapper<BingoFollowRecord> wrapper = new QueryWrapper<>();
+        wrapper.eq("user_id", userId);
+        wrapper.eq("goal_id", goalId);
+        return this.getOne(wrapper);
     }
 
     /**
-     * 查询关注用户id
+     * 取消关注（根据id）
      */
     @Override
-    public List<BingoFollowRecord> getFollowList(Long userId) {
-        return null;
-    }
-
-    /**
-     * 查询粉丝id
-     */
-    @Override
-    public List<BingoFollowRecord> getFanList(Long userId) {
-        return null;
+    public Boolean removeFollowRecordById(Long recordId) {
+        return this.removeById(recordId);
     }
 }

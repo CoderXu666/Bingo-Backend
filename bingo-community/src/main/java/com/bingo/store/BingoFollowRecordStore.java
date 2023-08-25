@@ -14,11 +14,9 @@ import java.util.List;
  * @since 2023-08-23
  */
 public interface BingoFollowRecordStore extends IService<BingoFollowRecord> {
-    List<BingoFollowRecord> getFriendList(Long userId);
-
-    List<BingoFollowRecord> getFollowList(Long userId);
-
-    List<BingoFollowRecord> getFanList(Long userId);
-
     Boolean followUser(BingoFollowRecord followRecord);
+
+    BingoFollowRecord findRecordByUserIdAndGoalId(Long userId, Long goalId);
+
+    Boolean removeFollowRecordById(Long recordId);
 }
