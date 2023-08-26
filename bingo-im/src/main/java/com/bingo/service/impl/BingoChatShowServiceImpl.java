@@ -66,7 +66,7 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
         List<BingoChatShow> userChatShowList = showListMap.get(0);
         List<BingoChatShow> groupChatShowList = showListMap.get(1);
 
-        // 查询具体目标信息：好友、群组
+        // 查询目标信息：好友、群组
         // List转Map（避免双重遍历循环，性能太低）
         Map<Long, UserVO> userInfoMap = null;
         Map<Long, BingoChatGroup> groupInfoMap = null;
@@ -84,16 +84,16 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
         // 排序：好友、群组列表信息按照最新消息时间
         List<ChatShowVO> chatShowVOList = new ArrayList<>();
         for (BingoChatShow chatShowItem : chatShowList) {
-            if (CollectionUtils.isNotEmpty(userInfoMap) && userInfoMap.containsKey(chatShowItem.getId())) {
-                UserVO userVO = userInfoMap.get(chatShowItem.getId());
+            if (CollectionUtils.isNotEmpty(userInfoMap) && userInfoMap.containsKey(chatShowItem.getGoalId())) {
+                UserVO userVO = userInfoMap.get(chatShowItem.getGoalId());
                 ChatShowVO chatShowVO = new ChatShowVO();
                 BeanUtils.copyProperties(userVO, chatShowVO);
                 chatShowVO.setItemName(userVO.getNickName());
                 chatShowVO.setType(0);
                 chatShowVOList.add(chatShowVO);
             }
-            if (CollectionUtils.isNotEmpty(groupInfoMap) && groupInfoMap.containsKey(chatShowItem.getId())) {
-                BingoChatGroup groupInfo = groupInfoMap.get(chatShowItem.getId());
+            if (CollectionUtils.isNotEmpty(groupInfoMap) && groupInfoMap.containsKey(chatShowItem.getGoalId())) {
+                BingoChatGroup groupInfo = groupInfoMap.get(chatShowItem.getGoalId());
                 ChatShowVO chatShowVO = new ChatShowVO();
                 BeanUtils.copyProperties(groupInfo, chatShowVO);
                 chatShowVO.setItemName(groupInfo.getGroupName());
@@ -106,7 +106,8 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
         for (ChatShowVO chatShowVO : chatShowVOList) {
             if (chatShowVO.getType().equals(0)) {
                 List<BingoChatSendRecord> sendRecordList = sendRecordStore.getSendRecordList(userId, chatShowVO.getId());
-                resultMap.put(chatShowVO, sendRecordList);
+                List<BingoChatSendRecord> finalRecords = sendRecordList.stream().limit(10).collect(Collectors.toList());
+                resultMap.put(chatShowVO, finalRecords);
             } else {
                 List<BingoChatGroupSendRecord> sendRecordList = groupSendRecordStore.getSendRecordList(chatShowVO.getId());
                 resultMap.put(chatShowVO, sendRecordList);

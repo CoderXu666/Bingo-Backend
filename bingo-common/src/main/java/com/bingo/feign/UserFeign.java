@@ -6,6 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -28,5 +29,5 @@ public interface UserFeign {
      * 根据ids批量查询用户信息
      */
     @PostMapping("/list_by_ids")
-    FeignResponse<List<UserVO>> getUserByIds(@RequestParam("ids") List<Long> ids);
+    FeignResponse<List<UserVO>> getUserByIds(@RequestBody List<Long> ids);
 }

@@ -37,7 +37,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
             "/login",
             "/register",
             "/resolve_token",
-            "/captcha"
+            "/captcha",
+            "/list_by_ids"
     );
 
     /**

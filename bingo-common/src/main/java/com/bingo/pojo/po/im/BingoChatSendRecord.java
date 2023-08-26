@@ -53,12 +53,6 @@ public class BingoChatSendRecord implements Serializable {
     private Integer chatContentType;
 
     /**
-     * 目标类型（0：用户，1：群组）
-     */
-    @TableField("chat_type")
-    private Boolean chatType;
-
-    /**
      * 发送状态（0：成功，1：失败）
      */
     @TableField("send_status")

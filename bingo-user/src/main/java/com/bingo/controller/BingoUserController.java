@@ -97,10 +97,15 @@ public class BingoUserController {
 
     /**
      * 根据ids批量查询用户信息
-     * postman前端传参数不要声明变量名，否则调用不通，例如：[1,2,3]
+     * ---------------------------------------------------------------
+     * PostMan使用JSON格式传递，不需要声名变量名，格式如下：
+     * [
+     *     1695363601690537985,
+     *     1695363601690537986
+     * ]
      */
     @PostMapping("/list_by_ids")
-    public R getUserInfoByIds(List<Long> ids) {
+    public R getUserInfoByIds(@RequestBody List<Long> ids) {
         List<UserVO> userList = userService.getUserByIds(ids);
         return R.out(RespCodeEnum.SUCCESS, userList);
     }
