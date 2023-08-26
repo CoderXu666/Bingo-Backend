@@ -9,16 +9,16 @@ import java.util.Date;
 
 /**
  * <p>
- * 好友聊天记录表
+ * 聊天记录表（群聊）
  * </p>
  *
  * @author 徐志斌
- * @since 2023-08-23
+ * @since 2023-08-26
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("bingo_chat_send_record")
-public class BingoChatSendRecord implements Serializable {
+@TableName("bingo_chat_group_send_record")
+public class BingoChatGroupSendRecord implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,16 +29,16 @@ public class BingoChatSendRecord implements Serializable {
     private Long id;
 
     /**
-     * 发送者id
+     * 群组id
+     */
+    @TableField("group_id")
+    private Long groupId;
+
+    /**
+     * 用户id
      */
     @TableField("user_id")
     private Long userId;
-
-    /**
-     * 目标id
-     */
-    @TableField("goal_id")
-    private Long goalId;
 
     /**
      * 聊天内容
@@ -47,25 +47,19 @@ public class BingoChatSendRecord implements Serializable {
     private String chatContent;
 
     /**
+     * 文件链接
+     */
+    @TableField("chat_url")
+    private String chatUrl;
+
+    /**
      * 消息类型（0：文字、1：表情包、2：文件（图片等）4：语音/视频）、5：内容分享
      */
     @TableField("chat_content_type")
     private Integer chatContentType;
 
     /**
-     * 目标类型（0：用户，1：群组）
-     */
-    @TableField("chat_content_type")
-    private Boolean chatContentType;
-
-    /**
-     * 发送状态（0：成功，1：失败）
-     */
-    @TableField("send_status")
-    private Boolean sendStatus;
-
-    /**
-     * 创建时间
+     * 发送时间
      */
     @TableField("create_time")
     private Date createTime;
@@ -76,5 +70,6 @@ public class BingoChatSendRecord implements Serializable {
     @TableField("deleted")
     @TableLogic
     private Boolean deleted;
+
 
 }

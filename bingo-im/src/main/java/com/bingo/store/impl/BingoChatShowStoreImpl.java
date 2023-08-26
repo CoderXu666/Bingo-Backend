@@ -1,5 +1,6 @@
 package com.bingo.store.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoChatShowMapper;
 import com.bingo.pojo.po.im.BingoChatShow;
@@ -19,10 +20,13 @@ import java.util.List;
 @Service
 public class BingoChatShowStoreImpl extends ServiceImpl<BingoChatShowMapper, BingoChatShow> implements BingoChatShowStore {
     /**
-     * 查询进行过聊天的好友
+     * 查询进行过聊天的好友关联关系
      */
     @Override
-    public List<Long> getChatShowList(Long userId) {
-        return baseMapper.getChatShowList(userId);
+    public List<BingoChatShow> getChatShowList(Long userId) {
+        QueryWrapper<BingoChatShow> wrapper = new QueryWrapper<>();
+        wrapper.eq("user_id", userId);
+        wrapper.orderByDesc("receive_time");
+        return this.list(wrapper);
     }
 }

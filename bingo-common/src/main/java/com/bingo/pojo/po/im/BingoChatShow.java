@@ -47,6 +47,12 @@ public class BingoChatShow implements Serializable {
     private Long unreadCount;
 
     /**
+     * 聊天类型
+     */
+    @TableField("chag=t_type")
+    private Integer chatType;
+
+    /**
      * 最新接收时间（显示排序）
      */
     @TableField("receive_time")

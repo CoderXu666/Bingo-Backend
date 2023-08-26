@@ -30,11 +30,6 @@ public class ChatShowVO {
     private String avatarUrl;
 
     /**
-     * 生日
-     */
-    private Date birthDay;
-
-    /**
      * 性别(男:1 女:0)
      */
     private Integer gender;
@@ -44,8 +39,5 @@ public class ChatShowVO {
      */
     private String address;
 
-    /**
-     * 聊天记录
-     */
-    private List<BingoChatSendRecord> chatContentList;
+
 }

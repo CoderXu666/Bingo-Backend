@@ -126,7 +126,9 @@ public class BingoUserController {
     }
 
 
-    // 测试专用
+    /**
+     * 测试读取Nacos配置文件中的配置
+     */
     @GetMapping("/test")
     public void getInfo() {
 

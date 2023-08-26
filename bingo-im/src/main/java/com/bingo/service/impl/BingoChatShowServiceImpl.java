@@ -6,8 +6,8 @@ import com.bingo.mapper.BingoChatShowMapper;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
 import com.bingo.pojo.po.im.BingoChatShow;
 import com.bingo.pojo.vo.user.UserVO;
+import com.bingo.service.BingoChatSendRecordService;
 import com.bingo.service.BingoChatShowService;
-import com.bingo.store.BingoChatSendRecordStore;
 import com.bingo.store.BingoChatShowStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -29,7 +30,7 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
     @Autowired
     private BingoChatShowStore showStore;
     @Autowired
-    private BingoChatSendRecordStore sendRecordStore;
+    private BingoChatSendRecordService sendRecordService;
     @Autowired
     private UserFeign userFeign;
 
@@ -41,11 +42,18 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
         // 最终结果集(K:用户信息，V:聊天记录列表)
         Map<String, List<BingoChatSendRecord>> resultMap = new HashMap<>();
 
-        // 查询好友展示列表用户信息
-        List<Long> chatShowIds = showStore.getChatShowList(userId);
-        List<UserVO> chatShowUserList = userFeign.getUserInfoByIds(chatShowIds).getData();
+        // 查询展示列表关联id信息（划分类型：好友id列表、群聊id列表）
+        List<BingoChatShow> chatShowList = showStore.getChatShowList(userId);
+        Map<Integer, List<BingoChatShow>> showListMap = chatShowList.stream().collect(Collectors.groupingBy(BingoChatShow::getChatType));
+        List<BingoChatShow> userChatShowList = showListMap.get(0);
+        List<BingoChatShow> groupChatShowList = showListMap.get(1);
 
-        // 查询好友群聊信息
+        // 查询具体信息：好友、群组
+        List<Long> userChatShowIds = userChatShowList.stream().map(BingoChatShow::getId).collect(Collectors.toList());
+        List<UserVO> chatUserList = userFeign.getUserByIds(userChatShowIds).getData();
+        List<Long> groupChatShowIds = groupChatShowList.stream().map(BingoChatShow::getId).collect(Collectors.toList());
+
+        // 查询好友、群组聊天信息
 
 
         return resultMap;

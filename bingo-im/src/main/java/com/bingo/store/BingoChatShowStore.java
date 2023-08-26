@@ -15,5 +15,5 @@ import java.util.List;
  */
 public interface BingoChatShowStore extends IService<BingoChatShow> {
 
-    List<Long> getChatShowList(Long userId);
+    List<BingoChatShow> getChatShowList(Long userId);
 }
