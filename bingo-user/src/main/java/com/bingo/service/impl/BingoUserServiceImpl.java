@@ -8,10 +8,7 @@ import com.bingo.pojo.po.user.BingoUser;
 import com.bingo.pojo.vo.user.UserVO;
 import com.bingo.service.BingoUserService;
 import com.bingo.store.BingoUserStore;
-import com.bingo.utils.AESUtil;
-import com.bingo.utils.CookieUtil;
-import com.bingo.utils.JWTUtil;
-import com.bingo.utils.RandomUtil;
+import com.bingo.utils.*;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -146,7 +143,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 注册
      */
     @Override
-    public Boolean register(UserDTO userDTO) throws Exception {
+    public Boolean register(UserDTO userDTO, HttpServletRequest request) throws Exception {
         String accountId = userDTO.getAccountId();
         String passWord = userDTO.getPassWord();
         String email = userDTO.getEmail();
@@ -169,10 +166,19 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
             throw new Exception("该账号已存在，换个试试~");
         }
 
+        // 解析用户所在区域
+        String ipAddress = IPUtil.getIpAddress(request);
+        Map<String, String> regionMap = AddressUtil.getCityInfo(ipAddress);
+        String province = regionMap.get("province");
+        String city = regionMap.get("city");
+
+        // TODO 保存用户统计数据信息
+
         // 保存账号信息
         BingoUser user = new BingoUser();
         BeanUtils.copyProperties(userDTO, user);
         user.setPassWord(AESUtil.encrypt(passWord));
+        user.setLocation(province + " " + city);
         return userStore.save(user);
     }
 

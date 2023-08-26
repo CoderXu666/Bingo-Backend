@@ -27,6 +27,6 @@ public interface UserFeign {
     /**
      * 根据ids批量查询用户信息
      */
-    @PostMapping("/get_list")
+    @PostMapping("/list_by_ids")
     FeignResponse<List<UserVO>> getUserInfoByIds(@RequestParam("ids") List<Long> ids);
 }

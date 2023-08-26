@@ -17,29 +17,14 @@ public class UserVO {
     private String nickName;
 
     /**
-     * 头像
-     */
-    private String avatarUrl;
-
-    /**
-     * 生日
-     */
-    private Date birthDay;
-
-    /**
-     * 电话
-     */
-    private String phone;
-
-    /**
      * 性别(男:1 女:0)
      */
     private Integer gender;
 
     /**
-     * 地址
+     * 头像
      */
-    private String address;
+    private String avatarUrl;
 
     /**
      * 邮箱
@@ -47,7 +32,39 @@ public class UserVO {
     private String email;
 
     /**
-     * 创建时间
+     * 地址
+     */
+    private String location;
+
+    /**
+     * 注册时间
      */
     private Date createTime;
+
+    /*-------------------------------用户相关统计数据------------------------------*/
+
+    /**
+     * 喜欢数量
+     */
+    private Integer likeCount;
+
+    /**
+     * 关注数量
+     */
+    private Integer followCount;
+
+    /**
+     * 粉丝数量
+     */
+    private Integer fanCount;
+
+    /**
+     * 人气值
+     */
+    private Integer popularityCount;
+
+    /**
+     * go币余额
+     */
+    private Integer money;
 }

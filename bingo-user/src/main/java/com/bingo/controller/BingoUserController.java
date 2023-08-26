@@ -44,8 +44,8 @@ public class BingoUserController {
      * 注册功能
      */
     @PostMapping("/register")
-    public R register(@RequestBody UserDTO userDTO) throws Exception {
-        userService.register(userDTO);
+    public R register(@RequestBody UserDTO userDTO, HttpServletRequest request) throws Exception {
+        userService.register(userDTO, request);
         return R.out(RespCodeEnum.SUCCESS, "操作成功");
     }
 

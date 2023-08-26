@@ -17,8 +17,8 @@ public class AddressUtil {
     /**
      * 根据 IP 查询登录来源
      */
-    public static Map<String, Object> getCityInfo(String ip) throws Exception {
-        Map<String, Object> resultMap = new HashMap<>();
+    public static Map<String, String> getCityInfo(String ip) throws Exception {
+        Map<String, String> resultMap = new HashMap<>();
         String dbPath = Objects.requireNonNull(AddressUtil.class.getResource("/ip2region/ip2region.xdb")).getPath();
         Searcher searcher = Searcher.newWithFileOnly(dbPath);
         String cityInfo = searcher.searchByStr(ip);
