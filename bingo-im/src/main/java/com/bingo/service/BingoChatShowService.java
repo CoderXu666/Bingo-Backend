@@ -1,11 +1,8 @@
 package com.bingo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bingo.pojo.po.im.BingoChatSendRecord;
 import com.bingo.pojo.po.im.BingoChatShow;
-import com.bingo.pojo.vo.im.ChatShowVO;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,5 +15,5 @@ import java.util.Map;
  */
 public interface BingoChatShowService extends IService<BingoChatShow> {
 
-    Map<String, List<BingoChatSendRecord>> getChatList(Long userId);
+    Map<Object, Object> getChatList(Long userId);
 }

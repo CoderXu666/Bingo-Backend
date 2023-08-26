@@ -7,6 +7,11 @@ import java.util.Date;
 @Data
 public class UserVO {
     /**
+     * 主键id
+     */
+    private Long id;
+
+    /**
      * 账号
      */
     private String accountId;

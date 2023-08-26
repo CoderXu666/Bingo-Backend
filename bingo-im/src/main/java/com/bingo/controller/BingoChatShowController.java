@@ -2,7 +2,6 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.po.im.BingoChatSendRecord;
 import com.bingo.pojo.resp.R;
 import com.bingo.service.BingoChatShowService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,7 +31,7 @@ public class BingoChatShowController {
      */
     @GetMapping("/list/{userId}")
     public R getChatList(@PathVariable("userId") Long userId) {
-        Map<String, List<BingoChatSendRecord>> resultMap = showService.getChatList(userId);
+        Map<Object, Object> resultMap = showService.getChatList(userId);
         return R.out(RespCodeEnum.SUCCESS, resultMap);
     }
 }

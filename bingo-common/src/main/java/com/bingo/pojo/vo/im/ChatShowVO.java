@@ -1,10 +1,6 @@
 package com.bingo.pojo.vo.im;
 
-import com.bingo.pojo.po.im.BingoChatSendRecord;
 import lombok.Data;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * @Author 徐志斌
@@ -15,29 +11,27 @@ import java.util.List;
 @Data
 public class ChatShowVO {
     /**
-     * 账号
+     * 主键id
      */
-    private String accountId;
+    private Long id;
 
     /**
-     * 用户名
+     * 名称（用户，群聊）
      */
-    private String nickName;
+    private String itemName;
 
     /**
-     * 头像
+     * 头像URL
      */
     private String avatarUrl;
 
     /**
-     * 性别(男:1 女:0)
+     * 目标类型（0：用户，1：群组）
      */
-    private Integer gender;
+    private Integer type;
 
     /**
      * 地址
      */
-    private String address;
-
-
+    private String location;
 }

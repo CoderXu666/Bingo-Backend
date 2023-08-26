@@ -19,6 +19,19 @@ public interface BingoChatSendRecordMapper extends BaseMapper<BingoChatSendRecor
     /**
      * 通过user_id查看聊天消息
      */
-    @Select("SELECT * FROM bingo_chat_send_record WHERE relation LIKE %#{userId}% GROUP BY user_id HAVING COUNT(*) = 1 LIMIT 10")
-    List<BingoChatSendRecord> getSendRecordList(@Param("userId") Long userId);
+    @Select("SELECT\n" +
+            "\t* \n" +
+            "FROM\n" +
+            "\tbingo_chat_send_record \n" +
+            "WHERE\n" +
+            "\tuesr_id = #{userId} \n" +
+            "\tAND goal_id = #{goalId} UNION ALL\n" +
+            "SELECT\n" +
+            "\t* \n" +
+            "FROM\n" +
+            "\tbingo_chat_send_record \n" +
+            "WHERE\n" +
+            "\tuser_id = #{goal_id} \n" +
+            "\tAND goal_id = #{user_id}")
+    List<BingoChatSendRecord> getSendRecordList(@Param("userId") Long userId, @Param("goalId") Long goalId);
 }

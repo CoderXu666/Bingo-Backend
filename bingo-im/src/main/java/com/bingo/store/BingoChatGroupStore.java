@@ -3,6 +3,8 @@ package com.bingo.store;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bingo.pojo.po.im.BingoChatGroup;
 
+import java.util.List;
+
 /**
  * <p>
  * 群聊信息表 服务类
@@ -13,4 +15,5 @@ import com.bingo.pojo.po.im.BingoChatGroup;
  */
 public interface BingoChatGroupStore extends IService<BingoChatGroup> {
 
+    List<BingoChatGroup> getGroupInfoByIds(List<Long> groupIds);
 }

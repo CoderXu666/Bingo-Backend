@@ -19,11 +19,10 @@ import java.util.List;
 @Service
 public class BingoChatSendRecordStoreImpl extends ServiceImpl<BingoChatSendRecordMapper, BingoChatSendRecord> implements BingoChatSendRecordStore {
     /**
-     * 通过user_id查看聊天消息
+     * 查看好友聊天消息
      */
     @Override
-    public List<BingoChatSendRecord> getSendRecordList(Long userId) {
-        List<BingoChatSendRecord> records = baseMapper.getSendRecordList(userId);
-        return records;
+    public List<BingoChatSendRecord> getSendRecordList(Long userId, Long goalId) {
+        return baseMapper.getSendRecordList(userId, goalId);
     }
 }

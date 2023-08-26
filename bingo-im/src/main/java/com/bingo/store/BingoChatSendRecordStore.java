@@ -1,7 +1,7 @@
 package com.bingo.store;
 
-import com.bingo.pojo.po.im.BingoChatSendRecord;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bingo.pojo.po.im.BingoChatSendRecord;
 
 import java.util.List;
 
@@ -15,5 +15,5 @@ import java.util.List;
  */
 public interface BingoChatSendRecordStore extends IService<BingoChatSendRecord> {
 
-    List<BingoChatSendRecord> getSendRecordList(Long userId);
+    List<BingoChatSendRecord> getSendRecordList(Long userId, Long goalId);
 }
