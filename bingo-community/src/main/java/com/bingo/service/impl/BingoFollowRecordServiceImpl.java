@@ -66,7 +66,7 @@ public class BingoFollowRecordServiceImpl extends ServiceImpl<BingoFollowRecordM
     public Map<String, Object> followList(Long userId, Integer current, Integer limit) {
         Page<BingoFollowRecord> recordPage = followRecordStore.followList(userId, current, limit);
         List<Long> followIds = recordPage.getRecords().stream().map(item -> item.getUserId()).collect(Collectors.toList());
-        List<UserVO> userInfoList = userFeign.getUserInfoByIds(followIds).getData();
+        List<UserVO> userInfoList = userFeign.getUserByIds(followIds).getData();
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("list", userInfoList);
         resultMap.put("count", recordPage.getTotal());
@@ -80,7 +80,7 @@ public class BingoFollowRecordServiceImpl extends ServiceImpl<BingoFollowRecordM
     public Map<String, Object> fanList(Long goalId, Integer current, Integer limit) {
         Page<BingoFollowRecord> recordPage = followRecordStore.fanList(goalId, current, limit);
         List<Long> fanIds = recordPage.getRecords().stream().map(item -> item.getUserId()).collect(Collectors.toList());
-        List<UserVO> userInfoList = userFeign.getUserInfoByIds(fanIds).getData();
+        List<UserVO> userInfoList = userFeign.getUserByIds(fanIds).getData();
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("list", userInfoList);
         resultMap.put("count", recordPage.getTotal());

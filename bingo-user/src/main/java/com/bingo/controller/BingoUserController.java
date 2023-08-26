@@ -107,8 +107,8 @@ public class BingoUserController {
 
     /**
      * 上传头像
-     * <p>
-     * 访问URL：http://101.42.13.186:9000/avatar-bucket/1687483809516_1690621557315.jpg
+     * -------------------------------------------------------------------------------
+     * 访问URL例子：http://101.42.13.186:9000/avatar-bucket/1687483809516_1690621557315.jpg
      */
     @PostMapping("/upload_avatar")
     public R uploadAvatar(MultipartFile file) {

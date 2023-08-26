@@ -9,14 +9,14 @@ import com.bingo.mapper.BingoPostMapper;
 import com.bingo.pojo.common.PageParam;
 import com.bingo.pojo.constant.ESConstant;
 import com.bingo.pojo.constant.MQConstant;
+import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.dto.community.LikeDTO;
 import com.bingo.pojo.dto.community.PostDTO;
-import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.po.community.BingoPost;
 import com.bingo.pojo.resp.FeignResponse;
-import com.bingo.pojo.vo.user.UserVO;
 import com.bingo.pojo.vo.community.PostPageVO;
 import com.bingo.pojo.vo.community.PostVO;
+import com.bingo.pojo.vo.user.UserVO;
 import com.bingo.service.BingoPostService;
 import com.bingo.store.BingoPostStore;
 import org.elasticsearch.action.search.SearchRequest;
@@ -169,7 +169,7 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
         //List<BingoPostStatistics> postStatistics = PostStatisticsStore.findPost(ids);
 
         //Feign取得对应用户相关信息
-        FeignResponse<List<UserVO>> feignResponse = userFeign.getUserInfoByIds(ids);
+        FeignResponse<List<UserVO>> feignResponse = userFeign.getUserByIds(ids);
         List<UserVO> userVOList = feignResponse.getData();
         BeanUtils.copyProperties(bingoPost, postPageVO);
 //        BeanUtils.copyProperties(postStatistics, postPageVO);

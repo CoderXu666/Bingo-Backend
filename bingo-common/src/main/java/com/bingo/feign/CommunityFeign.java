@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @Description: CommunityFeign
  */
 @Component
-@FeignClient(name = "bingo-user", url = "localhost:10002/community")
+@FeignClient(name = "bingo-community", url = "localhost:10002/community")
 public interface CommunityFeign {
 
 }
