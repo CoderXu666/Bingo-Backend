@@ -21,7 +21,7 @@ import java.util.Map;
  * @since 2023-08-24
  */
 @RestController
-@RequestMapping("/show")
+@RequestMapping("/chat")
 public class BingoChatShowController {
     @Autowired
     private BingoChatShowService showService;

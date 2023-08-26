@@ -49,7 +49,7 @@ public class BingoChatShow implements Serializable {
     /**
      * 聊天类型
      */
-    @TableField("chag=t_type")
+    @TableField("chat_type")
     private Integer chatType;
 
     /**

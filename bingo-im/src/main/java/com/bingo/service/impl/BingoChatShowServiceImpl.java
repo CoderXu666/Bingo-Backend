@@ -61,32 +61,38 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
         }
 
         // 根据类型拆分成两个List（好友id列表、群聊id列表）
-        Map<Integer, List<BingoChatShow>> showListMap = chatShowList.stream()
-                .collect(Collectors.groupingBy(BingoChatShow::getChatType));
+        Map<Integer, List<BingoChatShow>> showListMap =
+                chatShowList.stream().collect(Collectors.groupingBy(BingoChatShow::getChatType));
         List<BingoChatShow> userChatShowList = showListMap.get(0);
         List<BingoChatShow> groupChatShowList = showListMap.get(1);
 
         // 查询具体目标信息：好友、群组
-        List<Long> userChatShowIds = userChatShowList.stream().map(BingoChatShow::getId).collect(Collectors.toList());
-        List<Long> groupShowIds = groupChatShowList.stream().map(BingoChatShow::getId).collect(Collectors.toList());
-        List<UserVO> userInfoShowList = userFeign.getUserByIds(userChatShowIds).getData();
-        List<BingoChatGroup> groupInfoShowList = chatGroupStore.getGroupInfoByIds(groupShowIds);
-
-        // 好友、群组List集合转成Map（双重遍历循环，性能太低，不用List）
-        Map<Long, UserVO> userInfoMap = userInfoShowList.stream().collect(Collectors.toMap(UserVO::getId, item -> item));
-        Map<Long, BingoChatGroup> groupInfoMap = groupInfoShowList.stream().collect(Collectors.toMap(BingoChatGroup::getId, item -> item));
+        // List转Map（避免双重遍历循环，性能太低）
+        Map<Long, UserVO> userInfoMap = null;
+        Map<Long, BingoChatGroup> groupInfoMap = null;
+        if (CollectionUtils.isNotEmpty(userChatShowList)) {
+            List<Long> userChatShowIds = userChatShowList.stream().map(BingoChatShow::getGoalId).collect(Collectors.toList());
+            List<UserVO> userInfoShowList = userFeign.getUserByIds(userChatShowIds).getData();
+            userInfoMap = userInfoShowList.stream().collect(Collectors.toMap(UserVO::getId, item -> item));
+        }
+        if (CollectionUtils.isNotEmpty(groupChatShowList)) {
+            List<Long> groupShowIds = groupChatShowList.stream().map(BingoChatShow::getGoalId).collect(Collectors.toList());
+            List<BingoChatGroup> groupInfoShowList = chatGroupStore.getGroupInfoByIds(groupShowIds);
+            groupInfoMap = groupInfoShowList.stream().collect(Collectors.toMap(BingoChatGroup::getId, item -> item));
+        }
 
         // 排序：好友、群组列表信息按照最新消息时间
         List<ChatShowVO> chatShowVOList = new ArrayList<>();
         for (BingoChatShow chatShowItem : chatShowList) {
-            if (userInfoMap.containsKey(chatShowItem.getId())) {
+            if (CollectionUtils.isNotEmpty(userInfoMap) && userInfoMap.containsKey(chatShowItem.getId())) {
                 UserVO userVO = userInfoMap.get(chatShowItem.getId());
                 ChatShowVO chatShowVO = new ChatShowVO();
                 BeanUtils.copyProperties(userVO, chatShowVO);
                 chatShowVO.setItemName(userVO.getNickName());
                 chatShowVO.setType(0);
                 chatShowVOList.add(chatShowVO);
-            } else {
+            }
+            if (CollectionUtils.isNotEmpty(groupInfoMap) && groupInfoMap.containsKey(chatShowItem.getId())) {
                 BingoChatGroup groupInfo = groupInfoMap.get(chatShowItem.getId());
                 ChatShowVO chatShowVO = new ChatShowVO();
                 BeanUtils.copyProperties(groupInfo, chatShowVO);
