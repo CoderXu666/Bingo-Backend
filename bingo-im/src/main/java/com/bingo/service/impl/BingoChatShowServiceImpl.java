@@ -3,10 +3,10 @@ package com.bingo.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoChatShowMapper;
+import com.bingo.pojo.po.im.BingoChatGroup;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
 import com.bingo.pojo.po.im.BingoChatShow;
 import com.bingo.pojo.vo.user.UserVO;
-import com.bingo.service.BingoChatSendRecordService;
 import com.bingo.service.BingoChatShowService;
 import com.bingo.store.BingoChatShowStore;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +30,6 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
     @Autowired
     private BingoChatShowStore showStore;
     @Autowired
-    private BingoChatSendRecordService sendRecordService;
-    @Autowired
     private UserFeign userFeign;
 
     /**
@@ -53,8 +51,8 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
         List<UserVO> chatUserList = userFeign.getUserByIds(userChatShowIds).getData();
         List<Long> groupChatShowIds = groupChatShowList.stream().map(BingoChatShow::getId).collect(Collectors.toList());
 
-        // 查询好友、群组聊天信息
 
+        // 查询好友、群组聊天信息
 
         return resultMap;
     }
