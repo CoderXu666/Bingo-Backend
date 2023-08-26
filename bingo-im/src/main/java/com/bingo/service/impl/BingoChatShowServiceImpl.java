@@ -84,9 +84,9 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
         // 排序：好友、群组列表信息按照最新消息时间
         List<ChatShowVO> chatShowVOList = new ArrayList<>();
         for (BingoChatShow chatShowItem : chatShowList) {
+            ChatShowVO chatShowVO = new ChatShowVO();
             if (CollectionUtils.isNotEmpty(userInfoMap) && userInfoMap.containsKey(chatShowItem.getGoalId())) {
                 UserVO userVO = userInfoMap.get(chatShowItem.getGoalId());
-                ChatShowVO chatShowVO = new ChatShowVO();
                 BeanUtils.copyProperties(userVO, chatShowVO);
                 chatShowVO.setItemName(userVO.getNickName());
                 chatShowVO.setType(0);
@@ -94,7 +94,6 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
             }
             if (CollectionUtils.isNotEmpty(groupInfoMap) && groupInfoMap.containsKey(chatShowItem.getGoalId())) {
                 BingoChatGroup groupInfo = groupInfoMap.get(chatShowItem.getGoalId());
-                ChatShowVO chatShowVO = new ChatShowVO();
                 BeanUtils.copyProperties(groupInfo, chatShowVO);
                 chatShowVO.setItemName(groupInfo.getGroupName());
                 chatShowVO.setType(1);
