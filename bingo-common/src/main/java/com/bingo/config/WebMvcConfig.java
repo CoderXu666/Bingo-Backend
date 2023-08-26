@@ -29,19 +29,25 @@ public class WebMvcConfig implements WebMvcConfigurer {
     private LoginInterceptor loginInterceptor;
 
     /**
+     * 注意：
+     * 这个excludePathPatterns，一定要写接口路径
+     * 不要携带yml配置文件统一path路径，否则失效（例如：/user/captcha）
+     */
+    private static final List<String> EXCLUDE_PATH = Arrays.asList(
+            "/login",
+            "/register",
+            "/resolve_token",
+            "/captcha"
+    );
+
+    /**
      * 拦截器配置
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        List<String> excludePathList = Arrays.asList(
-                "/customer/login",
-                "/customer/register",
-                "/customer/resolve_token",
-                "/customer/captcha"
-        );
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns(excludePathList);
+                .excludePathPatterns(EXCLUDE_PATH);
     }
 
 
