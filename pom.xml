@@ -171,13 +171,6 @@
                 <version>${mysql.version}</version>
             </dependency>
 
-            <!--JDBC-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-jdbc</artifactId>
-                <version>${springboot.version}</version>
-            </dependency>
-
             <!--Redis-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

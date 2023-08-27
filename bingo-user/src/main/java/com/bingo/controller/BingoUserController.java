@@ -98,10 +98,10 @@ public class BingoUserController {
     /**
      * 根据ids批量查询用户信息
      * ---------------------------------------------------------------
-     * PostMan使用JSON格式传递，不需要声名变量名，格式如下：
+     * PostMan使用JSON格式传递，不要声名变量名，格式如下：
      * [
-     *     1695363601690537985,
-     *     1695363601690537986
+     * 1695363601690537985,
+     * 1695363601690537986
      * ]
      */
     @PostMapping("/list_by_ids")
@@ -135,8 +135,8 @@ public class BingoUserController {
      * 测试读取Nacos配置文件中的配置
      */
     @GetMapping("/test")
-    public void getInfo() {
-
+    public String getInfo() {
+        return "接口调用成功";
     }
 }
 
