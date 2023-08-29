@@ -169,7 +169,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         // 解析用户所在区域
         String ipAddress = IPUtil.getIpAddress(request);
         // FIXME 目前测试，这里先写死，本地ip校验必报错
-        Map<String, String> regionMap = AddressUtil.getCityInfo("220.181.38.150");
+        Map<String, String> regionMap = IPUtil.getCityInfo("220.181.38.150");
         String province = regionMap.get("province");
         String city = regionMap.get("city");
 

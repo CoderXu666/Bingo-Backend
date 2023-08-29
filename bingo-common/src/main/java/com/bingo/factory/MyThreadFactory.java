@@ -1,4 +1,4 @@
-package com.bingo;
+package com.bingo.factory;
 
 import com.bingo.handler.MyUncaughtExceptionHandler;
 import lombok.AllArgsConstructor;

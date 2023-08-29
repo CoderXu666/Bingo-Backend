@@ -25,7 +25,7 @@ import javax.annotation.PreDestroy;
  */
 @Slf4j
 @Component
-public class NettyServer {
+public class NettyWebSocketServer {
     @Autowired
     private NettyServerChannelInitHandler initializerHandler;
 
