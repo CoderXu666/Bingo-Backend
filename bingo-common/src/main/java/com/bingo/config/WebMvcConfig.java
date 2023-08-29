@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * @Description：前后端跨域、拦截器、JSON转换
  * @Author 徐志斌
  */
 @Configuration
