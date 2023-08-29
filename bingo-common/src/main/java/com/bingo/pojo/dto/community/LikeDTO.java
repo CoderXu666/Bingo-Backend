@@ -17,9 +17,9 @@ public class LikeDTO {
     /**
      * 被点赞人
      */
-    private String userId;
+    private String uid;
     /**
      * 发起点赞人
      */
-    private String likeUserId;
+    private String likeUid;
 }

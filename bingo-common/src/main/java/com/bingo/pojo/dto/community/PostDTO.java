@@ -15,7 +15,7 @@ public class PostDTO {
     /**
      * 账号id
      */
-    private String userId;
+    private String uid;
 
     /**
      * 帖子文案

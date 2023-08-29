@@ -19,7 +19,7 @@ import java.util.List;
  * @since 2023-03-01
  */
 public interface BingoUserService extends IService<BingoUser> {
-    UserVO findById(Long id);
+    UserVO findById(Long uid);
 
     void generateCode(HttpServletRequest request, HttpServletResponse response);
 

@@ -29,8 +29,8 @@ public class BingoChatShowController {
     /**
      * 查询聊天列表
      */
-    @GetMapping("/list/{userId}")
-    public R getChatList(@PathVariable("userId") Long userId) {
+    @GetMapping("/list/{uid}")
+    public R getChatList(@PathVariable("uid") Long userId) {
         Map<Object, Object> resultMap = showService.getChatList(userId);
         return R.out(RespCodeEnum.SUCCESS, resultMap);
     }

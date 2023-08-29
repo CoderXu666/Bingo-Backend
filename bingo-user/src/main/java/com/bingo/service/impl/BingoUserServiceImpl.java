@@ -53,9 +53,9 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 根据Id查询用户信息
      */
     @Override
-    public UserVO findById(Long id) {
+    public UserVO findById(Long uid) {
         UserVO userVO = new UserVO();
-        BingoUser userInfo = userStore.findById(id);
+        BingoUser userInfo = userStore.findById(uid);
         if (ObjectUtils.isNotEmpty(userInfo)) {
             BeanUtils.copyProperties(userInfo, userVO);
         }

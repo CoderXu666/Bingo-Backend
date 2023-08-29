@@ -17,7 +17,7 @@ public class ChatMsgDTO {
     /**
      * 接收用户
      */
-    private Long userId;
+    private Long uid;
     /**
      * 群id
      */

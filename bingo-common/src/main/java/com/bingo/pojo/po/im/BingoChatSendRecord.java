@@ -32,7 +32,7 @@ public class BingoChatSendRecord implements Serializable {
      * 发送者id
      */
     @TableField("uid")
-    private Long userId;
+    private Long uid;
 
     /**
      * 目标id

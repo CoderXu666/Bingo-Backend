@@ -17,7 +17,7 @@ public class PostVO {
     /**
      * 账号id
      */
-    private String userId;
+    private String uid;
     /**
      * 用户名
      */

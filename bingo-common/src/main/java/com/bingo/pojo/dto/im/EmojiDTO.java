@@ -8,7 +8,7 @@ public class EmojiDTO {
     /**
      * 用户ID（关联用户ID）
      */
-    private Long userId;
+    private Long uid;
 
     /**
      * 表情包

@@ -16,11 +16,11 @@ import java.util.Map;
  * @since 2023-08-23
  */
 public interface BingoFollowRecordService extends IService<BingoFollowRecord> {
-    Boolean followUser(Long userId, Long goalId);
+    Boolean followUser(Long uid, Long goalId);
 
-    Map<String, Object> followList(Long userId, Integer current, Integer limit);
+    Map<String, Object> followList(Long uid, Integer current, Integer limit);
 
     Map<String, Object> fanList(Long goalId, Integer current, Integer limit);
 
-    Map<String, Object> friendList(Long userId, Long goalId, Integer current, Integer limit);
+    Map<String, Object> friendList(Long uid, Long goalId, Integer current, Integer limit);
 }

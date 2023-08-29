@@ -81,7 +81,7 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
     @Override
     public Boolean likePost(LikeDTO likeDTO) {
         Long postId = likeDTO.getPostId();
-        String likeUserId = likeDTO.getLikeUserId();
+        String likeUserId = likeDTO.getLikeUid();
 
         // 生成RedisKey（点赞记录、点赞次数）
         String likeRecordKey = postId + ":" + likeUserId;

@@ -23,9 +23,9 @@ public class BingoChatShowStoreImpl extends ServiceImpl<BingoChatShowMapper, Bin
      * 查询进行过聊天的好友关联关系
      */
     @Override
-    public List<BingoChatShow> getChatShowList(Long userId) {
+    public List<BingoChatShow> getChatShowList(Long uid) {
         QueryWrapper<BingoChatShow> wrapper = new QueryWrapper<>();
-        wrapper.eq("uid", userId);
+        wrapper.eq("uid", uid);
         wrapper.orderByDesc("receive_time");
         return this.list(wrapper);
     }

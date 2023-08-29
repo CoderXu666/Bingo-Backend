@@ -15,7 +15,7 @@ public class ChatContentVO {
     /**
      * 用户id
      */
-    private Long userId;
+    private Long uid;
     /**
      * 用户昵称
      */

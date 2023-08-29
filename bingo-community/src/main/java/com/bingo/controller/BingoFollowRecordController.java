@@ -24,8 +24,8 @@ public class BingoFollowRecordController {
      * 关注用户/取消关注
      */
     @PostMapping("/save_or_cancel")
-    public R followUser(Long userId, Long goalId) {
-        followRecordService.followUser(userId, goalId);
+    public R followUser(Long uid, Long goalId) {
+        followRecordService.followUser(uid, goalId);
         return R.out(RespCodeEnum.SUCCESS, "关注成功");
     }
 
@@ -33,8 +33,8 @@ public class BingoFollowRecordController {
      * 关注列表
      */
     @GetMapping("/follow_list")
-    public R followList(Long userId, Integer current, Integer limit) {
-        Map<String, Object> resultMap = followRecordService.followList(userId, current, limit);
+    public R followList(Long uid, Integer current, Integer limit) {
+        Map<String, Object> resultMap = followRecordService.followList(uid, current, limit);
         return R.out(RespCodeEnum.SUCCESS, resultMap);
     }
 
@@ -50,9 +50,9 @@ public class BingoFollowRecordController {
     /**
      * 互关列表（好友）
      */
-    @GetMapping("/friend_list/{userId}/{goalId}/{current}/{size}")
-    public R friendList(Long userId, Long goalId, Integer current, Integer limit) {
-        Map<String, Object> resultMap = followRecordService.friendList(userId, goalId, current, limit);
+    @GetMapping("/friend_list/{uid}/{goalId}/{current}/{size}")
+    public R friendList(Long uid, Long goalId, Integer current, Integer limit) {
+        Map<String, Object> resultMap = followRecordService.friendList(uid, goalId, current, limit);
         return R.out(RespCodeEnum.SUCCESS, resultMap);
     }
 }

@@ -35,7 +35,7 @@ public class BingoChatGroup implements Serializable {
      * 群主id
      */
     @TableField("uid")
-    private Long userId;
+    private Long uid;
 
     /**
      * 群名称

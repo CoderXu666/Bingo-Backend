@@ -53,7 +53,7 @@ public class IPUtil {
      */
     public static Map<String, String> getCityInfo(String ip) throws Exception {
         Map<String, String> resultMap = new HashMap<>();
-        String dbPath = Objects.requireNonNull(AddressUtil.class.getResource("/ip2region/ip2region.xdb")).getPath();
+        String dbPath = Objects.requireNonNull(IPUtil.class.getResource("/ip2region/ip2region.xdb")).getPath();
         Searcher searcher = Searcher.newWithFileOnly(dbPath);
         String cityInfo = searcher.searchByStr(ip);
         if (StringUtils.isNotEmpty(cityInfo)) {

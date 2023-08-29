@@ -32,7 +32,7 @@ public class BingoChatEmoji implements Serializable {
      * 用户ID（关联用户ID）
      */
     @TableField("uid")
-    private Long userId;
+    private Long uid;
 
     /**
      * 表情包

@@ -39,7 +39,7 @@ public class BingoFollowLog implements Serializable {
      * 用户id
      */
     @TableField("uid")
-    private Long userId;
+    private Long uid;
 
     /**
      * 目标id

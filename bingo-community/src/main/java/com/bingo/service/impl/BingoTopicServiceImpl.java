@@ -39,7 +39,7 @@ public class BingoTopicServiceImpl extends ServiceImpl<BingoTopicMapper, BingoTo
     @SneakyThrows
     @Override
     public Boolean saveTopic(TopicDTO topicDTO) {
-        if (!StringUtils.isNotEmpty(topicDTO.getUserId().toString())) {
+        if (!StringUtils.isNotEmpty(topicDTO.getUid().toString())) {
             throw new Exception("用户ID为空");
         }
         BingoTopic bingoTopic = new BingoTopic();
@@ -70,7 +70,7 @@ public class BingoTopicServiceImpl extends ServiceImpl<BingoTopicMapper, BingoTo
         BingoTopic topic = topicStore.findTopicById(topicId);
 
         //远程调用查询用户相关信息
-        FeignResponse<UserVO> feignResponse = userFeign.findByUserId(topic.getUserId());
+        FeignResponse<UserVO> feignResponse = userFeign.findByUserId(topic.getUid());
         UserVO userVO = feignResponse.getData();
 
         BingoTopicVO topicVO = new BingoTopicVO();

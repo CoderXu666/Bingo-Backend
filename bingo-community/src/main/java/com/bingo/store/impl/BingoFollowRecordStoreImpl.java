@@ -30,9 +30,9 @@ public class BingoFollowRecordStoreImpl extends ServiceImpl<BingoFollowRecordMap
      * 根据uid和goal_id查询关注记录
      */
     @Override
-    public BingoFollowRecord findRecordByUserIdAndGoalId(Long userId, Long goalId) {
+    public BingoFollowRecord findRecordByUserIdAndGoalId(Long uid, Long goalId) {
         QueryWrapper<BingoFollowRecord> wrapper = new QueryWrapper<>();
-        wrapper.eq("uid", userId);
+        wrapper.eq("uid", uid);
         wrapper.eq("goal_id", goalId);
         return this.getOne(wrapper);
     }
@@ -49,10 +49,10 @@ public class BingoFollowRecordStoreImpl extends ServiceImpl<BingoFollowRecordMap
      * 关注列表
      */
     @Override
-    public Page<BingoFollowRecord> followList(Long userId, Integer current, Integer limit) {
+    public Page<BingoFollowRecord> followList(Long uid, Integer current, Integer limit) {
         Page<BingoFollowRecord> page = new Page(current, limit);
         QueryWrapper<BingoFollowRecord> wrapper = new QueryWrapper<>();
-        wrapper.eq("uid", userId);
+        wrapper.eq("uid", uid);
         return this.page(page, wrapper);
     }
 
@@ -72,7 +72,7 @@ public class BingoFollowRecordStoreImpl extends ServiceImpl<BingoFollowRecordMap
      * 互关列表（好友）
      */
     @Override
-    public Page<BingoFollowRecord> friendList(Long userId, Long goalId, Integer current, Integer limit) {
+    public Page<BingoFollowRecord> friendList(Long uid, Long goalId, Integer current, Integer limit) {
         QueryWrapper<BingoFollowRecord> wrapper = new QueryWrapper<>();
         return null;
     }

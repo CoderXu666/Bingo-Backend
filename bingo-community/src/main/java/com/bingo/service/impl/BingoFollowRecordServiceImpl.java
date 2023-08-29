@@ -41,31 +41,31 @@ public class BingoFollowRecordServiceImpl extends ServiceImpl<BingoFollowRecordM
      * 关注用户
      */
     @Override
-    public Boolean followUser(Long userId, Long goalId) {
+    public Boolean followUser(Long uid, Long goalId) {
         // 查询是否关注过
-        BingoFollowRecord record = followRecordStore.findRecordByUserIdAndGoalId(userId, goalId);
+        BingoFollowRecord record = followRecordStore.findRecordByUserIdAndGoalId(uid, goalId);
 
         // 不存在：没关注过
         if (ObjectUtils.isEmpty(record)) {
             BingoFollowRecord followRecord = new BingoFollowRecord();
-            followRecord.setUserId(userId);
+            followRecord.setUid(uid);
             followRecord.setGoalId(goalId);
             followRecordStore.saveFollowRecord(followRecord);
-            return followLogStore.save(new BingoFollowLog(null, userId, goalId, "ADD", new Date()));
+            return followLogStore.save(new BingoFollowLog(null, uid, goalId, "ADD", new Date()));
         }
 
         // 存在：关注过
         followRecordStore.removeFollowRecord(record.getId());
-        return followLogStore.save(new BingoFollowLog(null, userId, goalId, "DELETE", new Date()));
+        return followLogStore.save(new BingoFollowLog(null, uid, goalId, "DELETE", new Date()));
     }
 
     /**
      * 关注列表
      */
     @Override
-    public Map<String, Object> followList(Long userId, Integer current, Integer limit) {
-        Page<BingoFollowRecord> recordPage = followRecordStore.followList(userId, current, limit);
-        List<Long> followIds = recordPage.getRecords().stream().map(item -> item.getUserId()).collect(Collectors.toList());
+    public Map<String, Object> followList(Long uid, Integer current, Integer limit) {
+        Page<BingoFollowRecord> recordPage = followRecordStore.followList(uid, current, limit);
+        List<Long> followIds = recordPage.getRecords().stream().map(item -> item.getUid()).collect(Collectors.toList());
         List<UserVO> userInfoList = userFeign.getUserByIds(followIds).getData();
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("list", userInfoList);
@@ -79,7 +79,7 @@ public class BingoFollowRecordServiceImpl extends ServiceImpl<BingoFollowRecordM
     @Override
     public Map<String, Object> fanList(Long goalId, Integer current, Integer limit) {
         Page<BingoFollowRecord> recordPage = followRecordStore.fanList(goalId, current, limit);
-        List<Long> fanIds = recordPage.getRecords().stream().map(item -> item.getUserId()).collect(Collectors.toList());
+        List<Long> fanIds = recordPage.getRecords().stream().map(item -> item.getUid()).collect(Collectors.toList());
         List<UserVO> userInfoList = userFeign.getUserByIds(fanIds).getData();
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("list", userInfoList);
@@ -91,8 +91,8 @@ public class BingoFollowRecordServiceImpl extends ServiceImpl<BingoFollowRecordM
      * 互关列表（好友）
      */
     @Override
-    public Map<String, Object> friendList(Long userId, Long goalId, Integer current, Integer limit) {
-        Page<BingoFollowRecord> recordPage = followRecordStore.friendList(userId, goalId, current, limit);
+    public Map<String, Object> friendList(Long uid, Long goalId, Integer current, Integer limit) {
+        Page<BingoFollowRecord> recordPage = followRecordStore.friendList(uid, goalId, current, limit);
         return null;
     }
 }

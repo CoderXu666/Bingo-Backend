@@ -17,7 +17,7 @@ import java.util.List;
 public interface BingoUserStore extends IService<BingoUser> {
     BingoUser findById(Long id);
 
-    BingoUser findByAccountId(String userId);
+    BingoUser findByAccountId(String uid);
 
     Boolean updateUser(BingoUser user);
 

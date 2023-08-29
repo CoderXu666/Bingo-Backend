@@ -47,8 +47,8 @@ public class BingoChatEmojiController {
      * 表情包展示（按照最新时间排序）
      */
     @GetMapping("/find")
-    public R findEmojiByUserId(Long userId) {
-        List<BingoChatEmoji> emojiUrl = emojiService.findEmojiByUserId(userId);
+    public R findEmojiByUserId(Long uid) {
+        List<BingoChatEmoji> emojiUrl = emojiService.findEmojiByUserId(uid);
         return R.out(RespCodeEnum.SUCCESS, emojiUrl);
     }
 }

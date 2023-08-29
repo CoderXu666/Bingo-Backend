@@ -21,14 +21,14 @@ public class JWTUtil {
     /**
      * 根据 uid 生成 Token
      */
-    public static String generateToken(Long userId) {
+    public static String generateToken(Long uid) {
         String JwtToken = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setHeaderParam("alg", "HS256")
                 .setSubject("Bingo")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
-                .claim("uid", userId)
+                .claim("uid", uid)
                 .signWith(SignatureAlgorithm.HS256, JWT_SECRET)
                 .compact();
         return JwtToken;

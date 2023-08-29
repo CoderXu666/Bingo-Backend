@@ -17,13 +17,13 @@ import java.util.List;
 public interface BingoFollowRecordStore extends IService<BingoFollowRecord> {
     Boolean saveFollowRecord(BingoFollowRecord followRecord);
 
-    BingoFollowRecord findRecordByUserIdAndGoalId(Long userId, Long goalId);
+    BingoFollowRecord findRecordByUserIdAndGoalId(Long uid, Long goalId);
 
     Boolean removeFollowRecord(Long recordId);
 
-    Page<BingoFollowRecord> followList(Long userId, Integer current, Integer limit);
+    Page<BingoFollowRecord> followList(Long uid, Integer current, Integer limit);
 
     Page<BingoFollowRecord> fanList(Long goalId, Integer current, Integer limit);
 
-    Page<BingoFollowRecord> friendList(Long userId, Long goalId, Integer current, Integer limit);
+    Page<BingoFollowRecord> friendList(Long uid, Long goalId, Integer current, Integer limit);
 }

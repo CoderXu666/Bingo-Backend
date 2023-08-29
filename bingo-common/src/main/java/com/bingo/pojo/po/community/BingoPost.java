@@ -32,7 +32,7 @@ public class BingoPost implements Serializable {
      * 账号
      */
     @TableField("uid")
-    private String userId;
+    private Long uid;
 
     /**
      * 帖子文案

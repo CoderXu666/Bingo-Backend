@@ -35,8 +35,8 @@ public class BingoUserController {
      * 根据userId查询用户信息
      */
     @GetMapping("/find_by_id")
-    public R findByUserId(Long id) {
-        UserVO userVO = userService.findById(id);
+    public R findByUserId(Long uid) {
+        UserVO userVO = userService.findById(uid);
         return R.out(RespCodeEnum.SUCCESS, userVO);
     }
 

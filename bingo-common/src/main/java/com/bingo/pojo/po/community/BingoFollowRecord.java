@@ -32,7 +32,7 @@ public class BingoFollowRecord implements Serializable {
      * 关注者
      */
     @TableField("uid")
-    private Long userId;
+    private Long uid;
 
     /**
      * 被关注者
