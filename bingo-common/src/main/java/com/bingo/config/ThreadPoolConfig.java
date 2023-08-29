@@ -1,8 +1,10 @@
 package com.bingo.config;
 
+import com.bingo.MyThreadFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
@@ -27,24 +29,26 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Configuration
 public class ThreadPoolConfig {
     private static final String CHAT_POOL_NAME = "CHAT_POOL_EXECUTOR";
-    private static final int coreSize = 10;
-    private static final int maxSize = 20;
-    private static final int queueCapacity = 200;
-    private static final int aliveSecond = 60;
-    private static final String prefixName = "chat-executor-pool-thread-";
+    private static final int CORE_SIZE = 10;
+    private static final int MAX_SIZE = 20;
+    private static final int QUEUE_CAPACITY = 200;
+    private static final int ALIVE_SECOND = 60;
+    private static final String PREFIX_NAME = "chat-executor-pool-thread-";
 
     /**
-     * 聊天通讯专用线程吃池
+     * 聊天通讯专用——线程池
      */
+    @Primary
     @Bean(CHAT_POOL_NAME)
     public ThreadPoolTaskExecutor chatExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(coreSize);
-        executor.setMaxPoolSize(maxSize);
-        executor.setQueueCapacity(queueCapacity);
-        executor.setKeepAliveSeconds(aliveSecond);
-        executor.setThreadNamePrefix(prefixName);
+        executor.setCorePoolSize(CORE_SIZE);
+        executor.setMaxPoolSize(MAX_SIZE);
+        executor.setQueueCapacity(QUEUE_CAPACITY);
+        executor.setKeepAliveSeconds(ALIVE_SECOND);
+        executor.setThreadNamePrefix(PREFIX_NAME);
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+        executor.setThreadFactory(new MyThreadFactory(executor));
         executor.initialize();
         return executor;
     }

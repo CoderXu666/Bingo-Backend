@@ -32,6 +32,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         String token = request.getHeader("token");
         if (JWTUtil.checkToken(token)) {
             log.info("登录Token校验通过：SUCCESS");
+            // 校验通过了，将用户信息封装到ThreadLocal中
+
             return true;
         } else {
             log.error("登录Token已过期：FAIL");
