@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * @Author: 徐志斌
  * @CreateTime: 2023-08-29  15:01
- * @Description: 未捕捉异常处理器（针对线程池）
+ * @Description: 未捕捉异常处理器
  * @Version: 1.0
  */
 @Slf4j
