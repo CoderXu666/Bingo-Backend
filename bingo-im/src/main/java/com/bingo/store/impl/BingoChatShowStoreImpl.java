@@ -25,7 +25,7 @@ public class BingoChatShowStoreImpl extends ServiceImpl<BingoChatShowMapper, Bin
     @Override
     public List<BingoChatShow> getChatShowList(Long userId) {
         QueryWrapper<BingoChatShow> wrapper = new QueryWrapper<>();
-        wrapper.eq("user_id", userId);
+        wrapper.eq("uid", userId);
         wrapper.orderByDesc("receive_time");
         return this.list(wrapper);
     }

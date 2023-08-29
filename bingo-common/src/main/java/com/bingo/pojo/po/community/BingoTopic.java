@@ -31,7 +31,7 @@ public class BingoTopic implements Serializable {
     /**
      * 关联用户ID
      */
-    @TableField("user_id")
+    @TableField("uid")
     private Long userId;
 
     /**

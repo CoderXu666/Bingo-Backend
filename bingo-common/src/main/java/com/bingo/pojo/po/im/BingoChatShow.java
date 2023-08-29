@@ -31,7 +31,7 @@ public class BingoChatShow implements Serializable {
     /**
      * 用户id
      */
-    @TableField("user_id")
+    @TableField("uid")
     private Long userId;
 
     /**

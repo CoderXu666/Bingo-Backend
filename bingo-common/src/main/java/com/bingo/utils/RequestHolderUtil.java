@@ -1,6 +1,6 @@
 package com.bingo.utils;
 
-import org.apache.coyote.RequestInfo;
+import java.util.Map;
 
 /**
  * @Author: 徐志斌
@@ -9,19 +9,19 @@ import org.apache.coyote.RequestInfo;
  * @Version: 1.0
  */
 public class RequestHolderUtil {
-    private static final ThreadLocal<RequestInfo> threadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<>();
 
     /**
      * 保存设置信息
      */
-    public static void set(RequestInfo requestInfo) {
-        threadLocal.set(requestInfo);
+    public static void set(Map<String, Object> map) {
+        threadLocal.set(map);
     }
 
     /**
      * 获取信息
      */
-    public static RequestInfo get() {
+    public static Map<String, Object> get() {
         return threadLocal.get();
     }
 

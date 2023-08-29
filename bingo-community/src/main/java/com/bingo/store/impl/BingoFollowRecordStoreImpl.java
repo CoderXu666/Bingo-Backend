@@ -27,12 +27,12 @@ public class BingoFollowRecordStoreImpl extends ServiceImpl<BingoFollowRecordMap
     }
 
     /**
-     * 根据user_id和goal_id查询关注记录
+     * 根据uid和goal_id查询关注记录
      */
     @Override
     public BingoFollowRecord findRecordByUserIdAndGoalId(Long userId, Long goalId) {
         QueryWrapper<BingoFollowRecord> wrapper = new QueryWrapper<>();
-        wrapper.eq("user_id", userId);
+        wrapper.eq("uid", userId);
         wrapper.eq("goal_id", goalId);
         return this.getOne(wrapper);
     }
@@ -52,7 +52,7 @@ public class BingoFollowRecordStoreImpl extends ServiceImpl<BingoFollowRecordMap
     public Page<BingoFollowRecord> followList(Long userId, Integer current, Integer limit) {
         Page<BingoFollowRecord> page = new Page(current, limit);
         QueryWrapper<BingoFollowRecord> wrapper = new QueryWrapper<>();
-        wrapper.eq("user_id", userId);
+        wrapper.eq("uid", userId);
         return this.page(page, wrapper);
     }
 

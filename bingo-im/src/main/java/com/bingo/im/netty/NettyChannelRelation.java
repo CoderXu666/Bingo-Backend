@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @Author 徐志斌
  * @Date: 2023/5/28 19:29
- * @Description: 管理 user_id & Channel 关系
+ * @Description: 管理 uid & Channel 关系
  */
 public class NettyChannelRelation {
     /**

@@ -31,7 +31,7 @@ public class BingoPost implements Serializable {
     /**
      * 账号
      */
-    @TableField("user_id")
+    @TableField("uid")
     private String userId;
 
     /**

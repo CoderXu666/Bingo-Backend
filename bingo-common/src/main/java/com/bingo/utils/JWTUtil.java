@@ -7,8 +7,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @Author 徐志斌
@@ -21,7 +19,7 @@ public class JWTUtil {
     public static final String JWT_SECRET = "Bingo_XuZhiBin_666";
 
     /**
-     * 根据 user_id 生成 Token
+     * 根据 uid 生成 Token
      */
     public static String generateToken(Long userId) {
         String JwtToken = Jwts.builder()
@@ -30,22 +28,19 @@ public class JWTUtil {
                 .setSubject("Bingo")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
-                .claim("user_id", userId)
+                .claim("uid", userId)
                 .signWith(SignatureAlgorithm.HS256, JWT_SECRET)
                 .compact();
         return JwtToken;
     }
 
     /**
-     * 解析 Token 获取 user_id
+     * 解析 Token 获取 uid
      */
-    public static Map<String, Object> resolveToken(String token) {
-        Map<String, Object> resultMap = new HashMap<>();
+    public static Long resolveToken(String token) {
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token);
         Claims claims = claimsJws.getBody();
-        Long userId = (Long) claims.get("user_id");
-        resultMap.put("user_id", userId);
-        return resultMap;
+        return (Long) claims.get("uid");
     }
 
     /**

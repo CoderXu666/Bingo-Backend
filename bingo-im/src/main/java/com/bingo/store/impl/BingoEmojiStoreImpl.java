@@ -42,7 +42,7 @@ public class BingoEmojiStoreImpl extends ServiceImpl<BingoEmojiMapper, BingoChat
     @Override
     public List findEmojiByUserId(Long userId) {
         QueryWrapper<BingoChatEmoji> queryWrapper = new QueryWrapper();
-        queryWrapper.eq("user_id", userId);
+        queryWrapper.eq("uid", userId);
         queryWrapper.orderByDesc("create_time");
         return this.list(queryWrapper);
     }

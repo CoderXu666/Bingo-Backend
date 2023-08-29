@@ -26,12 +26,12 @@ public class BingoChatSendRecordStoreImpl extends ServiceImpl<BingoChatSendRecor
     @Override
     public List<BingoChatSendRecord> getSendRecordList(Long userId, Long goalId) {
         QueryWrapper<BingoChatSendRecord> wrapper1 = new QueryWrapper<>();
-        wrapper1.eq("user_id", userId);
+        wrapper1.eq("uid", userId);
         wrapper1.eq("goal_id", goalId);
         List<BingoChatSendRecord> list1 = this.list(wrapper1);
 
         QueryWrapper<BingoChatSendRecord> wrapper2 = new QueryWrapper<>();
-        wrapper2.eq("user_id", goalId);
+        wrapper2.eq("uid", goalId);
         wrapper2.eq("goal_id", userId);
         List<BingoChatSendRecord> list2 = this.list(wrapper2);
 
