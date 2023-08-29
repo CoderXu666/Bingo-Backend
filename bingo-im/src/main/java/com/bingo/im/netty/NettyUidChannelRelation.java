@@ -11,12 +11,12 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Author 徐志斌
  * @Date: 2023/5/28 19:29
  * @Description: 管理 uid & Channel 关系
+ * ---------------------------------------------------------------------------------
+ * 解释：
+ * 1：ChannelGroup：管理所有channel，负责连接，每个channel就是一个通道（GlobalEventExecutor.INSTANCE:单例）
+ * 2：ConcurrentHashMap：管理 UserId 与 Channel 对应关系（用于给指定用户发送消息）
  */
-public class NettyChannelRelation {
-    /**
-     * 1：ChannelGroup：管理所有channel，每个channel就是一个通道（GlobalEventExecutor.INSTANCE:单例）
-     * 2：ConcurrentHashMap：管理 UserId 与 Channel 对应关系（用于给指定用户发送消息）
-     */
+public class NettyUidChannelRelation {
     private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     private static ConcurrentHashMap<Long, Channel> userChannelMap = new ConcurrentHashMap<>();
 
