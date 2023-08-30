@@ -1,4 +1,4 @@
-package com.bingo.anno;
+package com.bingo.annotation;
 
 
 import com.bingo.enums.CacheType;

@@ -7,7 +7,7 @@ import com.bingo.pojo.dto.community.PostDTO;
 import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.vo.community.PostPageVO;
 import com.bingo.pojo.vo.community.PostVO;
-import com.bingo.pojo.resp.R;
+import com.bingo.pojo.common.resp.R;
 import com.bingo.service.BingoPostService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

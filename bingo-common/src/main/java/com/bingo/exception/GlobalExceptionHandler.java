@@ -1,7 +1,7 @@
 package com.bingo.exception;
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.resp.R;
+import com.bingo.pojo.common.resp.R;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;

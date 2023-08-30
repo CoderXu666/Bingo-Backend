@@ -1,6 +1,6 @@
 package com.bingo.aop;
 
-import com.bingo.anno.DoubleCache;
+import com.bingo.annotation.DoubleCache;
 import com.bingo.enums.CacheType;
 import com.github.benmanes.caffeine.cache.Cache;
 import lombok.AllArgsConstructor;
@@ -45,7 +45,7 @@ public class CacheAspect {
     /**
      * 切入点：DoubleCache注解
      */
-    @Pointcut("@annotation(com.bingo.anno.DoubleCache)")
+    @Pointcut("@annotation(com.bingo.annotation.DoubleCache)")
     public void cacheAspect() {
     }
 

@@ -1,4 +1,4 @@
-package com.bingo.pojo.resp;
+package com.bingo.pojo.common.resp;
 
 import lombok.Data;
 

@@ -4,7 +4,7 @@ package com.bingo.controller;
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.dto.user.UserDTO;
 import com.bingo.pojo.po.user.BingoUser;
-import com.bingo.pojo.resp.R;
+import com.bingo.pojo.common.resp.R;
 import com.bingo.pojo.vo.user.UserVO;
 import com.bingo.service.BingoUserService;
 import com.bingo.utils.MinioUtil;

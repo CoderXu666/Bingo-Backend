@@ -6,7 +6,7 @@ import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoTopicMapper;
 import com.bingo.pojo.dto.community.TopicDTO;
 import com.bingo.pojo.po.community.BingoTopic;
-import com.bingo.pojo.resp.FeignResponse;
+import com.bingo.pojo.common.resp.FeignResponse;
 import com.bingo.pojo.vo.community.BingoTopicVO;
 import com.bingo.pojo.vo.user.UserVO;
 import com.bingo.service.BingoTopicService;
