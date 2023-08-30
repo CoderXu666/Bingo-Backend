@@ -18,11 +18,9 @@ import java.util.concurrent.ThreadPoolExecutor;
  * 1.ThreadPoolExecutor：Java标准库中的线程池类
  * 2.ThreadPoolTaskExecutor：对ThreadPoolExecutor进行了封装处理，具备更多功能
  * -------------------------------------------------------------------------------
- * 拒绝策略：
- * ThreadPoolExecutor.AbortPolicy:丢弃任务并抛出RejectedExecutionException异常。
- * ThreadPoolExecutor.DiscardPolicy：也是丢弃任务，但是不抛出异常。
- * ThreadPoolExecutor.DiscardOldestPolicy：丢弃队列最前面的任务，然后重新尝试执行任务（重复此过程）
- * ThreadPoolExecutor.CallerRunsPolicy：重试添加当前的任务，自动重复调用 execute() 方法，直到成功
+ * 为什么通过该方式使用线程池：
+ * 1.线程池交给Spring容器统一管理，不需要频繁的创建
+ * 2.不需要手动释放线程池资源，当项目关闭的时候，需要通过JVM的shutdownHook回调线程池，等队列里任务执行完再停机，保证任务不丢失。
  */
 @Slf4j
 @EnableAsync

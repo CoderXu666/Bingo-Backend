@@ -112,13 +112,6 @@
                 <version>${springboot.version}</version>
             </dependency>
 
-            <!-- WebSocket -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-websocket</artifactId>
-                <version>${springboot.version}</version>
-            </dependency>
-
             <!--Netty-->
             <dependency>
                 <groupId>io.netty</groupId>
