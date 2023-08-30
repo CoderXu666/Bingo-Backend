@@ -29,11 +29,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Configuration
 public class ThreadPoolConfig {
     private static final String CHAT_POOL_NAME = "CHAT_POOL_EXECUTOR";
-    private static final int CORE_SIZE = 10;
-    private static final int MAX_SIZE = 20;
-    private static final int QUEUE_CAPACITY = 200;
-    private static final int ALIVE_SECOND = 60;
-    private static final String PREFIX_NAME = "chat-executor-pool-thread-";
 
     /**
      * 聊天通讯专用——线程池
@@ -42,11 +37,11 @@ public class ThreadPoolConfig {
     @Bean(CHAT_POOL_NAME)
     public ThreadPoolTaskExecutor chatExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(CORE_SIZE);
-        executor.setMaxPoolSize(MAX_SIZE);
-        executor.setQueueCapacity(QUEUE_CAPACITY);
-        executor.setKeepAliveSeconds(ALIVE_SECOND);
-        executor.setThreadNamePrefix(PREFIX_NAME);
+        executor.setCorePoolSize(10);
+        executor.setMaxPoolSize(20);
+        executor.setQueueCapacity(200);
+        executor.setKeepAliveSeconds(60);
+        executor.setThreadNamePrefix("chat-executor-pool-thread-");
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         executor.setThreadFactory(new MyThreadFactory(executor));
         executor.initialize();

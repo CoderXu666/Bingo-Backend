@@ -1,4 +1,4 @@
-package com.bingo.im.netty;
+package com.bingo.netty;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;

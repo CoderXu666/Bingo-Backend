@@ -1,4 +1,4 @@
-package com.bingo.im.netty;
+package com.bingo.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -30,10 +30,38 @@ public class NettyWebSocketServer {
     private NettyServerChannelInitHandler initializerHandler;
 
     /**
-     * boss接受客户端连接等事件，work处理boss接收的事件
+     * boss接受客户端连接等事件
+     * work处理boss接收的事件
      */
     private EventLoopGroup bossGroup;
     private EventLoopGroup workGroup;
+
+    /**
+     * Netty WebSocket Server启动
+     */
+    private void start() throws InterruptedException {
+        bossGroup = new NioEventLoopGroup();
+        workGroup = new NioEventLoopGroup();
+
+        // 定义IM Server启动器
+        try {
+            ServerBootstrap server = new ServerBootstrap();
+            server.group(bossGroup, workGroup);
+            server.channel(NioServerSocketChannel.class);
+            // 为每个连接成功的Channel绑定子处理器
+            server.childHandler(initializerHandler);
+
+            // Netty Server绑定端口号
+            ChannelFuture channelFuture = server.bind(9099).sync();
+            log.info("Server started and listen on:{}", channelFuture.channel().localAddress());
+
+            // 关闭 Channel
+            channelFuture.channel().closeFuture().sync();
+        } finally {
+            bossGroup.shutdownGracefully();
+            workGroup.shutdownGracefully();
+        }
+    }
 
     /**
      * 启动 Netty Server
@@ -59,33 +87,6 @@ public class NettyWebSocketServer {
         }
         if (workGroup != null) {
             workGroup.shutdownGracefully().sync();
-        }
-    }
-
-    /**
-     * Netty Chat Server启动
-     */
-    private void start() throws InterruptedException {
-        bossGroup = new NioEventLoopGroup();
-        workGroup = new NioEventLoopGroup();
-
-        // 定义IM Server启动器
-        try {
-            ServerBootstrap server = new ServerBootstrap();
-            server.group(bossGroup, workGroup);
-            server.channel(NioServerSocketChannel.class);
-            // 为每个连接成功的Channel绑定子处理器
-            server.childHandler(initializerHandler);
-
-            // Netty Server绑定端口号
-            ChannelFuture channelFuture = server.bind(9099).sync();
-            log.info("Server started and listen on:{}", channelFuture.channel().localAddress());
-
-            // 关闭 Channel
-            channelFuture.channel().closeFuture().sync();
-        } finally {
-            bossGroup.shutdownGracefully();
-            workGroup.shutdownGracefully();
         }
     }
 }
