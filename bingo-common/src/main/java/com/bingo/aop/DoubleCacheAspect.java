@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -35,24 +34,16 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Aspect
 @Component
-@AllArgsConstructor
-public class CacheAspect {
+public class DoubleCacheAspect {
     @Autowired
     private Cache cache;
     @Autowired
     private RedisTemplate redisTemplate;
 
     /**
-     * 切入点：DoubleCache注解
+     * 二级缓存
      */
-    @Pointcut("@annotation(com.bingo.annotation.DoubleCache)")
-    public void cacheAspect() {
-    }
-
-    /**
-     * 环绕通知
-     */
-    @Around("cacheAspect()")
+    @Around("@annotation(com.bingo.annotation.DoubleCache)")
     public Object doAround(ProceedingJoinPoint point) throws Throwable {
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();
