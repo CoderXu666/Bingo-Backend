@@ -1,4 +1,4 @@
-package com.bingo.pojo.common.resp;
+package com.bingo.pojo.common.response;
 
 import com.bingo.enums.RespCodeEnum;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.Setter;
  * @Author 徐志斌
  * @Date: 2023/5/8 21:59
  * @Version 1.0
- * @Description: R
+ * @Description: 响应封装类：前后端统一消息格式
  */
 @Getter
 @Setter

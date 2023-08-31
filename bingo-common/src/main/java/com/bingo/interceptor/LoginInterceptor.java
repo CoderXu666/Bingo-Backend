@@ -34,12 +34,12 @@ public class LoginInterceptor implements HandlerInterceptor {
         // 从请求头中获取token信息，校验是可用
         String token = request.getHeader("token");
         if (JWTUtil.checkToken(token)) {
+            log.info("登录Token校验通过：SUCCESS....................");
             // 用户信息封装到ThreadLocal中
             Map<String, Object> map = new HashMap<>();
-            map.put("uid", JWTUtil.resolveToken(token));
+            map.put("uid", JWTUtil.resolveTokenToUid(token));
             map.put("ip", IPUtil.getIpAddress(request));
             RequestHolderUtil.set(map);
-            log.info("登录Token校验通过：SUCCESS....................");
             return true;
         } else {
             log.error("登录Token已过期：FAIL....................");

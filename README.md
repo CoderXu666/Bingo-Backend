@@ -2,8 +2,6 @@
 
 欢迎您的到来，这是我的个人开源项目—Bingo社交，一款功能丰富、新颖的，针对年轻人的社交平台；
 
-
-
 ### 2、模块划分
 
 #### 用户/会员管理【bingo-user】
@@ -34,8 +32,6 @@
 
 用于封装项目通用所需的相关实体类、工具类、Feign接口、注解、拦截器等.....
 
-
-
 ### 3、技术栈
 
 #### 后端
@@ -51,8 +47,7 @@
     - Sentinel
     - Seata
 - Kafka
-- Netty
-- WebSocket + WebRTC
+- Netty + WebSocket + WebRTC
 - SpringEmail
 - MinIO
 - ShardingSphere
@@ -86,19 +81,11 @@
 - Prometheus
 - Grafana
 
-
-
 #### 大数据
 
 待定......
 
-
-
 ### 4、项目架构图
-
-
-
-
 
 ### 5、加入我们
 

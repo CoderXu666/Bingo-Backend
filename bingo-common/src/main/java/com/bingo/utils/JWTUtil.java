@@ -37,14 +37,14 @@ public class JWTUtil {
     /**
      * 解析 Token 获取 uid
      */
-    public static Long resolveToken(String token) {
+    public static Long resolveTokenToUid(String token) {
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token);
         Claims claims = claimsJws.getBody();
         return (Long) claims.get("uid");
     }
 
     /**
-     * 校验 Token 是否过期
+     * 校验 Token 是否可用
      */
     public static boolean checkToken(String jwtToken) {
         if (StringUtils.isEmpty(jwtToken)) {

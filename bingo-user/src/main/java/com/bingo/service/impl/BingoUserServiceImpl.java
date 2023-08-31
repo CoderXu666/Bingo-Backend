@@ -257,7 +257,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      */
     @Override
     public BingoUser resolveToken(String token) throws Exception {
-        Long userId = JWTUtil.resolveToken(token);
+        Long userId = JWTUtil.resolveTokenToUid(token);
         BingoUser userInfo = userStore.findById(userId);
         if (ObjectUtils.isEmpty(userInfo)) {
             throw new Exception("没有查询到该uid的用户信息");
