@@ -1,16 +1,17 @@
 package com.bingo.controller;
 
 
-import com.bingo.annotation.RateLimiter;
-import com.bingo.enums.LimitType;
 import com.bingo.enums.RespCodeEnum;
+import com.bingo.pojo.common.response.R;
 import com.bingo.pojo.dto.user.UserDTO;
 import com.bingo.pojo.po.user.BingoUser;
-import com.bingo.pojo.common.response.R;
 import com.bingo.pojo.vo.user.UserVO;
 import com.bingo.service.BingoUserService;
 import com.bingo.utils.MinioUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,6 +27,8 @@ import java.util.List;
  * @author 徐志斌
  * @since 2023-03-01
  */
+@Slf4j
+
 @RestController
 public class BingoUserController {
     @Autowired
@@ -134,11 +137,41 @@ public class BingoUserController {
 
 
     /**
-     * 测试读取Nacos配置文件中的配置
+     * Test测试专用接口
      */
+    @Autowired
+    private ThreadPoolTaskExecutor taskExecutor;
+
+
+    @Async
+    public void testAsync() {
+        for (int i = 0; i < 20; i++) {
+            System.out.println(taskExecutor.getThreadNamePrefix() + "第3333333个异步：" + i);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     @GetMapping("/test")
-    @RateLimiter(time = 60,count = 5,limitType = LimitType.DEFAULT)
     public String getInfo() {
+
+        testAsync();
+//        taskExecutor.execute(() -> testAsync());
+
+        taskExecutor.execute(() -> {
+            for (int i = 0; i < 20; i++) {
+                System.out.println(taskExecutor.getThreadNamePrefix() + "第222222个异步：" + i);
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
         return "接口调用成功";
     }
 }
