@@ -1,6 +1,8 @@
 package com.bingo.controller;
 
 
+import com.bingo.annotation.RateLimiter;
+import com.bingo.enums.LimitType;
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.dto.user.UserDTO;
 import com.bingo.pojo.po.user.BingoUser;
@@ -135,6 +137,7 @@ public class BingoUserController {
      * 测试读取Nacos配置文件中的配置
      */
     @GetMapping("/test")
+    @RateLimiter(time = 5,count = 3,limitType = LimitType.DEFAULT)
     public String getInfo() {
         return "接口调用成功";
     }

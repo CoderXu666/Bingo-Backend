@@ -22,6 +22,9 @@ import java.util.List;
 /**
  * @Description：前后端跨域、拦截器、JSON转换
  * @Author 徐志斌
+ * -------------------------------------------------------
+ * 注意：
+ * 不要携带yml配置文件统一path路径，否则失效（例如：/user/captcha）
  */
 @Configuration
 @EnableWebMvc
@@ -30,23 +33,18 @@ public class WebMvcConfig implements WebMvcConfigurer {
     private LoginInterceptor loginInterceptor;
 
     /**
-     * 注意：
-     * 这个excludePathPatterns，一定要写接口路径
-     * 不要携带yml配置文件统一path路径，否则失效（例如：/user/captcha）
-     */
-    private static final List<String> EXCLUDE_PATH = Arrays.asList(
-            "/login",
-            "/register",
-            "/resolve_token",
-            "/captcha",
-            "/list_by_ids"
-    );
-
-    /**
      * 拦截器配置
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        final List<String> EXCLUDE_PATH = Arrays.asList(
+                "/login",
+                "/register",
+                "/resolve_token",
+                "/captcha",
+                "/list_by_ids",
+                "/test"
+        );
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns(EXCLUDE_PATH);

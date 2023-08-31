@@ -2,12 +2,17 @@ package com.bingo.annotation;
 
 import com.bingo.enums.LimitType;
 
+import java.lang.annotation.*;
+
 /**
  * @Author: 徐志斌
  * @CreateTime: 2023-08-30  21:07
  * @Description: Redis限流注解
  * @Version: 1.0
  */
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
 public @interface RateLimiter {
     /**
      * 限流key

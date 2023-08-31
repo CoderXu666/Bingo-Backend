@@ -10,14 +10,14 @@ import org.springframework.scripting.support.ResourceScriptSource;
  * @Author 徐志斌
  * @Date: 2023/8/30 22:13
  * @Version 1.0
- * @Description: Redis Lua脚本配置类，用于加载Lua脚本文件
+ * @Description: Redis Lua脚本配置类：将 Lua脚本 放入Spring容器中加载
  */
 @Configuration
-public class RedisLuaScriptConfig {
+public class LuaScriptConfig {
     public static final String RATE_LIMIT = "RATE_LIMIT_LUA";
 
     /**
-     * RateLimit.lua脚本
+     * RateLimit.lua限流脚本
      */
     @Bean(RATE_LIMIT)
     public DefaultRedisScript<Long> rateLimitScript() {

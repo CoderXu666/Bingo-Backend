@@ -1,7 +1,7 @@
 package com.bingo.aop;
 
 import com.bingo.annotation.RateLimiter;
-import com.bingo.config.RedisLuaScriptConfig;
+import com.bingo.config.LuaScriptConfig;
 import com.bingo.enums.LimitType;
 import com.bingo.utils.IPUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -26,10 +26,12 @@ import java.util.List;
  * @Date: 2023/8/30 22:26
  * @Version 1.0
  * @Description: RateLimitAspect
- * ---------------------------------------------------
+ * -------------------------------------------------------------------------------
  * 注意：
  * 使用注解AOP切入很奇怪，如果方法参数有注解，那就不能全报名，只能变量名：@Before("@annotation(rateLimiter)")
  * 如果方法参数没有声明注解，那就可以全类名：@Around("@annotation(com.bingo.annotation.DoubleCache)")
+ * -------------------------------------------------------------------------------
+ *
  */
 @Slf4j
 @Aspect
@@ -38,11 +40,11 @@ public class RateLimitAspect {
     @Autowired
     private RedisTemplate<Object, Object> redisTemplate;
     @Autowired
-    @Qualifier(RedisLuaScriptConfig.RATE_LIMIT)
+    @Qualifier(LuaScriptConfig.RATE_LIMIT)
     private RedisScript<Long> redisScript;
 
     /**
-     * Redis限流
+     * Redis限流：计数器方案
      */
     @Before("@annotation(rateLimiter)")
     public void rateLimiter(JoinPoint point, RateLimiter rateLimiter) throws Exception {
