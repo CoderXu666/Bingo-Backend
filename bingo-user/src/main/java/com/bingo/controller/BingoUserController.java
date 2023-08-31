@@ -137,7 +137,7 @@ public class BingoUserController {
      * 测试读取Nacos配置文件中的配置
      */
     @GetMapping("/test")
-    @RateLimiter(time = 5,count = 3,limitType = LimitType.DEFAULT)
+    @RateLimiter(time = 60,count = 5,limitType = LimitType.DEFAULT)
     public String getInfo() {
         return "接口调用成功";
     }
