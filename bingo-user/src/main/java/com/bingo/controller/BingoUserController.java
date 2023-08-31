@@ -144,15 +144,8 @@ public class BingoUserController {
     @GetMapping("/test")
     public String getInfo() {
         taskExecutor.execute(() -> {
-            for (int i = 0; i < 20; i++) {
-                System.out.println(taskExecutor.getThreadNamePrefix() + "第222222个异步：" + i);
-
-                try {
-                    int res = 1 / 0;
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
+            System.out.println(taskExecutor.getThreadNamePrefix() + "第222222个异步：");
+            int res = 1 / 0;
         });
 
         return "接口调用成功";

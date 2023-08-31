@@ -17,6 +17,15 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     /**
+     * Test
+     */
+    @ExceptionHandler(RuntimeException.class)
+    public R expiredJwtException(RuntimeException e) {
+        log.error("--------------------ArithmeticException：{}--------------------", e);
+        return R.out(RespCodeEnum.TOKEN_EXPIRED, e);
+    }
+
+    /**
      * JWT Token过期解析异常
      */
     @ExceptionHandler(ExpiredJwtException.class)
