@@ -10,7 +10,6 @@ import com.bingo.service.BingoUserService;
 import com.bingo.utils.MinioUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -142,31 +141,15 @@ public class BingoUserController {
     @Autowired
     private ThreadPoolTaskExecutor taskExecutor;
 
-
-    @Async
-    public void testAsync() {
-        for (int i = 0; i < 20; i++) {
-            System.out.println(taskExecutor.getThreadNamePrefix() + "第3333333个异步：" + i);
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
     @GetMapping("/test")
     public String getInfo() {
-
-        testAsync();
-//        taskExecutor.execute(() -> testAsync());
-
         taskExecutor.execute(() -> {
             for (int i = 0; i < 20; i++) {
                 System.out.println(taskExecutor.getThreadNamePrefix() + "第222222个异步：" + i);
+
                 try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
+                    int res = 1 / 0;
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
             }
