@@ -1,5 +1,6 @@
 package com.bingo.config;
 
+import com.bingo.factory.MyThreadFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,7 +41,7 @@ public class ThreadPoolConfig implements AsyncConfigurer {
         executor.setKeepAliveSeconds(60);
         executor.setThreadNamePrefix("chat-pool-thread-");
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-//        executor.setThreadFactory(new MyThreadFactory(executor));
+        executor.setThreadFactory(new MyThreadFactory(executor));
         executor.initialize();
         return executor;
     }
