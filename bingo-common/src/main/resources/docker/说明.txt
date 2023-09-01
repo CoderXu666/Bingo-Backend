@@ -1,6 +1,0 @@
-针对DockerFile：
-这些DockerFile文件用于构建微服务Image镜像，然后放到目标外网服务进行服务启动运行。
-不要尝试在本地执行这些Dockerfile文件! dockerfile中的命令是根据生产环境进行编写的。
-
-
-关于Docker-Compose

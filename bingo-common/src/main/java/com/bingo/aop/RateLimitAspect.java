@@ -31,7 +31,7 @@ import java.util.List;
  * 使用注解AOP切入很奇怪，如果方法参数有注解，那就不能全报名，只能变量名：@Before("@annotation(rateLimiter)")
  * 如果方法参数没有声明注解，那就可以全类名：@Around("@annotation(com.bingo.annotation.DoubleCache)")
  * -------------------------------------------------------------------------------
- *
+ * Lua脚本原子性 + Redis单线程 = 线程安全
  */
 @Slf4j
 @Aspect

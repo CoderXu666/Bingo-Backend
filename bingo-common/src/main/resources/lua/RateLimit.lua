@@ -1,4 +1,4 @@
---[[脚本传入参数]]
+--[[脚本传入参数：限流key、限流次数、限流时间范围]]
 local key = KEYS[1]
 local count = tonumber(ARGV[1])
 local time = tonumber(ARGV[2])
