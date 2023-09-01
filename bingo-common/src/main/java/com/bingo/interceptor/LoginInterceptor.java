@@ -6,6 +6,7 @@ import com.bingo.utils.RequestHolderUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,9 @@ import java.util.Map;
 @Slf4j
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
+    /**
+     * 请求到达Controller前
+     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (request.getMethod().equals("OPTIONS")) {
@@ -45,5 +49,20 @@ public class LoginInterceptor implements HandlerInterceptor {
             log.error("登录Token已过期：FAIL....................");
             return false;
         }
+    }
+
+    /**
+     * 调用Controller后，DispatcherServlet 渲染视图之前
+     */
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    }
+
+    /**
+     * DispatcherServlet 渲染视图后
+     */
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        RequestHolderUtil.remove();
     }
 }

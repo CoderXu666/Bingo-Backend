@@ -18,8 +18,8 @@ public class MyUncaughtExceptionHandler implements Thread.UncaughtExceptionHandl
     }
 
     /**
-     * 捕捉异常（线程池），打印日志
-     * 作用：仅仅为了打印日志，别指望把异常抛出给全局异常处理器处理
+     * 作用：捕捉异常（线程池），打印日志
+     * 别指望把异常抛出给全局异常处理器处理，异步操作出现的异常没啥可处理的
      */
     @Override
     public void uncaughtException(Thread t, Throwable e) {
