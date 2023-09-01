@@ -1,11 +1,11 @@
 # 基础镜像：构建镜像依赖
 FROM openjdk:8
 
-# 作者
+# 维护者
 MAINTAINER 徐志斌
 
 # 镜像指定标签
-LABEL version="1.0"
+LABEL version="Bingo:1.0"
 
 # 宿主机文件 COPY 镜像
 # 说明：类似COPY，不过COPY不能自动解压文件，不能访问网络资源
@@ -14,5 +14,5 @@ ADD bingo-user.jar /bingo-user.jar
 # 运行成容器时的端口
 EXPOSE 10001
 
-# 容器启动时执行（类似ENTRYPOINT）
-CMD ["java","-jar","bingo-user.jar"]
+# 容器启动时执行（类似CMD）
+ENTRYPOINT ["java","-jar","bingo-user.jar"]

@@ -24,6 +24,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>bingo-party</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
