@@ -1,4 +1,5 @@
 # 基础镜像：构建镜像依赖
+# 解释：为什么公有云没有安装jdk，还能运行java -jar，就是因为这行命令
 FROM openjdk:8
 
 # 维护者
@@ -9,7 +10,7 @@ LABEL version="Bingo:1.0"
 
 # 宿主机文件 COPY 镜像
 # 说明：类似COPY，不过COPY不能自动解压文件，不能访问网络资源
-ADD bingo-user.jar /bingo-user.jar
+ADD /opt/bingo-dir/jar/bingo-user.jar /bingo-user.jar
 
 # 运行成容器时的端口
 EXPOSE 10001
