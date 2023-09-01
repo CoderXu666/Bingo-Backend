@@ -1,4 +1,4 @@
-package com.bingo.pojo.constant;
+package com.bingo.constant;
 
 /**
  * @Author 徐志斌
