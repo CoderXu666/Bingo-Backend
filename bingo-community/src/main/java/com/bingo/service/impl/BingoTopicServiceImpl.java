@@ -7,8 +7,8 @@ import com.bingo.mapper.BingoTopicMapper;
 import com.bingo.pojo.dto.community.TopicDTO;
 import com.bingo.pojo.po.community.BingoTopic;
 import com.bingo.pojo.common.response.FeignResponse;
-import com.bingo.pojo.vo.community.BingoTopicVO;
-import com.bingo.pojo.vo.user.UserVO;
+import com.bingo.pojo.resp.community.BingoTopicResp;
+import com.bingo.pojo.resp.user.UserResp;
 import com.bingo.service.BingoTopicService;
 import com.bingo.store.BingoTopicStore;
 import lombok.SneakyThrows;
@@ -61,7 +61,7 @@ public class BingoTopicServiceImpl extends ServiceImpl<BingoTopicMapper, BingoTo
      * 根据话题ID查询话题详细信息以及用户相关信息
      */
     @Override
-    public BingoTopicVO getTopicById(Long topicId) throws Exception {
+    public BingoTopicResp getTopicById(Long topicId) throws Exception {
         if (!StringUtils.isNotEmpty(topicId.toString())) {
             throw new Exception("话题异常");
         }
@@ -70,12 +70,12 @@ public class BingoTopicServiceImpl extends ServiceImpl<BingoTopicMapper, BingoTo
         BingoTopic topic = topicStore.findTopicById(topicId);
 
         //远程调用查询用户相关信息
-        FeignResponse<UserVO> feignResponse = userFeign.findByUserId(topic.getUid());
-        UserVO userVO = feignResponse.getData();
+        FeignResponse<UserResp> feignResponse = userFeign.findByUserId(topic.getUid());
+        UserResp userResp = feignResponse.getData();
 
-        BingoTopicVO topicVO = new BingoTopicVO();
-        BeanUtils.copyProperties(userVO, topicVO);
-        BeanUtils.copyProperties(topic, topicVO);
-        return topicVO;
+        BingoTopicResp topicResp = new BingoTopicResp();
+        BeanUtils.copyProperties(userResp, topicResp);
+        BeanUtils.copyProperties(topic, topicResp);
+        return topicResp;
     }
 }

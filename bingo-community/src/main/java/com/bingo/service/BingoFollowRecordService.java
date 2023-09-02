@@ -2,9 +2,7 @@ package com.bingo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bingo.pojo.po.community.BingoFollowRecord;
-import com.bingo.pojo.vo.user.UserVO;
 
-import java.util.List;
 import java.util.Map;
 
 /**

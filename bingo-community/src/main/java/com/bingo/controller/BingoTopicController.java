@@ -4,7 +4,7 @@ package com.bingo.controller;
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.dto.community.TopicDTO;
 import com.bingo.pojo.common.response.R;
-import com.bingo.pojo.vo.community.BingoTopicVO;
+import com.bingo.pojo.resp.community.BingoTopicResp;
 import com.bingo.service.BingoTopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -54,8 +54,8 @@ public class BingoTopicController {
      */
     @GetMapping("/information")
     public R getTopicById(Long topicId) throws Exception {
-        BingoTopicVO topicVO = topicService.getTopicById(topicId);
-        return R.out(RespCodeEnum.SUCCESS, topicVO);
+        BingoTopicResp topicResp = topicService.getTopicById(topicId);
+        return R.out(RespCodeEnum.SUCCESS, topicResp);
     }
 
 

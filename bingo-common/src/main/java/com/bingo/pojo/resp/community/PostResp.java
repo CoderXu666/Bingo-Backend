@@ -1,4 +1,4 @@
-package com.bingo.pojo.vo.community;
+package com.bingo.pojo.resp.community;
 
 import lombok.Data;
 
@@ -6,10 +6,10 @@ import lombok.Data;
  * @Author 徐志斌
  * @Date: 2023/6/4 19:30
  * @Version 1.0
- * @Description: PostVO
+ * @Description: PostResp
  */
 @Data
-public class PostVO {
+public class PostResp {
     /**
      * id
      */

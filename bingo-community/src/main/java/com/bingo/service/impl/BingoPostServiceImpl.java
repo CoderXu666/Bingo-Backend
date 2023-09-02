@@ -14,9 +14,9 @@ import com.bingo.pojo.dto.community.LikeDTO;
 import com.bingo.pojo.dto.community.PostDTO;
 import com.bingo.pojo.po.community.BingoPost;
 import com.bingo.pojo.common.response.FeignResponse;
-import com.bingo.pojo.vo.community.PostPageVO;
-import com.bingo.pojo.vo.community.PostVO;
-import com.bingo.pojo.vo.user.UserVO;
+import com.bingo.pojo.resp.community.PostPageResp;
+import com.bingo.pojo.resp.community.PostResp;
+import com.bingo.pojo.resp.user.UserResp;
 import com.bingo.service.BingoPostService;
 import com.bingo.store.BingoPostStore;
 import org.elasticsearch.action.search.SearchRequest;
@@ -116,9 +116,9 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
      * 根据关键字 postFont，全文搜索帖子
      */
     @Override
-    public List<PostVO> searchPost(SearchDTO searchDTO) throws IOException {
+    public List<PostResp> searchPost(SearchDTO searchDTO) throws IOException {
         List<Long> idList = new ArrayList<>();
-        List<PostVO> resultList = new ArrayList<>();
+        List<PostResp> resultList = new ArrayList<>();
         String content = searchDTO.getContent();
         Integer current = searchDTO.getCurrent();
         Integer limit = searchDTO.getLimit();
@@ -138,9 +138,9 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
         // 处理查询结果
         for (SearchHit hit : hits) {
             String postString = hit.getSourceAsString();
-            PostVO postVO = JSON.parseObject(postString, PostVO.class);
-            resultList.add(postVO);
-            idList.add(postVO.getId());
+            PostResp postResp = JSON.parseObject(postString, PostResp.class);
+            resultList.add(postResp);
+            idList.add(postResp.getId());
         }
 
         // TODO 将帖子点赞、评论相关数量信息封装到帖子中
@@ -152,8 +152,8 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
      * 展示用户最新的帖子（分页10条）
      */
     @Override
-    public PostPageVO pagePost(PageParam pageParam) {
-        PostPageVO postPageVO = new PostPageVO();
+    public PostPageResp pagePost(PageParam pageParam) {
+        PostPageResp postPageResp = new PostPageResp();
 
         //查询帖子表（分页10条）
         Page<BingoPost> bingoPost = postStore.pagePost(pageParam);
@@ -169,11 +169,11 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
         //List<BingoPostStatistics> postStatistics = PostStatisticsStore.findPost(ids);
 
         //Feign取得对应用户相关信息
-        FeignResponse<List<UserVO>> feignResponse = userFeign.getUserByIds(ids);
-        List<UserVO> userVOList = feignResponse.getData();
-        BeanUtils.copyProperties(bingoPost, postPageVO);
-//        BeanUtils.copyProperties(postStatistics, postPageVO);
-        BeanUtils.copyProperties(userVOList, postPageVO);
-        return postPageVO;
+        FeignResponse<List<UserResp>> feignResponse = userFeign.getUserByIds(ids);
+        List<UserResp> userRespList = feignResponse.getData();
+        BeanUtils.copyProperties(bingoPost, postPageResp);
+//        BeanUtils.copyProperties(postStatistics, postPageResp);
+        BeanUtils.copyProperties(userRespList, postPageResp);
+        return postPageResp;
     }
 }

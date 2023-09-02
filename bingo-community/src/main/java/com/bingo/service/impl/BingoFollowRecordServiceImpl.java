@@ -6,7 +6,7 @@ import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoFollowRecordMapper;
 import com.bingo.pojo.po.community.BingoFollowLog;
 import com.bingo.pojo.po.community.BingoFollowRecord;
-import com.bingo.pojo.vo.user.UserVO;
+import com.bingo.pojo.resp.user.UserResp;
 import com.bingo.service.BingoFollowRecordService;
 import com.bingo.store.BingoFollowLogStore;
 import com.bingo.store.BingoFollowRecordStore;
@@ -66,7 +66,7 @@ public class BingoFollowRecordServiceImpl extends ServiceImpl<BingoFollowRecordM
     public Map<String, Object> followList(Long uid, Integer current, Integer limit) {
         Page<BingoFollowRecord> recordPage = followRecordStore.followList(uid, current, limit);
         List<Long> followIds = recordPage.getRecords().stream().map(item -> item.getUid()).collect(Collectors.toList());
-        List<UserVO> userInfoList = userFeign.getUserByIds(followIds).getData();
+        List<UserResp> userInfoList = userFeign.getUserByIds(followIds).getData();
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("list", userInfoList);
         resultMap.put("count", recordPage.getTotal());
@@ -80,7 +80,7 @@ public class BingoFollowRecordServiceImpl extends ServiceImpl<BingoFollowRecordM
     public Map<String, Object> fanList(Long goalId, Integer current, Integer limit) {
         Page<BingoFollowRecord> recordPage = followRecordStore.fanList(goalId, current, limit);
         List<Long> fanIds = recordPage.getRecords().stream().map(item -> item.getUid()).collect(Collectors.toList());
-        List<UserVO> userInfoList = userFeign.getUserByIds(fanIds).getData();
+        List<UserResp> userInfoList = userFeign.getUserByIds(fanIds).getData();
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("list", userInfoList);
         resultMap.put("count", recordPage.getTotal());

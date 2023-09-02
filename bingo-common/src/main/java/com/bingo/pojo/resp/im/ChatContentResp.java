@@ -1,4 +1,4 @@
-package com.bingo.pojo.vo.im;
+package com.bingo.pojo.resp.im;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import java.util.Date;
  * @Description: 单条聊天信息
  */
 @Data
-public class ChatContentVO {
+public class ChatContentResp {
     /**
      * 用户id
      */

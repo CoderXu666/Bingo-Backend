@@ -5,7 +5,7 @@ import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.common.response.R;
 import com.bingo.pojo.dto.user.UserDTO;
 import com.bingo.pojo.po.user.BingoUser;
-import com.bingo.pojo.vo.user.UserVO;
+import com.bingo.pojo.resp.user.UserResp;
 import com.bingo.service.BingoUserService;
 import com.bingo.utils.MinioUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -40,8 +40,8 @@ public class BingoUserController {
      */
     @GetMapping("/find_by_id")
     public R findByUserId(Long uid) {
-        UserVO userVO = userService.findById(uid);
-        return R.out(RespCodeEnum.SUCCESS, userVO);
+        UserResp userResp = userService.findById(uid);
+        return R.out(RespCodeEnum.SUCCESS, userResp);
     }
 
     /**
@@ -110,7 +110,7 @@ public class BingoUserController {
      */
     @PostMapping("/list_by_ids")
     public R getUserInfoByIds(@RequestBody List<Long> ids) {
-        List<UserVO> userList = userService.getUserByIds(ids);
+        List<UserResp> userList = userService.getUserByIds(ids);
         return R.out(RespCodeEnum.SUCCESS, userList);
     }
 

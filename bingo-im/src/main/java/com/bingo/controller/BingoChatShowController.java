@@ -6,7 +6,6 @@ import com.bingo.pojo.common.response.R;
 import com.bingo.service.BingoChatShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +20,7 @@ import java.util.Map;
  * @since 2023-08-24
  */
 @RestController
-@RequestMapping("/chat")
+@RequestMapping("/show")
 public class BingoChatShowController {
     @Autowired
     private BingoChatShowService showService;
@@ -29,9 +28,9 @@ public class BingoChatShowController {
     /**
      * 查询聊天列表
      */
-    @GetMapping("/list/{uid}")
-    public R getChatList(@PathVariable("uid") Long userId) {
-        Map<Object, Object> resultMap = showService.getChatList(userId);
+    @GetMapping("/list")
+    public R getChatList() {
+        Map<Object, Object> resultMap = showService.getChatList();
         return R.out(RespCodeEnum.SUCCESS, resultMap);
     }
 }

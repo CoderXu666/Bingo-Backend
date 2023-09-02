@@ -1,9 +1,9 @@
-package com.bingo.pojo.vo.community;
+package com.bingo.pojo.resp.community;
 
 import lombok.Data;
 
 @Data
-public class BingoFollowVO {
+public class BingoFollowResp {
     /**
      * 用户id
      */

@@ -5,8 +5,8 @@ import com.bingo.pojo.common.PageParam;
 import com.bingo.pojo.dto.community.LikeDTO;
 import com.bingo.pojo.dto.community.PostDTO;
 import com.bingo.pojo.dto.SearchDTO;
-import com.bingo.pojo.vo.community.PostPageVO;
-import com.bingo.pojo.vo.community.PostVO;
+import com.bingo.pojo.resp.community.PostPageResp;
+import com.bingo.pojo.resp.community.PostResp;
 import com.bingo.pojo.common.response.R;
 import com.bingo.service.BingoPostService;
 import lombok.extern.slf4j.Slf4j;
@@ -48,7 +48,7 @@ public class BingoPostController {
      */
     @PostMapping("/search")
     public R searchPost(@RequestBody SearchDTO searchDTO) throws IOException {
-        List<PostVO> result = postService.searchPost(searchDTO);
+        List<PostResp> result = postService.searchPost(searchDTO);
         return R.out(RespCodeEnum.SUCCESS, result);
     }
 
@@ -66,8 +66,8 @@ public class BingoPostController {
      */
     @PostMapping("/post_list")
     public R pagePost(@RequestBody PageParam pageParam) {
-        PostPageVO postPageVO = postService.pagePost(pageParam);
-        return R.out(RespCodeEnum.SUCCESS, postPageVO);
+        PostPageResp postPageResp = postService.pagePost(pageParam);
+        return R.out(RespCodeEnum.SUCCESS, postPageResp);
     }
 }
 

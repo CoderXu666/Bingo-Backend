@@ -15,5 +15,5 @@ import java.util.Map;
  */
 public interface BingoChatShowService extends IService<BingoChatShow> {
 
-    Map<Object, Object> getChatList(Long userId);
+    Map<Object, Object> getChatList();
 }

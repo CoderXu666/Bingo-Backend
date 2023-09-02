@@ -4,7 +4,7 @@ package com.bingo.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bingo.pojo.dto.community.TopicDTO;
 import com.bingo.pojo.po.community.BingoTopic;
-import com.bingo.pojo.vo.community.BingoTopicVO;
+import com.bingo.pojo.resp.community.BingoTopicResp;
 
 /**
  * <p>
@@ -20,5 +20,5 @@ public interface BingoTopicService extends IService<BingoTopic> {
 
     Boolean deleteTopic(Long id);
 
-    BingoTopicVO getTopicById(Long topicId) throws Exception;
+    BingoTopicResp getTopicById(Long topicId) throws Exception;
 }

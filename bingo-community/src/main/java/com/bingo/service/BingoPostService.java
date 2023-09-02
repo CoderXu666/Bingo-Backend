@@ -6,8 +6,8 @@ import com.bingo.pojo.dto.community.LikeDTO;
 import com.bingo.pojo.dto.community.PostDTO;
 import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.po.community.BingoPost;
-import com.bingo.pojo.vo.community.PostPageVO;
-import com.bingo.pojo.vo.community.PostVO;
+import com.bingo.pojo.resp.community.PostPageResp;
+import com.bingo.pojo.resp.community.PostResp;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,6 +23,6 @@ import java.util.List;
 public interface BingoPostService extends IService<BingoPost> {
     Boolean savePost(PostDTO postDTO);
     Boolean likePost(LikeDTO likeDTO);
-    List<PostVO> searchPost(SearchDTO searchDTO) throws IOException;
-    PostPageVO pagePost(PageParam pageParam);
+    List<PostResp> searchPost(SearchDTO searchDTO) throws IOException;
+    PostPageResp pagePost(PageParam pageParam);
 }

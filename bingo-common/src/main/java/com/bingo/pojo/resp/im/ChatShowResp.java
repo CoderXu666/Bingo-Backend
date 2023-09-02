@@ -1,4 +1,4 @@
-package com.bingo.pojo.vo.im;
+package com.bingo.pojo.resp.im;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import lombok.Data;
  * @Description: 聊天列表显示
  */
 @Data
-public class ChatShowVO {
+public class ChatShowResp {
     /**
      * 主键id
      */

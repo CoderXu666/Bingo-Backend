@@ -1,11 +1,11 @@
-package com.bingo.pojo.vo.user;
+package com.bingo.pojo.resp.user;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class UserVO {
+public class UserResp {
     /**
      * 主键id
      */
