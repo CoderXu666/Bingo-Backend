@@ -93,13 +93,6 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
                 chatShowResp.setType(0);
                 chatShowRespList.add(chatShowResp);
             }
-            if (CollectionUtils.isNotEmpty(groupInfoMap) && groupInfoMap.containsKey(chatShowItem.getGoalId())) {
-                BingoChatGroup groupInfo = groupInfoMap.get(chatShowItem.getGoalId());
-                BeanUtils.copyProperties(groupInfo, chatShowResp);
-                chatShowResp.setItemName(groupInfo.getGroupName());
-                chatShowResp.setType(1);
-                chatShowRespList.add(chatShowResp);
-            }
         }
 
         // 查询好友、群组聊天信息（循环查询吧，有Redis，并且这里条件复杂）
