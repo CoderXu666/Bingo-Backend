@@ -5,13 +5,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoChatShowMapper;
 import com.bingo.pojo.po.im.BingoChatGroup;
-import com.bingo.pojo.po.im.BingoChatGroupSendRecord;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
 import com.bingo.pojo.po.im.BingoChatShow;
 import com.bingo.pojo.resp.im.ChatShowResp;
 import com.bingo.pojo.resp.user.UserResp;
 import com.bingo.service.BingoChatShowService;
-import com.bingo.store.BingoChatGroupSendRecordStore;
 import com.bingo.store.BingoChatGroupStore;
 import com.bingo.store.BingoChatSendRecordStore;
 import com.bingo.store.BingoChatShowStore;
@@ -42,8 +40,6 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
     private BingoChatGroupStore chatGroupStore;
     @Autowired
     private BingoChatSendRecordStore sendRecordStore;
-    @Autowired
-    private BingoChatGroupSendRecordStore groupSendRecordStore;
     @Autowired
     private UserFeign userFeign;
 
@@ -108,14 +104,9 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
 
         // 查询好友、群组聊天信息（循环查询吧，有Redis，并且这里条件复杂）
         for (ChatShowResp chatShowResp : chatShowRespList) {
-            if (chatShowResp.getType().equals(0)) {
-                List<BingoChatSendRecord> sendRecordList = sendRecordStore.getSendRecordList(uid, chatShowResp.getId());
-                List<BingoChatSendRecord> finalRecords = sendRecordList.stream().limit(10).collect(Collectors.toList());
-                resultMap.put(chatShowResp, finalRecords);
-            } else {
-                List<BingoChatGroupSendRecord> sendRecordList = groupSendRecordStore.getSendRecordList(chatShowResp.getId());
-                resultMap.put(chatShowResp, sendRecordList);
-            }
+            List<BingoChatSendRecord> sendRecordList = sendRecordStore.getSendRecordList(uid, chatShowResp.getId());
+            List<BingoChatSendRecord> finalRecords = sendRecordList.stream().limit(10).collect(Collectors.toList());
+            resultMap.put(chatShowResp, finalRecords);
         }
 
         return resultMap;

@@ -52,7 +52,7 @@ public class NettyWebSocketServer {
             server.childHandler(initializerHandler);
 
             // Netty Server绑定端口号
-            ChannelFuture channelFuture = server.bind(9099).sync();
+            ChannelFuture channelFuture = server.bind(10086).sync();
             log.info("Server started and listen on:{}", channelFuture.channel().localAddress());
 
             // 关闭 Channel
