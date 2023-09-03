@@ -4,13 +4,11 @@ import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoChatShowMapper;
-import com.bingo.pojo.po.im.BingoChatGroup;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
 import com.bingo.pojo.po.im.BingoChatShow;
 import com.bingo.pojo.resp.im.ChatShowResp;
 import com.bingo.pojo.resp.user.UserResp;
 import com.bingo.service.BingoChatShowService;
-import com.bingo.store.BingoChatGroupStore;
 import com.bingo.store.BingoChatSendRecordStore;
 import com.bingo.store.BingoChatShowStore;
 import com.bingo.utils.RequestHolderUtil;
@@ -37,8 +35,6 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
     @Autowired
     private BingoChatShowStore showStore;
     @Autowired
-    private BingoChatGroupStore chatGroupStore;
-    @Autowired
     private BingoChatSendRecordStore sendRecordStore;
     @Autowired
     private UserFeign userFeign;
@@ -61,32 +57,20 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
             return resultMap;
         }
 
-        // 根据类型拆分成两个List（好友id列表、群聊id列表）
-        Map<Integer, List<BingoChatShow>> showListMap =
-                chatShowList.stream().collect(Collectors.groupingBy(BingoChatShow::getChatType));
-        List<BingoChatShow> userChatShowList = showListMap.get(0);
-        List<BingoChatShow> groupChatShowList = showListMap.get(1);
-
         // 查询目标信息：好友、群组
         // List转Map（避免双重遍历循环，性能太低）
         Map<Long, UserResp> userInfoMap = null;
-        Map<Long, BingoChatGroup> groupInfoMap = null;
-        if (CollectionUtils.isNotEmpty(userChatShowList)) {
-            List<Long> userChatShowIds = userChatShowList.stream().map(BingoChatShow::getGoalId).collect(Collectors.toList());
+        if (CollectionUtils.isNotEmpty(chatShowList)) {
+            List<Long> userChatShowIds = chatShowList.stream().map(BingoChatShow::getGoalId).collect(Collectors.toList());
             List<UserResp> userInfoShowList = userFeign.getUserByIds(userChatShowIds).getData();
             userInfoMap = userInfoShowList.stream().collect(Collectors.toMap(UserResp::getId, item -> item));
         }
-        if (CollectionUtils.isNotEmpty(groupChatShowList)) {
-            List<Long> groupShowIds = groupChatShowList.stream().map(BingoChatShow::getGoalId).collect(Collectors.toList());
-            List<BingoChatGroup> groupInfoShowList = chatGroupStore.getGroupInfoByIds(groupShowIds);
-            groupInfoMap = groupInfoShowList.stream().collect(Collectors.toMap(BingoChatGroup::getId, item -> item));
-        }
 
-        // 排序：好友、群组列表信息按照最新消息时间
+        // 排序：好友列表信息按照最新消息时间
         List<ChatShowResp> chatShowRespList = new ArrayList<>();
         for (BingoChatShow chatShowItem : chatShowList) {
-            ChatShowResp chatShowResp = new ChatShowResp();
             if (CollectionUtils.isNotEmpty(userInfoMap) && userInfoMap.containsKey(chatShowItem.getGoalId())) {
+                ChatShowResp chatShowResp = new ChatShowResp();
                 UserResp userResp = userInfoMap.get(chatShowItem.getGoalId());
                 BeanUtils.copyProperties(userResp, chatShowResp);
                 chatShowResp.setItemName(userResp.getNickName());
@@ -97,7 +81,7 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
 
         // 查询好友、群组聊天信息（循环查询吧，有Redis，并且这里条件复杂）
         for (ChatShowResp chatShowResp : chatShowRespList) {
-            List<BingoChatSendRecord> sendRecordList = sendRecordStore.getSendRecordList(uid, chatShowResp.getId());
+            List<BingoChatSendRecord> sendRecordList = sendRecordStore.getSendRecordList(uid, chatShowResp.getUid());
             List<BingoChatSendRecord> finalRecords = sendRecordList.stream().limit(10).collect(Collectors.toList());
             resultMap.put(chatShowResp, finalRecords);
         }

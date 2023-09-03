@@ -13,7 +13,7 @@ public class ChatShowResp {
     /**
      * 主键id
      */
-    private Long id;
+    private Long uid;
 
     /**
      * 名称（用户，群聊）
