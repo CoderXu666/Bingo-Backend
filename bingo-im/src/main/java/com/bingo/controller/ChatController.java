@@ -18,7 +18,7 @@ public class ChatController {
      */
     @PostMapping("/send_msg")
     public R sendMsgByUserId(@RequestBody ChatMsgDTO msgDTO) throws Exception {
-        chatService.sendMsgByUserId(msgDTO.getUid(), msgDTO.getMsg());
+        chatService.sendMsgByUserId(msgDTO);
         return R.out(RespCodeEnum.SUCCESS, "发送消息成功");
     }
 

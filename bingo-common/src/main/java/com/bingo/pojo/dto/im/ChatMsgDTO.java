@@ -15,9 +15,13 @@ public class ChatMsgDTO {
      */
     private String msg;
     /**
-     * 接收用户
+     * 发送用户id
      */
     private Long uid;
+    /**
+     * 接收用户id
+     */
+    private Long goalId;
     /**
      * 群id
      */

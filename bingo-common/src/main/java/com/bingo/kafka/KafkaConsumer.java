@@ -3,7 +3,9 @@ package com.bingo.kafka;
 import com.alibaba.fastjson.JSON;
 import com.bingo.constant.ESConstant;
 import com.bingo.constant.MQConstant;
+import com.bingo.pojo.dto.im.ChatMsgDTO;
 import com.bingo.pojo.po.community.BingoPost;
+import com.bingo.pojo.po.im.BingoChatSendRecord;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
@@ -24,10 +26,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class KafkaConsumer {
     @Autowired
+    private BingoChatSendRecord chatSendRecord;
+    @Autowired
     private RestHighLevelClient esClient;
 
     /**
-     * 保存帖子
+     * 保存帖子信息到ES
      */
     @KafkaListener(topics = MQConstant.COMMUNITY_POST_TOPIC, groupId = MQConstant.POST_GROUP_ID)
     public String savePost(String message) {
@@ -50,5 +54,14 @@ public class KafkaConsumer {
     @KafkaListener(topics = MQConstant.POST_LIKE_TOPIC, groupId = MQConstant.POST_GROUP_ID)
     public String likePost(String message) {
         return null;
+    }
+
+    /**
+     * 发送聊天消息
+     */
+    @KafkaListener(topics = MQConstant.IM_SEND_MSG_TOPIC, groupId = MQConstant.POST_GROUP_ID)
+    public String sendMsg(String message) {
+        ChatMsgDTO msgDTO = JSON.parseObject(message, ChatMsgDTO.class);
+        chatSendRecord.saveRecord();
     }
 }

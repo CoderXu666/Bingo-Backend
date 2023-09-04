@@ -18,6 +18,11 @@ public class MQConstant {
     public static final String POST_LIKE_TOPIC = "POST_LIKE_TOPIC";
 
     /**
+     * 发送消息Topic
+     */
+    public static final String IM_SEND_MSG_TOPIC = "IM_SEND_MSG_TOPIC";
+
+    /**
      * 帖子消费组
      */
     public static final String POST_GROUP_ID = "my-group";

@@ -1,7 +1,9 @@
 package com.bingo.service;
 
+import com.bingo.pojo.dto.im.ChatMsgDTO;
+
 public interface ChatService {
-    void sendMsgByUserId(Long userId, String msg) throws Exception;
+    void sendMsgByUserId(ChatMsgDTO msgDTO) throws Exception;
 
     void sendMsgToAll(String msg);
 

@@ -1,11 +1,16 @@
 package com.bingo.service.impl;
 
+import com.bingo.constant.MQConstant;
 import com.bingo.netty.NettyChannelUidRelation;
+import com.bingo.pojo.dto.im.ChatMsgDTO;
 import com.bingo.service.ChatService;
 import io.netty.channel.Channel;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,17 +23,29 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Service
 public class ChatServiceImpl implements ChatService {
+    @Autowired
+    private KafkaTemplate kafkaTemplate;
+    @Autowired
+    private ThreadPoolTaskExecutor taskExecutor;
+
     /**
      * 发送消息给某个用户
      */
     @Override
-    public void sendMsgByUserId(Long userId, String msg) throws Exception {
+    public void sendMsgByUserId(ChatMsgDTO msgDTO) throws Exception {
         ConcurrentHashMap<Long, Channel> userChannelMap = NettyChannelUidRelation.getUserChannelMap();
-        Channel channel = userChannelMap.get(userId);
+        Channel channel = userChannelMap.get(msgDTO.getGoalId());
         if (ObjectUtils.isEmpty(channel)) {
-            throw new Exception("用户信息不存在Netty服务端");
+            throw new Exception("用户Channel频道不存在.....");
         }
-        channel.writeAndFlush(new TextWebSocketFrame(msg));
+
+        // 线程池异步：通过Channel发送消息到客户端
+        taskExecutor.execute(() -> {
+            channel.writeAndFlush(new TextWebSocketFrame(msgDTO.getMsg()));
+        });
+
+        // 异步保存聊天消息
+        kafkaTemplate.send(MQConstant.IM_SEND_MSG_TOPIC, msgDTO);
     }
 
     /**
