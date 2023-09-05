@@ -51,12 +51,12 @@ public class NettyWebSocketServer {
                 @Override
                 protected void initChannel(SocketChannel channel) throws Exception {
                     ChannelPipeline pipeline = channel.pipeline();
-                    // 30s客户端未发送心跳给服务器，断开链接
+                    // 30s客户端未发送心跳给服务器，断开链接（存在直接关闭客户端情况）
                     pipeline.addLast(new IdleStateHandler(30, 0, 0));
                     pipeline.addLast(new HttpServerCodec()); // HTTP协议编、解码器
                     pipeline.addLast(new ChunkedWriteHandler()); // 块方式写数据
                     pipeline.addLast(new HttpObjectAggregator(8192));
-                    pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
+                    pipeline.addLast(new WebSocketServerProtocolHandler("/ws")); // HTTP升级为WebSocket
                     pipeline.addLast(channelHandler);
                 }
             });
@@ -77,7 +77,7 @@ public class NettyWebSocketServer {
             try {
                 start();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }).start();
     }

@@ -6,6 +6,9 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.AttributeKey;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -14,23 +17,25 @@ import org.springframework.stereotype.Component;
  * @Author 徐志斌
  * @Date: 2023/5/28 20:10
  * @Version 1.0
- * @Description: WebSocket服务器Channel处理器
+ * @Description: WebSocket Channel处理器
  */
 @Slf4j
 @Component
 @ChannelHandler.Sharable
 public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     /**
-     * 作用：读取客户端的数据
-     * <p>
-     * 注意：用户发送数据时候，调用了Controller，并没有在js中使用socket.send api
-     * 这里还有种实现方式就是发送消息不调用Controller，而是js调用socket.send
+     * 作用：读取客户端的数据（包括客户端心跳也会接收）
+     * -------------------------------------------------------------
+     * 用户发送数据时候，调用了Controller，并没有在js中使用socket.send
+     * 另种实现方式发送消息不调用Controller，而是js调用socket.send
+     * ------------------------------------------------------------
+     * TODO 这里接受消息可以考虑根据类型判断
      */
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
-        JSONObject msgJson = JSON.parseObject(msg.text());
-        Long userId = msgJson.getLong("userId");
-        NettyChannelUidRelation.getUserChannelMap().put(userId, ctx.channel());
+    protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame frame) {
+        JSONObject msg = JSON.parseObject(frame.text());
+        Long userId = msg.getLong("userId");
+        NettyChannelRelation.getUserChannelMap().put(userId, ctx.channel());
         AttributeKey<Long> key = AttributeKey.valueOf("userId");
         // 相当于为channel做个标识，用于removeUserId()
         ctx.channel().attr(key).setIfAbsent(userId);
@@ -41,7 +46,7 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
      */
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) {
-        NettyChannelUidRelation.getChannelGroup().add(ctx.channel());
+        NettyChannelRelation.getChannelGroup().add(ctx.channel());
     }
 
     /**
@@ -49,8 +54,25 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
      */
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) {
-        NettyChannelUidRelation.getChannelGroup().remove(ctx.channel());
+        NettyChannelRelation.getChannelGroup().remove(ctx.channel());
         removeUserId(ctx);
+    }
+
+    /**
+     * 握手完成
+     */
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        if (evt instanceof WebSocketServerProtocolHandler.HandshakeComplete) {
+            System.out.println("握手完成.....");
+        } else if (evt instanceof IdleStateEvent) {
+            IdleStateEvent event = (IdleStateEvent) evt;
+            if (event.state() == IdleState.READER_IDLE) {
+                System.out.println("心跳读空闲.....");
+                // TODO 用户下线
+                ctx.channel().close();
+            }
+        }
     }
 
     /**
@@ -59,6 +81,6 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
     private void removeUserId(ChannelHandlerContext ctx) {
         AttributeKey<Long> key = AttributeKey.valueOf("userId");
         Long userId = ctx.channel().attr(key).get();
-        NettyChannelUidRelation.getUserChannelMap().remove(userId);
+        NettyChannelRelation.getUserChannelMap().remove(userId);
     }
 }

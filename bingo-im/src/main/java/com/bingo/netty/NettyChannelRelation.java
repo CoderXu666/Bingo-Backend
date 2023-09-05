@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 1：ChannelGroup：管理所有channel，负责连接，每个channel就是一个通道（GlobalEventExecutor.INSTANCE:单例）
  * 2：ConcurrentHashMap：管理 UserId 与 Channel 对应关系（用于给指定用户发送消息）
  */
-public class NettyChannelUidRelation {
+public class NettyChannelRelation {
     private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     private static ConcurrentHashMap<Long, Channel> userChannelMap = new ConcurrentHashMap<>();
 

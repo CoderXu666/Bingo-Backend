@@ -1,7 +1,7 @@
 package com.bingo.service.impl;
 
 import com.bingo.constant.MQConstant;
-import com.bingo.netty.NettyChannelUidRelation;
+import com.bingo.netty.NettyChannelRelation;
 import com.bingo.pojo.dto.im.ChatMsgDTO;
 import com.bingo.service.ChatService;
 import io.netty.channel.Channel;
@@ -33,7 +33,7 @@ public class ChatServiceImpl implements ChatService {
      */
     @Override
     public void sendMsgByUserId(ChatMsgDTO msgDTO) throws Exception {
-        ConcurrentHashMap<Long, Channel> userChannelMap = NettyChannelUidRelation.getUserChannelMap();
+        ConcurrentHashMap<Long, Channel> userChannelMap = NettyChannelRelation.getUserChannelMap();
         Channel channel = userChannelMap.get(msgDTO.getGoalId());
         if (ObjectUtils.isEmpty(channel)) {
             throw new Exception("用户Channel频道不存在.....");
@@ -53,7 +53,7 @@ public class ChatServiceImpl implements ChatService {
      */
     @Override
     public void sendMsgToAll(String msg) {
-        ChannelGroup channelGroup = NettyChannelUidRelation.getChannelGroup();
+        ChannelGroup channelGroup = NettyChannelRelation.getChannelGroup();
         channelGroup.writeAndFlush(new TextWebSocketFrame(msg));
     }
 }
