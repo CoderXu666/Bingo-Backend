@@ -14,12 +14,12 @@ import org.springframework.stereotype.Component;
  * @Author 徐志斌
  * @Date: 2023/5/28 20:10
  * @Version 1.0
- * @Description: Netty服务器事件、消息处理器
+ * @Description: WebSocket服务器Channel处理器
  */
 @Slf4j
 @Component
 @ChannelHandler.Sharable
-public class NettyServerHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
+public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     /**
      * 作用：读取客户端的数据
      * <p>

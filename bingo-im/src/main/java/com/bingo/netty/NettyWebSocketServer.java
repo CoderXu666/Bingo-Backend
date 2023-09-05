@@ -1,10 +1,16 @@
 package com.bingo.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.http.HttpObjectAggregator;
+import io.netty.handler.codec.http.HttpServerCodec;
+import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
+import io.netty.handler.stream.ChunkedWriteHandler;
+import io.netty.handler.timeout.IdleStateHandler;
+import io.netty.util.NettyRuntime;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,47 +22,46 @@ import javax.annotation.PreDestroy;
  * @Author 徐志斌
  * @Date: 2023/5/28 19:36
  * @Version 1.0
- * @Description: Netty服务器(用于好友聊天)
- * ------------------------------------------------------------
- * 服务端流程：
- * 1.创建Netty服务端
- * 2.创建Netty Channel初始化Handler
- * 3.创建Netty Channel消息Handler
+ * @Description: Netty构建WebSocket服务器（IM好友聊天）
  */
 @Slf4j
 @Component
 public class NettyWebSocketServer {
     @Autowired
-    private NettyServerChannelInitHandler initializerHandler;
+    private NettyChannelHandler channelHandler;
 
     /**
      * boss接受客户端连接等事件
      * work处理boss接收的事件
      */
-    private EventLoopGroup bossGroup;
-    private EventLoopGroup workGroup;
+    private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+    private EventLoopGroup workGroup = new NioEventLoopGroup(NettyRuntime.availableProcessors());
 
     /**
      * Netty WebSocket Server启动
      */
     private void start() throws InterruptedException {
-        bossGroup = new NioEventLoopGroup();
-        workGroup = new NioEventLoopGroup();
-
-        // 定义IM Server启动器
         try {
             ServerBootstrap server = new ServerBootstrap();
             server.group(bossGroup, workGroup);
             server.channel(NioServerSocketChannel.class);
-            // 为每个连接成功的Channel绑定子处理器
-            server.childHandler(initializerHandler);
-
-            // Netty Server绑定端口号
-            ChannelFuture channelFuture = server.bind(10086).sync();
-            log.info("Server started and listen on:{}", channelFuture.channel().localAddress());
-
-            // 关闭 Channel
-            channelFuture.channel().closeFuture().sync();
+            server.option(ChannelOption.SO_BACKLOG, 128);
+            server.option(ChannelOption.SO_KEEPALIVE, true);
+            server.childHandler(new ChannelInitializer<SocketChannel>() {
+                @Override
+                protected void initChannel(SocketChannel channel) throws Exception {
+                    ChannelPipeline pipeline = channel.pipeline();
+                    // 30s客户端未发送心跳给服务器，断开链接
+                    pipeline.addLast(new IdleStateHandler(30, 0, 0));
+                    pipeline.addLast(new HttpServerCodec()); // HTTP协议编、解码器
+                    pipeline.addLast(new ChunkedWriteHandler()); // 块方式写数据
+                    pipeline.addLast(new HttpObjectAggregator(8192));
+                    pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
+                    pipeline.addLast(channelHandler);
+                }
+            });
+            ChannelFuture future = server.bind(10086).sync();
+            log.info("Netty WebSocket服务器启动成功：{}", future.channel().localAddress());
         } finally {
             bossGroup.shutdownGracefully();
             workGroup.shutdownGracefully();
@@ -64,7 +69,7 @@ public class NettyWebSocketServer {
     }
 
     /**
-     * 启动 Netty Server
+     * 启动 Netty WebSocket Server
      */
     @PostConstruct
     private void init() {
@@ -78,7 +83,7 @@ public class NettyWebSocketServer {
     }
 
     /**
-     * 服务器停止释放资源
+     * WebSocket Server停止释放资源
      */
     @PreDestroy
     private void destroy() throws InterruptedException {

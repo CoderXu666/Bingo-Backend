@@ -26,8 +26,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class KafkaConsumer {
     @Autowired
-    private BingoChatSendRecord chatSendRecord;
-    @Autowired
     private RestHighLevelClient esClient;
 
     /**
@@ -62,6 +60,7 @@ public class KafkaConsumer {
     @KafkaListener(topics = MQConstant.IM_SEND_MSG_TOPIC, groupId = MQConstant.POST_GROUP_ID)
     public String sendMsg(String message) {
         ChatMsgDTO msgDTO = JSON.parseObject(message, ChatMsgDTO.class);
-        chatSendRecord.saveRecord();
+//        chatSendRecord.saveRecord();
+        return null;
     }
 }
