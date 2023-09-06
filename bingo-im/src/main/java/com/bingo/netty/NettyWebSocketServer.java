@@ -87,11 +87,7 @@ public class NettyWebSocketServer {
      */
     @PreDestroy
     private void destroy() throws InterruptedException {
-        if (bossGroup != null) {
-            bossGroup.shutdownGracefully().sync();
-        }
-        if (workGroup != null) {
-            workGroup.shutdownGracefully().sync();
-        }
+        bossGroup.shutdownGracefully().sync();
+        workGroup.shutdownGracefully().sync();
     }
 }

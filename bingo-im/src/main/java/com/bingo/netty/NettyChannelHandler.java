@@ -59,7 +59,7 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
     }
 
     /**
-     * 握手完成
+     * 连接握手、心跳事件
      */
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
