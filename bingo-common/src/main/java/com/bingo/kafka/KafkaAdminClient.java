@@ -20,7 +20,7 @@ public class KafkaAdminClient {
 
     public static void main(String[] args) throws Exception {
 //        createTopic(MQConstant.COMMUNITY_POST_TOPIC);
-//        createTopic(MQConstant.POST_LIKE_TOPIC);
+//        createTopic(MQConstant.IM_SEND_MSG_TOPIC);
         getTopic();
 //        deleteTopic("");
     }
@@ -45,7 +45,7 @@ public class KafkaAdminClient {
         props.put("bootstrap.servers", url);
         AdminClient adminClient = AdminClient.create(props);
         ListTopicsResult topicsResult = adminClient.listTopics();
-        System.out.println("============================================" + topicsResult.names().get());
+        System.out.println("============================================" + topicsResult.names().get() + "============================================");
     }
 
     /**

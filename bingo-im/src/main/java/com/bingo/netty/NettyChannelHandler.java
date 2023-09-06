@@ -25,19 +25,18 @@ import org.springframework.stereotype.Component;
 public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     /**
      * 作用：读取客户端的数据（包括客户端心跳也会接收）
-     * 目的：聊天消息不通过channel传递过来，而是通过调用接口；暂时接收心跳
+     * 目的：首次建立连接，存储Channel和Uid关系
      * -------------------------------------------------------------
      * 1.客户端发送消息调用Controller，没有在js使用socket.send
      * 2.客户端发送消息不调用Controller，而是js使用用socket.send通过Channel传递数据
      * 这里WebSocket只想做推送，不做接受，所以采用第一种方式算了
-     * ------------------------------------------------------------
-     * TODO 这里接受消息可以考虑根据类型判断
      */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame frame) {
         JSONObject msg = JSON.parseObject(frame.text());
         Long userId = msg.getLong("userId");
         NettyChannelRelation.getUserChannelMap().put(userId, ctx.channel());
+        NettyChannelRelation.getChannelGroup().add(ctx.channel());
         AttributeKey<Long> key = AttributeKey.valueOf("userId");
         // 相当于为channel做个标识，用于removeUserId()
         ctx.channel().attr(key).setIfAbsent(userId);
@@ -48,7 +47,6 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
      */
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) {
-        NettyChannelRelation.getChannelGroup().add(ctx.channel());
     }
 
     /**
@@ -64,13 +62,16 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
      * 连接握手、心跳事件
      */
     @Override
-    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) {
+        // WebSocket建立连接事件调用
         if (evt instanceof WebSocketServerProtocolHandler.HandshakeComplete) {
-            System.out.println("握手完成.....");
-        } else if (evt instanceof IdleStateEvent) {
+            System.out.println("首次建立连接，握手完成.....");
+        }
+
+        // WebSocket心跳断开事件
+        else if (evt instanceof IdleStateEvent) {
             IdleStateEvent event = (IdleStateEvent) evt;
             if (event.state() == IdleState.READER_IDLE) {
-                System.out.println("心跳读空闲.....");
                 // TODO 用户下线
                 ctx.channel().close();
             }
