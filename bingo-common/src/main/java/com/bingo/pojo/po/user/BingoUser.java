@@ -65,6 +65,12 @@ public class BingoUser implements Serializable {
     private String email;
 
     /**
+     * 在线状态（0：未在线，1：在线）
+     */
+    @TableField("online_status")
+    private Integer onlineStatus;
+
+    /**
      * 地区
      */
     @TableField("location")

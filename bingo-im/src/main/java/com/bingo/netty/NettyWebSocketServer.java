@@ -41,31 +41,26 @@ public class NettyWebSocketServer {
      * Netty WebSocket Server启动
      */
     private void start() throws InterruptedException {
-        try {
-            ServerBootstrap server = new ServerBootstrap();
-            server.group(bossGroup, workGroup);
-            server.channel(NioServerSocketChannel.class);
-            server.option(ChannelOption.SO_BACKLOG, 128);
-            server.option(ChannelOption.SO_KEEPALIVE, true);
-            server.childHandler(new ChannelInitializer<SocketChannel>() {
-                @Override
-                protected void initChannel(SocketChannel channel) throws Exception {
-                    ChannelPipeline pipeline = channel.pipeline();
-                    // 30s客户端未发送心跳给服务器，断开链接（存在直接关闭客户端情况）
-                    pipeline.addLast(new IdleStateHandler(30, 0, 0));
-                    pipeline.addLast(new HttpServerCodec()); // HTTP协议编、解码器
-                    pipeline.addLast(new ChunkedWriteHandler()); // 块方式写数据
-                    pipeline.addLast(new HttpObjectAggregator(8192));
-                    pipeline.addLast(new WebSocketServerProtocolHandler("/ws")); // HTTP升级为WebSocket
-                    pipeline.addLast(channelHandler);
-                }
-            });
-            ChannelFuture future = server.bind(10086).sync();
-            log.info("Netty WebSocket服务器启动成功：{}", future.channel().localAddress());
-        } finally {
-            bossGroup.shutdownGracefully();
-            workGroup.shutdownGracefully();
-        }
+        ServerBootstrap server = new ServerBootstrap();
+        server.group(bossGroup, workGroup);
+        server.channel(NioServerSocketChannel.class);
+        server.option(ChannelOption.SO_BACKLOG, 128);
+        server.option(ChannelOption.SO_KEEPALIVE, true);
+        server.childHandler(new ChannelInitializer<SocketChannel>() {
+            @Override
+            protected void initChannel(SocketChannel channel) throws Exception {
+                ChannelPipeline pipeline = channel.pipeline();
+                // 30s客户端未发送心跳给服务器，断开链接（存在直接关闭客户端情况）
+                pipeline.addLast(new IdleStateHandler(30, 0, 0));
+                pipeline.addLast(new HttpServerCodec()); // HTTP协议编、解码器
+                pipeline.addLast(new ChunkedWriteHandler()); // 块方式写数据
+                pipeline.addLast(new HttpObjectAggregator(8192));
+                pipeline.addLast(new WebSocketServerProtocolHandler("/ws")); // HTTP升级为WebSocket
+                pipeline.addLast(channelHandler);
+            }
+        });
+        ChannelFuture future = server.bind(10086).sync();
+        log.info("Netty WebSocket服务器启动成功：{}", future.channel().localAddress());
     }
 
     /**

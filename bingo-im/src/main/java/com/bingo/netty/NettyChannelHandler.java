@@ -25,6 +25,7 @@ import org.springframework.stereotype.Component;
 public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     /**
      * 作用：读取客户端的数据（包括客户端心跳也会接收）
+     * 目的：聊天消息不通过channel传递过来，而是通过调用接口；暂时接收心跳
      * -------------------------------------------------------------
      * 1.客户端发送消息调用Controller，没有在js使用socket.send
      * 2.客户端发送消息不调用Controller，而是js使用用socket.send通过Channel传递数据
