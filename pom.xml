@@ -39,6 +39,8 @@
         <netty.version>4.1.45.Final</netty.version>
         <minio.version>8.0.3</minio.version>
         <caffeine.version>2.9.3</caffeine.version>
+        <hutool.version>5.8.18</hutool.version>
+        <ip2region.version>2.6.3</ip2region.version>
     </properties>
 
     <dependencyManagement>
@@ -75,10 +77,8 @@
             <dependency>
                 <groupId>org.lionsoul</groupId>
                 <artifactId>ip2region</artifactId>
-                <version>2.6.3</version>
+                <version>${ip2region.version}</version>
             </dependency>
-
-            <!-- 用于读取ip2region.xdb -->
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
@@ -90,6 +90,13 @@
                 <groupId>io.minio</groupId>
                 <artifactId>minio</artifactId>
                 <version>${minio.version}</version>
+            </dependency>
+
+            <!--HuTool-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
 
             <!--Caffeine-->

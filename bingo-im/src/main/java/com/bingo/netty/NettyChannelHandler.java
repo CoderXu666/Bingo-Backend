@@ -26,8 +26,9 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
     /**
      * 作用：读取客户端的数据（包括客户端心跳也会接收）
      * -------------------------------------------------------------
-     * 用户发送数据时候，调用了Controller，并没有在js中使用socket.send
-     * 另种实现方式发送消息不调用Controller，而是js调用socket.send
+     * 1.客户端发送消息调用Controller，没有在js使用socket.send
+     * 2.客户端发送消息不调用Controller，而是js使用用socket.send通过Channel传递数据
+     * 这里WebSocket只想做推送，不做接受，所以采用第一种方式算了
      * ------------------------------------------------------------
      * TODO 这里接受消息可以考虑根据类型判断
      */

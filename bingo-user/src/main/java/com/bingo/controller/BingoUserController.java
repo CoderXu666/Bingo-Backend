@@ -138,16 +138,9 @@ public class BingoUserController {
     /**
      * Test测试专用接口
      */
-    @Autowired
-    private ThreadPoolTaskExecutor taskExecutor;
-
     @GetMapping("/test")
-    public String getInfo() {
-        taskExecutor.execute(() -> {
-            System.out.println(taskExecutor.getThreadNamePrefix() + "第222222个异步：");
-            int res = 1 / 0;
-        });
-
+    public String getInfo() throws InterruptedException {
+        Thread.sleep(1000);
         return "接口调用成功";
     }
 }
