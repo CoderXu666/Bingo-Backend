@@ -11,7 +11,7 @@ import com.bingo.pojo.resp.user.UserResp;
 import com.bingo.service.BingoChatShowService;
 import com.bingo.store.BingoChatSendRecordStore;
 import com.bingo.store.BingoChatShowStore;
-import com.bingo.utils.RequestHolderUtil;
+import com.bingo.context.RequestHolder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +45,7 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
     @Override
     public Map<Object, Object> getChatList() {
         // 请求全局域获取 uid
-        Map<String, Object> holderMap = RequestHolderUtil.get();
+        Map<String, Object> holderMap = RequestHolder.get();
         Long uid = (Long) holderMap.get("uid");
 
         // 最终结果集(K:展示对象信息，V:聊天记录列表)，排序展示

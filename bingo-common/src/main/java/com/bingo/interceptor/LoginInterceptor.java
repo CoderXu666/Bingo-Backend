@@ -2,7 +2,7 @@ package com.bingo.interceptor;
 
 import com.bingo.utils.IPUtil;
 import com.bingo.utils.JWTUtil;
-import com.bingo.utils.RequestHolderUtil;
+import com.bingo.context.RequestHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -43,7 +43,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             Map<String, Object> map = new HashMap<>();
             map.put("uid", JWTUtil.resolveTokenToUid(token));
             map.put("ip", IPUtil.getIpAddress(request));
-            RequestHolderUtil.set(map);
+            RequestHolder.set(map);
             return true;
         } else {
             log.error("登录Token已过期：FAIL....................");
@@ -63,6 +63,6 @@ public class LoginInterceptor implements HandlerInterceptor {
      */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        RequestHolderUtil.remove();
+        RequestHolder.remove();
     }
 }

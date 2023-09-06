@@ -1,4 +1,4 @@
-package com.bingo.utils;
+package com.bingo.context;
 
 import java.util.Map;
 
@@ -8,7 +8,7 @@ import java.util.Map;
  * @Description: 请求全局上下文
  * @Version: 1.0
  */
-public class RequestHolderUtil {
+public class RequestHolder {
     private static final ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<>();
 
     /**

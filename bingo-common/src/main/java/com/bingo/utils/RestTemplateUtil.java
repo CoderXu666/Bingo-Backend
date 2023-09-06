@@ -14,7 +14,7 @@ import java.util.Map;
  * @author 徐志斌
  * @createDate 2023-08-16
  */
-public class RestTemplateUtils {
+public class RestTemplateUtil {
     private static final RestTemplate restTemplate = new RestTemplate();
 
     /**
