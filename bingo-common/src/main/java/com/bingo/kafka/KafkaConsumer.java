@@ -54,13 +54,13 @@ public class KafkaConsumer {
         return null;
     }
 
-    /**
-     * 发送聊天消息
-     */
-    @KafkaListener(topics = MQConstant.IM_SEND_MSG_TOPIC, groupId = MQConstant.POST_GROUP_ID)
-    public String sendMsg(String message) {
-        ChatMsgDTO msgDTO = JSON.parseObject(message, ChatMsgDTO.class);
-//        chatSendRecord.saveRecord();
-        return null;
-    }
+//    /**
+//     * 发送聊天消息
+//     */
+//    @KafkaListener(topics = MQConstant.IM_SEND_MSG_TOPIC, groupId = MQConstant.POST_GROUP_ID)
+//    public String sendMsg(String message) {
+//        ChatMsgDTO msgDTO = JSON.parseObject(message, ChatMsgDTO.class);
+////        chatSendRecord.saveRecord();
+//        return null;
+//    }
 }
