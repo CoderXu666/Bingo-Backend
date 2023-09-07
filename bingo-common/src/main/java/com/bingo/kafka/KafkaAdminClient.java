@@ -1,9 +1,7 @@
 package com.bingo.kafka;
 
-import org.apache.kafka.clients.admin.AdminClient;
-import org.apache.kafka.clients.admin.AdminClientConfig;
-import org.apache.kafka.clients.admin.ListTopicsResult;
-import org.apache.kafka.clients.admin.NewTopic;
+import org.apache.kafka.clients.admin.*;
+import org.apache.kafka.common.KafkaFuture;
 
 import java.util.Collections;
 import java.util.Properties;
@@ -18,11 +16,14 @@ import java.util.concurrent.ExecutionException;
 public class KafkaAdminClient {
     private static String url = "101.42.13.186:9092";
 
+    /**
+     * IM_SEND_TOPIC, COMMUNITY-POST-TOPIC
+     */
     public static void main(String[] args) throws Exception {
 //        createTopic(MQConstant.COMMUNITY_POST_TOPIC);
 //        createTopic(MQConstant.IM_SEND_TOPIC);
+//        deleteTopic("POST_LIKE_TOPIC");
         getTopic();
-//        deleteTopic("");
     }
 
     /**
@@ -32,6 +33,7 @@ public class KafkaAdminClient {
         Properties props = new Properties();
         props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, url);
         try (AdminClient adminClient = AdminClient.create(props)) {
+            // 主题名、分区
             NewTopic newTopic = new NewTopic(topicName, 1, (short) 1);
             adminClient.createTopics(Collections.singleton(newTopic));
         }
@@ -42,7 +44,7 @@ public class KafkaAdminClient {
      */
     public static void getTopic() throws ExecutionException, InterruptedException {
         Properties props = new Properties();
-        props.put("bootstrap.servers", url);
+        props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, url);
         AdminClient adminClient = AdminClient.create(props);
         ListTopicsResult topicsResult = adminClient.listTopics();
         System.out.println("============================================" + topicsResult.names().get() + "============================================");
@@ -53,8 +55,17 @@ public class KafkaAdminClient {
      */
     public static void deleteTopic(String topicName) {
         Properties props = new Properties();
-        props.put("bootstrap.servers", url);
-        AdminClient adminClient = AdminClient.create(props);
-        adminClient.deleteTopics(Collections.singleton(topicName));
+        props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, url);
+
+        try (AdminClient adminClient = AdminClient.create(props)) {
+            DeleteTopicsOptions options = new DeleteTopicsOptions();
+            options.timeoutMs(5000);
+            DeleteTopicsResult result = adminClient.deleteTopics(Collections.singleton(topicName), options);
+            KafkaFuture<Void> allDone = result.values().get(topicName);
+            allDone.get();
+            System.out.println("主题 " + topicName + " 已成功删除");
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 }

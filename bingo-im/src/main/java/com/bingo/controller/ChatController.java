@@ -5,7 +5,10 @@ import com.bingo.pojo.common.response.R;
 import com.bingo.pojo.dto.im.ChatMsgDTO;
 import com.bingo.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/chat")
@@ -14,20 +17,11 @@ public class ChatController {
     private ChatService chatService;
 
     /**
-     * 消息推送给指定uid用户
+     * 发送消息（单聊）
      */
     @PostMapping("/send_chat_msg")
     public R sendChatByUid(@RequestBody ChatMsgDTO msgDTO) throws Exception {
         chatService.sendChatByUid(msgDTO);
-        return R.out(RespCodeEnum.SUCCESS, "发送消息成功");
-    }
-
-    /**
-     * 消息推送给所有用户
-     */
-    @PostMapping("/send_all")
-    public R pushToAll(@RequestParam("msg") String msg) {
-        chatService.sendMsgToAll(msg);
-        return R.out(RespCodeEnum.SUCCESS, "消息群发成功");
+        return R.out(RespCodeEnum.SUCCESS, "发送成功");
     }
 }

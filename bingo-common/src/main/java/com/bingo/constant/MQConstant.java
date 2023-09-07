@@ -8,18 +8,10 @@ package com.bingo.constant;
  */
 public class MQConstant {
     /**
-     * 帖子主题
+     * Topic主题
      */
     public static final String COMMUNITY_POST_TOPIC = "COMMUNITY-POST-TOPIC";
-
-    /**
-     * 点赞主题
-     */
     public static final String POST_LIKE_TOPIC = "POST_LIKE_TOPIC";
-
-    /**
-     * 发送消息Topic
-     */
     public static final String IM_SEND_TOPIC = "IM_SEND_TOPIC";
 
     /**
