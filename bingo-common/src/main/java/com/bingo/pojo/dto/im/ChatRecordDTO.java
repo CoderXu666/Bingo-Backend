@@ -9,7 +9,7 @@ import lombok.Data;
  * @Description: ChatMsgDTO
  */
 @Data
-public class ChatMsgDTO {
+public class ChatRecordDTO {
     /**
      * 发送方id
      */

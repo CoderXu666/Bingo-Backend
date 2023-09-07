@@ -7,11 +7,12 @@ import com.bingo.pojo.dto.user.UserDTO;
 import com.bingo.pojo.po.user.BingoUser;
 import com.bingo.pojo.resp.user.UserResp;
 import com.bingo.service.BingoUserService;
-import com.bingo.utils.MinioUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,15 +25,12 @@ import java.util.List;
  *
  * @author 徐志斌
  * @since 2023-03-01
- * xzb fork test
  */
 @Slf4j
 @RestController
 public class BingoUserController {
     @Autowired
     private BingoUserService userService;
-    @Autowired
-    private MinioUtil minioUtil;
 
     /**
      * 根据userId查询用户信息
@@ -111,26 +109,6 @@ public class BingoUserController {
     public R getUserInfoByIds(@RequestBody List<Long> ids) {
         List<UserResp> userList = userService.getUserByIds(ids);
         return R.out(RespCodeEnum.SUCCESS, userList);
-    }
-
-    /**
-     * 上传头像
-     * -------------------------------------------------------------------------------
-     * 访问URL例子：http://101.42.13.186:9000/avatar-bucket/1687483809516_1690621557315.jpg
-     */
-    @PostMapping("/upload_avatar")
-    public R uploadAvatar(MultipartFile file) {
-        String avatarUrl = minioUtil.upload(file, "avatar-bucket");
-        return R.out(RespCodeEnum.SUCCESS, avatarUrl);
-    }
-
-    /**
-     * 移除头像
-     */
-    @DeleteMapping("/remove_avatar")
-    public R removeAvatar(String objectName) throws Exception {
-        minioUtil.removeObject("avatar-bucket", objectName);
-        return R.out(RespCodeEnum.SUCCESS, "移除成功");
     }
 
     /**

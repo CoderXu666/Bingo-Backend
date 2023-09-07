@@ -1,6 +1,6 @@
 package com.bingo.adapter;
 
-import com.bingo.pojo.dto.im.ChatMsgDTO;
+import com.bingo.pojo.dto.im.ChatRecordDTO;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
 import org.springframework.beans.BeanUtils;
 
@@ -16,7 +16,7 @@ public class ChatRecordAdapter {
     /**
      * 聊天消息转换（单聊）
      */
-    public static BingoChatSendRecord buildChatRecord(ChatMsgDTO chatMsgDTO) {
+    public static BingoChatSendRecord buildChatRecordPO(ChatRecordDTO chatMsgDTO) {
         BingoChatSendRecord sendRecord = new BingoChatSendRecord();
         BeanUtils.copyProperties(chatMsgDTO, sendRecord);
         sendRecord.setCreateTime(new Date());

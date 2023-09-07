@@ -1,9 +1,8 @@
 package com.bingo.controller;
 
-import com.bingo.annotation.RateLimiter;
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.common.response.R;
-import com.bingo.pojo.dto.im.ChatMsgDTO;
+import com.bingo.pojo.dto.im.ChatRecordDTO;
 import com.bingo.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +21,7 @@ public class ChatController {
      */
     @PostMapping("/send_msg")
 //    @RateLimiter(time = 3, count = 8)
-    public R sendChatByUid(@RequestBody ChatMsgDTO msgDTO) throws Exception {
+    public R sendChatByUid(@RequestBody ChatRecordDTO msgDTO) throws Exception {
         chatService.sendChatByUid(msgDTO);
         return R.out(RespCodeEnum.SUCCESS, "发送成功");
     }

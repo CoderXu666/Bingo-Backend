@@ -2,7 +2,7 @@ package com.bingo.service.impl;
 
 import com.bingo.adapter.ChatRecordAdapter;
 import com.bingo.constant.MQConstant;
-import com.bingo.pojo.dto.im.ChatMsgDTO;
+import com.bingo.pojo.dto.im.ChatRecordDTO;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
 import com.bingo.pojo.po.im.BingoChatShow;
 import com.bingo.service.ChatService;
@@ -36,9 +36,9 @@ public class ChatServiceImpl implements ChatService {
      * 发送消息给用户
      */
     @Override
-    public void sendChatByUid(ChatMsgDTO msgDTO) {
+    public void sendChatByUid(ChatRecordDTO msgDTO) {
         // 保存聊天记录
-        BingoChatSendRecord sendRecord = ChatRecordAdapter.buildChatRecord(msgDTO);
+        BingoChatSendRecord sendRecord = ChatRecordAdapter.buildChatRecordPO(msgDTO);
         recordStore.saveChatRecord(sendRecord);
 
         // 更新未读数量（并发问题？）
