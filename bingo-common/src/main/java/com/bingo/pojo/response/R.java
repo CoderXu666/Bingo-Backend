@@ -1,4 +1,4 @@
-package com.bingo.pojo.common.response;
+package com.bingo.pojo.response;
 
 import com.bingo.enums.RespCodeEnum;
 import lombok.Getter;

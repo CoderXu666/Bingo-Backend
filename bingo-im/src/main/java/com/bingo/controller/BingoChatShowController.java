@@ -2,7 +2,7 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.common.response.R;
+import com.bingo.pojo.response.R;
 import com.bingo.service.BingoChatShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,7 @@ import java.util.Map;
  * @since 2023-08-24
  */
 @RestController
-@RequestMapping("/show")
+@RequestMapping("/conversation")
 public class BingoChatShowController {
     @Autowired
     private BingoChatShowService showService;

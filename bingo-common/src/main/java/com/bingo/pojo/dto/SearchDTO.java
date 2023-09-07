@@ -12,6 +12,10 @@ import lombok.Data;
 @Data
 public class SearchDTO extends PageParam {
     /**
+     * 内容类型
+     */
+    private Integer type;
+    /**
      * 输入框的内容
      */
     private String content;

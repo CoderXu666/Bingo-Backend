@@ -1,7 +1,0 @@
-spring:
-  profiles:
-    active: dev
-server:
-  port: 10005
-  servlet:
-    context-path: /recharge
