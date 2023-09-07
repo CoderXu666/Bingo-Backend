@@ -16,7 +16,7 @@ public class ChatRecordAdapter {
     /**
      * 聊天消息转换（单聊）
      */
-    public static BingoChatSendRecord chatDTO2ChatRecord(ChatMsgDTO chatMsgDTO) {
+    public static BingoChatSendRecord buildChatRecord(ChatMsgDTO chatMsgDTO) {
         BingoChatSendRecord sendRecord = new BingoChatSendRecord();
         BeanUtils.copyProperties(chatMsgDTO, sendRecord);
         sendRecord.setCreateTime(new Date());

@@ -34,18 +34,15 @@ public class ChatServiceImpl implements ChatService {
 
     /**
      * 发送消息给用户
-     * -------------------------------------------------
-     * 问题：
-     * 1.接收到消息的话，还要刷新列表？
      */
     @Override
     public void sendChatByUid(ChatMsgDTO msgDTO) {
-        // TODO 并发问题考虑一下）
+        // 保存聊天记录
+        BingoChatSendRecord sendRecord = ChatRecordAdapter.buildChatRecord(msgDTO);
+        recordStore.saveChatRecord(sendRecord);
+
+        // 更新未读数量（并发问题？）
         taskExecutor.execute(() -> {
-            // 保存聊天记录
-            BingoChatSendRecord sendRecord = ChatRecordAdapter.chatDTO2ChatRecord(msgDTO);
-            recordStore.saveChatRecord(sendRecord);
-            // 更新未读数量
             BingoChatShow record = showStore.getOneShowRecord(msgDTO.getGoalId(), msgDTO.getUid());
             record.setUnreadCount(record.getUnreadCount() + 1);
             record.setReceiveTime(new Date());
@@ -53,6 +50,6 @@ public class ChatServiceImpl implements ChatService {
         });
 
         // 通过Channel发送消息（等待聊天记录保存成功了在推送，要不会出现问题）
-        kafkaTemplate.send(MQConstant.IM_SEND_TOPIC, msgDTO);
+        kafkaTemplate.send(MQConstant.IM_SEND_TOPIC, sendRecord);
     }
 }

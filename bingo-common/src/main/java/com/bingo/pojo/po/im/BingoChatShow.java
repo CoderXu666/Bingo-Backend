@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  * <p>
- * 聊天窗口列表（展示）
+ * 聊天会话列表
  * </p>
  *
  * @author 徐志斌

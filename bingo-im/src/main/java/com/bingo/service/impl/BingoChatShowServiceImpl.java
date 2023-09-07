@@ -2,6 +2,7 @@ package com.bingo.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bingo.context.RequestHolder;
 import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoChatShowMapper;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
@@ -11,7 +12,6 @@ import com.bingo.pojo.resp.user.UserResp;
 import com.bingo.service.BingoChatShowService;
 import com.bingo.store.BingoChatSendRecordStore;
 import com.bingo.store.BingoChatShowStore;
-import com.bingo.context.RequestHolder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +40,7 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
     private UserFeign userFeign;
 
     /**
-     * 查询聊天列表
+     * 查询聊天会话列表
      */
     @Override
     public Map<Object, Object> getChatList() {

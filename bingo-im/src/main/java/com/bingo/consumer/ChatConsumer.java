@@ -3,7 +3,7 @@ package com.bingo.consumer;
 import com.alibaba.fastjson.JSON;
 import com.bingo.constant.MQConstant;
 import com.bingo.netty.NettyChannelRelation;
-import com.bingo.pojo.dto.im.ChatMsgDTO;
+import com.bingo.pojo.po.im.BingoChatSendRecord;
 import io.netty.channel.Channel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import lombok.extern.slf4j.Slf4j;
@@ -25,14 +25,14 @@ public class ChatConsumer {
      */
     @KafkaListener(topics = MQConstant.IM_SEND_TOPIC, groupId = MQConstant.IM_GROUP_ID)
     public void sendMsg(String message) {
-        ChatMsgDTO msgDTO = JSON.parseObject(message, ChatMsgDTO.class);
+        BingoChatSendRecord sendRecord = JSON.parseObject(message, BingoChatSendRecord.class);
 
         // 接收方channel
-        Channel channel = NettyChannelRelation.getUserChannelMap().get(msgDTO.getGoalId());
+        Channel channel = NettyChannelRelation.getUserChannelMap().get(sendRecord.getGoalId());
 
         // 通过Channel发送消息到客户端（在线状态直接推，不在线就不推送了）
         if (ObjectUtils.isNotEmpty(channel)) {
-            channel.writeAndFlush(new TextWebSocketFrame(msgDTO.toString()));
+            channel.writeAndFlush(new TextWebSocketFrame(sendRecord.toString()));
         }
     }
 }

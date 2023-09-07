@@ -26,7 +26,7 @@ public class BingoChatShowController {
     private BingoChatShowService showService;
 
     /**
-     * 查询聊天列表
+     * 查询聊天会话列表
      */
     @GetMapping("/list")
     public R getChatList() {
