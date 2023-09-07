@@ -5,7 +5,7 @@
 
     <parent>
         <groupId>com.bingo</groupId>
-        <artifactId>Bingo-Backend</artifactId>
+        <artifactId>Bingo</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
