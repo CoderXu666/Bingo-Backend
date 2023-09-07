@@ -60,7 +60,9 @@ public class JWTUtil {
     }
 
     public static void main(String[] args) {
-        JWTUtil.resolveTokenToUid("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJCaW5nbyIsImlhdCI6MTY5NDAxMTU2MywiZXhwIjoxNjk0MDk3OTYzLCJ1aWQiOjEwMH0.-NQqgb5ZBcGQX1DZWsKRCz398bA4FarW1ypPz6hPnV4");
-        System.out.println();
+        Long val = JWTUtil.resolveTokenToUid(
+                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJCaW5nbyIsImlhdCI6MTY5NDA5MDY" +
+                        "1NywiZXhwIjoxNjk0MTc3MDU3LCJ1aWQiOjEwMH0.3NfZDyh2g_Ob6T-YxOkzuR4L-LrDef_T4gwHTC_50Jg");
+        System.out.println(val);
     }
 }

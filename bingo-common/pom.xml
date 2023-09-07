@@ -147,12 +147,6 @@
             <artifactId>spring-context-support</artifactId>
         </dependency>
 
-        <!--fastjson-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-        </dependency>
-
         <!--Redis-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -161,13 +155,6 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
-        </dependency>
-
-        <!--AspectJ-->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aspects</artifactId>
-            <version>5.2.3.RELEASE</version>
         </dependency>
 
         <!--Sentinel-->

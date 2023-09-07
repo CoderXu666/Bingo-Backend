@@ -3,7 +3,6 @@ package com.bingo.aop;
 import com.bingo.annotation.DoubleCache;
 import com.bingo.enums.CacheType;
 import com.github.benmanes.caffeine.cache.Cache;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

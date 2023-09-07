@@ -1,6 +1,7 @@
 package com.bingo.controller;
 
 
+import com.bingo.annotation.RateLimiter;
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.response.R;
 import com.bingo.pojo.dto.user.UserDTO;
@@ -125,8 +126,8 @@ public class BingoUserController {
      * Test测试专用接口
      */
     @GetMapping("/test")
+    @RateLimiter(time = 3, count = 2)
     public String getInfo() throws InterruptedException {
-        Thread.sleep(1000);
         return "接口调用成功";
     }
 }

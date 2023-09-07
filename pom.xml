@@ -41,7 +41,6 @@
         <hutool.version>5.8.18</hutool.version>
         <ip2region.version>2.6.3</ip2region.version>
         <sharding.version>4.0.0-RC1</sharding.version>
-        <fastjson.version>1.2.83</fastjson.version>
     </properties>
 
     <dependencyManagement>
@@ -202,13 +201,6 @@
                 <groupId>org.apache.shardingsphere</groupId>
                 <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
                 <version>${sharding.version}</version>
-            </dependency>
-
-            <!--FastJSON-->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${fastjson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
