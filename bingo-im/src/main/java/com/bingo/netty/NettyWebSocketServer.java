@@ -23,6 +23,13 @@ import javax.annotation.PreDestroy;
  * @Date: 2023/5/28 19:36
  * @Version 1.0
  * @Description: Netty构建WebSocket服务器（IM好友聊天）
+ * ------------------------------------------------------------
+ * 该项目我只想使用WebSocket服务器进行消息推送，而不进行消息接收。
+ * 所以关于聊天这里采用调用Controller方式将聊天信息发送给服务端，然后通过WebSocket服务器推送给客户端
+ * ------------------------------------------------------------
+ * 1.客户端发送消息调用Controller，没有在js使用socket.send
+ * 2.客户端发送消息不调用Controller，而是js使用用socket.send通过Channel传递数据
+ * 该项目WebSocket只做推送，不做Channel接收，所以采用第1种方式
  */
 @Slf4j
 @Component

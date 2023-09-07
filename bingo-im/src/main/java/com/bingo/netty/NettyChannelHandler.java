@@ -24,12 +24,11 @@ import org.springframework.stereotype.Component;
 @ChannelHandler.Sharable
 public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     /**
-     * 作用：读取客户端的数据（包括客户端心跳也会接收）
-     * 目的：首次建立连接，存储Channel和Uid关系
-     * -------------------------------------------------------------
-     * 1.客户端发送消息调用Controller，没有在js使用socket.send
-     * 2.客户端发送消息不调用Controller，而是js使用用socket.send通过Channel传递数据
-     * 该项目WebSocket只做推送，不做Channel接收，所以采用第1种方式
+     * 作用：读取客户端的数据
+     * 逻辑：首次建立链接，前端会调用send发送uid。后端在这里绑定一下Channel和uid关系
+     * socket.onopen = () => {
+     * socket.send(this.userId)
+     * }
      */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame frame) {
@@ -72,8 +71,8 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
         else if (evt instanceof IdleStateEvent) {
             IdleStateEvent event = (IdleStateEvent) evt;
             if (event.state() == IdleState.READER_IDLE) {
-                // TODO 用户下线
-//                ctx.channel().close();
+                log.info("30s未检测到心跳，断开链接");
+                ctx.channel().close();
             }
         }
     }
