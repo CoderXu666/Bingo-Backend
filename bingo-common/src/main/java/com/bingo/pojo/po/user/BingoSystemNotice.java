@@ -1,4 +1,4 @@
-package com.bingo.pojo.po.im;
+package com.bingo.pojo.po.user;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -13,32 +13,32 @@ import java.util.Date;
  * </p>
  *
  * @author 徐志斌
- * @since 2023-07-18
+ * @since 2023-06-04
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("bingo_chat_emoji")
-public class BingoChatEmoji implements Serializable {
+@TableName("bingo_system_notice")
+public class BingoSystemNotice implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键ID
+     * 关联用户表主键ID
      */
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
     /**
-     * 用户ID（关联用户ID）
+     * 通知类型（1:系统通知，2:点赞通知，3:关注通知）
      */
-    @TableField("uid")
-    private Long uid;
+    @TableField("notice_type")
+    private Boolean noticeType;
 
     /**
-     * 表情包
+     * 通知内容
      */
-    @TableField("emoji_url")
-    private String emojiUrl;
+    @TableField("notice_content")
+    private String noticeContent;
 
     /**
      * 创建时间
@@ -47,7 +47,7 @@ public class BingoChatEmoji implements Serializable {
     private Date createTime;
 
     /**
-     * 删除标识
+     * 删除标识（1：未删除，2：已删除）
      */
     @TableField("deleted")
     @TableLogic

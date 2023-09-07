@@ -2,7 +2,7 @@ package com.bingo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoSystemNoticeMapper;
-import com.bingo.pojo.po.BingoSystemNotice;
+import com.bingo.pojo.po.user.BingoSystemNotice;
 import com.bingo.service.BingoSystemNoticeService;
 import com.bingo.store.BingoSystemNoticeStore;
 import org.springframework.beans.factory.annotation.Autowired;

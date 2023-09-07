@@ -2,7 +2,7 @@ package com.bingo.store;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bingo.pojo.po.BingoSystemNotice;
+import com.bingo.pojo.po.user.BingoSystemNotice;
 
 import java.util.List;
 

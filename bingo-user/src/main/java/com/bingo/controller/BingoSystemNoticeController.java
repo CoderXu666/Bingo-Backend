@@ -2,7 +2,7 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.po.BingoSystemNotice;
+import com.bingo.pojo.po.user.BingoSystemNotice;
 import com.bingo.pojo.common.response.R;
 import com.bingo.service.BingoSystemNoticeService;
 import org.springframework.beans.factory.annotation.Autowired;

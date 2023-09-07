@@ -2,7 +2,7 @@ package com.bingo.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.bingo.pojo.po.BingoSystemNotice;
+import com.bingo.pojo.po.user.BingoSystemNotice;
 
 /**
  * <p>

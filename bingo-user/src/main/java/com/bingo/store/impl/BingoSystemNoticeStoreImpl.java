@@ -3,7 +3,7 @@ package com.bingo.store.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoSystemNoticeMapper;
-import com.bingo.pojo.po.BingoSystemNotice;
+import com.bingo.pojo.po.user.BingoSystemNotice;
 import com.bingo.store.BingoSystemNoticeStore;
 import org.springframework.stereotype.Service;
 
