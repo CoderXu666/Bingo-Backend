@@ -21,8 +21,8 @@ public class CodeGenerator {
         DataSourceConfig dataSource = new DataSourceConfig();
         dataSource.setDriverName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://101.42.13.186:3306/bingo?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false");
-        dataSource.setUsername("root");
-        dataSource.setPassword("Xuzhibin123.");
+        dataSource.setUsername("");
+        dataSource.setPassword("");
         autoGenerator.setDataSource(dataSource);
         /**
          * 第二步：设置全局配置

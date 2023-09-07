@@ -55,7 +55,7 @@ public class NettyWebSocketServer {
                 pipeline.addLast(new HttpServerCodec()); // HTTP协议编、解码器
                 pipeline.addLast(new ChunkedWriteHandler()); // 块方式写数据
                 pipeline.addLast(new HttpObjectAggregator(8192));
-                pipeline.addLast(new WebSocketServerProtocolHandler("/ws")); // HTTP升级为WebSocket
+                pipeline.addLast(new WebSocketServerProtocolHandler("/")); // HTTP升级为WebSocket
                 pipeline.addLast(channelHandler);
             }
         });
@@ -84,5 +84,6 @@ public class NettyWebSocketServer {
     private void destroy() throws InterruptedException {
         bossGroup.shutdownGracefully().sync();
         workGroup.shutdownGracefully().sync();
+        log.info("Netty WebSocket服务器已停机.....");
     }
 }

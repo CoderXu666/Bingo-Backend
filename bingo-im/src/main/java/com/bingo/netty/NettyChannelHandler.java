@@ -29,14 +29,13 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
      * -------------------------------------------------------------
      * 1.客户端发送消息调用Controller，没有在js使用socket.send
      * 2.客户端发送消息不调用Controller，而是js使用用socket.send通过Channel传递数据
-     * 这里WebSocket只想做推送，不做接受，所以采用第一种方式算了
+     * 该项目WebSocket只做推送，不做Channel接收，所以采用第1种方式
      */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame frame) {
         JSONObject msg = JSON.parseObject(frame.text());
         Long userId = msg.getLong("userId");
         NettyChannelRelation.getUserChannelMap().put(userId, ctx.channel());
-        NettyChannelRelation.getChannelGroup().add(ctx.channel());
         AttributeKey<Long> key = AttributeKey.valueOf("userId");
         // 相当于为channel做个标识，用于removeUserId()
         ctx.channel().attr(key).setIfAbsent(userId);
@@ -47,6 +46,7 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
      */
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) {
+        NettyChannelRelation.getChannelGroup().add(ctx.channel());
     }
 
     /**
@@ -73,7 +73,7 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
             IdleStateEvent event = (IdleStateEvent) evt;
             if (event.state() == IdleState.READER_IDLE) {
                 // TODO 用户下线
-                ctx.channel().close();
+//                ctx.channel().close();
             }
         }
     }
