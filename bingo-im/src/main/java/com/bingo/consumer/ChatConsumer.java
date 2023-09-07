@@ -4,12 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.bingo.constant.MQConstant;
 import com.bingo.netty.NettyChannelRelation;
 import com.bingo.pojo.dto.im.ChatMsgDTO;
-import com.bingo.store.BingoChatSendRecordStore;
 import io.netty.channel.Channel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -22,14 +20,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class ChatConsumer {
-    @Autowired
-    private BingoChatSendRecordStore recordStore;
-
     /**
      * 发送聊天消息
      */
     @KafkaListener(topics = MQConstant.IM_SEND_TOPIC, groupId = MQConstant.IM_GROUP_ID)
-    public String sendMsg(String message) {
+    public void sendMsg(String message) {
         ChatMsgDTO msgDTO = JSON.parseObject(message, ChatMsgDTO.class);
 
         // 接收方channel
@@ -39,7 +34,5 @@ public class ChatConsumer {
         if (ObjectUtils.isNotEmpty(channel)) {
             channel.writeAndFlush(new TextWebSocketFrame(msgDTO.toString()));
         }
-
-        return null;
     }
 }

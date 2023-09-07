@@ -29,4 +29,23 @@ public class BingoChatShowStoreImpl extends ServiceImpl<BingoChatShowMapper, Bin
         wrapper.orderByDesc("receive_time");
         return this.list(wrapper);
     }
+
+    /**
+     * 根据uid，goalId精准查询
+     */
+    @Override
+    public BingoChatShow getOneShowRecord(Long uid, Long goalId) {
+        QueryWrapper<BingoChatShow> wrapper = new QueryWrapper<>();
+        wrapper.eq("uid", uid);
+        wrapper.eq("goalId", goalId);
+        return this.getOne(wrapper);
+    }
+
+    /**
+     * 更新记录
+     */
+    @Override
+    public Boolean updateShowRecord(BingoChatShow record) {
+        return this.updateById(record);
+    }
 }
