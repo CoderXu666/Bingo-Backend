@@ -23,7 +23,7 @@ public interface BingoUserService extends IService<BingoUser> {
 
     void generateCode(HttpServletRequest request, HttpServletResponse response);
 
-    Boolean updateUser(BingoUser user);
+    Boolean updateUserById(BingoUser user);
 
     List<UserResp> getUserByIds(List<Long> ids);
 
@@ -34,4 +34,6 @@ public interface BingoUserService extends IService<BingoUser> {
     void sendEmail(String email) throws Exception;
 
     BingoUser resolveToken(String token) throws Exception;
+
+    Boolean updateOnlineStatus(Long uid, Integer status);
 }

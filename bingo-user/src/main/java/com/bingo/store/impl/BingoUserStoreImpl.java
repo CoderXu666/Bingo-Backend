@@ -44,7 +44,7 @@ public class BingoUserStoreImpl extends ServiceImpl<BingoUserMapper, BingoUser> 
      * 修改用户信息
      */
     @Override
-    public Boolean updateUser(BingoUser user) {
+    public Boolean updateUserById(BingoUser user) {
         return this.updateById(user);
     }
 

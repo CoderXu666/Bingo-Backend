@@ -2,6 +2,7 @@ package com.bingo.netty;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.bingo.feign.UserFeign;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -11,6 +12,7 @@ import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.AttributeKey;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,6 +25,9 @@ import org.springframework.stereotype.Component;
 @Component
 @ChannelHandler.Sharable
 public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
+    @Autowired
+    private UserFeign userFeign;
+
     /**
      * 作用：读取客户端的数据
      * 逻辑：首次建立链接，前端会调用send发送uid。后端在这里绑定一下Channel和uid关系
@@ -33,9 +38,9 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame frame) {
         JSONObject msg = JSON.parseObject(frame.text());
-        Long userId = msg.getLong("userId");
+        Long userId = msg.getLong("uid");
         NettyChannelRelation.getUserChannelMap().put(userId, ctx.channel());
-        AttributeKey<Long> key = AttributeKey.valueOf("userId");
+        AttributeKey<Long> key = AttributeKey.valueOf("uid");
         // 相当于为channel做个标识，用于removeUserId()
         ctx.channel().attr(key).setIfAbsent(userId);
     }
@@ -68,21 +73,23 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
         }
 
         // WebSocket心跳断开事件
-        else if (evt instanceof IdleStateEvent) {
+        if (evt instanceof IdleStateEvent) {
             IdleStateEvent event = (IdleStateEvent) evt;
+            // 关闭Channel连接，更新用户在线状态
             if (event.state() == IdleState.READER_IDLE) {
-                log.info("30s未检测到心跳，断开链接");
                 ctx.channel().close();
+                log.info("--------------------30s未检测到心跳，断开WebSocket链接--------------------");
             }
         }
     }
 
     /**
-     * 删除 ConcurrentHashMap 对应的用户信息
+     * 删除 ConcurrentHashMap 对应的用户信息；更新用户在线状态
      */
     private void removeUserId(ChannelHandlerContext ctx) {
-        AttributeKey<Long> key = AttributeKey.valueOf("userId");
-        Long userId = ctx.channel().attr(key).get();
-        NettyChannelRelation.getUserChannelMap().remove(userId);
+        AttributeKey<Long> key = AttributeKey.valueOf("uid");
+        Long uid = ctx.channel().attr(key).get();
+        NettyChannelRelation.getUserChannelMap().remove(uid);
+        userFeign.updateOnlineStatus(uid, 0);
     }
 }

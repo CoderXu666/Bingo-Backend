@@ -44,11 +44,8 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
      */
     @Override
     public Map<Object, Object> getChatList() {
-        // 请求全局域获取 uid
-        Map<String, Object> holderMap = RequestHolder.get();
-        Long uid = (Long) holderMap.get("uid");
-
-        // 最终结果集(K:展示对象信息，V:聊天记录列表)，排序展示
+        // 请求全局域获取 uid | 最终结果集(K:展示对象信息，V:聊天记录列表)
+        Long uid = (Long) RequestHolder.get().get("uid");
         Map<Object, Object> resultMap = new HashMap<>();
 
         // 查询展示列表关联id信息
@@ -57,7 +54,7 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
             return resultMap;
         }
 
-        // 查询目标信息：好友、群组
+        // 查询目标信息：好友
         // List转Map（避免双重遍历循环，性能太低）
         Map<Long, UserResp> userInfoMap = null;
         if (CollectionUtils.isNotEmpty(chatShowList)) {

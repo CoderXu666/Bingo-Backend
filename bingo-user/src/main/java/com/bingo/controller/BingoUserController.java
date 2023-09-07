@@ -10,7 +10,6 @@ import com.bingo.service.BingoUserService;
 import com.bingo.utils.MinioUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -65,7 +64,7 @@ public class BingoUserController {
     }
 
     /**
-     * 解析Token拿到用户信息
+     * 解析 Token
      */
     @GetMapping("/resolve_token")
     public R resolveToken(String token) throws Exception {
@@ -77,8 +76,8 @@ public class BingoUserController {
      * 修改用户信息
      */
     @PostMapping("/update")
-    public R updateUserInfo(@RequestBody BingoUser user) {
-        userService.updateUser(user);
+    public R updateUserById(@RequestBody BingoUser user) {
+        userService.updateUserById(user);
         return R.out(RespCodeEnum.SUCCESS, "操作成功");
     }
 
@@ -131,6 +130,15 @@ public class BingoUserController {
     @DeleteMapping("/remove_avatar")
     public R removeAvatar(String objectName) throws Exception {
         minioUtil.removeObject("avatar-bucket", objectName);
+        return R.out(RespCodeEnum.SUCCESS, "移除成功");
+    }
+
+    /**
+     * 修改用户在线状态（针对IM聊天）
+     */
+    @PostMapping("/update_online")
+    public R updateOnline(Long uid, Integer status) throws Exception {
+        userService.updateOnlineStatus(uid, status);
         return R.out(RespCodeEnum.SUCCESS, "移除成功");
     }
 

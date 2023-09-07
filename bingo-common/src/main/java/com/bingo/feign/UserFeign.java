@@ -30,4 +30,10 @@ public interface UserFeign {
      */
     @PostMapping("/list_by_ids")
     FeignResponse<List<UserResp>> getUserByIds(@RequestBody List<Long> ids);
+
+    /**
+     * 修改用户在线状态（针对聊天功能）
+     */
+    @PostMapping("/update_online")
+    Boolean updateOnlineStatus(@RequestParam("uid") Long uid, @RequestParam("status") Integer status);
 }

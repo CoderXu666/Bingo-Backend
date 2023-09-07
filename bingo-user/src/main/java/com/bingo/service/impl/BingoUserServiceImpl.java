@@ -120,8 +120,8 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 修改用户信息
      */
     @Override
-    public Boolean updateUser(BingoUser user) {
-        return userStore.updateUser(user);
+    public Boolean updateUserById(BingoUser user) {
+        return userStore.updateUserById(user);
     }
 
     /**
@@ -263,5 +263,15 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
             throw new Exception("没有查询到该uid的用户信息");
         }
         return userInfo;
+    }
+
+    /**
+     * 修改用户在线状态（针对IM聊天）
+     */
+    @Override
+    public Boolean updateOnlineStatus(Long uid, Integer status) {
+        BingoUser user = new BingoUser();
+        userStore.updateUserById(user);
+        return null;
     }
 }

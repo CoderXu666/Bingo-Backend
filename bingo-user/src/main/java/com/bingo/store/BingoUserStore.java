@@ -19,7 +19,7 @@ public interface BingoUserStore extends IService<BingoUser> {
 
     BingoUser findByAccountId(String uid);
 
-    Boolean updateUser(BingoUser user);
+    Boolean updateUserById(BingoUser user);
 
     List<BingoUser> getUserListByIds(List<Long> ids);
 }
