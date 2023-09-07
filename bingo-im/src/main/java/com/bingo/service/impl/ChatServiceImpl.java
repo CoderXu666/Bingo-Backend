@@ -4,7 +4,6 @@ import com.bingo.constant.MQConstant;
 import com.bingo.netty.NettyChannelRelation;
 import com.bingo.pojo.dto.im.ChatMsgDTO;
 import com.bingo.service.ChatService;
-import io.netty.channel.Channel;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +29,13 @@ public class ChatServiceImpl implements ChatService {
      */
     @Override
     public void sendChatByUid(ChatMsgDTO msgDTO) {
-        // 接收方channel
-        Channel channel = NettyChannelRelation.getUserChannelMap().get(msgDTO.getGoalId());
-
-        // 异步：通过Channel发送消息到客户端
+        // 异步保存聊天记录、未读数量
         taskExecutor.execute(() -> {
-            channel.writeAndFlush(new TextWebSocketFrame(msgDTO.toString()));
+
         });
 
-        // 保存聊天消息
-        kafkaTemplate.send(MQConstant.IM_SEND_MSG_TOPIC, msgDTO);
+        // MQ保存聊天消息
+        kafkaTemplate.send(MQConstant.IM_SEND_TOPIC, msgDTO);
     }
 
     /**

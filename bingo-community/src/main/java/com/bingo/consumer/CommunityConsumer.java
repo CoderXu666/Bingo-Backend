@@ -29,7 +29,7 @@ public class CommunityConsumer {
     /**
      * 同步帖子信息到ES
      */
-    @KafkaListener(topics = MQConstant.COMMUNITY_POST_TOPIC, groupId = MQConstant.POST_GROUP_ID)
+    @KafkaListener(topics = MQConstant.COMMUNITY_POST_TOPIC, groupId = MQConstant.COMMUNITY_GROUP_ID)
     public String savePost(String message) {
         try {
             BingoPost bingoPost = JSON.parseObject(message, BingoPost.class);

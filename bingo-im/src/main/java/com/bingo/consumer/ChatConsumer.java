@@ -2,9 +2,13 @@ package com.bingo.consumer;
 
 import com.alibaba.fastjson.JSON;
 import com.bingo.constant.MQConstant;
+import com.bingo.netty.NettyChannelRelation;
 import com.bingo.pojo.dto.im.ChatMsgDTO;
 import com.bingo.store.BingoChatSendRecordStore;
+import io.netty.channel.Channel;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
@@ -24,10 +28,18 @@ public class ChatConsumer {
     /**
      * 发送聊天消息
      */
-    @KafkaListener(topics = MQConstant.IM_SEND_MSG_TOPIC, groupId = MQConstant.POST_GROUP_ID)
+    @KafkaListener(topics = MQConstant.IM_SEND_TOPIC, groupId = MQConstant.IM_GROUP_ID)
     public String sendMsg(String message) {
         ChatMsgDTO msgDTO = JSON.parseObject(message, ChatMsgDTO.class);
-//        chatSendRecord.saveRecord();
+
+        // 接收方channel
+        Channel channel = NettyChannelRelation.getUserChannelMap().get(msgDTO.getGoalId());
+
+        // 通过Channel发送消息到客户端（在线状态直接推，不在线就不推送了）
+        if (ObjectUtils.isNotEmpty(channel)) {
+            channel.writeAndFlush(new TextWebSocketFrame(msgDTO.toString()));
+        }
+
         return null;
     }
 }

@@ -20,7 +20,7 @@ public class KafkaAdminClient {
 
     public static void main(String[] args) throws Exception {
 //        createTopic(MQConstant.COMMUNITY_POST_TOPIC);
-//        createTopic(MQConstant.IM_SEND_MSG_TOPIC);
+//        createTopic(MQConstant.IM_SEND_TOPIC);
         getTopic();
 //        deleteTopic("");
     }

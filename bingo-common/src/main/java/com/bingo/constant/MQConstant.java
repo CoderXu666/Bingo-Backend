@@ -20,10 +20,14 @@ public class MQConstant {
     /**
      * 发送消息Topic
      */
-    public static final String IM_SEND_MSG_TOPIC = "IM_SEND_MSG_TOPIC";
+    public static final String IM_SEND_TOPIC = "IM_SEND_TOPIC";
 
     /**
-     * 帖子消费组
+     * 消费组
      */
-    public static final String POST_GROUP_ID = "my-group";
+    public static final String USER_GROUP_ID = "user-group";
+    public static final String COMMUNITY_GROUP_ID = "community-group";
+    public static final String IM_GROUP_ID = "im-group";
+    public static final String PARTY_GROUP_ID = "party-group";
+    public static final String RECHARGE_GROUP_ID = "recharge-group";
 }
