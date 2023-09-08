@@ -43,7 +43,7 @@ public class IPUtil {
                 ipAddress = request.getRemoteAddr();
             }
         } catch (Exception e) {
-            log.error("IPUtils ERROR ", e);
+            log.error("========================IPUtils ERROR：{e} ========================", e);
         }
         return ipAddress;
     }

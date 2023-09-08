@@ -31,10 +31,10 @@ public class DistributedLock {
         try {
             RLock lock = redissonClient.getLock(lockKey);
             lock.lock(15, TimeUnit.SECONDS);
-            log.info("Thread [{}] DistributedLock lock [{}] success", Thread.currentThread().getName(), lockKey);
+            log.info("------------------------Thread [{}] DistributedLock lock [{}] success--------------------------", Thread.currentThread().getName(), lockKey);
             return true;
         } catch (Exception e) {
-            log.error("DistributedLock lock [{}] Exception:", lockKey, e);
+            log.error("======================================DistributedLock lock [{}] Exception:======================================", lockKey, e);
             return false;
         }
     }
@@ -44,16 +44,16 @@ public class DistributedLock {
      */
     public Boolean unlock(String lockKey) {
         if (redissonClient == null) {
-            log.info("DistributedLock redissonClient is null");
+            log.error("======================================DistributedLock redissonClient is null======================================");
             return false;
         }
         try {
             RLock lock = redissonClient.getLock(lockKey);
             lock.unlock();
-            log.info("Thread [{}] DistributedLock unlock [{}] success", Thread.currentThread().getName(), lockKey);
+            log.info("------------------------Thread [{}] DistributedLock unlock [{}] success------------------------", Thread.currentThread().getName(), lockKey);
             return true;
         } catch (Exception e) {
-            log.error("DistributedLock unlock [{}] Exception:", lockKey, e);
+            log.error("===================================DistributedLock unlock [{}] Exception:{}===================================", lockKey, e);
             return false;
         }
     }

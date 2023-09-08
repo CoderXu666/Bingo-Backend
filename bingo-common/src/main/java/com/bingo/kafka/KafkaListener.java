@@ -35,7 +35,7 @@ public class KafkaListener {
 
             @Override
             public void onError(ProducerRecord<String, Object> producerRecord, Exception exception) {
-                log.error("-----------------------kafka error,message={}-----------------------", producerRecord.value());
+                log.error("========================kafka error,message={}========================", producerRecord.value());
             }
         });
     }

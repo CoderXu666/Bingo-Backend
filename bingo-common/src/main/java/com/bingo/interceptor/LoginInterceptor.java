@@ -46,7 +46,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             RequestHolder.set(map);
             return true;
         } else {
-            log.error("登录Token已过期：FAIL....................");
+            log.error("========================登录Token已过期：FAIL========================");
             return false;
         }
     }

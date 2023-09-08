@@ -67,7 +67,7 @@ public class NettyWebSocketServer {
             }
         });
         ChannelFuture future = server.bind(10086).sync();
-        log.info("Netty WebSocket服务器启动成功：{}", future.channel().localAddress());
+        log.info("-----------------------Netty WebSocket服务器启动成功：{}-----------------------", future.channel().localAddress());
     }
 
     /**
@@ -91,6 +91,6 @@ public class NettyWebSocketServer {
     private void destroy() throws InterruptedException {
         bossGroup.shutdownGracefully().sync();
         workGroup.shutdownGracefully().sync();
-        log.info("Netty WebSocket服务器已停机.....");
+        log.info("-----------------------Netty WebSocket服务器已停机-----------------------");
     }
 }

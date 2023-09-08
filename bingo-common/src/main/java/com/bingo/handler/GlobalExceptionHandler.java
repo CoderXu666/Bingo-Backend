@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(ExpiredJwtException.class)
     public R expiredJwtException(ExpiredJwtException e) {
-        log.error("--------------------ExpiredJwtException：{}--------------------", e);
+        log.error("========================ExpiredJwtException：{}========================", e);
         return R.out(RespCodeEnum.TOKEN_EXPIRED, e);
     }
 
@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public R bindException(Exception e) {
-        log.error("--------------------Exception：{}--------------------", e);
+        log.error("========================Exception：{}========================", e);
         return R.out(RespCodeEnum.FAIL, e);
     }
 }

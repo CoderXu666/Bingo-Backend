@@ -33,9 +33,9 @@ public class ChatConsumer {
         // 通过Channel发送消息到客户端（在线直接推，不在线不推）
         if (ObjectUtils.isNotEmpty(channel)) {
             channel.writeAndFlush(new TextWebSocketFrame(sendRecord.toString()));
-            log.info("该Channel已连接，通过Channel进行推送");
+            log.info("-----------------------该Channel已连接，通过Channel进行推送-----------------------");
         } else {
-            log.info("该Channel没建立连接，只保存聊天记录，不进行推送");
+            log.info("-----------------------该Channel没建立连接，只保存聊天记录，不进行推送-----------------------");
         }
     }
 }

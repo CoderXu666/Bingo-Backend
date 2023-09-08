@@ -39,7 +39,7 @@ public class CommunityConsumer {
             IndexResponse response = esClient.index(request, RequestOptions.DEFAULT);
             return response.getId();
         } catch (Exception e) {
-            log.error("保存帖子ES数据报错：{}", e.getMessage());
+            log.error("========================保存帖子ES数据报错：{}========================", e.getMessage());
             return null;
         }
     }
