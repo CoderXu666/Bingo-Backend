@@ -22,8 +22,8 @@ public class DistributedLock {
     /**
      * 加锁
      */
-    public Boolean lock(String lockKey) {
-        redissonClient.getLock(lockKey).lock(15, TimeUnit.SECONDS);
+    public Boolean lock(String lockKey, Integer second) {
+        redissonClient.getLock(lockKey).lock(second, TimeUnit.SECONDS);
         log.info("------------------------Thread [{}] DistributedLock lock [{}] success--------------------------", Thread.currentThread().getName(), lockKey);
         return true;
     }
