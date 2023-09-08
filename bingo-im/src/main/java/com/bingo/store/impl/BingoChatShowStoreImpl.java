@@ -2,6 +2,7 @@ package com.bingo.store.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bingo.adapter.ChatShowAdapter;
 import com.bingo.mapper.BingoChatShowMapper;
 import com.bingo.pojo.po.im.BingoChatShow;
 import com.bingo.store.BingoChatShowStore;
@@ -47,5 +48,13 @@ public class BingoChatShowStoreImpl extends ServiceImpl<BingoChatShowMapper, Bin
     @Override
     public Boolean updateRecordById(BingoChatShow record) {
         return this.updateById(record);
+    }
+
+    /**
+     * 保存会话记录
+     */
+    @Override
+    public Boolean saveRecord(Long uid, Long goalId) {
+        return this.save(ChatShowAdapter.buildChatShowPO(uid, goalId));
     }
 }

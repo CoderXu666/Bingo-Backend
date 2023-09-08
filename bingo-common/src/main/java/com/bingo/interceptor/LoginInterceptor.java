@@ -32,7 +32,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        // 从请求头中获取token信息，校验是可用
+        // 从请求头中获取token，校验是否可用
         String token = request.getHeader("token");
         if (JWTUtil.checkToken(token)) {
             Map<String, Object> map = new HashMap<>();
@@ -42,7 +42,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             log.info("-------------------------登录Token校验通过：SUCCESS--------------------------");
             return true;
         } else {
-            log.error("========================登录Token已过期：FAIL========================");
+            log.info("-------------------------登录Token已过期：FAIL-------------------------");
             return false;
         }
     }

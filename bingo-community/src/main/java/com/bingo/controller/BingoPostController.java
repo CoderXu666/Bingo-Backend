@@ -2,9 +2,9 @@ package com.bingo.controller;
 
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.common.PageParam;
+import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.dto.community.LikeDTO;
 import com.bingo.pojo.dto.community.PostDTO;
-import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.resp.community.PostPageResp;
 import com.bingo.pojo.resp.community.PostResp;
 import com.bingo.response.R;

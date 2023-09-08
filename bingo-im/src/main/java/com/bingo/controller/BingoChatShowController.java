@@ -38,9 +38,9 @@ public class BingoChatShowController {
     /**
      * 清空未读
      */
-    @PostMapping("/flush_unread")
-    public R flushUnread(Long goalId) {
-        showService.markRead(goalId);
+    @PostMapping("/clear_unread")
+    public R clearUnread(Long goalId) {
+        showService.clearUnread(goalId);
         return R.out(RespCodeEnum.SUCCESS, "清空未读数量");
     }
 }

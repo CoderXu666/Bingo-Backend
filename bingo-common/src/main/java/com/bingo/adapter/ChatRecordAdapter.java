@@ -2,7 +2,6 @@ package com.bingo.adapter;
 
 import com.bingo.pojo.dto.im.ChatRecordDTO;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
-import org.springframework.beans.BeanUtils;
 
 import java.util.Date;
 
@@ -13,13 +12,13 @@ import java.util.Date;
  * @Version: 1.0
  */
 public class ChatRecordAdapter {
-    /**
-     * 聊天消息（单聊）
-     */
     public static BingoChatSendRecord buildChatRecordPO(ChatRecordDTO chatMsgDTO) {
-        BingoChatSendRecord sendRecord = new BingoChatSendRecord();
-        BeanUtils.copyProperties(chatMsgDTO, sendRecord);
-        sendRecord.setCreateTime(new Date());
-        return sendRecord;
+        return BingoChatSendRecord.builder()
+                .uid(chatMsgDTO.getUid())
+                .goalId(chatMsgDTO.getGoalId())
+                .chatContent(chatMsgDTO.getChatContent())
+                .type(chatMsgDTO.getType())
+                .createTime(new Date())
+                .build();
     }
 }

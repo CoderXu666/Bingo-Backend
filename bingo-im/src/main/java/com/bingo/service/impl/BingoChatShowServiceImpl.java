@@ -89,7 +89,7 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
      * 清空未读数量
      */
     @Override
-    public Boolean markRead(Long goalId) {
+    public Boolean clearUnread(Long goalId) {
         Long uid = (Long) RequestHolder.get().get("uid");
         BingoChatShow record = showStore.getOneRecord(uid, goalId);
         record.setUnreadCount(0);
