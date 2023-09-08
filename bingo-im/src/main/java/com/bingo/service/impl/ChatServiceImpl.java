@@ -38,32 +38,32 @@ public class ChatServiceImpl implements ChatService {
      * 发送消息给用户
      */
     @Override
-    public void sendChatByUid(ChatRecordDTO msgDTO) {
+    public void sendChatRecord(ChatRecordDTO msgDTO) {
         // 适配器模式：对象转换
+        BingoChatSendRecord sendRecord = ChatRecordAdapter.buildChatRecordPO(msgDTO);
         Long uid = msgDTO.getUid();
         Long goalId = msgDTO.getGoalId();
-        BingoChatSendRecord sendRecord = ChatRecordAdapter.buildChatRecordPO(msgDTO);
 
         // 保存聊天记录
         CompletableFuture.runAsync(() -> {
             recordStore.saveChatRecord(sendRecord);
         }, taskExecutor);
 
-        // 聊天会话处理
+        // 处理聊天会话窗口逻辑
         CompletableFuture showFuture = CompletableFuture.runAsync(() -> {
-            BingoChatShow record1 = showStore.getOneRecord(uid, goalId);
-            BingoChatShow record2 = showStore.getOneRecord(goalId, uid);
-            if (ObjectUtils.isEmpty(record1)) {
+            BingoChatShow uRecord = showStore.getOneRecord(uid, goalId);
+            BingoChatShow goalRecord = showStore.getOneRecord(goalId, uid);
+            if (ObjectUtils.isEmpty(uRecord)) {
                 showStore.saveRecord(uid, goalId);
             }
-            if (ObjectUtils.isEmpty(record2)) {
+            if (ObjectUtils.isEmpty(goalRecord)) {
                 showStore.saveRecord(goalId, uid);
             }
         }, taskExecutor);
 
-        // 更新未读数量（showFuture执行完毕执行该方法）
+        // 更新未读数量
         showFuture.thenRunAsync(() -> {
-            BingoChatShow record = showStore.getOneRecord(msgDTO.getGoalId(), msgDTO.getUid());
+            BingoChatShow record = showStore.getOneRecord(uid, goalId);
             record.setUnreadCount(record.getUnreadCount() + 1);
             record.setReceiveTime(new Date());
             showStore.updateRecordById(record);

@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * @Author: 徐志斌
  * @CreateTime: 2023-09-07  14:31
- * @Description: 聊天消息转换
+ * @Description: BingoChatSendRecord转换
  * @Version: 1.0
  */
 public class ChatRecordAdapter {
