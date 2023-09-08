@@ -7,11 +7,11 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
-import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.AttributeKey;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +29,7 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
     private UserFeign userFeign;
 
     /**
-     * 读取客户端的数据
+     * 读取客户端 Channel 数据
      * ------------------------------------------------------------
      * 逻辑：
      * 首次建立链接，前端会调用send发送uid。后端在这里绑定一下Channel和uid关系
@@ -41,8 +41,47 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
      */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame frame) {
+        this.online(ctx, frame);
+    }
+
+    /**
+     * 建立连接
+     */
+    @Override
+    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+        log.info("------------------客户端建立连接成功------------------");
+    }
+
+    /**
+     * 断开连接
+     */
+    @Override
+    public void handlerRemoved(ChannelHandlerContext ctx) {
+        this.offline(ctx);
+    }
+
+    /**
+     * 事件触发监听
+     */
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object event) {
+        // 心跳检测：30s无心跳触发断开事件
+        if (event instanceof IdleStateEvent) {
+            IdleStateEvent idleStateEvent = (IdleStateEvent) event;
+            if (idleStateEvent.state() == IdleState.READER_IDLE) {
+                ctx.close(); // 调用close可以触发handlerRemoved逻辑
+                log.warn("--------------------30s未检测到心跳，断开WebSocket链接--------------------");
+            }
+        }
+    }
+
+    /**
+     * 建立连接操作
+     */
+    private void online(ChannelHandlerContext ctx, TextWebSocketFrame frame) {
         JSONObject channelMsg = JSON.parseObject(frame.text());
         Long uid = channelMsg.getLong("uid");
+        NettyChannelRelation.getChannelGroup().add(ctx.channel());
         NettyChannelRelation.getUserChannelMap().put(uid, ctx.channel());
         AttributeKey<Long> key = AttributeKey.valueOf("uid");
         // 相当于为channel做个标识，用于removeUserId()
@@ -50,51 +89,20 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
     }
 
     /**
-     * Client 与 Server 连接
+     * 断开连接操作
      */
-    @Override
-    public void handlerAdded(ChannelHandlerContext ctx) {
-        NettyChannelRelation.getChannelGroup().add(ctx.channel());
-        log.info("------------------建立连接成功，Channel已添加到Channel Group------------------");
-    }
-
-    /**
-     * Client 与 Server 断开
-     */
-    @Override
-    public void handlerRemoved(ChannelHandlerContext ctx) {
+    private void offline(ChannelHandlerContext ctx) {
+        // 移除 Channel Group 中的 Channel 信息
         NettyChannelRelation.getChannelGroup().remove(ctx.channel());
-        removeUid(ctx);
-    }
 
-    /**
-     * 连接握手、心跳事件
-     */
-    @Override
-    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) {
-        // WebSocket建立连接事件调用
-        if (evt instanceof WebSocketServerProtocolHandler.HandshakeComplete) {
-            System.out.println("首次建立连接，握手完成.....");
-        }
-
-        // WebSocket心跳断开事件
-        if (evt instanceof IdleStateEvent) {
-            IdleStateEvent event = (IdleStateEvent) evt;
-            // 关闭Channel连接，更新用户在线状态
-            if (event.state() == IdleState.READER_IDLE) {
-                ctx.channel().close();
-                log.info("--------------------30s未检测到心跳，断开WebSocket链接--------------------");
-            }
-        }
-    }
-
-    /**
-     * 删除 ConcurrentHashMap 对应的用户信息；更新用户在线状态
-     */
-    private void removeUid(ChannelHandlerContext ctx) {
+        // 移除 uid 和 Channel 关联关系
         AttributeKey<Long> key = AttributeKey.valueOf("uid");
         Long uid = ctx.channel().attr(key).get();
-        NettyChannelRelation.getUserChannelMap().remove(uid);
+        if (ObjectUtils.isNotEmpty(uid)) {
+            NettyChannelRelation.getUserChannelMap().remove(uid);
+        }
+
+        // 用户状态更新为下线
         userFeign.updateOnlineStatus(uid, 0);
         log.info("------------------客户端与WebSocket服务器断开连接------------------");
     }

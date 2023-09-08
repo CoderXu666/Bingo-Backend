@@ -13,7 +13,7 @@ import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.dto.community.LikeDTO;
 import com.bingo.pojo.dto.community.PostDTO;
 import com.bingo.pojo.po.community.BingoPost;
-import com.bingo.pojo.response.FeignResponse;
+import com.bingo.response.FeignResponse;
 import com.bingo.pojo.resp.community.PostPageResp;
 import com.bingo.pojo.resp.community.PostResp;
 import com.bingo.pojo.resp.user.UserResp;

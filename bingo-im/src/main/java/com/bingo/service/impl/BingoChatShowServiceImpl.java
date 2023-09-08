@@ -84,4 +84,15 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
 
         return resultMap;
     }
+
+    /**
+     * 清空未读数量
+     */
+    @Override
+    public Boolean flushUnread(Long goalId) {
+        Long uid = (Long) RequestHolder.get().get("uid");
+        BingoChatShow record = showStore.getOneShowRecord(uid, goalId);
+        record.setUnreadCount(0L);
+        return showStore.updateRecordById(record);
+    }
 }

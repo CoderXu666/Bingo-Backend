@@ -2,10 +2,11 @@ package com.bingo.controller;
 
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.response.R;
+import com.bingo.response.R;
 import com.bingo.service.BingoChatShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,7 @@ import java.util.Map;
  * @since 2023-08-24
  */
 @RestController
-@RequestMapping("/conversation")
+@RequestMapping("/show")
 public class BingoChatShowController {
     @Autowired
     private BingoChatShowService showService;
@@ -32,6 +33,15 @@ public class BingoChatShowController {
     public R getChatList() {
         Map<Object, Object> resultMap = showService.getChatList();
         return R.out(RespCodeEnum.SUCCESS, resultMap);
+    }
+
+    /**
+     * 清空未读
+     */
+    @PostMapping("/flush_unread")
+    public R flushUnread(Long goalId) {
+        showService.flushUnread(goalId);
+        return R.out(RespCodeEnum.SUCCESS, "清空未读数量");
     }
 }
 

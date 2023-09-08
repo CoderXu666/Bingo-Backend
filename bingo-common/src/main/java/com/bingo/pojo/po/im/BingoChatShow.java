@@ -44,7 +44,7 @@ public class BingoChatShow implements Serializable {
      * 未读消息数量
      */
     @TableField("unread_count")
-    private Long unreadCount;
+    private Integer unreadCount;
 
     /**
      * 聊天类型

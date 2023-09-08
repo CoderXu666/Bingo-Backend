@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 public class BingoChatShowStoreImpl extends ServiceImpl<BingoChatShowMapper, BingoChatShow> implements BingoChatShowStore {
     /**
-     * 查询进行过聊天的好友关联关系
+     * 查询聊天会话id
      */
     @Override
     public List<BingoChatShow> getChatShowList(Long uid) {
@@ -45,7 +45,7 @@ public class BingoChatShowStoreImpl extends ServiceImpl<BingoChatShowMapper, Bin
      * 更新记录
      */
     @Override
-    public Boolean updateShowRecord(BingoChatShow record) {
+    public Boolean updateRecordById(BingoChatShow record) {
         return this.updateById(record);
     }
 }

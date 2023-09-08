@@ -46,7 +46,7 @@ public class ChatServiceImpl implements ChatService {
             BingoChatShow record = showStore.getOneShowRecord(msgDTO.getGoalId(), msgDTO.getUid());
             record.setUnreadCount(record.getUnreadCount() + 1);
             record.setReceiveTime(new Date());
-            showStore.updateShowRecord(record);
+            showStore.updateRecordById(record);
         });
 
         // 通过Channel发送消息（等待聊天记录保存成功了在推送，要不会出现问题）

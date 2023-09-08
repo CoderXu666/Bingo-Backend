@@ -1,6 +1,6 @@
 package com.bingo.feign;
 
-import com.bingo.pojo.response.FeignResponse;
+import com.bingo.response.FeignResponse;
 import com.bingo.pojo.resp.user.UserResp;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;

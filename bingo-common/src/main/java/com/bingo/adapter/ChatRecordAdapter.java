@@ -9,13 +9,12 @@ import java.util.Date;
 /**
  * @Author: 徐志斌
  * @CreateTime: 2023-09-07  14:31
- * @Description: 聊天消息转换（适配器模式）
+ * @Description: 聊天消息转换
  * @Version: 1.0
  */
 public class ChatRecordAdapter {
     /**
-     * 聊天消息转换（单聊）
-     * TODO 考虑消息类型问题（有可能要调用MinIO）
+     * 聊天消息（单聊）
      */
     public static BingoChatSendRecord buildChatRecordPO(ChatRecordDTO chatMsgDTO) {
         BingoChatSendRecord sendRecord = new BingoChatSendRecord();

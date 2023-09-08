@@ -3,7 +3,7 @@ package com.bingo.controller;
 
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.pojo.dto.community.TopicDTO;
-import com.bingo.pojo.response.R;
+import com.bingo.response.R;
 import com.bingo.pojo.resp.community.BingoTopicResp;
 import com.bingo.service.BingoTopicService;
 import org.springframework.beans.factory.annotation.Autowired;
