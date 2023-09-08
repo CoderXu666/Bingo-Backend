@@ -25,8 +25,8 @@ public class BingoUser implements Serializable {
     /**
      * 主键Id
      */
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private Long id;
+    @TableId(value = "uid", type = IdType.ASSIGN_ID)
+    private Long uid;
 
     /**
      * 账号id

@@ -70,7 +70,7 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
             IdleStateEvent idleStateEvent = (IdleStateEvent) event;
             if (idleStateEvent.state() == IdleState.READER_IDLE) {
                 ctx.close(); // 调用close可以触发handlerRemoved逻辑
-                log.warn("--------------------30s未检测到心跳，断开WebSocket链接--------------------");
+                log.info("--------------------30s未检测到心跳，断开WebSocket链接--------------------");
             }
         }
     }

@@ -92,7 +92,7 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
     public Boolean flushUnread(Long goalId) {
         Long uid = (Long) RequestHolder.get().get("uid");
         BingoChatShow record = showStore.getOneShowRecord(uid, goalId);
-        record.setUnreadCount(0L);
+        record.setUnreadCount(0);
         return showStore.updateRecordById(record);
     }
 }

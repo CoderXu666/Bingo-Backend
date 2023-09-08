@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class ChatShowResp {
     /**
-     * 主键id
+     * 用户id
      */
     private Long uid;
 
