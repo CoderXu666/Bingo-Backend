@@ -21,8 +21,8 @@ public class CodeGenerator {
         DataSourceConfig dataSource = new DataSourceConfig();
         dataSource.setDriverName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://101.42.13.186:3306/bingo?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false");
-        dataSource.setUsername("");
-        dataSource.setPassword("");
+        dataSource.setUsername("root");
+        dataSource.setPassword("Xuzhibin123.");
         autoGenerator.setDataSource(dataSource);
         /**
          * 第二步：设置全局配置
@@ -50,7 +50,7 @@ public class CodeGenerator {
          * 第四步：   策略设置
          */
         StrategyConfig strategyConfig = new StrategyConfig();
-        strategyConfig.setInclude("bingo_chat_group");
+        strategyConfig.setInclude("bingo_gift");
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setEntityLombokModel(true);
