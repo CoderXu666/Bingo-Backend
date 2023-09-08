@@ -17,7 +17,7 @@ public interface BingoChatShowStore extends IService<BingoChatShow> {
 
     List<BingoChatShow> getChatShowList(Long uid);
 
-    BingoChatShow getOneShowRecord(Long uid, Long goalId);
+    BingoChatShow getOneRecord(Long uid, Long goalId);
 
     Boolean updateRecordById(BingoChatShow record);
 }

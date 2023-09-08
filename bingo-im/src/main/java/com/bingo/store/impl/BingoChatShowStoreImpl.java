@@ -34,7 +34,7 @@ public class BingoChatShowStoreImpl extends ServiceImpl<BingoChatShowMapper, Bin
      * 根据uid，goalId精准查询
      */
     @Override
-    public BingoChatShow getOneShowRecord(Long uid, Long goalId) {
+    public BingoChatShow getOneRecord(Long uid, Long goalId) {
         QueryWrapper<BingoChatShow> wrapper = new QueryWrapper<>();
         wrapper.eq("uid", uid);
         wrapper.eq("goalId", goalId);

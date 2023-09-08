@@ -17,5 +17,5 @@ public interface BingoChatShowService extends IService<BingoChatShow> {
 
     Map<Object, Object> getChatList();
 
-    Boolean flushUnread(Long goalId);
+    Boolean markRead(Long goalId);
 }

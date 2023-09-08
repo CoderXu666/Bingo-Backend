@@ -40,7 +40,7 @@ public class BingoChatShowController {
      */
     @PostMapping("/flush_unread")
     public R flushUnread(Long goalId) {
-        showService.flushUnread(goalId);
+        showService.markRead(goalId);
         return R.out(RespCodeEnum.SUCCESS, "清空未读数量");
     }
 }

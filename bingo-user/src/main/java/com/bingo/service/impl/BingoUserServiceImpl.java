@@ -219,8 +219,8 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         }
 
         // 生成Token
-        Long userId = userInfo.getId();
-        String token = JWTUtil.generateToken(userId);
+        Long uid = userInfo.getUid();
+        String token = JWTUtil.generateToken(uid);
         if (StringUtils.isEmpty(token)) {
             throw new Exception("生成Token用户信息异常");
         }

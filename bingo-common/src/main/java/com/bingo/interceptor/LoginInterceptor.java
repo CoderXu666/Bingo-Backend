@@ -18,10 +18,6 @@ import java.util.Map;
  * @Date: 2023/8/21 20:58
  * @Version 1.0
  * @Description: 登录状态-请求拦截器
- * ----------------------------------------------------------
- * 理解：
- * 前端会调用JWTUtil.resolveToken()，这里为何还要检验每个请求呢？
- * 因为有些请求不会调用JWTUtil.resolveToken()，所以登录状态失效也可以继续使用
  */
 @Slf4j
 @Component

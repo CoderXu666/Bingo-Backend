@@ -44,7 +44,7 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
      */
     @Override
     public Map<Object, Object> getChatList() {
-        // 请求全局域获取 uid | 最终结果集(K:展示对象信息，V:聊天记录列表)
+        // 请求全局域获取 uid
         Long uid = (Long) RequestHolder.get().get("uid");
         Map<Object, Object> resultMap = new HashMap<>();
 
@@ -89,9 +89,9 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
      * 清空未读数量
      */
     @Override
-    public Boolean flushUnread(Long goalId) {
+    public Boolean markRead(Long goalId) {
         Long uid = (Long) RequestHolder.get().get("uid");
-        BingoChatShow record = showStore.getOneShowRecord(uid, goalId);
+        BingoChatShow record = showStore.getOneRecord(uid, goalId);
         record.setUnreadCount(0);
         return showStore.updateRecordById(record);
     }

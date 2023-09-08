@@ -17,7 +17,6 @@ public class MyThreadFactory implements ThreadFactory {
 
     /**
      * 线程工厂创建出来的每个线程都设置：未捕获异常处理器
-     * 线程中发现未捕获异常及时处理
      */
     @Override
     public Thread newThread(Runnable r) {

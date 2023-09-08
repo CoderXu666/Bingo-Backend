@@ -43,7 +43,7 @@ public class ChatServiceImpl implements ChatService {
 
         // 聊天记录保存成功（保存了才算发送成功），更新未读数量（TODO 并发问题？）
         taskExecutor.execute(() -> {
-            BingoChatShow record = showStore.getOneShowRecord(msgDTO.getGoalId(), msgDTO.getUid());
+            BingoChatShow record = showStore.getOneRecord(msgDTO.getGoalId(), msgDTO.getUid());
             record.setUnreadCount(record.getUnreadCount() + 1);
             record.setReceiveTime(new Date());
             showStore.updateRecordById(record);
