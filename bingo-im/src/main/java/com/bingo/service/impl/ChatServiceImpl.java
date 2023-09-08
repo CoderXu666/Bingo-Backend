@@ -37,11 +37,11 @@ public class ChatServiceImpl implements ChatService {
      */
     @Override
     public void sendChatByUid(ChatRecordDTO msgDTO) {
-        // 保存聊天记录
+        // 保存聊天记录（TODO 考虑一下这里接受消息类型）
         BingoChatSendRecord sendRecord = ChatRecordAdapter.buildChatRecordPO(msgDTO);
         recordStore.saveChatRecord(sendRecord);
 
-        // 更新未读数量（并发问题？）
+        // 聊天记录保存成功（保存了才算发送成功），更新未读数量（TODO 并发问题？）
         taskExecutor.execute(() -> {
             BingoChatShow record = showStore.getOneShowRecord(msgDTO.getGoalId(), msgDTO.getUid());
             record.setUnreadCount(record.getUnreadCount() + 1);

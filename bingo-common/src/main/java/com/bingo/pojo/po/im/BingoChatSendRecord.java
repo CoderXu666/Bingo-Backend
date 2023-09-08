@@ -47,7 +47,7 @@ public class BingoChatSendRecord implements Serializable {
     private String chatContent;
 
     /**
-     * 消息类型（0：文字、1：表情包、2：文件（图片等）4：语音/视频）、5：内容分享
+     * 消息类型（0：文字、1：文件、2：语音消息、3、视频消息）
      */
     @TableField("type")
     private Integer type;

@@ -15,6 +15,7 @@ import java.util.Date;
 public class ChatRecordAdapter {
     /**
      * 聊天消息转换（单聊）
+     * TODO 考虑消息类型问题（有可能要调用MinIO）
      */
     public static BingoChatSendRecord buildChatRecordPO(ChatRecordDTO chatMsgDTO) {
         BingoChatSendRecord sendRecord = new BingoChatSendRecord();

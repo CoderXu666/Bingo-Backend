@@ -29,20 +29,24 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
     private UserFeign userFeign;
 
     /**
-     * 作用：读取客户端的数据
-     * 逻辑：首次建立链接，前端会调用send发送uid。后端在这里绑定一下Channel和uid关系
+     * 读取客户端的数据
+     * ------------------------------------------------------------
+     * 逻辑：
+     * 首次建立链接，前端会调用send发送uid。后端在这里绑定一下Channel和uid关系
+     * 这里不接受客户端发送的消息，发送消息通过接口接受
+     * ------------------------------------------------------------
      * socket.onopen = () => {
      * socket.send(this.userId)
      * }
      */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame frame) {
-        JSONObject msg = JSON.parseObject(frame.text());
-        Long userId = msg.getLong("uid");
-        NettyChannelRelation.getUserChannelMap().put(userId, ctx.channel());
+        JSONObject channelMsg = JSON.parseObject(frame.text());
+        Long uid = channelMsg.getLong("uid");
+        NettyChannelRelation.getUserChannelMap().put(uid, ctx.channel());
         AttributeKey<Long> key = AttributeKey.valueOf("uid");
         // 相当于为channel做个标识，用于removeUserId()
-        ctx.channel().attr(key).setIfAbsent(userId);
+        ctx.channel().attr(key).setIfAbsent(uid);
     }
 
     /**
@@ -51,6 +55,7 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) {
         NettyChannelRelation.getChannelGroup().add(ctx.channel());
+        log.info("------------------建立连接成功，Channel已添加到Channel Group------------------");
     }
 
     /**
@@ -59,7 +64,7 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) {
         NettyChannelRelation.getChannelGroup().remove(ctx.channel());
-        removeUserId(ctx);
+        removeUid(ctx);
     }
 
     /**
@@ -86,10 +91,11 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
     /**
      * 删除 ConcurrentHashMap 对应的用户信息；更新用户在线状态
      */
-    private void removeUserId(ChannelHandlerContext ctx) {
+    private void removeUid(ChannelHandlerContext ctx) {
         AttributeKey<Long> key = AttributeKey.valueOf("uid");
         Long uid = ctx.channel().attr(key).get();
         NettyChannelRelation.getUserChannelMap().remove(uid);
         userFeign.updateOnlineStatus(uid, 0);
+        log.info("------------------客户端与WebSocket服务器断开连接------------------");
     }
 }

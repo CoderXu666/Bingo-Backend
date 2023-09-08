@@ -54,8 +54,7 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
             return resultMap;
         }
 
-        // 查询目标信息：好友
-        // List转Map（避免双重遍历循环，性能太低）
+        // 查询目标好友信息（Map避免双重遍历循环，性能太低）
         Map<Long, UserResp> userInfoMap = null;
         if (CollectionUtils.isNotEmpty(chatShowList)) {
             List<Long> userChatShowIds = chatShowList.stream().map(BingoChatShow::getGoalId).collect(Collectors.toList());
@@ -76,7 +75,7 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
             }
         }
 
-        // 查询好友、群组聊天信息（循环查询吧，有Redis，并且这里条件复杂）
+        // 查询好友聊天信息（循环查询吧，Redis做好缓存，并且这里是首次连接登录，不需要加载特别快）
         for (ChatShowResp chatShowResp : chatShowRespList) {
             List<BingoChatSendRecord> sendRecordList = sendRecordStore.getSendRecordList(uid, chatShowResp.getUid());
             List<BingoChatSendRecord> finalRecords = sendRecordList.stream().limit(10).collect(Collectors.toList());
