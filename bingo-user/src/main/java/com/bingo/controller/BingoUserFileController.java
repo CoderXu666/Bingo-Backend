@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @Description: 用户模块-文件对象存储相关操作
  * @Version: 1.0
  */
-public class BingoUserOssController {
+public class BingoUserFileController {
     @Autowired
     private MinioUtil minioUtil;
 

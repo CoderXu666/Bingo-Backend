@@ -1,8 +1,8 @@
 package com.bingo.controller;
 
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.pojo.response.R;
 import com.bingo.pojo.dto.im.ChatRecordDTO;
+import com.bingo.pojo.response.R;
 import com.bingo.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/chat")
-public class ChatController {
+public class WebSocketChatController {
     @Autowired
     private ChatService chatService;
 
