@@ -51,20 +51,19 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
             return resultMap;
         }
 
-        // 查询会话用户详细信息
+        // 查询好友会话列表-详细用户信息
         List<Long> userChatShowIds = chatShowList.stream().map(BingoChatShow::getGoalId).collect(Collectors.toList());
         List<UserResp> userChatShowList = userFeign.getUserByIds(userChatShowIds).getData();
-        resultMap.put("showList", userChatShowList);
+        resultMap.put("chatShow", userChatShowList);
 
         // 查询好友聊天信息（循环查询吧，Redis做好缓存，并且这里是首次连接登录，不需要加载特别快）
-        Map<String, Object> recordMap = new HashMap<>();
+        Map<Long, Object> recordMap = new HashMap<>();
         for (UserResp userResp : userChatShowList) {
             List<BingoChatSendRecord> sendRecordList = sendRecordStore.getSendRecordList(uid, userResp.getUid());
             List<BingoChatSendRecord> finalRecords = sendRecordList.stream().limit(10).collect(Collectors.toList());
-            recordMap.put(uid.toString(), finalRecords);
+            recordMap.put(userResp.getUid(), finalRecords);
         }
-        resultMap.put("recordMap", recordMap);
-
+        resultMap.put("chatRecord", recordMap);
         return resultMap;
     }
 

@@ -28,5 +28,5 @@ public class ChatRecordDTO {
     /**
      * 消息内容
      */
-    private String chatContent;
+    private String content;
 }

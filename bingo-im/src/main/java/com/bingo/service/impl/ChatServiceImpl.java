@@ -1,13 +1,16 @@
 package com.bingo.service.impl;
 
 import com.bingo.adapter.ChatRecordAdapter;
-import com.bingo.constant.MQConstant;
+import com.bingo.netty.NettyChannelRelation;
 import com.bingo.pojo.dto.im.ChatRecordDTO;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
 import com.bingo.pojo.po.im.BingoChatShow;
 import com.bingo.service.ChatService;
 import com.bingo.store.BingoChatSendRecordStore;
 import com.bingo.store.BingoChatShowStore;
+import io.netty.channel.Channel;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -23,6 +26,7 @@ import java.util.concurrent.CompletableFuture;
  * @Version 1.0
  * @Description: SendServiceImpl
  */
+@Slf4j
 @Service
 public class ChatServiceImpl implements ChatService {
     @Autowired
@@ -70,6 +74,15 @@ public class ChatServiceImpl implements ChatService {
         }, taskExecutor);
 
         // 通过Channel发送消息
-        kafkaTemplate.send(MQConstant.IM_SEND_TOPIC, sendRecord);
+        Channel channel = NettyChannelRelation.getUserChannelMap().get(sendRecord.getGoalId());
+
+        // 通过Channel发送消息到客户端（在线直接推，不在线不推）
+        if (ObjectUtils.isNotEmpty(channel)) {
+            channel.writeAndFlush(new TextWebSocketFrame(sendRecord.toString()));
+            log.info("-----------------------该Channel已连接，通过Channel进行推送-----------------------");
+        } else {
+            log.info("-----------------------该Channel没建立连接，只保存聊天记录，不进行推送-----------------------");
+        }
+//        kafkaTemplate.send(MQConstant.IM_SEND_TOPIC, sendRecord);
     }
 }

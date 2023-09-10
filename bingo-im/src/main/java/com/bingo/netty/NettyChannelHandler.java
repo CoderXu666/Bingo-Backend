@@ -48,7 +48,7 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
      * 建立连接
      */
     @Override
-    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+    public void handlerAdded(ChannelHandlerContext ctx) {
         log.info("------------------客户端建立连接成功------------------");
     }
 
@@ -86,6 +86,7 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
         AttributeKey<Long> key = AttributeKey.valueOf("uid");
         // 相当于为channel做个标识，用于removeUserId()
         ctx.channel().attr(key).setIfAbsent(uid);
+        log.info("--------------------------建立连接成功--------------------------");
     }
 
     /**
