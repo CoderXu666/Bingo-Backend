@@ -58,7 +58,7 @@ public class NettyWebSocketServer {
             protected void initChannel(SocketChannel channel) throws Exception {
                 ChannelPipeline pipeline = channel.pipeline();
                 // 30s客户端未发送心跳给服务器，断开链接（存在直接关闭客户端情况）
-                pipeline.addLast(new IdleStateHandler(30, 0, 0));
+//                pipeline.addLast(new IdleStateHandler(30, 0, 0));
                 pipeline.addLast(new HttpServerCodec()); // HTTP协议编、解码器
                 pipeline.addLast(new ChunkedWriteHandler()); // 块方式写数据
                 pipeline.addLast(new HttpObjectAggregator(8192));

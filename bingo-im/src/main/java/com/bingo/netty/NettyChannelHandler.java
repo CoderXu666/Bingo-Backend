@@ -1,7 +1,6 @@
 package com.bingo.netty;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.bingo.feign.UserFeign;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -49,7 +48,7 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
      */
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) {
-        log.info("------------------客户端建立连接成功------------------");
+        log.info("------------------客户端建立连接成功:{}------------------", ctx.channel());
     }
 
     /**
@@ -79,8 +78,7 @@ public class NettyChannelHandler extends SimpleChannelInboundHandler<TextWebSock
      * 建立连接操作
      */
     private void online(ChannelHandlerContext ctx, TextWebSocketFrame frame) {
-        JSONObject channelMsg = JSON.parseObject(frame.text());
-        Long uid = channelMsg.getLong("uid");
+        Long uid = JSON.parseObject(frame.text(), Long.class);
         NettyChannelRelation.getChannelGroup().add(ctx.channel());
         NettyChannelRelation.getUserChannelMap().put(uid, ctx.channel());
         AttributeKey<Long> key = AttributeKey.valueOf("uid");

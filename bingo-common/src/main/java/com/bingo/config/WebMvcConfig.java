@@ -43,7 +43,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 "/resolve_token",
                 "/captcha",
                 "/list_by_ids",
-                "/test"
+                "/test",
+                "/chat/search_ws_connect"
         );
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**")
