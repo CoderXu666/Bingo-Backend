@@ -16,7 +16,7 @@ public class ChatRecordAdapter {
         return BingoChatSendRecord.builder()
                 .uid(chatMsgDTO.getUid())
                 .goalId(chatMsgDTO.getGoalId())
-                .chatContent(chatMsgDTO.getContent())
+                .chatContent(chatMsgDTO.getChatContent())
                 .type(chatMsgDTO.getType())
                 .createTime(new Date())
                 .build();
