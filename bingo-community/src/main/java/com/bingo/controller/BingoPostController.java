@@ -40,7 +40,7 @@ public class BingoPostController {
     @PostMapping("/save")
     public R savePost(@RequestBody PostDTO postDTO) {
         postService.savePost(postDTO);
-        return R.out(RespCodeEnum.SUCCESS, "操作成功");
+        return R.out(RespCodeEnum.SUCCESS, null);
     }
 
     /**
@@ -58,7 +58,7 @@ public class BingoPostController {
     @PostMapping("/like")
     public R likePost(@RequestBody LikeDTO likeDTO) {
         postService.likePost(likeDTO);
-        return R.out(RespCodeEnum.SUCCESS, "操作成功");
+        return R.out(RespCodeEnum.SUCCESS, null);
     }
 
     /**

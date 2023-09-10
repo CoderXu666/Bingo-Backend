@@ -31,7 +31,7 @@ public class BingoChatShowController {
      */
     @GetMapping("/list")
     public R getChatList() {
-        Map<Object, Object> resultMap = showService.getChatList();
+        Map<String, Object> resultMap = showService.getChatList();
         return R.out(RespCodeEnum.SUCCESS, resultMap);
     }
 
@@ -41,7 +41,7 @@ public class BingoChatShowController {
     @PostMapping("/clear_unread")
     public R clearUnread(Long goalId) {
         showService.clearUnread(goalId);
-        return R.out(RespCodeEnum.SUCCESS, "清空未读数量");
+        return R.out(RespCodeEnum.SUCCESS, null);
     }
 }
 

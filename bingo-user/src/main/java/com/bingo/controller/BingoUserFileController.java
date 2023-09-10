@@ -35,6 +35,6 @@ public class BingoUserFileController {
     @DeleteMapping("/remove_avatar")
     public R removeAvatar(String objectName) throws Exception {
         minioUtil.removeObject("avatar-bucket", objectName);
-        return R.out(RespCodeEnum.SUCCESS, "移除成功");
+        return R.out(RespCodeEnum.SUCCESS, null);
     }
 }

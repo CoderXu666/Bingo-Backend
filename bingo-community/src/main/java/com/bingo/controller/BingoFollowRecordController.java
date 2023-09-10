@@ -26,7 +26,7 @@ public class BingoFollowRecordController {
     @PostMapping("/save_or_cancel")
     public R followUser(Long uid, Long goalId) {
         followRecordService.followUser(uid, goalId);
-        return R.out(RespCodeEnum.SUCCESS, "关注成功");
+        return R.out(RespCodeEnum.SUCCESS, null);
     }
 
     /**

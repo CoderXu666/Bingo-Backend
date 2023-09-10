@@ -26,7 +26,7 @@ public class BingoUserStoreImpl extends ServiceImpl<BingoUserMapper, BingoUser> 
     @Override
     public BingoUser findById(Long id) {
         QueryWrapper<BingoUser> wrapper = new QueryWrapper<>();
-        wrapper.eq("id", id);
+        wrapper.eq("uid", id);
         return this.getOne(wrapper);
     }
 
@@ -54,7 +54,7 @@ public class BingoUserStoreImpl extends ServiceImpl<BingoUserMapper, BingoUser> 
     @Override
     public List<BingoUser> getUserListByIds(List<Long> ids) {
         QueryWrapper wrapper = new QueryWrapper();
-        wrapper.in("id", ids);
+        wrapper.in("uid", ids);
         return this.list(wrapper);
     }
 }

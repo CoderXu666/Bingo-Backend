@@ -48,7 +48,7 @@ public class BingoUserController {
     @PostMapping("/register")
     public R register(@RequestBody UserDTO userDTO, HttpServletRequest request) throws Exception {
         userService.register(userDTO, request);
-        return R.out(RespCodeEnum.SUCCESS, "操作成功");
+        return R.out(RespCodeEnum.SUCCESS, RespCodeEnum.SUCCESS.getMsg());
     }
 
     /**
@@ -77,7 +77,7 @@ public class BingoUserController {
     @PostMapping("/update")
     public R updateUserById(@RequestBody BingoUser user) {
         userService.updateUserById(user);
-        return R.out(RespCodeEnum.SUCCESS, "操作成功");
+        return R.out(RespCodeEnum.SUCCESS, null);
     }
 
     /**
@@ -94,7 +94,7 @@ public class BingoUserController {
     @PostMapping("/send_email")
     public R sendEmail(String email) throws Exception {
         userService.sendEmail(email);
-        return R.out(RespCodeEnum.SUCCESS, "邮件发送成功");
+        return R.out(RespCodeEnum.SUCCESS, null);
     }
 
     /**
@@ -118,7 +118,7 @@ public class BingoUserController {
     @PostMapping("/update_online")
     public R updateOnline(Long uid, Integer status) throws Exception {
         userService.updateOnlineStatus(uid, status);
-        return R.out(RespCodeEnum.SUCCESS, "移除成功");
+        return R.out(RespCodeEnum.SUCCESS, null);
     }
 
 

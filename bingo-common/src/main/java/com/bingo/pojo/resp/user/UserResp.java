@@ -9,7 +9,7 @@ public class UserResp {
     /**
      * 主键id
      */
-    private Long id;
+    private Long uid;
 
     /**
      * 账号

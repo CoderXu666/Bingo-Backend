@@ -23,6 +23,6 @@ public class WebSocketChatController {
 //    @RateLimiter(time = 3, count = 8)
     public R sendChatByUid(@RequestBody ChatRecordDTO msgDTO) throws Exception {
         chatService.sendChatRecord(msgDTO);
-        return R.out(RespCodeEnum.SUCCESS, "发送成功");
+        return R.out(RespCodeEnum.SUCCESS, null);
     }
 }

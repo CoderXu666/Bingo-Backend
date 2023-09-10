@@ -37,7 +37,7 @@ public class BingoTopicController {
     @PostMapping("/save_topic")
     public R saveTopic(@RequestBody TopicDTO topicDTO) {
         topicService.saveTopic(topicDTO);
-        return R.out(RespCodeEnum.SUCCESS, "保存成功");
+        return R.out(RespCodeEnum.SUCCESS, null);
     }
 
     /**
@@ -46,7 +46,7 @@ public class BingoTopicController {
     @DeleteMapping("/delete_topic")
     public R deleteTopic(Long id) {
         topicService.deleteTopic(id);
-        return R.out(RespCodeEnum.SUCCESS, "删除成功");
+        return R.out(RespCodeEnum.SUCCESS, null);
     }
 
     /**

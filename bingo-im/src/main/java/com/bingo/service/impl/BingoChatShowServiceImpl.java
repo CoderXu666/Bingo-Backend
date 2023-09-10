@@ -7,16 +7,13 @@ import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoChatShowMapper;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
 import com.bingo.pojo.po.im.BingoChatShow;
-import com.bingo.pojo.resp.im.ChatShowResp;
 import com.bingo.pojo.resp.user.UserResp;
 import com.bingo.service.BingoChatShowService;
 import com.bingo.store.BingoChatSendRecordStore;
 import com.bingo.store.BingoChatShowStore;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,44 +40,30 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
      * 查询聊天会话列表
      */
     @Override
-    public Map<Object, Object> getChatList() {
+    public Map<String, Object> getChatList() {
         // 请求全局域获取 uid
         Long uid = (Long) RequestHolder.get().get("uid");
-        Map<Object, Object> resultMap = new HashMap<>();
+        Map<String, Object> resultMap = new HashMap<>();
 
-        // 查询展示列表关联id信息
+        // 好友会话列表
         List<BingoChatShow> chatShowList = showStore.getChatShowList(uid);
         if (CollectionUtils.isEmpty(chatShowList)) {
             return resultMap;
         }
 
-        // 查询目标好友信息（Map避免双重遍历循环，性能太低）
-        Map<Long, UserResp> userInfoMap = null;
-        if (CollectionUtils.isNotEmpty(chatShowList)) {
-            List<Long> userChatShowIds = chatShowList.stream().map(BingoChatShow::getGoalId).collect(Collectors.toList());
-            List<UserResp> userInfoShowList = userFeign.getUserByIds(userChatShowIds).getData();
-            userInfoMap = userInfoShowList.stream().collect(Collectors.toMap(UserResp::getId, item -> item));
-        }
-
-        // 排序：好友列表信息按照最新消息时间
-        List<ChatShowResp> chatShowRespList = new ArrayList<>();
-        for (BingoChatShow chatShowItem : chatShowList) {
-            if (CollectionUtils.isNotEmpty(userInfoMap) && userInfoMap.containsKey(chatShowItem.getGoalId())) {
-                ChatShowResp chatShowResp = new ChatShowResp();
-                UserResp userResp = userInfoMap.get(chatShowItem.getGoalId());
-                BeanUtils.copyProperties(userResp, chatShowResp);
-                chatShowResp.setItemName(userResp.getNickName());
-                chatShowResp.setType(0);
-                chatShowRespList.add(chatShowResp);
-            }
-        }
+        // 查询会话用户详细信息
+        List<Long> userChatShowIds = chatShowList.stream().map(BingoChatShow::getGoalId).collect(Collectors.toList());
+        List<UserResp> userChatShowList = userFeign.getUserByIds(userChatShowIds).getData();
+        resultMap.put("showList", userChatShowList);
 
         // 查询好友聊天信息（循环查询吧，Redis做好缓存，并且这里是首次连接登录，不需要加载特别快）
-        for (ChatShowResp chatShowResp : chatShowRespList) {
-            List<BingoChatSendRecord> sendRecordList = sendRecordStore.getSendRecordList(uid, chatShowResp.getUid());
+        Map<String, Object> recordMap = new HashMap<>();
+        for (UserResp userResp : userChatShowList) {
+            List<BingoChatSendRecord> sendRecordList = sendRecordStore.getSendRecordList(uid, userResp.getUid());
             List<BingoChatSendRecord> finalRecords = sendRecordList.stream().limit(10).collect(Collectors.toList());
-            resultMap.put(chatShowResp, finalRecords);
+            recordMap.put(uid.toString(), finalRecords);
         }
+        resultMap.put("recordMap", recordMap);
 
         return resultMap;
     }
