@@ -35,7 +35,7 @@ public class BingoTopicController {
      * 用户创建话题
      */
     @PostMapping("/save_topic")
-    public R saveTopic(@RequestBody TopicDTO topicDTO) {
+    public R saveTopic(@RequestBody TopicDTO topicDTO) throws Exception {
         topicService.saveTopic(topicDTO);
         return R.out(RespCodeEnum.SUCCESS, null);
     }

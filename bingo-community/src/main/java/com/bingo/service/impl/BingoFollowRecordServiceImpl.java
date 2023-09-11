@@ -11,9 +11,9 @@ import com.bingo.pojo.resp.user.UserResp;
 import com.bingo.service.BingoFollowRecordService;
 import com.bingo.store.BingoFollowLogStore;
 import com.bingo.store.BingoFollowRecordStore;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -42,22 +42,26 @@ public class BingoFollowRecordServiceImpl extends ServiceImpl<BingoFollowRecordM
      * 关注用户
      */
     @Override
-    public Boolean followUser(Long uid, Long goalId) {
+    public Boolean followUser(Long uid, Long goalId) throws Exception {
+        if (ObjectUtils.isEmpty(uid) || ObjectUtils.isEmpty(goalId)) {
+            throw new Exception("接口入参异常");
+        }
+
         // 查询是否关注过
         BingoFollowRecord record = followRecordStore.findRecordByUserIdAndGoalId(uid, goalId);
 
-        // 不存在：没关注过
-        if (ObjectUtils.isEmpty(record)) {
-            BingoFollowRecord followRecord = new BingoFollowRecord();
-            followRecord.setUid(uid);
-            followRecord.setGoalId(goalId);
-            followRecordStore.saveFollowRecord(followRecord);
-            return followLogStore.save(new BingoFollowLog(null, uid, goalId, "ADD", new Date()));
+        // 存在关注记录
+        if (ObjectUtils.isNotEmpty(record)) {
+            followRecordStore.removeFollowRecord(record.getId());
+            followLogStore.save(new BingoFollowLog(null, uid, goalId, "DELETE", new Date()));
         }
 
-        // 存在：关注过
-        followRecordStore.removeFollowRecord(record.getId());
-        return followLogStore.save(new BingoFollowLog(null, uid, goalId, "DELETE", new Date()));
+        // 不存在：没关注过
+        BingoFollowRecord followRecord = new BingoFollowRecord();
+        followRecord.setUid(uid);
+        followRecord.setGoalId(goalId);
+        followRecordStore.saveFollowRecord(followRecord);
+        return followLogStore.save(new BingoFollowLog(null, uid, goalId, "ADD", new Date()));
     }
 
     /**

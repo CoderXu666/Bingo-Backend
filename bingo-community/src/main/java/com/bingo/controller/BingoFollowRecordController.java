@@ -23,8 +23,8 @@ public class BingoFollowRecordController {
     /**
      * 关注用户/取消关注
      */
-    @PostMapping("/save_or_cancel")
-    public R followUser(Long uid, Long goalId) {
+    @PostMapping("/save")
+    public R followUser(Long uid, Long goalId) throws Exception {
         followRecordService.followUser(uid, goalId);
         return R.out(RespCodeEnum.SUCCESS, null);
     }
@@ -32,7 +32,7 @@ public class BingoFollowRecordController {
     /**
      * 关注列表
      */
-    @GetMapping("/follow_list")
+    @GetMapping("/list")
     public R followList(Long uid, Integer current, Integer limit) {
         Map<String, Object> resultMap = followRecordService.followList(uid, current, limit);
         return R.out(RespCodeEnum.SUCCESS, resultMap);

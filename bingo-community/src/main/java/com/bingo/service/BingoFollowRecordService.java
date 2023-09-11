@@ -14,7 +14,7 @@ import java.util.Map;
  * @since 2023-08-23
  */
 public interface BingoFollowRecordService extends IService<BingoFollowRecord> {
-    Boolean followUser(Long uid, Long goalId);
+    Boolean followUser(Long uid, Long goalId) throws Exception;
 
     Map<String, Object> followList(Long uid, Integer current, Integer limit);
 
