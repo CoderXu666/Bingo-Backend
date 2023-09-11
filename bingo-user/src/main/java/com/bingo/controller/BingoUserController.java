@@ -3,10 +3,10 @@ package com.bingo.controller;
 
 import com.bingo.annotation.RateLimiter;
 import com.bingo.enums.RespCodeEnum;
-import com.bingo.response.R;
 import com.bingo.pojo.dto.user.UserDTO;
 import com.bingo.pojo.po.user.BingoUser;
 import com.bingo.pojo.resp.user.UserResp;
+import com.bingo.response.R;
 import com.bingo.service.BingoUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class BingoUserController {
      * 根据userId查询用户信息
      */
     @GetMapping("/find_by_id")
-    public R findByUserId(Long uid) {
+    public R findByUserId(Long uid) throws Exception {
         UserResp userResp = userService.findById(uid);
         return R.out(RespCodeEnum.SUCCESS, userResp);
     }
@@ -75,7 +75,7 @@ public class BingoUserController {
      * 修改用户信息
      */
     @PostMapping("/update")
-    public R updateUserById(@RequestBody BingoUser user) {
+    public R updateUserById(@RequestBody BingoUser user) throws Exception {
         userService.updateUserById(user);
         return R.out(RespCodeEnum.SUCCESS, null);
     }

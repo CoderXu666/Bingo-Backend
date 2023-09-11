@@ -1,6 +1,7 @@
 package com.bingo.pojo.po.user;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,6 +17,7 @@ import java.util.Date;
  * @since 2023-03-01
  */
 @Data
+@Builder
 @EqualsAndHashCode(callSuper = false)
 @TableName("bingo_user")
 public class BingoUser implements Serializable {

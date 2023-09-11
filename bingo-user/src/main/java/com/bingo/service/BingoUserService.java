@@ -19,11 +19,11 @@ import java.util.List;
  * @since 2023-03-01
  */
 public interface BingoUserService extends IService<BingoUser> {
-    UserResp findById(Long uid);
+    UserResp findById(Long uid) throws Exception;
 
     void generateCode(HttpServletRequest request, HttpServletResponse response);
 
-    Boolean updateUserById(BingoUser user);
+    Boolean updateUserById(BingoUser user) throws Exception;
 
     List<UserResp> getUserByIds(List<Long> ids);
 

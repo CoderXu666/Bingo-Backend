@@ -2,6 +2,7 @@ package com.bingo.service.impl;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bingo.adapter.UserAdapter;
 import com.bingo.mapper.BingoUserMapper;
 import com.bingo.pojo.dto.user.UserDTO;
 import com.bingo.pojo.po.user.BingoUser;
@@ -53,12 +54,13 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 根据Id查询用户信息
      */
     @Override
-    public UserResp findById(Long uid) {
-        UserResp userResp = new UserResp();
+    public UserResp findById(Long uid) throws Exception {
         BingoUser userInfo = userStore.findById(uid);
-        if (ObjectUtils.isNotEmpty(userInfo)) {
-            BeanUtils.copyProperties(userInfo, userResp);
+        if (ObjectUtils.isEmpty(userInfo)) {
+            throw new Exception("当前用户信息不存在");
         }
+        UserResp userResp = new UserResp();
+        BeanUtils.copyProperties(userInfo, userResp);
         return userResp;
     }
 
@@ -120,7 +122,13 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 修改用户信息
      */
     @Override
-    public Boolean updateUserById(BingoUser user) {
+    public Boolean updateUserById(BingoUser user) throws Exception {
+        if (ObjectUtils.isEmpty(user)) {
+            throw new Exception("当前用户信息不存在！");
+        }
+        if (ObjectUtils.isEmpty(user.getUid())) {
+            throw new Exception("当前用户信息不存在id信息！");
+        }
         return userStore.updateUserById(user);
     }
 
@@ -145,7 +153,6 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     @Override
     public Boolean register(UserDTO userDTO, HttpServletRequest request) throws Exception {
         String accountId = userDTO.getAccountId();
-        String passWord = userDTO.getPassWord();
         String email = userDTO.getEmail();
         String captcha = userDTO.getCaptcha();
 
@@ -176,10 +183,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         // TODO 保存用户统计数据信息
 
         // 保存账号信息
-        BingoUser user = new BingoUser();
-        BeanUtils.copyProperties(userDTO, user);
-        user.setPassWord(AESUtil.encrypt(passWord));
-        user.setLocation(province + "-" + city);
+        BingoUser user = UserAdapter.buildUserPO(userDTO, province, city);
         return userStore.save(user);
     }
 
@@ -270,8 +274,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      */
     @Override
     public Boolean updateOnlineStatus(Long uid, Integer status) {
-        BingoUser user = new BingoUser();
-        userStore.updateUserById(user);
-        return null;
+        BingoUser userInfo = UserAdapter.buildUserPO(uid, status);
+        return userStore.updateUserById(userInfo);
     }
 }
