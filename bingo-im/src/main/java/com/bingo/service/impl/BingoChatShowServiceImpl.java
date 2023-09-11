@@ -60,7 +60,7 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
         Map<Long, Object> recordMap = new HashMap<>();
         for (UserResp userResp : userChatShowList) {
             List<BingoChatSendRecord> sendRecordList = sendRecordStore.getSendRecordList(uid, userResp.getUid());
-            List<BingoChatSendRecord> finalRecords = sendRecordList.stream().limit(10).collect(Collectors.toList());
+            List<BingoChatSendRecord> finalRecords = sendRecordList.stream().limit(20).collect(Collectors.toList());
             recordMap.put(userResp.getUid(), finalRecords);
         }
         resultMap.put("chatShow", userChatShowList);

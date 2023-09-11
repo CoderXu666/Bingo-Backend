@@ -89,6 +89,8 @@
 - node.js
 - npm
 - iconfont
+- js-audio-recorder
+- json-bigint
 
 #### 运维
 
