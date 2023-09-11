@@ -1,5 +1,6 @@
 package com.bingo.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.bingo.adapter.ChatRecordAdapter;
 import com.bingo.netty.NettyChannelRelation;
 import com.bingo.pojo.dto.im.ChatRecordDTO;
@@ -8,8 +9,6 @@ import com.bingo.pojo.po.im.BingoChatShow;
 import com.bingo.service.ChatService;
 import com.bingo.store.BingoChatSendRecordStore;
 import com.bingo.store.BingoChatShowStore;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.netty.channel.Channel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +43,7 @@ public class ChatServiceImpl implements ChatService {
      * 发送消息给用户
      */
     @Override
-    public void sendChatRecord(ChatRecordDTO msgDTO) throws JsonProcessingException {
+    public void sendChatRecord(ChatRecordDTO msgDTO) {
         // 适配器模式：对象转换
         BingoChatSendRecord sendRecord = ChatRecordAdapter.buildChatRecordPO(msgDTO);
         Long uid = msgDTO.getUid();
@@ -80,7 +79,7 @@ public class ChatServiceImpl implements ChatService {
 
         // 通过Channel发送消息到客户端（在线直接推，不在线不推）
         if (ObjectUtils.isNotEmpty(channel)) {
-            channel.writeAndFlush(new TextWebSocketFrame(new ObjectMapper().writeValueAsString(sendRecord)));
+            channel.writeAndFlush(new TextWebSocketFrame(JSON.toJSONString(sendRecord)));
             log.info("-----------------------该Channel已连接，通过Channel进行推送-----------------------");
         } else {
             log.info("-----------------------该Channel没建立连接，只保存聊天记录，不进行推送-----------------------");
