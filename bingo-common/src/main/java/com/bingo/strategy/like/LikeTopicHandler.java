@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * @Author: 徐志斌
  * @CreateTime: 2023-09-08  17:26
- * @Description: 点赞主题相关
+ * @Description: 点赞话题
  * @Version: 1.0
  */
 @Slf4j
