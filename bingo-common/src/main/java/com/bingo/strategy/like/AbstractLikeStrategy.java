@@ -8,12 +8,7 @@ package com.bingo.strategy.like;
  */
 public abstract class AbstractLikeStrategy {
     /**
-     * 点赞帖子、话题
+     * 点赞用户、帖子、话题
      */
     abstract Boolean like();
-
-    /**
-     * 点赞帖子、话题评论
-     */
-    abstract Boolean likeComment();
 }

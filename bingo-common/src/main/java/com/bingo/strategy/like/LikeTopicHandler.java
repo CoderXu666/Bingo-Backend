@@ -19,12 +19,4 @@ public class LikeTopicHandler extends AbstractLikeStrategy {
     Boolean like() {
         return null;
     }
-
-    /**
-     * 点赞话题评论
-     */
-    @Override
-    Boolean likeComment() {
-        return null;
-    }
 }

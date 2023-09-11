@@ -26,7 +26,7 @@ public class BingoTopicController {
     /**
      * 当前热门话题查询
      */
-    @PostMapping("/topic_list")
+    @PostMapping("/hot_list")
     public R hotTopic() {
         return null;
     }
