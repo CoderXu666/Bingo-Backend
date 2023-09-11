@@ -6,5 +6,5 @@ package com.bingo.strategy.action;
  * @Description:
  * @Version: 1.0
  */
-public class StrategyLikeFactory {
+public class StrategyActionFactory {
 }

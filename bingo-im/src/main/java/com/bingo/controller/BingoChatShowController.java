@@ -30,7 +30,7 @@ public class BingoChatShowController {
      * 查询聊天会话列表
      */
     @GetMapping("/list")
-    public R getChatList() {
+    public R getChatList() throws Exception {
         Map<String, Object> resultMap = showService.getChatList();
         return R.out(RespCodeEnum.SUCCESS, resultMap);
     }
@@ -39,7 +39,7 @@ public class BingoChatShowController {
      * 清空未读
      */
     @PostMapping("/clear_unread")
-    public R clearUnread(Long goalId) {
+    public R clearUnread(Long goalId) throws Exception {
         showService.clearUnread(goalId);
         return R.out(RespCodeEnum.SUCCESS, null);
     }

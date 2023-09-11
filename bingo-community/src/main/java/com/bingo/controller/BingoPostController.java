@@ -64,9 +64,9 @@ public class BingoPostController {
     /**
      * 展示用户最新的帖子（分页10条）
      */
-    @PostMapping("/post_list")
+    @PostMapping("/list")
     public R pagePost(@RequestBody PageParam pageParam) {
-        PostPageResp postPageResp = postService.pagePost(pageParam);
+        PostPageResp postPageResp = postService.getList(pageParam);
         return R.out(RespCodeEnum.SUCCESS, postPageResp);
     }
 }

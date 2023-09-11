@@ -19,6 +19,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -137,8 +138,11 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      */
     @Override
     public List<UserResp> getUserByIds(List<Long> ids) {
-        List<BingoUser> userInfoList = userStore.getUserListByIds(ids);
         List<UserResp> userRespList = new ArrayList<>();
+        if (CollectionUtils.isEmpty(ids)) {
+            return userRespList;
+        }
+        List<BingoUser> userInfoList = userStore.getUserListByIds(ids);
         for (BingoUser bingoUser : userInfoList) {
             UserResp userResp = new UserResp();
             BeanUtils.copyProperties(bingoUser, userResp);
@@ -273,7 +277,10 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 修改用户在线状态（针对IM聊天）
      */
     @Override
-    public Boolean updateOnlineStatus(Long uid, Integer status) {
+    public Boolean updateOnlineStatus(Long uid, Integer status) throws Exception {
+        if (ObjectUtils.isEmpty(uid) || ObjectUtils.isEmpty(status)) {
+            throw new Exception("接口入参缺失，请重试");
+        }
         BingoUser userInfo = UserAdapter.buildUserPO(uid, status);
         return userStore.updateUserById(userInfo);
     }

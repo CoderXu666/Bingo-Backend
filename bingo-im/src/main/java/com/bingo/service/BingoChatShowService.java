@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public interface BingoChatShowService extends IService<BingoChatShow> {
 
-    Map<String, Object> getChatList();
+    Map<String, Object> getChatList() throws Exception;
 
-    Boolean clearUnread(Long goalId);
+    Boolean clearUnread(Long goalId) throws Exception;
 }

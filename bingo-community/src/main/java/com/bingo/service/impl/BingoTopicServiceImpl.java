@@ -6,12 +6,12 @@ import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoTopicMapper;
 import com.bingo.pojo.dto.community.TopicDTO;
 import com.bingo.pojo.po.community.BingoTopic;
-import com.bingo.response.FeignResponse;
 import com.bingo.pojo.resp.community.BingoTopicResp;
 import com.bingo.pojo.resp.user.UserResp;
+import com.bingo.response.FeignResponse;
 import com.bingo.service.BingoTopicService;
 import com.bingo.store.BingoTopicStore;
-import lombok.SneakyThrows;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class BingoTopicServiceImpl extends ServiceImpl<BingoTopicMapper, BingoTopic> implements BingoTopicService {
-
     @Autowired
     private BingoTopicStore topicStore;
     @Autowired
@@ -36,16 +35,14 @@ public class BingoTopicServiceImpl extends ServiceImpl<BingoTopicMapper, BingoTo
     /**
      * 用户创建话题
      */
-    @SneakyThrows
     @Override
-    public Boolean saveTopic(TopicDTO topicDTO) {
+    public Boolean saveTopic(TopicDTO topicDTO) throws Exception {
         if (!StringUtils.isNotEmpty(topicDTO.getUid().toString())) {
             throw new Exception("用户ID为空");
         }
         BingoTopic bingoTopic = new BingoTopic();
         BeanUtils.copyProperties(topicDTO, bingoTopic);
-        Boolean isSuccess = topicStore.saveTopic(bingoTopic);
-        return isSuccess;
+        return topicStore.saveTopic(bingoTopic);
     }
 
     /**
@@ -53,8 +50,7 @@ public class BingoTopicServiceImpl extends ServiceImpl<BingoTopicMapper, BingoTo
      */
     @Override
     public Boolean deleteTopic(Long id) {
-        Boolean isSuccess = topicStore.deleteTopic(id);
-        return isSuccess;
+        return topicStore.deleteTopic(id);
     }
 
     /**
@@ -62,16 +58,22 @@ public class BingoTopicServiceImpl extends ServiceImpl<BingoTopicMapper, BingoTo
      */
     @Override
     public BingoTopicResp getTopicById(Long topicId) throws Exception {
-        if (!StringUtils.isNotEmpty(topicId.toString())) {
-            throw new Exception("话题异常");
+        if (ObjectUtils.isEmpty(topicId)) {
+            throw new Exception("接口参数不存在");
         }
 
         //查询话题相关信息
         BingoTopic topic = topicStore.findTopicById(topicId);
+        if (ObjectUtils.isEmpty(topic)) {
+            throw new Exception("未查询到话题信息");
+        }
 
         //远程调用查询用户相关信息
         FeignResponse<UserResp> feignResponse = userFeign.findByUserId(topic.getUid());
         UserResp userResp = feignResponse.getData();
+        if (ObjectUtils.isEmpty(userResp)) {
+            throw new Exception("未查询到该用户信息");
+        }
 
         BingoTopicResp topicResp = new BingoTopicResp();
         BeanUtils.copyProperties(userResp, topicResp);

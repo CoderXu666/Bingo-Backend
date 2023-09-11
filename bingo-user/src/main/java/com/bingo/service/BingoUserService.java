@@ -35,5 +35,5 @@ public interface BingoUserService extends IService<BingoUser> {
 
     BingoUser resolveToken(String token) throws Exception;
 
-    Boolean updateOnlineStatus(Long uid, Integer status);
+    Boolean updateOnlineStatus(Long uid, Integer status) throws Exception;
 }

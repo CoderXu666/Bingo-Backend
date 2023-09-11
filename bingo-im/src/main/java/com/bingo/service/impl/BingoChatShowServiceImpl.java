@@ -1,6 +1,7 @@
 package com.bingo.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.context.RequestHolder;
 import com.bingo.feign.UserFeign;
@@ -40,10 +41,13 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
      * 查询聊天会话列表
      */
     @Override
-    public Map<String, Object> getChatList() {
+    public Map<String, Object> getChatList() throws Exception {
         // 请求全局域获取 uid
-        Long uid = (Long) RequestHolder.get().get("uid");
         Map<String, Object> resultMap = new HashMap<>();
+        Long uid = (Long) RequestHolder.get().get("uid");
+        if (ObjectUtils.isEmpty(uid)) {
+            throw new Exception("RequestHolder中不存在用户id");
+        }
 
         // 好友会话列表
         List<BingoChatShow> chatShowList = showStore.getChatShowList(uid);
@@ -53,7 +57,10 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
 
         // 查询好友会话列表-详细用户信息
         List<Long> userChatShowIds = chatShowList.stream().map(BingoChatShow::getGoalId).collect(Collectors.toList());
-        List<UserResp> userChatShowList = userFeign.getUserByIds(userChatShowIds).getData();
+        List<UserResp> userChatShowList = null;
+        if (CollectionUtils.isNotEmpty(userChatShowIds)) {
+            userChatShowList = userFeign.getUserByIds(userChatShowIds).getData();
+        }
         resultMap.put("chatShow", userChatShowList);
 
         // 查询好友聊天信息（循环查询吧，Redis做好缓存，并且这里是首次连接登录，不需要加载特别快）
@@ -71,9 +78,20 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
      * 清空未读数量
      */
     @Override
-    public Boolean clearUnread(Long goalId) {
+    public Boolean clearUnread(Long goalId) throws Exception {
+        if (ObjectUtils.isEmpty(goalId)) {
+            throw new Exception("接口入参不存在，请刷新重试");
+        }
+
         Long uid = (Long) RequestHolder.get().get("uid");
+        if (ObjectUtils.isEmpty(uid)) {
+            throw new Exception("RequestHolder中不存在用户id");
+        }
+
         BingoChatShow record = showStore.getOneRecord(uid, goalId);
+        if (ObjectUtils.isEmpty(record)) {
+            throw new Exception("未查询到用户会话信息");
+        }
         record.setUnreadCount(0);
         return showStore.updateRecordById(record);
     }

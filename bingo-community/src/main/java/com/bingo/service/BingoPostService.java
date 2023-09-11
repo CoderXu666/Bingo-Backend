@@ -24,5 +24,5 @@ public interface BingoPostService extends IService<BingoPost> {
     Boolean savePost(PostDTO postDTO);
     Boolean likePost(LikeDTO likeDTO);
     List<PostResp> searchPost(SearchDTO searchDTO) throws IOException;
-    PostPageResp pagePost(PageParam pageParam);
+    PostPageResp getList(PageParam pageParam);
 }

@@ -16,7 +16,7 @@ import com.bingo.pojo.resp.community.BingoTopicResp;
  */
 public interface BingoTopicService extends IService<BingoTopic> {
 
-    Boolean saveTopic(TopicDTO topicDTO);
+    Boolean saveTopic(TopicDTO topicDTO) throws Exception;
 
     Boolean deleteTopic(Long id);
 

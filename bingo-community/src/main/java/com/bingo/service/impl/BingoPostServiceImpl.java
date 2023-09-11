@@ -1,22 +1,23 @@
 package com.bingo.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bingo.constant.ESConstant;
+import com.bingo.constant.MQConstant;
 import com.bingo.feign.UserFeign;
 import com.bingo.kafka.KafkaProducer;
 import com.bingo.mapper.BingoPostMapper;
 import com.bingo.pojo.common.PageParam;
-import com.bingo.constant.ESConstant;
-import com.bingo.constant.MQConstant;
 import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.dto.community.LikeDTO;
 import com.bingo.pojo.dto.community.PostDTO;
 import com.bingo.pojo.po.community.BingoPost;
-import com.bingo.response.FeignResponse;
 import com.bingo.pojo.resp.community.PostPageResp;
 import com.bingo.pojo.resp.community.PostResp;
 import com.bingo.pojo.resp.user.UserResp;
+import com.bingo.response.FeignResponse;
 import com.bingo.service.BingoPostService;
 import com.bingo.store.BingoPostStore;
 import org.elasticsearch.action.search.SearchRequest;
@@ -152,14 +153,17 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
      * 展示用户最新的帖子（分页10条）
      */
     @Override
-    public PostPageResp pagePost(PageParam pageParam) {
+    public PostPageResp getList(PageParam pageParam) {
         PostPageResp postPageResp = new PostPageResp();
 
-        //查询帖子表（分页10条）
+        // 查询帖子表（分页10条）
         Page<BingoPost> bingoPost = postStore.pagePost(pageParam);
         List<BingoPost> records = bingoPost.getRecords();
+        if (CollectionUtils.isEmpty(records)) {
+            return postPageResp;
+        }
 
-        //封装账号ID
+        // 封装账号ID
         List<Long> ids = new ArrayList<>();
         for (BingoPost post : records) {
             ids.add(post.getId());
@@ -168,7 +172,7 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
         //查询对应的帖子的点赞数，转发数，评论数
         //List<BingoPostStatistics> postStatistics = PostStatisticsStore.findPost(ids);
 
-        //Feign取得对应用户相关信息
+        // 查询对应用户相关信息
         FeignResponse<List<UserResp>> feignResponse = userFeign.getUserByIds(ids);
         List<UserResp> userRespList = feignResponse.getData();
         BeanUtils.copyProperties(bingoPost, postPageResp);

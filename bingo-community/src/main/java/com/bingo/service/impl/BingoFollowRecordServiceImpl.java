@@ -1,5 +1,6 @@
 package com.bingo.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.feign.UserFeign;
@@ -64,10 +65,14 @@ public class BingoFollowRecordServiceImpl extends ServiceImpl<BingoFollowRecordM
      */
     @Override
     public Map<String, Object> followList(Long uid, Integer current, Integer limit) {
-        Page<BingoFollowRecord> recordPage = followRecordStore.followList(uid, current, limit);
-        List<Long> followIds = recordPage.getRecords().stream().map(item -> item.getUid()).collect(Collectors.toList());
-        List<UserResp> userInfoList = userFeign.getUserByIds(followIds).getData();
         Map<String, Object> resultMap = new HashMap<>();
+        Page<BingoFollowRecord> recordPage = followRecordStore.followList(uid, current, limit);
+        List<BingoFollowRecord> records = recordPage.getRecords();
+        if (CollectionUtils.isEmpty(records)) {
+            return resultMap;
+        }
+        List<Long> followIds = records.stream().map(item -> item.getUid()).collect(Collectors.toList());
+        List<UserResp> userInfoList = userFeign.getUserByIds(followIds).getData();
         resultMap.put("list", userInfoList);
         resultMap.put("count", recordPage.getTotal());
         return resultMap;
@@ -78,10 +83,14 @@ public class BingoFollowRecordServiceImpl extends ServiceImpl<BingoFollowRecordM
      */
     @Override
     public Map<String, Object> fanList(Long goalId, Integer current, Integer limit) {
+        Map<String, Object> resultMap = new HashMap<>();
         Page<BingoFollowRecord> recordPage = followRecordStore.fanList(goalId, current, limit);
+        List<BingoFollowRecord> records = recordPage.getRecords();
+        if (CollectionUtils.isEmpty(records)) {
+            return resultMap;
+        }
         List<Long> fanIds = recordPage.getRecords().stream().map(item -> item.getUid()).collect(Collectors.toList());
         List<UserResp> userInfoList = userFeign.getUserByIds(fanIds).getData();
-        Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("list", userInfoList);
         resultMap.put("count", recordPage.getTotal());
         return resultMap;
