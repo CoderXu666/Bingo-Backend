@@ -1,4 +1,4 @@
-package com.bingo.strategy.like;
+package com.bingo.strategy.action;
 
 /**
  * @Author: 徐志斌

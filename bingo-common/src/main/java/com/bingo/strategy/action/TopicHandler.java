@@ -1,4 +1,4 @@
-package com.bingo.strategy.like;
+package com.bingo.strategy.action;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -11,12 +11,19 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class LikeTopicHandler extends AbstractLikeStrategy {
-    /**
-     * 点赞话题
-     */
+public class TopicHandler extends AbstractActionStrategy {
     @Override
-    Boolean like() {
+    Boolean doLike() {
+        return null;
+    }
+
+    @Override
+    Boolean sendGift() {
+        return null;
+    }
+
+    @Override
+    Boolean doComment() {
         return null;
     }
 }
