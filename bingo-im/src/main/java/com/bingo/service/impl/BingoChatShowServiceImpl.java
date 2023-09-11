@@ -45,9 +45,6 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
         // 请求全局域获取 uid
         Map<String, Object> resultMap = new HashMap<>();
         Long uid = (Long) RequestHolder.get().get("uid");
-        if (ObjectUtils.isEmpty(uid)) {
-            throw new Exception("RequestHolder中不存在用户id");
-        }
 
         // 好友会话列表
         List<BingoChatShow> chatShowList = showStore.getChatShowList(uid);
@@ -79,13 +76,7 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
         if (ObjectUtils.isEmpty(goalId)) {
             throw new Exception("接口入参不存在，请刷新重试");
         }
-
-        Long uid = (Long) RequestHolder.get().get("uid");
-        if (ObjectUtils.isEmpty(uid)) {
-            throw new Exception("RequestHolder中不存在用户id");
-        }
-
-        BingoChatShow record = showStore.getOneRecord(uid, goalId);
+        BingoChatShow record = showStore.getOneRecord((Long) RequestHolder.get().get("uid"), goalId);
         if (ObjectUtils.isEmpty(record)) {
             throw new Exception("未查询到用户会话信息");
         }
