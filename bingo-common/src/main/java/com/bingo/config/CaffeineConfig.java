@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * @Author 徐志斌
  * @Date: 2023/5/20 21:21
  * @Version 1.0
- * @Description: Caffine Config
+ * @Description: Caffeine 配置类
  */
 @Configuration
 public class CaffeineConfig {
