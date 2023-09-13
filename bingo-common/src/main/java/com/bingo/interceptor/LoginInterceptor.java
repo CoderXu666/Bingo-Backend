@@ -1,6 +1,6 @@
 package com.bingo.interceptor;
 
-import com.bingo.context.RequestHolder;
+import com.bingo.context.RequestContextHolder;
 import com.bingo.utils.IPUtil;
 import com.bingo.utils.JWTUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +38,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             Map<String, Object> map = new HashMap<>();
             map.put("uid", JWTUtil.resolveTokenToUid(token));
             map.put("ip", IPUtil.getIpAddress(request));
-            RequestHolder.set(map);
+            RequestContextHolder.set(map);
             log.info("-------------------------登录Token校验通过：SUCCESS--------------------------");
             return true;
         } else {
@@ -59,6 +59,6 @@ public class LoginInterceptor implements HandlerInterceptor {
      */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        RequestHolder.remove();
+        RequestContextHolder.remove();
     }
 }

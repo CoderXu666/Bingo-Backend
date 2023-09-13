@@ -3,7 +3,7 @@ package com.bingo.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bingo.context.RequestHolder;
+import com.bingo.context.RequestContextHolder;
 import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoChatShowMapper;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
@@ -44,7 +44,7 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
     public Map<String, Object> getChatList() throws Exception {
         // 请求全局域获取 uid
         Map<String, Object> resultMap = new HashMap<>();
-        Long uid = (Long) RequestHolder.get().get("uid");
+        Long uid = (Long) RequestContextHolder.get().get("uid");
 
         // 好友会话列表
         List<BingoChatShow> chatShowList = showStore.getChatShowList(uid);
@@ -76,7 +76,7 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
         if (ObjectUtils.isEmpty(goalId)) {
             throw new Exception("接口入参不存在，请刷新重试");
         }
-        BingoChatShow record = showStore.getOneRecord((Long) RequestHolder.get().get("uid"), goalId);
+        BingoChatShow record = showStore.getOneRecord((Long) RequestContextHolder.get().get("uid"), goalId);
         if (ObjectUtils.isEmpty(record)) {
             throw new Exception("未查询到用户会话信息");
         }
