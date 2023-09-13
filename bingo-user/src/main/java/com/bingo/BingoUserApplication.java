@@ -16,7 +16,6 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableCaching
 @EnableFeignClients
 @EnableDiscoveryClient
-@ComponentScan("com.bingo.*")
 @MapperScan("com.bingo.mapper")
 @SpringBootApplication
 public class BingoUserApplication {
