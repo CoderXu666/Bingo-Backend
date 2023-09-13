@@ -4,10 +4,11 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author 徐志斌
@@ -36,16 +37,15 @@ public class JWTUtil {
     }
 
     /**
-     * 解析 Token 获取 uid
+     * 解析 Token
      */
-    public static Long resolveTokenToUid(String token) throws Exception {
+    public static Map<String, Object> resolveToken(String token) {
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token);
         Claims claims = claimsJws.getBody();
         Long uid = (Long) claims.get("uid");
-        if (ObjectUtils.isEmpty(uid)) {
-            throw new Exception("Token解析uid异常");
-        }
-        return uid;
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("uid", uid);
+        return resultMap;
     }
 
     /**
@@ -64,10 +64,6 @@ public class JWTUtil {
         return true;
     }
 
-    public static void main(String[] args) throws Exception {
-        Long val = JWTUtil.resolveTokenToUid(
-                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJCaW5nbyIsImlhdCI6MTY5NDA5MDY" +
-                        "1NywiZXhwIjoxNjk0MTc3MDU3LCJ1aWQiOjEwMH0.3NfZDyh2g_Ob6T-YxOkzuR4L-LrDef_T4gwHTC_50Jg");
-        System.out.println(val);
+    public static void main(String[] args) {
     }
 }
