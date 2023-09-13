@@ -1,4 +1,4 @@
-package com.bingo.aop;
+package com.bingo.aspect;
 
 import cn.hutool.core.date.StopWatch;
 import lombok.extern.slf4j.Slf4j;
