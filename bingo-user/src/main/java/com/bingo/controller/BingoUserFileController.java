@@ -1,5 +1,6 @@
 package com.bingo.controller;
 
+import com.bingo.constant.MinioConstant;
 import com.bingo.enums.RespCodeEnum;
 import com.bingo.response.R;
 import com.bingo.utils.MinioUtil;
@@ -25,7 +26,7 @@ public class BingoUserFileController {
      */
     @PostMapping("/upload_avatar")
     public R uploadAvatar(MultipartFile file) {
-        String avatarUrl = minioUtil.upload(file, "avatar-bucket");
+        String avatarUrl = minioUtil.upload(file, MinioConstant.AVATAR_BUCKET);
         return R.out(RespCodeEnum.SUCCESS, avatarUrl);
     }
 
