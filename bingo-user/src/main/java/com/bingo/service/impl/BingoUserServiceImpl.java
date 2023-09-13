@@ -206,9 +206,6 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
 
         // 判断验证码是否正确
         String captchaVal = (String) redisTemplate.opsForValue().get(captchaKey);
-        if (StringUtils.isEmpty(captcha)) {
-            throw new Exception("验证码生成异常，请重新刷新页面");
-        }
         if (!captcha.equalsIgnoreCase(captchaVal)) {
             throw new Exception("验证码不正确，请重新输入");
         }
