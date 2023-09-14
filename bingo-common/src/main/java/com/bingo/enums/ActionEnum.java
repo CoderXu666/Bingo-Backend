@@ -8,6 +8,10 @@ import lombok.AllArgsConstructor;
  * @Description: 行为枚举（点赞、评论、转发、打赏）
  * @Version: 1.0
  */
+@AllArgsConstructor
 public enum ActionEnum {
-
+    LIKE(),
+    COMMENT(),
+    SHARE(),
+    GIFT();
 }
