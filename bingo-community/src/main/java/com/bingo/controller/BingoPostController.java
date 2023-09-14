@@ -1,6 +1,6 @@
 package com.bingo.controller;
 
-import com.bingo.enums.RespCodeEnum;
+import com.bingo.enums.ResponseEnum;
 import com.bingo.pojo.common.PageParam;
 import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.dto.community.LikeDTO;
@@ -40,7 +40,7 @@ public class BingoPostController {
     @PostMapping("/save")
     public R savePost(@RequestBody PostDTO postDTO) {
         postService.savePost(postDTO);
-        return R.out(RespCodeEnum.SUCCESS, null);
+        return R.out(ResponseEnum.SUCCESS, null);
     }
 
     /**
@@ -49,7 +49,7 @@ public class BingoPostController {
     @PostMapping("/search")
     public R searchPost(@RequestBody SearchDTO searchDTO) throws IOException {
         List<PostResp> result = postService.searchPost(searchDTO);
-        return R.out(RespCodeEnum.SUCCESS, result);
+        return R.out(ResponseEnum.SUCCESS, result);
     }
 
     /**
@@ -58,7 +58,7 @@ public class BingoPostController {
     @PostMapping("/like")
     public R likePost(@RequestBody LikeDTO likeDTO) {
         postService.likePost(likeDTO);
-        return R.out(RespCodeEnum.SUCCESS, null);
+        return R.out(ResponseEnum.SUCCESS, null);
     }
 
     /**
@@ -67,7 +67,7 @@ public class BingoPostController {
     @PostMapping("/list")
     public R pagePost(@RequestBody PageParam pageParam) {
         PostPageResp postPageResp = postService.getList(pageParam);
-        return R.out(RespCodeEnum.SUCCESS, postPageResp);
+        return R.out(ResponseEnum.SUCCESS, postPageResp);
     }
 }
 

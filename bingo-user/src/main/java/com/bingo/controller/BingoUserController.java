@@ -2,7 +2,7 @@ package com.bingo.controller;
 
 
 import com.bingo.annotation.RateLimiter;
-import com.bingo.enums.RespCodeEnum;
+import com.bingo.enums.ResponseEnum;
 import com.bingo.pojo.dto.user.UserDTO;
 import com.bingo.pojo.po.user.BingoUser;
 import com.bingo.pojo.resp.user.UserResp;
@@ -39,7 +39,7 @@ public class BingoUserController {
     @GetMapping("/find_by_id")
     public R findByUserId(Long uid) throws Exception {
         UserResp userResp = userService.findById(uid);
-        return R.out(RespCodeEnum.SUCCESS, userResp);
+        return R.out(ResponseEnum.SUCCESS, userResp);
     }
 
     /**
@@ -48,7 +48,7 @@ public class BingoUserController {
     @PostMapping("/register")
     public R register(@RequestBody UserDTO userDTO, HttpServletRequest request) throws Exception {
         userService.register(userDTO, request);
-        return R.out(RespCodeEnum.SUCCESS, RespCodeEnum.SUCCESS.getMsg());
+        return R.out(ResponseEnum.SUCCESS, ResponseEnum.SUCCESS.getMsg());
     }
 
     /**
@@ -59,7 +59,7 @@ public class BingoUserController {
     @PostMapping("/login")
     public R login(@RequestBody UserDTO userDTO) throws Exception {
         String token = userService.login(userDTO);
-        return R.out(RespCodeEnum.SUCCESS, token);
+        return R.out(ResponseEnum.SUCCESS, token);
     }
 
     /**
@@ -68,7 +68,7 @@ public class BingoUserController {
     @GetMapping("/resolve_token")
     public R resolveToken(String token) throws Exception {
         BingoUser userInfo = userService.resolveToken(token);
-        return R.out(RespCodeEnum.SUCCESS, userInfo);
+        return R.out(ResponseEnum.SUCCESS, userInfo);
     }
 
     /**
@@ -77,7 +77,7 @@ public class BingoUserController {
     @PostMapping("/update")
     public R updateUserById(@RequestBody BingoUser user) throws Exception {
         userService.updateUserById(user);
-        return R.out(RespCodeEnum.SUCCESS, null);
+        return R.out(ResponseEnum.SUCCESS, null);
     }
 
     /**
@@ -94,7 +94,7 @@ public class BingoUserController {
     @PostMapping("/send_email")
     public R sendEmail(String email) throws Exception {
         userService.sendEmail(email);
-        return R.out(RespCodeEnum.SUCCESS, null);
+        return R.out(ResponseEnum.SUCCESS, null);
     }
 
     /**
@@ -109,7 +109,7 @@ public class BingoUserController {
     @PostMapping("/list_by_ids")
     public R getUserInfoByIds(@RequestBody List<Long> ids) {
         List<UserResp> userList = userService.getUserByIds(ids);
-        return R.out(RespCodeEnum.SUCCESS, userList);
+        return R.out(ResponseEnum.SUCCESS, userList);
     }
 
     /**
@@ -118,7 +118,7 @@ public class BingoUserController {
     @PostMapping("/update_online")
     public R updateOnline(Long uid, Integer status) throws Exception {
         userService.updateOnlineStatus(uid, status);
-        return R.out(RespCodeEnum.SUCCESS, null);
+        return R.out(ResponseEnum.SUCCESS, null);
     }
 
 

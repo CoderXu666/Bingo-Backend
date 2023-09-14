@@ -1,7 +1,7 @@
 package com.bingo.controller;
 
 import com.bingo.constant.MinioConstant;
-import com.bingo.enums.RespCodeEnum;
+import com.bingo.enums.ResponseEnum;
 import com.bingo.response.R;
 import com.bingo.utils.MinioUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class BingoUserFileController {
     @PostMapping("/upload_avatar")
     public R uploadAvatar(MultipartFile file) {
         String avatarUrl = minioUtil.upload(file, MinioConstant.AVATAR_BUCKET);
-        return R.out(RespCodeEnum.SUCCESS, avatarUrl);
+        return R.out(ResponseEnum.SUCCESS, avatarUrl);
     }
 
     /**
@@ -36,6 +36,6 @@ public class BingoUserFileController {
     @DeleteMapping("/remove_avatar")
     public R removeAvatar(String objectName) throws Exception {
         minioUtil.removeObject("avatar-bucket", objectName);
-        return R.out(RespCodeEnum.SUCCESS, null);
+        return R.out(ResponseEnum.SUCCESS, null);
     }
 }

@@ -1,6 +1,6 @@
 package com.bingo.response;
 
-import com.bingo.enums.RespCodeEnum;
+import com.bingo.enums.ResponseEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,20 +15,20 @@ import lombok.Setter;
 public class R<T> extends BaseResponse {
     private T data;
 
-    private R(RespCodeEnum code) {
+    private R(ResponseEnum code) {
         super(code);
     }
 
-    private R(RespCodeEnum code, T data) {
+    private R(ResponseEnum code, T data) {
         super(code);
         this.data = data;
     }
 
-    public static BaseResponse out(RespCodeEnum code) {
+    public static BaseResponse out(ResponseEnum code) {
         return new BaseResponse(code);
     }
 
-    public static <T> R<T> out(RespCodeEnum code, T data) {
+    public static <T> R<T> out(ResponseEnum code, T data) {
         return new R<>(code, data);
     }
 }

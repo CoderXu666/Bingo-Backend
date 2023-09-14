@@ -1,6 +1,6 @@
 package com.bingo.response;
 
-import com.bingo.enums.RespCodeEnum;
+import com.bingo.enums.ResponseEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,7 +25,7 @@ public class BaseResponse {
     protected BaseResponse() {
     }
 
-    protected BaseResponse(RespCodeEnum code) {
+    protected BaseResponse(ResponseEnum code) {
         this.code = code.getCode();
         this.msg = code.getMsg();
     }

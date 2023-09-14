@@ -1,6 +1,6 @@
 package com.bingo.controller;
 
-import com.bingo.enums.RespCodeEnum;
+import com.bingo.enums.ResponseEnum;
 import com.bingo.pojo.po.user.BingoGift;
 import com.bingo.response.R;
 import com.bingo.service.BingoGiftService;
@@ -29,6 +29,6 @@ public class BingoGiftController {
     @GetMapping("/list")
     public R list() {
         List<BingoGift> list = giftService.getList();
-        return R.out(RespCodeEnum.SUCCESS, list);
+        return R.out(ResponseEnum.SUCCESS, list);
     }
 }

@@ -1,7 +1,7 @@
 package com.bingo.controller;
 
 
-import com.bingo.enums.RespCodeEnum;
+import com.bingo.enums.ResponseEnum;
 import com.bingo.pojo.dto.community.TopicDTO;
 import com.bingo.pojo.resp.community.BingoTopicResp;
 import com.bingo.response.R;
@@ -37,7 +37,7 @@ public class BingoTopicController {
     @PostMapping("/save_topic")
     public R saveTopic(@RequestBody TopicDTO topicDTO) throws Exception {
         topicService.saveTopic(topicDTO);
-        return R.out(RespCodeEnum.SUCCESS, null);
+        return R.out(ResponseEnum.SUCCESS, null);
     }
 
     /**
@@ -46,7 +46,7 @@ public class BingoTopicController {
     @DeleteMapping("/delete_topic")
     public R deleteTopic(Long id) {
         topicService.deleteTopic(id);
-        return R.out(RespCodeEnum.SUCCESS, null);
+        return R.out(ResponseEnum.SUCCESS, null);
     }
 
     /**
@@ -55,7 +55,7 @@ public class BingoTopicController {
     @GetMapping("/information")
     public R getTopicById(Long topicId) throws Exception {
         BingoTopicResp topicResp = topicService.getTopicById(topicId);
-        return R.out(RespCodeEnum.SUCCESS, topicResp);
+        return R.out(ResponseEnum.SUCCESS, topicResp);
     }
 
 

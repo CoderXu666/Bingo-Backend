@@ -1,7 +1,7 @@
 package com.bingo.controller;
 
 import com.bingo.annotation.RateLimiter;
-import com.bingo.enums.RespCodeEnum;
+import com.bingo.enums.ResponseEnum;
 import com.bingo.netty.NettyChannelRelation;
 import com.bingo.pojo.dto.im.ChatRecordDTO;
 import com.bingo.response.R;
@@ -28,7 +28,7 @@ public class WebSocketChatController {
     @RateLimiter(time = 3, count = 6)
     public R sendChatByUid(@RequestBody ChatRecordDTO msgDTO) throws Exception {
         chatService.sendChatRecord(msgDTO);
-        return R.out(RespCodeEnum.SUCCESS, null);
+        return R.out(ResponseEnum.SUCCESS, null);
     }
 
     /**

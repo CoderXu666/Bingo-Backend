@@ -2,7 +2,6 @@ package com.bingo.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @Author 徐志斌
@@ -11,7 +10,7 @@ import lombok.Setter;
  * @Description: 响应封装类状态码 + 响应信息
  */
 @AllArgsConstructor
-public enum RespCodeEnum {
+public enum ResponseEnum {
     SUCCESS(200, "操作成功"),
     FAIL(500, "操作失败"),
     TOKEN_EXPIRED(501, "用户Token已失效，请重新登录");

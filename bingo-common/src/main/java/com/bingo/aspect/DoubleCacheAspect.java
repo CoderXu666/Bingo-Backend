@@ -1,7 +1,7 @@
 package com.bingo.aspect;
 
 import com.bingo.annotation.DoubleCache;
-import com.bingo.enums.CacheType;
+import com.bingo.enums.CacheEnum;
 import com.github.benmanes.caffeine.cache.Cache;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -61,7 +61,7 @@ public class DoubleCacheAspect {
         String realKey = annotation.cacheName() + ":" + elResult;
 
         // 如果是删除操作，那就删除；如果不是删除，那就是查询咯！
-        if (annotation.type() == CacheType.DELETE) {
+        if (annotation.type() == CacheEnum.DELETE) {
             redisTemplate.delete(realKey);
             cache.invalidate(realKey);
             return point.proceed();

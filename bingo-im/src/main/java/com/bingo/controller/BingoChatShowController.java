@@ -1,7 +1,7 @@
 package com.bingo.controller;
 
 
-import com.bingo.enums.RespCodeEnum;
+import com.bingo.enums.ResponseEnum;
 import com.bingo.response.R;
 import com.bingo.service.BingoChatShowService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class BingoChatShowController {
     @GetMapping("/list")
     public R getChatList() throws Exception {
         Map<String, Object> resultMap = showService.getChatList();
-        return R.out(RespCodeEnum.SUCCESS, resultMap);
+        return R.out(ResponseEnum.SUCCESS, resultMap);
     }
 
     /**
@@ -41,7 +41,7 @@ public class BingoChatShowController {
     @PostMapping("/clear_unread")
     public R clearUnread(Long goalId) throws Exception {
         showService.clearUnread(goalId);
-        return R.out(RespCodeEnum.SUCCESS, null);
+        return R.out(ResponseEnum.SUCCESS, null);
     }
 }
 

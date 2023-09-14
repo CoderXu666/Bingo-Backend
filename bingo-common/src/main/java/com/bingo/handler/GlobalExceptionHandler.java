@@ -1,6 +1,7 @@
 package com.bingo.handler;
 
-import com.bingo.enums.RespCodeEnum;
+import com.bingo.enums.ResponseEnum;
+import com.bingo.exception.BingoException;
 import com.bingo.response.R;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ExpiredJwtException.class)
     public R expiredJwtException(ExpiredJwtException e) {
         log.error("========================ExpiredJwtException：{}========================", e);
-        return R.out(RespCodeEnum.TOKEN_EXPIRED, e);
+        return R.out(ResponseEnum.TOKEN_EXPIRED, e);
+    }
+
+    /**
+     * 自定义异常
+     */
+    @ExceptionHandler(BingoException.class)
+    public R bingoException(BingoException e) {
+        log.error("========================BingoException：{}========================", e);
+        return R.out(ResponseEnum.TOKEN_EXPIRED, e);
     }
 
     /**
@@ -31,6 +41,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public R bindException(Exception e) {
         log.error("========================Exception：{}========================", e);
-        return R.out(RespCodeEnum.FAIL, e);
+        return R.out(ResponseEnum.FAIL, e);
     }
 }

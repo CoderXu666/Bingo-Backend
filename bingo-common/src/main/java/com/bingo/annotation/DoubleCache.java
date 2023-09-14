@@ -1,7 +1,7 @@
 package com.bingo.annotation;
 
 
-import com.bingo.enums.CacheType;
+import com.bingo.enums.CacheEnum;
 
 import java.lang.annotation.*;
 
@@ -31,5 +31,5 @@ public @interface DoubleCache {
     /**
      * 操作类型：具体参考CacheType
      */
-    CacheType type() default CacheType.FULL;
+    CacheEnum type() default CacheEnum.FULL;
 }

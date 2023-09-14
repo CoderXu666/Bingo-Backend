@@ -2,7 +2,7 @@ package com.bingo.aspect;
 
 import com.bingo.annotation.RateLimiter;
 import com.bingo.config.LuaScriptConfig;
-import com.bingo.enums.LimitType;
+import com.bingo.enums.LimitTypeEnum;
 import com.bingo.utils.IPUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -72,7 +72,7 @@ public class RateLimitAspect {
      */
     public String getCombineKey(RateLimiter rateLimiter, JoinPoint point) {
         StringBuffer stringBuffer = new StringBuffer(rateLimiter.key());
-        if (rateLimiter.limitType() == LimitType.IP) {
+        if (rateLimiter.limitType() == LimitTypeEnum.IP) {
             stringBuffer.append(IPUtil.getIpAddress(((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest())).append("-");
         }
         MethodSignature signature = (MethodSignature) point.getSignature();

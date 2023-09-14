@@ -1,6 +1,6 @@
 package com.bingo.annotation;
 
-import com.bingo.enums.LimitType;
+import com.bingo.enums.LimitTypeEnum;
 
 import java.lang.annotation.*;
 
@@ -32,5 +32,5 @@ public @interface RateLimiter {
     /**
      * 限流类型
      */
-    LimitType limitType() default LimitType.DEFAULT;
+    LimitTypeEnum limitType() default LimitTypeEnum.DEFAULT;
 }
