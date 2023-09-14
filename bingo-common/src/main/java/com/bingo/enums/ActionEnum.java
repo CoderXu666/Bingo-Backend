@@ -1,6 +1,7 @@
 package com.bingo.enums;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * @Author: 徐志斌
@@ -10,8 +11,14 @@ import lombok.AllArgsConstructor;
  */
 @AllArgsConstructor
 public enum ActionEnum {
-    LIKE(),
-    COMMENT(),
-    SHARE(),
-    GIFT();
+    LIKE(0, "点赞行为")
+//    COMMENT(),
+//    SHARE(),
+//    GIFT();
+    ;
+
+    @Getter
+    private int code;
+    @Getter
+    private String msg;
 }
