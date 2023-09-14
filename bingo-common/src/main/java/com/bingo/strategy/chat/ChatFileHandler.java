@@ -1,5 +1,6 @@
 package com.bingo.strategy.chat;
 
+import com.bingo.enums.ChatRecordEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,13 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class ChatFileHandler extends AbstractChatStrategy {
+    /**
+     * 当前策略类型枚举
+     */
+    @Override
+    ChatRecordEnum getEnum() {
+        return ChatRecordEnum.FILE;
+    }
 
     @Override
     Boolean saveChatRecord() {

@@ -1,4 +1,4 @@
-package com.bingo.handler;
+package com.bingo.exception;
 
 
 import lombok.extern.slf4j.Slf4j;
