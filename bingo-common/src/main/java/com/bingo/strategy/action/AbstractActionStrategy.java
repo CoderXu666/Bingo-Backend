@@ -8,17 +8,17 @@ package com.bingo.strategy.action;
  */
 public abstract class AbstractActionStrategy {
     /**
-     * 点赞
+     * 点赞行为
      */
     abstract Boolean doLike();
 
     /**
-     * 打赏
+     * 打赏行为
      */
     abstract Boolean sendGift();
 
     /**
-     * 评论
+     * 评论行为
      */
     abstract Boolean doComment();
 }

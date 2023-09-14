@@ -6,23 +6,31 @@ import org.springframework.stereotype.Component;
 /**
  * @Author: 徐志斌
  * @CreateTime: 2023-09-08  17:24
- * @Description: 点赞帖子
+ * @Description: 帖子行为
  * @Version: 1.0
  */
 @Slf4j
 @Component
 public class PostHandler extends AbstractActionStrategy {
-
+    /***
+     * 点赞帖子
+     */
     @Override
     Boolean doLike() {
         return null;
     }
 
+    /**
+     * 发送礼物
+     */
     @Override
     Boolean sendGift() {
         return null;
     }
 
+    /**
+     * 评论帖子
+     */
     @Override
     Boolean doComment() {
         return null;

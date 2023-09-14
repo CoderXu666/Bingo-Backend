@@ -17,10 +17,8 @@ public enum RespCodeEnum {
     TOKEN_EXPIRED(501, "用户Token已失效，请重新登录");
 
     @Getter
-    @Setter
     private Integer code;
 
     @Getter
-    @Setter
     private String msg;
 }
