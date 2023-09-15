@@ -7,6 +7,8 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
+import java.util.TimeZone;
+
 /**
  * @Author 徐志斌
  * @Date: 2023/5/27 17:23
@@ -19,6 +21,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 public class BingoIMApplication {
     public static void main(String[] args) {
+        // JVM 和 Linux 服务器时间保持一致
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai"));
         SpringApplication.run(BingoIMApplication.class);
     }
 }

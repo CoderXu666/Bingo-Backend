@@ -9,14 +9,13 @@ import lombok.Getter;
  * @Description: 行为枚举（点赞、评论、打赏）
  * @Version: 1.0
  */
+@Getter
 @AllArgsConstructor
 public enum ActionEnum {
     LIKE(1, "点赞"),
     COMMENT(2, "评论"),
     GIFT(3, "打赏");
 
-    @Getter
     private int code;
-    @Getter
     private String msg;
 }

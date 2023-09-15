@@ -9,6 +9,7 @@ import lombok.Getter;
  * @Description: 聊天内容类型枚举
  * @Version: 1.0
  */
+@Getter
 @AllArgsConstructor
 public enum ChatRecordEnum {
     FONT(1, "文字内容"),
@@ -19,8 +20,6 @@ public enum ChatRecordEnum {
     GIFT(6, "礼物打赏"),
     LINE(7, "视频通话");
 
-    @Getter
     private int code;
-    @Getter
     private String msg;
 }

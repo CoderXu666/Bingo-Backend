@@ -5,12 +5,6 @@ package com.bingo.enums;
  * Redis限流类型
  */
 public enum LimitTypeEnum {
-    /**
-     * 全局默认
-     */
     DEFAULT,
-    /**
-     * IP
-     */
     IP
 }
