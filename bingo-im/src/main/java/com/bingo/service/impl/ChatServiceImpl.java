@@ -13,7 +13,6 @@ import com.bingo.store.BingoChatShowStore;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
@@ -48,13 +47,11 @@ public class ChatServiceImpl implements ChatService {
         Long uid = msgDTO.getUid();
         Long goalId = msgDTO.getGoalId();
 
-        // 保存聊天记录
-        CompletableFuture.runAsync(() -> {
-            recordStore.saveChatRecord(sendRecord);
-        }, taskExecutor);
+        // 保存聊天记录（保存成功，才算发送成功）
+        recordStore.saveChatRecord(sendRecord);
 
-        // 处理聊天会话窗口逻辑
-        CompletableFuture showFuture = CompletableFuture.runAsync(() -> {
+        // 处理聊天会话窗口逻辑 | 更新未读数量
+        CompletableFuture.runAsync(() -> {
             BingoChatShow uRecord = showStore.getOneRecord(uid, goalId);
             BingoChatShow goalRecord = showStore.getOneRecord(goalId, uid);
             if (ObjectUtils.isEmpty(uRecord)) {
@@ -63,10 +60,6 @@ public class ChatServiceImpl implements ChatService {
             if (ObjectUtils.isEmpty(goalRecord)) {
                 showStore.saveRecord(goalId, uid);
             }
-        }, taskExecutor);
-
-        // 更新未读数量
-        showFuture.thenRunAsync(() -> {
             BingoChatShow record = showStore.getOneRecord(uid, goalId);
             record.setUnreadCount(record.getUnreadCount() + 1);
             record.setReceiveTime(new Date());
