@@ -16,7 +16,7 @@ public abstract class AbstractChatStrategy {
      */
     @PostConstruct
     private void initStrategyHandler() {
-//        StrategyChatFactory.register(getEnum().getCode(), this);
+        StrategyChatFactory.register(getEnum().getCode(), this);
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.bingo.strategy.action;
 
+import com.bingo.enums.ChatRecordEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,14 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class UserHandler extends AbstractActionStrategy {
+    /**
+     * 返回当前策略处理器枚举
+     */
+    @Override
+    ChatRecordEnum getEnum() {
+        return null;
+    }
+
     /**
      * 点赞/喜欢用户
      */
