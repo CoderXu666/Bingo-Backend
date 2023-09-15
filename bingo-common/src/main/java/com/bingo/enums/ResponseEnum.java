@@ -16,13 +16,15 @@ public enum ResponseEnum {
      */
     SUCCESS(200, "操作成功"),
     FAIL(500, "操作失败"),
+    NO_STRATEGY_HANDLER(50002, "Map中不存在当前策略类"),
 
 
     /**
      * 自定义
      */
+    /*---------------------------------USER模块------------------------------*/
     TOKEN_EXPIRED(50001, "用户Token已失效，请重新登录"),
-    NO_STRATEGY_HANDLER(50002, "Map中不存在当前策略类"),
+    USER_NOT_EXIST(50002, "未查询到当前用户相关信息"),
     ;
 
     @Getter

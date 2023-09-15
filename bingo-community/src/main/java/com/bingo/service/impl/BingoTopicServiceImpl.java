@@ -2,6 +2,7 @@ package com.bingo.service.impl;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bingo.exception.BingoException;
 import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoTopicMapper;
 import com.bingo.pojo.dto.community.TopicDTO;
@@ -38,7 +39,7 @@ public class BingoTopicServiceImpl extends ServiceImpl<BingoTopicMapper, BingoTo
     @Override
     public Boolean saveTopic(TopicDTO topicDTO) throws Exception {
         if (!StringUtils.isNotEmpty(topicDTO.getUid().toString())) {
-            throw new Exception("用户ID为空");
+            throw new BingoException(null);
         }
         BingoTopic bingoTopic = new BingoTopic();
         BeanUtils.copyProperties(topicDTO, bingoTopic);
@@ -59,20 +60,20 @@ public class BingoTopicServiceImpl extends ServiceImpl<BingoTopicMapper, BingoTo
     @Override
     public BingoTopicResp getTopicById(Long topicId) throws Exception {
         if (ObjectUtils.isEmpty(topicId)) {
-            throw new Exception("接口参数不存在");
+            throw new BingoException(null);
         }
 
         //查询话题相关信息
         BingoTopic topic = topicStore.findTopicById(topicId);
         if (ObjectUtils.isEmpty(topic)) {
-            throw new Exception("未查询到话题信息");
+            throw new BingoException(null);
         }
 
         //远程调用查询用户相关信息
         FeignResponse<UserResp> feignResponse = userFeign.findByUserId(topic.getUid());
         UserResp userResp = feignResponse.getData();
         if (ObjectUtils.isEmpty(userResp)) {
-            throw new Exception("未查询到该用户信息");
+            throw new BingoException(null);
         }
 
         BingoTopicResp topicResp = new BingoTopicResp();

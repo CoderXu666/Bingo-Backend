@@ -3,6 +3,7 @@ package com.bingo.aspect;
 import com.bingo.annotation.RateLimiter;
 import com.bingo.config.LuaScriptConfig;
 import com.bingo.enums.LimitTypeEnum;
+import com.bingo.exception.BingoException;
 import com.bingo.utils.IPUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -63,7 +64,7 @@ public class RateLimitAspect {
         // 判断限流Key对应次数是否 > 注解限流值
         if (number.equals(null) || number.intValue() > count) {
             log.info("限制请求'{}',当前请求'{}',缓存key'{}'", count, number.intValue(), key);
-            throw new Exception("操作过于频繁，请稍后再试！");
+            throw new BingoException(null);
         }
     }
 

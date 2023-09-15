@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.context.RequestContextHolder;
+import com.bingo.exception.BingoException;
 import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoChatShowMapper;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
@@ -74,11 +75,11 @@ public class BingoChatShowServiceImpl extends ServiceImpl<BingoChatShowMapper, B
     @Override
     public Boolean clearUnread(Long goalId) throws Exception {
         if (ObjectUtils.isEmpty(goalId)) {
-            throw new Exception("接口入参不存在，请刷新重试");
+            throw new BingoException(null);
         }
         BingoChatShow record = showStore.getOneRecord((Long) RequestContextHolder.get().get("uid"), goalId);
         if (ObjectUtils.isEmpty(record)) {
-            throw new Exception("未查询到用户会话信息");
+            throw new BingoException(null);
         }
         record.setUnreadCount(0);
         return showStore.updateRecordById(record);

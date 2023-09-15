@@ -3,6 +3,7 @@ package com.bingo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.adapter.UserAdapter;
+import com.bingo.exception.BingoException;
 import com.bingo.mapper.BingoUserMapper;
 import com.bingo.pojo.dto.user.UserDTO;
 import com.bingo.pojo.po.user.BingoUser;
@@ -58,7 +59,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     public UserResp findById(Long uid) throws Exception {
         BingoUser userInfo = userStore.findById(uid);
         if (ObjectUtils.isEmpty(userInfo)) {
-            throw new Exception("当前用户信息不存在");
+            throw new BingoException(null);
         }
         UserResp userResp = new UserResp();
         BeanUtils.copyProperties(userInfo, userResp);
@@ -125,10 +126,10 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     @Override
     public Boolean updateUserById(BingoUser user) throws Exception {
         if (ObjectUtils.isEmpty(user)) {
-            throw new Exception("当前用户信息不存在！");
+            throw new BingoException(null);
         }
         if (ObjectUtils.isEmpty(user.getUid())) {
-            throw new Exception("当前用户信息不存在id信息！");
+            throw new BingoException(null);
         }
         return userStore.updateUserById(user);
     }
@@ -163,18 +164,18 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         // 邮箱验证码是否过期
         String code = (String) redisTemplate.opsForValue().get(email);
         if (StringUtils.isEmpty(code)) {
-            throw new Exception("验证码已失效，请重新发送");
+            throw new BingoException(null);
         }
 
         // 验证码输入是否正确
         if (!captcha.equalsIgnoreCase(code)) {
-            throw new Exception("您输入的验证码有误，请重试");
+            throw new BingoException(null);
         }
 
         // 判断账号是否注册过
         BingoUser userInfo = userStore.findByAccountId(accountId);
         if (ObjectUtils.isNotEmpty(userInfo)) {
-            throw new Exception("该账号已存在，换个试试~");
+            throw new BingoException(null);
         }
 
         // 解析用户所在区域
@@ -207,27 +208,27 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         // 判断验证码是否正确
         String captchaVal = (String) redisTemplate.opsForValue().get(captchaKey);
         if (!captcha.equalsIgnoreCase(captchaVal)) {
-            throw new Exception("验证码不正确，请重新输入");
+            throw new BingoException(null);
         }
 
         // 判断用户账号是否存在
         BingoUser userInfo = userStore.findByAccountId(accountId);
         if (ObjectUtils.isEmpty(userInfo)) {
-            throw new Exception("该用户账号不存在，请重试");
+            throw new BingoException(null);
         }
 
         // 判断密码是否正确
         String encryptPassWord = AESUtil.encrypt(passWord);
         String dbPassWord = userInfo.getPassWord();
         if (!encryptPassWord.equals(dbPassWord)) {
-            throw new Exception("密码错误，请重试");
+            throw new BingoException(null);
         }
 
         // 生成Token
         Long uid = userInfo.getUid();
         String token = JWTUtil.generateToken(uid);
         if (StringUtils.isEmpty(token)) {
-            throw new Exception("生成Token用户信息异常");
+            throw new BingoException(null);
         }
         return token;
     }
@@ -238,7 +239,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     @Override
     public void sendEmail(String email) throws Exception {
         if (StringUtils.isEmpty(email)) {
-            throw new Exception("验证码为空，请重试");
+            throw new BingoException(null);
         }
 
         // 生成邮箱验证码
@@ -266,7 +267,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         Long uid = (Long) map.get("uid");
         BingoUser userInfo = userStore.findById(uid);
         if (ObjectUtils.isEmpty(userInfo)) {
-            throw new Exception("没有查询到该uid的用户信息");
+            throw new BingoException(null);
         }
         return userInfo;
     }
@@ -277,7 +278,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     @Override
     public Boolean updateOnlineStatus(Long uid, Integer status) throws Exception {
         if (ObjectUtils.isEmpty(uid) || ObjectUtils.isEmpty(status)) {
-            throw new Exception("接口入参缺失，请重试");
+            throw new BingoException(null);
         }
         BingoUser userInfo = UserAdapter.buildUserPO(uid, status);
         return userStore.updateUserById(userInfo);

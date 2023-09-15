@@ -3,6 +3,7 @@ package com.bingo.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bingo.exception.BingoException;
 import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoFollowRecordMapper;
 import com.bingo.pojo.po.community.BingoFollowLog;
@@ -44,7 +45,7 @@ public class BingoFollowRecordServiceImpl extends ServiceImpl<BingoFollowRecordM
     @Override
     public Boolean followUser(Long uid, Long goalId) throws Exception {
         if (ObjectUtils.isEmpty(uid) || ObjectUtils.isEmpty(goalId)) {
-            throw new Exception("接口入参异常");
+            throw new BingoException(null);
         }
 
         // 查询是否关注过

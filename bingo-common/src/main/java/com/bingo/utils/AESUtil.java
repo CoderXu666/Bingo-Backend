@@ -1,6 +1,8 @@
 package com.bingo.utils;
 
 
+import com.bingo.exception.BingoException;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -33,7 +35,7 @@ public class AESUtil {
             byte[] encryptedBytes = cipher.doFinal(password.getBytes());
             return Base64.getEncoder().encodeToString(encryptedBytes);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to encrypt password", e);
+            throw new BingoException(null);
         }
     }
 
@@ -51,7 +53,7 @@ public class AESUtil {
             byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
             return new String(decryptedBytes);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to decrypt password", e);
+            throw new BingoException(null);
         }
     }
 }
