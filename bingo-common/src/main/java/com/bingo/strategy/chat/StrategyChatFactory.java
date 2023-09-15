@@ -14,7 +14,6 @@ import java.util.Map;
  * @Version: 1.0
  */
 public class StrategyChatFactory {
-    // K：策略标识，V：策略处理器
     private static final Map<Integer, AbstractChatStrategy> STRATEGY_MAP = new HashMap<>();
 
     /**

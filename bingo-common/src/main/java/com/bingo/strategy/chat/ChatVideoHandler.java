@@ -13,10 +13,12 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class ChatVideoHandler extends AbstractChatStrategy {
-
+    /**
+     * 当前策略枚举
+     */
     @Override
     ChatRecordEnum getEnum() {
-        return null;
+        return ChatRecordEnum.VIDEO;
     }
 
     @Override

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ChatFileHandler extends AbstractChatStrategy {
     /**
-     * 当前策略类型枚举
+     * 当前策略枚举
      */
     @Override
     ChatRecordEnum getEnum() {

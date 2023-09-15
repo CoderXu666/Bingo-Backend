@@ -14,9 +14,10 @@ public enum ChatRecordEnum {
     FONT(1, "文字内容"),
     SOUND(2, "音频内容"),
     PICTURE(3, "图片内容"),
-    FILE(4, "文件内容"),
-    GIFT(5, "礼物打赏"),
-    LINE(6, "视频通话");
+    VIDEO(4, "视频内容"),
+    FILE(5, "文件内容"),
+    GIFT(6, "礼物打赏"),
+    LINE(7, "视频通话");
 
     @Getter
     private int code;

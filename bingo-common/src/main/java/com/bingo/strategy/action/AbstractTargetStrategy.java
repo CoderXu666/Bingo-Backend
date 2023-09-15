@@ -1,6 +1,7 @@
 package com.bingo.strategy.action;
 
-import com.bingo.enums.ChatRecordEnum;
+import com.bingo.enums.ActionEnum;
+import com.bingo.enums.TargetEnum;
 
 import javax.annotation.PostConstruct;
 
@@ -10,7 +11,7 @@ import javax.annotation.PostConstruct;
  * @Description: 策略模式（点赞、打赏、评论）：用户、帖子、话题
  * @Version: 1.0
  */
-public abstract class AbstractActionStrategy {
+public abstract class AbstractTargetStrategy {
     /**
      * 初始化策略类 Map
      */
@@ -22,7 +23,7 @@ public abstract class AbstractActionStrategy {
     /**
      * 获取策略类型枚举
      */
-    abstract ChatRecordEnum getEnum();
+    abstract TargetEnum getEnum();
 
     /**
      * 点赞行为
