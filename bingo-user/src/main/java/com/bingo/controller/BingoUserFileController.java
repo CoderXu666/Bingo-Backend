@@ -25,7 +25,7 @@ public class BingoUserFileController {
      * 访问URL例子：http://101.42.13.186:9000/avatar-bucket/1687483809516_1690621557315.jpg
      */
     @PostMapping("/upload_avatar")
-    public R uploadAvatar(MultipartFile file) {
+    public R uploadAvatar(MultipartFile file) throws Exception {
         String avatarUrl = minioUtil.upload(file, MinioConstant.AVATAR_BUCKET);
         return R.out(ResponseEnum.SUCCESS, avatarUrl);
     }

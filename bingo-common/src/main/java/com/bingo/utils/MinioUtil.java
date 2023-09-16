@@ -24,7 +24,7 @@ import java.util.List;
  * @Author 徐志斌
  * @Date: 2023/7/23 18:29
  * @Version 1.0
- * @Description: MinioUtil
+ * @Description: MinIO工具类
  */
 @Component
 public class MinioUtil {
@@ -62,7 +62,7 @@ public class MinioUtil {
     /**
      * 上传文件
      */
-    public String upload(MultipartFile file, String bucketName) {
+    public String upload(MultipartFile file, String bucketName) throws Exception {
         String fileName = file.getOriginalFilename();
         String[] split = fileName.split("\\.");
         if (split.length > 1) {
@@ -80,22 +80,15 @@ public class MinioUtil {
                     .contentType(file.getContentType())
                     .build()
             );
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                in.close();
             }
         }
         StringBuffer url = new StringBuffer();
-        url.append("http://");
-        url.append("101.42.13.186:9000/");
-        url.append("avatar-bucket/");
-        url.append(fileName);
+        url.append("http://101.42.13.186:9000/");
+        url.append(bucketName); // bucket名
+        url.append("/" + fileName);
         return url.toString();
     }
 

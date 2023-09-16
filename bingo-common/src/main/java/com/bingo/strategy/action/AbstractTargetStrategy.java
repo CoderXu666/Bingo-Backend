@@ -1,6 +1,5 @@
 package com.bingo.strategy.action;
 
-import com.bingo.enums.ActionEnum;
 import com.bingo.enums.TargetEnum;
 
 import javax.annotation.PostConstruct;

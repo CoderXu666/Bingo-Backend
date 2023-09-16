@@ -13,8 +13,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ActionEnum {
     LIKE(1, "点赞"),
-    COMMENT(2, "评论"),
-    GIFT(3, "打赏");
+    COMMENT(2, "评论/留言"),
+    GIFT(3, "打赏"),
+    SHARE(4, "转发"),
+    ;
 
     private int code;
     private String msg;
