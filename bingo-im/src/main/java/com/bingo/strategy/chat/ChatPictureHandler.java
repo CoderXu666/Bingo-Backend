@@ -1,7 +1,7 @@
 package com.bingo.strategy.chat;
 
 import com.bingo.enums.ChatRecordEnum;
-import com.bingo.pojo.dto.im.ChatRecordDTO;
+import com.bingo.pojo.po.im.BingoChatSendRecord;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -22,8 +22,11 @@ public class ChatPictureHandler extends AbstractChatStrategy {
         return ChatRecordEnum.PICTURE;
     }
 
+    /**
+     * 上传图片
+     */
     @Override
-    public Boolean saveChatRecord(ChatRecordDTO recordDTO) {
+    public Boolean handleChatRecord(BingoChatSendRecord sendRecord) {
         return null;
     }
 

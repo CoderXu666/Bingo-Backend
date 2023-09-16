@@ -1,7 +1,7 @@
 package com.bingo.strategy.chat;
 
 import com.bingo.enums.ChatRecordEnum;
-import com.bingo.pojo.dto.im.ChatRecordDTO;
+import com.bingo.pojo.po.im.BingoChatSendRecord;
 
 import javax.annotation.PostConstruct;
 
@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
  * @Version: 1.0
  * -------------------------------------------------------------------
  * 1个枚举对应1个策略Handler
+ * 每个策略类做的操作不同，相同的公共操作不应该写到策略类中
  */
 public abstract class AbstractChatStrategy {
     /**
@@ -30,5 +31,5 @@ public abstract class AbstractChatStrategy {
     /**
      * 保存聊天记录
      */
-    public abstract Boolean saveChatRecord(ChatRecordDTO recordDTO);
+    public abstract Boolean handleChatRecord(BingoChatSendRecord sendRecord);
 }
