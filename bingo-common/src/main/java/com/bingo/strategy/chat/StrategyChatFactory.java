@@ -17,14 +17,14 @@ public class StrategyChatFactory {
     private static final Map<Integer, AbstractChatStrategy> STRATEGY_MAP = new HashMap<>();
 
     /**
-     * 策略类注册到Map中
+     * 目标策略类注册到工厂的Map中
      */
     public static void register(Integer code, AbstractChatStrategy strategyHandler) {
         STRATEGY_MAP.put(code, strategyHandler);
     }
 
     /**
-     * 获取策略处理器（根据策略标识）
+     * 获取策略处理器
      */
     public static AbstractChatStrategy getStrategyHandler(Integer code) {
         AbstractChatStrategy strategyHandler = STRATEGY_MAP.get(code);

@@ -8,18 +8,18 @@ import org.springframework.stereotype.Component;
 /**
  * @Author: 徐志斌
  * @CreateTime: 2023-09-08  17:38
- * @Description: 视频策略Handler
+ * @Description: 视频通话策略Handler
  * @Version: 1.0
  */
 @Slf4j
 @Component
-public class ChatVideoHandler extends AbstractChatStrategy {
+public class ChatLiveHandler extends AbstractChatStrategy {
     /**
      * 当前策略枚举
      */
     @Override
     ChatRecordEnum getEnum() {
-        return ChatRecordEnum.VIDEO;
+        return ChatRecordEnum.GIFT;
     }
 
     @Override

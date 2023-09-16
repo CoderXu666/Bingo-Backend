@@ -18,7 +18,7 @@ public enum ChatRecordEnum {
     VIDEO(4, "视频"),
     FILE(5, "文件"),
     GIFT(6, "礼物"),
-    LINE(7, "视频通话");
+    LIVE(7, "视频通话");
 
     private int code;
     private String msg;

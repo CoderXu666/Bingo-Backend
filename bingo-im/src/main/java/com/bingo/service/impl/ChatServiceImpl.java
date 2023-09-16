@@ -48,7 +48,6 @@ public class ChatServiceImpl implements ChatService {
         AbstractChatStrategy strategyHandler = StrategyChatFactory.getStrategyHandler(msgDTO.getType());
 
 
-
         // 适配器模式：对象转换
         BingoChatSendRecord sendRecord = ChatRecordAdapter.buildChatRecordPO(msgDTO);
         Long uid = msgDTO.getUid();

@@ -10,10 +10,12 @@ import javax.annotation.PostConstruct;
  * @CreateTime: 2023-09-08  17:18
  * @Description: 策略模式（保存聊天功能）：文字、音频、图片、视频、文件、视频通话等
  * @Version: 1.0
+ * -------------------------------------------------------------------
+ * 1个枚举对应1个策略Handler
  */
 public abstract class AbstractChatStrategy {
     /**
-     * 初始化策略类 Map
+     * 注册目标策略Handler
      */
     @PostConstruct
     private void initStrategyHandler() {
@@ -21,9 +23,9 @@ public abstract class AbstractChatStrategy {
     }
 
     /**
-     * 获取策略类型枚举
+     * 获取当前策略类型枚举
      */
-    public abstract ChatRecordEnum getEnum();
+    abstract ChatRecordEnum getEnum();
 
     /**
      * 保存聊天记录

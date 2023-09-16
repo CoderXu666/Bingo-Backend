@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * @Author: 徐志斌
  * @CreateTime: 2023-09-08  17:38
- * @Description: TODO
+ * @Description: 文字策略Handler
  * @Version: 1.0
  */
 @Slf4j
@@ -18,7 +18,7 @@ public class ChatFontHandler extends AbstractChatStrategy {
      * 当前策略枚举
      */
     @Override
-    public ChatRecordEnum getEnum() {
+    ChatRecordEnum getEnum() {
         return ChatRecordEnum.FONT;
     }
 
