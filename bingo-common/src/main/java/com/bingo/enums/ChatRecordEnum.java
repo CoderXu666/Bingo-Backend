@@ -13,7 +13,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ChatRecordEnum {
     FONT(1, "文字"),
-    SOUND(2, "音频"),
+    VOICE(2, "音频"),
     PICTURE(3, "图片"),
     VIDEO(4, "视频"),
     FILE(5, "文件"),

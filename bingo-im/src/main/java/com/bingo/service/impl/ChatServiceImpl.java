@@ -10,6 +10,8 @@ import com.bingo.pojo.po.im.BingoChatShow;
 import com.bingo.service.ChatService;
 import com.bingo.store.BingoChatSendRecordStore;
 import com.bingo.store.BingoChatShowStore;
+import com.bingo.strategy.chat.AbstractChatStrategy;
+import com.bingo.strategy.chat.StrategyChatFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,11 @@ public class ChatServiceImpl implements ChatService {
      */
     @Override
     public void sendChatRecord(ChatRecordDTO msgDTO) {
+        // 根据消息类型获取策略类
+        AbstractChatStrategy strategyHandler = StrategyChatFactory.getStrategyHandler(msgDTO.getType());
+
+
+
         // 适配器模式：对象转换
         BingoChatSendRecord sendRecord = ChatRecordAdapter.buildChatRecordPO(msgDTO);
         Long uid = msgDTO.getUid();

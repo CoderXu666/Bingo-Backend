@@ -1,6 +1,7 @@
 package com.bingo.strategy.chat;
 
 import com.bingo.enums.ChatRecordEnum;
+import com.bingo.pojo.dto.im.ChatRecordDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -12,17 +13,17 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class ChatSoundHandler extends AbstractChatStrategy {
+public class ChatVoiceHandler extends AbstractChatStrategy {
     /**
      * 当前策略枚举
      */
     @Override
-    ChatRecordEnum getEnum() {
-        return ChatRecordEnum.SOUND;
+    public ChatRecordEnum getEnum() {
+        return ChatRecordEnum.VOICE;
     }
 
     @Override
-    Boolean saveChatRecord() {
+    public Boolean saveChatRecord(ChatRecordDTO recordDTO) {
         return null;
     }
 }

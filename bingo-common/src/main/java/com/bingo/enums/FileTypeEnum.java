@@ -12,9 +12,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum FileTypeEnum {
-    AVATAR(1, "头像文件"),
-    AUDIO(2, "语音文件"),
-    TREND(3, "社区动态文件")
+    AVATAR(1, "头像"),
+    AUDIO(2, "语音"),
+    TREND(3, "社区动态")
     ;
 
     private int code;

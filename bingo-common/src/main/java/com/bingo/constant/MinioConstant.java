@@ -8,4 +8,5 @@ package com.bingo.constant;
  */
 public class MinioConstant {
     public static final String AVATAR_BUCKET = "avatar-bucket";
+    public static final String AUDIO_BUCKET = "avatar-bucket";
 }

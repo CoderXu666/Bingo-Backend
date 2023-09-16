@@ -1,6 +1,7 @@
 package com.bingo.strategy.chat;
 
 import com.bingo.enums.ChatRecordEnum;
+import com.bingo.pojo.dto.im.ChatRecordDTO;
 
 import javax.annotation.PostConstruct;
 
@@ -22,10 +23,10 @@ public abstract class AbstractChatStrategy {
     /**
      * 获取策略类型枚举
      */
-    abstract ChatRecordEnum getEnum();
+    public abstract ChatRecordEnum getEnum();
 
     /**
      * 保存聊天记录
      */
-    abstract Boolean saveChatRecord();
+    public abstract Boolean saveChatRecord(ChatRecordDTO recordDTO);
 }
