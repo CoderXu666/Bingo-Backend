@@ -28,7 +28,7 @@ public class WebSocketChatController {
     @PostMapping("/send_one")
     @RateLimiter(time = 3, count = 6)
     public R sendChatByUid(@RequestBody ChatRecordDTO msgDTO, MultipartFile file) throws Exception {
-        chatService.sendChatRecord(msgDTO);
+        chatService.sendChatRecord(msgDTO, file);
         return R.out(ResponseEnum.SUCCESS, null);
     }
 

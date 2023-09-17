@@ -47,7 +47,11 @@ public class ChatServiceImpl implements ChatService {
         // 根据消息类型获取对应策略类
         taskExecutor.submit(() -> {
             AbstractChatStrategy strategyHandler = StrategyChatFactory.getStrategyHandler(msgDTO.getType());
-            strategyHandler.handleChatRecord(sendRecord, file);
+            try {
+                strategyHandler.handleChatRecord(sendRecord, file);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         });
 
         // 通过Channel发送消息

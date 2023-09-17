@@ -32,5 +32,5 @@ public abstract class AbstractChatStrategy {
     /**
      * 保存聊天记录
      */
-    public abstract Boolean handleChatRecord(BingoChatSendRecord sendRecord, MultipartFile file);
+    public abstract Boolean handleChatRecord(BingoChatSendRecord sendRecord, MultipartFile file) throws Exception;
 }

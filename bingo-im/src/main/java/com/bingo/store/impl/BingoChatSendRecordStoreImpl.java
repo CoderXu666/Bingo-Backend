@@ -39,4 +39,12 @@ public class BingoChatSendRecordStoreImpl extends ServiceImpl<BingoChatSendRecor
     public Boolean saveChatRecord(BingoChatSendRecord record) {
         return this.save(record);
     }
+
+    /**
+     * 修改聊天记录信息
+     */
+    @Override
+    public Boolean updateChatRecord(BingoChatSendRecord record) {
+        return this.updateById(record);
+    }
 }

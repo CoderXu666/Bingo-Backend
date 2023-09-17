@@ -18,4 +18,6 @@ public interface BingoChatSendRecordStore extends IService<BingoChatSendRecord> 
     List<BingoChatSendRecord> getSendRecordList(Long userId, Long goalId);
 
     Boolean saveChatRecord(BingoChatSendRecord record);
+
+    Boolean updateChatRecord(BingoChatSendRecord record);
 }
