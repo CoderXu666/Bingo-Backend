@@ -1,8 +1,7 @@
-package com.bingo.strategy.uploadfile;
+package com.bingo.strategy.upload;
 
 import com.bingo.enums.ResponseEnum;
 import com.bingo.exception.BingoException;
-import com.bingo.strategy.action.AbstractTargetStrategy;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.HashMap;

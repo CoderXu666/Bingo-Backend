@@ -1,4 +1,4 @@
-package com.bingo.strategy.uploadfile;
+package com.bingo.strategy.upload;
 
 import com.bingo.enums.FileEnum;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,10 +18,10 @@ public abstract class AbstractUploadStrategy {
     /**
      * 上传文件
      */
-    public abstract Boolean uploadFile(MultipartFile file);
+    public abstract String uploadFile(MultipartFile file) throws Exception;
 
     /**
      * 移除文件
      */
-    public abstract Boolean removeFile();
+    public abstract Boolean removeFile(String bucketName, String objName);
 }

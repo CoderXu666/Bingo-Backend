@@ -13,7 +13,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum FileEnum {
     AVATAR(1, "头像图片"),
-    AUDIO(2, "语音WAV文件"),
+    VOICE(2, "语音WAV文件"),
     DYNAMIC(3, "社区动态图片"),
     TOPIC(4, "话题图片"),
     COMMENT(5, "评论图片");
