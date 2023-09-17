@@ -87,8 +87,9 @@ public class MinioUtil {
         }
         StringBuffer url = new StringBuffer();
         url.append("http://101.42.13.186:9000/");
-        url.append(bucketName); // bucket名
-        url.append("/" + fileName);
+        url.append(bucketName);
+        url.append("/");
+        url.append(fileName);
         return url.toString();
     }
 

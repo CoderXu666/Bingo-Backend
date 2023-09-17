@@ -4,6 +4,7 @@ import com.bingo.enums.ChatRecordEnum;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @Author: 徐志斌
@@ -26,7 +27,7 @@ public class ChatGiftHandler extends AbstractChatStrategy {
      * 处理礼物逻辑
      */
     @Override
-    public Boolean handleChatRecord(BingoChatSendRecord sendRecord) {
+    public Boolean handleChatRecord(BingoChatSendRecord sendRecord, MultipartFile file) {
         return null;
     }
 }

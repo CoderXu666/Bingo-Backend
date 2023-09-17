@@ -1,6 +1,5 @@
 package com.bingo.strategy.chat;
 
-import com.bingo.config.ThreadPoolConfig;
 import com.bingo.enums.ChatRecordEnum;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
 import com.bingo.pojo.po.im.BingoChatShow;
@@ -8,9 +7,8 @@ import com.bingo.store.BingoChatShowStore;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
@@ -24,9 +22,6 @@ import java.util.Date;
 @Component
 public class ChatFontHandler extends AbstractChatStrategy {
     @Autowired
-    @Qualifier(ThreadPoolConfig.CHAT_POOL_NAME)
-    private ThreadPoolTaskExecutor taskExecutor;
-    @Autowired
     private BingoChatShowStore showStore;
 
     /**
@@ -39,12 +34,9 @@ public class ChatFontHandler extends AbstractChatStrategy {
 
     /**
      * 处理会话窗口，更新未读数量
-     *
-     * @param sendRecord
-     * @return
      */
     @Override
-    public Boolean handleChatRecord(BingoChatSendRecord sendRecord) {
+    public Boolean handleChatRecord(BingoChatSendRecord sendRecord, MultipartFile file) {
         Long uid = sendRecord.getUid();
         Long goalId = sendRecord.getGoalId();
 

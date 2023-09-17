@@ -10,9 +10,9 @@ public class MinioConstant {
     /**
      * Bucket桶
      */
-    public static final String USER_AVATAR_BUCKET = "user-avatar-bucket";
-    public static final String CHAT_VOICE_BUCKET = "chat-voice-bucket";
-    public static final String CHAT_PICTURE_BUCKET = "chat-picture-bucket";
-    public static final String CHAT_VIDEO_BUCKET = "chat-video-bucket";
-    public static final String CHAT_FILE_BUCKET = "chat-file-bucket";
+    public static final String USER_AVATAR_BUCKET = "avatar-bucket";
+    public static final String CHAT_VOICE_BUCKET = "voice-bucket";
+    public static final String CHAT_PICTURE_BUCKET = "picture-bucket";
+    public static final String CHAT_VIDEO_BUCKET = "video-bucket";
+    public static final String CHAT_FILE_BUCKET = "file-bucket";
 }

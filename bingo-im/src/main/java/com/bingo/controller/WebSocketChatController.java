@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class WebSocketChatController {
      */
     @PostMapping("/send_one")
     @RateLimiter(time = 3, count = 6)
-    public R sendChatByUid(@RequestBody ChatRecordDTO msgDTO) throws Exception {
+    public R sendChatByUid(@RequestBody ChatRecordDTO msgDTO, MultipartFile file) throws Exception {
         chatService.sendChatRecord(msgDTO);
         return R.out(ResponseEnum.SUCCESS, null);
     }

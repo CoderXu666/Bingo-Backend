@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @Author 徐志斌
@@ -38,7 +39,7 @@ public class ChatServiceImpl implements ChatService {
      * 发送消息给用户
      */
     @Override
-    public void sendChatRecord(ChatRecordDTO msgDTO) {
+    public void sendChatRecord(ChatRecordDTO msgDTO, MultipartFile file) {
         // 保存聊天记录（保存成功，才算发送成功）
         BingoChatSendRecord sendRecord = ChatRecordAdapter.buildChatRecordPO(msgDTO);
         recordStore.saveChatRecord(sendRecord);
@@ -46,7 +47,7 @@ public class ChatServiceImpl implements ChatService {
         // 根据消息类型获取对应策略类
         taskExecutor.submit(() -> {
             AbstractChatStrategy strategyHandler = StrategyChatFactory.getStrategyHandler(msgDTO.getType());
-            strategyHandler.handleChatRecord(sendRecord);
+            strategyHandler.handleChatRecord(sendRecord, file);
         });
 
         // 通过Channel发送消息

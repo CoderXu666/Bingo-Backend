@@ -2,6 +2,7 @@ package com.bingo.strategy.chat;
 
 import com.bingo.enums.ChatRecordEnum;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 
@@ -31,5 +32,5 @@ public abstract class AbstractChatStrategy {
     /**
      * 保存聊天记录
      */
-    public abstract Boolean handleChatRecord(BingoChatSendRecord sendRecord);
+    public abstract Boolean handleChatRecord(BingoChatSendRecord sendRecord, MultipartFile file);
 }
