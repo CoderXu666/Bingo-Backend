@@ -1,6 +1,5 @@
 package com.bingo.strategy.action;
 
-import com.bingo.enums.ActionEnum;
 import com.bingo.enums.TargetEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

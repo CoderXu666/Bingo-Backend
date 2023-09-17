@@ -13,7 +13,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * @Author: 徐志斌
@@ -49,20 +48,18 @@ public class ChatFontHandler extends AbstractChatStrategy {
         Long uid = sendRecord.getUid();
         Long goalId = sendRecord.getGoalId();
 
-        CompletableFuture.runAsync(() -> {
-            // 处理聊天会话窗口
-            BingoChatShow uRecord = showStore.getOneRecord(uid, goalId);
-            BingoChatShow goalRecord = showStore.getOneRecord(goalId, uid);
-            if (ObjectUtils.isEmpty(uRecord)) {
-                showStore.saveRecord(uid, goalId);
-            } else if (ObjectUtils.isEmpty(goalRecord)) {
-                showStore.saveRecord(goalId, uid);
-            }
-            // 更新未读数量
-            uRecord.setUnreadCount(uRecord.getUnreadCount() + 1);
-            uRecord.setReceiveTime(new Date());
-            showStore.updateRecordById(uRecord);
-        }, taskExecutor);
-        return true;
+        // 处理聊天会话窗口
+        BingoChatShow uRecord = showStore.getOneRecord(uid, goalId);
+        BingoChatShow goalRecord = showStore.getOneRecord(goalId, uid);
+        if (ObjectUtils.isEmpty(uRecord)) {
+            showStore.saveRecord(uid, goalId);
+        } else if (ObjectUtils.isEmpty(goalRecord)) {
+            showStore.saveRecord(goalId, uid);
+        }
+
+        // 更新未读数量
+        uRecord.setUnreadCount(uRecord.getUnreadCount() + 1);
+        uRecord.setReceiveTime(new Date());
+        return showStore.updateRecordById(uRecord);
     }
 }
