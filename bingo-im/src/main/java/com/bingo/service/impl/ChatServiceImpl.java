@@ -7,16 +7,21 @@ import com.bingo.constant.MQConstant;
 import com.bingo.kafka.KafkaProducer;
 import com.bingo.pojo.dto.im.ChatRecordDTO;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
+import com.bingo.pojo.po.im.BingoChatShow;
 import com.bingo.service.ChatService;
 import com.bingo.store.BingoChatSendRecordStore;
+import com.bingo.store.BingoChatShowStore;
 import com.bingo.strategy.chat.AbstractChatStrategy;
 import com.bingo.strategy.chat.StrategyChatFactory;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Date;
 
 /**
  * @Author 徐志斌
@@ -29,6 +34,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class ChatServiceImpl implements ChatService {
     @Autowired
     private BingoChatSendRecordStore recordStore;
+    @Autowired
+    private BingoChatShowStore showStore;
     @Autowired
     private KafkaProducer producer;
     @Autowired
@@ -54,7 +61,29 @@ public class ChatServiceImpl implements ChatService {
             }
         });
 
+        // 处理聊天会话窗口
+        taskExecutor.submit(() -> {
+            this.handleChatShow(msgDTO.getUid(), msgDTO.getGoalId());
+        });
+
         // 通过Channel发送消息
         producer.sendMessage(MQConstant.IM_SEND_TOPIC, JSON.toJSONString(sendRecord));
+    }
+
+    /**
+     * 处理聊天会话窗口（未读数等.....）
+     */
+    public Boolean handleChatShow(Long uid, Long goalId) {
+        BingoChatShow uRecord = showStore.getOneRecord(uid, goalId);
+        BingoChatShow goalRecord = showStore.getOneRecord(goalId, uid);
+        if (ObjectUtils.isEmpty(uRecord)) {
+            showStore.saveRecord(uid, goalId);
+        } else if (ObjectUtils.isEmpty(goalRecord)) {
+            showStore.saveRecord(goalId, uid);
+        }
+        // 更新未读数量
+        uRecord.setUnreadCount(uRecord.getUnreadCount() + 1);
+        uRecord.setReceiveTime(new Date());
+        return showStore.updateRecordById(uRecord);
     }
 }

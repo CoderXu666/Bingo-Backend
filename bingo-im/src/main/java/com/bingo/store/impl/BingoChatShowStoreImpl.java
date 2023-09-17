@@ -38,7 +38,7 @@ public class BingoChatShowStoreImpl extends ServiceImpl<BingoChatShowMapper, Bin
     public BingoChatShow getOneRecord(Long uid, Long goalId) {
         QueryWrapper<BingoChatShow> wrapper = new QueryWrapper<>();
         wrapper.eq("uid", uid);
-        wrapper.eq("goalId", goalId);
+        wrapper.eq("goal_Id", goalId);
         return this.getOne(wrapper);
     }
 

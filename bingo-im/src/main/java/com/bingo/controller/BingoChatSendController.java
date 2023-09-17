@@ -18,7 +18,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/chat")
-public class WebSocketChatController {
+public class BingoChatSendController {
     @Autowired
     private ChatService chatService;
 
