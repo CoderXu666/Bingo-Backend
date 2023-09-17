@@ -22,12 +22,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @Author 徐志斌
  * @Date: 2023/5/28 20:30
  * @Version 1.0
- * @Description: SendServiceImpl
  */
 @Slf4j
 @Service
@@ -47,27 +47,31 @@ public class ChatServiceImpl implements ChatService {
      */
     @Override
     public void sendChatRecord(ChatRecordDTO msgDTO, MultipartFile file) {
-        // 保存聊天记录（保存成功，才算发送成功）
+        // 保存聊天记录
         BingoChatSendRecord sendRecord = ChatRecordAdapter.buildChatRecordPO(msgDTO);
-        recordStore.saveChatRecord(sendRecord);
+        CompletableFuture.runAsync(() -> {
+            recordStore.saveChatRecord(sendRecord);
+        }, taskExecutor);
 
-        // 根据消息类型获取对应策略类
-        taskExecutor.submit(() -> {
+        // 处理聊天会话窗口
+        CompletableFuture.runAsync(() -> {
+            this.handleChatShow(msgDTO.getUid(), msgDTO.getGoalId());
+        }, taskExecutor);
+
+        // 根据消息类型运行对应策略类处理聊天信息
+        CompletableFuture<Void> handlerFuture = CompletableFuture.runAsync(() -> {
             AbstractChatStrategy strategyHandler = StrategyChatFactory.getStrategyHandler(msgDTO.getType());
             try {
                 strategyHandler.handleChatRecord(sendRecord, file);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        });
+        }, taskExecutor);
 
-        // 处理聊天会话窗口
-        taskExecutor.submit(() -> {
-            this.handleChatShow(msgDTO.getUid(), msgDTO.getGoalId());
+        // 通过Channel发送消息（这里等待的目的是：让url获取到）
+        handlerFuture.thenRunAsync(() -> {
+            producer.sendMessage(MQConstant.IM_SEND_TOPIC, JSON.toJSONString(sendRecord));
         });
-
-        // 通过Channel发送消息
-        producer.sendMessage(MQConstant.IM_SEND_TOPIC, JSON.toJSONString(sendRecord));
     }
 
     /**

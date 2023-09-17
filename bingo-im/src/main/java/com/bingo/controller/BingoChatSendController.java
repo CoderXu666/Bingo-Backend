@@ -7,10 +7,7 @@ import com.bingo.pojo.dto.im.ChatRecordDTO;
 import com.bingo.response.R;
 import com.bingo.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
@@ -27,7 +24,7 @@ public class BingoChatSendController {
      */
     @PostMapping("/send_one")
     @RateLimiter(time = 3, count = 6)
-    public R sendChatByUid(@RequestBody ChatRecordDTO msgDTO, MultipartFile file) throws Exception {
+    public R sendChatByUid(@RequestBody ChatRecordDTO msgDTO, @RequestParam("file") MultipartFile file) throws Exception {
         chatService.sendChatRecord(msgDTO, file);
         return R.out(ResponseEnum.SUCCESS, null);
     }

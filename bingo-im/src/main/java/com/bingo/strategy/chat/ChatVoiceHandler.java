@@ -47,6 +47,7 @@ public class ChatVoiceHandler extends AbstractChatStrategy {
         try {
             String fileUrl = minioUtil.upload(file, MinioConstant.CHAT_VOICE_BUCKET);
             sendRecord.setChatContent(fileUrl);
+            // TODO 音频相关数据
             recordStore.updateChatRecord(sendRecord);
         } catch (Exception e) {
             throw new RuntimeException(e);

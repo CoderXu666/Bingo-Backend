@@ -2,9 +2,7 @@ package com.bingo.strategy.chat;
 
 import com.bingo.enums.ChatRecordEnum;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
-import com.bingo.store.BingoChatShowStore;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,9 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @Component
 public class ChatFontHandler extends AbstractChatStrategy {
-    @Autowired
-    private BingoChatShowStore showStore;
-
     /**
      * 当前策略枚举
      */
