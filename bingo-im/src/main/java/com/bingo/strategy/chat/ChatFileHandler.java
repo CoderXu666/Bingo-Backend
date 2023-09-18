@@ -24,7 +24,7 @@ public class ChatFileHandler extends AbstractChatStrategy {
     }
 
     /**
-     * 上传文件
+     * 上传文件：将文件上传到对象存储中
      */
     @Override
     public Boolean handleChatRecord(BingoChatSendRecord sendRecord, MultipartFile file) {

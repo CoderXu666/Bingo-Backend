@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/dynamic")
 public class BingoPostController {
     @Autowired
     private BingoPostService postService;

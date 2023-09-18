@@ -24,7 +24,7 @@ public class ChatFontHandler extends AbstractChatStrategy {
     }
 
     /**
-     * 处理会话窗口，更新未读数量
+     * 处理聊天消息
      */
     @Override
     public Boolean handleChatRecord(BingoChatSendRecord sendRecord, MultipartFile file) {

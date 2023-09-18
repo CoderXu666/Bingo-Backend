@@ -59,7 +59,7 @@ public class ChatServiceImpl implements ChatService {
         }, taskExecutor);
 
         // 根据消息类型运行对应策略类处理聊天信息
-        CompletableFuture<Void> handlerFuture = CompletableFuture.runAsync(() -> {
+        CompletableFuture handlerFuture = CompletableFuture.runAsync(() -> {
             AbstractChatStrategy strategyHandler = StrategyChatFactory.getStrategyHandler(msgDTO.getType());
             try {
                 strategyHandler.handleChatRecord(sendRecord, file);
