@@ -57,6 +57,13 @@
                 <version>${springboot.version}</version>
             </dependency>
 
+            <!--SpringSecurity-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+
             <!--Redisson-->
             <dependency>
                 <groupId>org.redisson</groupId>
