@@ -56,7 +56,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 根据Id查询用户信息
      */
     @Override
-    public UserResp findById(Long uid) throws Exception {
+    public UserResp findById(Long uid) {
         BingoUser userInfo = userStore.findById(uid);
         if (ObjectUtils.isEmpty(userInfo)) {
             throw new BingoException(null);
@@ -124,7 +124,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 修改用户信息
      */
     @Override
-    public Boolean updateUserById(BingoUser user) throws Exception {
+    public Boolean updateUserById(BingoUser user) {
         if (ObjectUtils.isEmpty(user)) {
             throw new BingoException(null);
         }
@@ -199,7 +199,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 3.后端拦截器校验成功那就不做任何操作，校验Token失败就让前端退出登陆状态，返回到首页
      */
     @Override
-    public String login(UserDTO userDTO) throws Exception {
+    public String login(UserDTO userDTO) {
         String accountId = userDTO.getAccountId();
         String passWord = userDTO.getPassWord();
         String captcha = userDTO.getCaptcha();
@@ -237,7 +237,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 发送邮件
      */
     @Override
-    public void sendEmail(String email) throws Exception {
+    public void sendEmail(String email) {
         if (StringUtils.isEmpty(email)) {
             throw new BingoException(null);
         }
@@ -262,7 +262,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 解析Token获取用户信息
      */
     @Override
-    public BingoUser resolveToken(String token) throws Exception {
+    public BingoUser resolveToken(String token) {
         Map<String, Object> map = JWTUtil.resolveToken(token);
         Long uid = (Long) map.get("uid");
         BingoUser userInfo = userStore.findById(uid);
@@ -276,7 +276,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      * 修改用户在线状态（针对IM聊天）
      */
     @Override
-    public Boolean updateOnlineStatus(Long uid, Integer status) throws Exception {
+    public Boolean updateOnlineStatus(Long uid, Integer status) {
         if (ObjectUtils.isEmpty(uid) || ObjectUtils.isEmpty(status)) {
             throw new BingoException(null);
         }

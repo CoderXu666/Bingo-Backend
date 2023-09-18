@@ -61,7 +61,7 @@
     - Feign
     - Sentinel
     - Seata
-- Lombok
+- SpringSecurity + JWT
 - Kafka
 - Netty + WebSocket + WebRTC
 - ElasticSearch + Kibana + LogStash
@@ -75,6 +75,7 @@
     - 适配器模式
     - 策略模式
     - 工厂模式
+    - ......
 
 #### 前端
 
@@ -85,10 +86,10 @@
 - Vue.js
 - ElementUI
 - Axios
-- js-cookie
 - node.js
 - npm
 - iconfont
+- js-cookie
 - js-audio-recorder
 - json-bigint
 

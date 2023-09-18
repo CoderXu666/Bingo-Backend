@@ -6,8 +6,10 @@ import com.bingo.enums.CacheEnum;
 import java.lang.annotation.*;
 
 /**
- * @Author 徐志斌
- * 自定义的SpringCache注解：二级缓存的操作
+ * @Author: 徐志斌
+ * @CreateTime: 2023-06-15  21:07
+ * @Description: 自定义的SpringCache注解：二级缓存的操作
+ * @Version: 1.0
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

@@ -8,7 +8,7 @@ import org.springframework.beans.BeanUtils;
 /**
  * @Author: 徐志斌
  * @CreateTime: 2023-09-11  14:41
- * @Description: 适配器模式：BingoUser
+ * @Description: 适配器模式：用户信息相关
  * @Version: 1.0
  */
 public class UserAdapter {

@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * @Author: 徐志斌
  * @CreateTime: 2023-09-08  16:08
- * @Description: BingoChatShow转换
+ * @Description: 适配器模式：聊天会话相关
  * @Version: 1.0
  */
 public class ChatShowAdapter {
