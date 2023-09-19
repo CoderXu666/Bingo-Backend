@@ -33,26 +33,27 @@
 
 #### 用户管理【bingo-user】
 
-该模块用于用户基本信息，例如：用户信息、礼物权益、账户充值等.....
+该模块用于用户基本信息，例如：用户信息、礼物权益、账户充值、Bingo Show等.....
 
 #### 社区广场【bingo-community】
 
-关于帖子、话题、动态、视频等；用户也可以发布、点赞、评论这类帖子和话题。
+关于动态、话题、视频等；用户也可以发布、点赞、评论这类。
 
 #### 聊天通讯【bingo-im】
 
-好友之间进行实时聊天、语音、视频、斗图等功能
+用户之间进行实时畅聊、语音、视频、斗图等功能，实时高效的IM通讯功能模块。
 
 #### 狂欢派对【bingo-party】
 
-实现多人同时聊天、多人交流、抢麦、直播、游戏等.....
+实现多人房间维度的聊天、交流、抢麦、直播、游戏等功能.....
 
-### 3、技术栈
+### 3、技术选型
 
 #### 后端
 
 - MySQL
-- Redis + Lua
+- Redis
+- Redisson
 - MyBatis-Plus
 - SpringBoot
 - SpringCloud
@@ -62,13 +63,12 @@
     - Sentinel
     - Seata
 - SpringSecurity + JWT
-- Kafka
 - Netty + WebSocket + WebRTC
 - ElasticSearch + Kibana + LogStash
+- MinIO
+- Kafka
 - XXL-JOB
 - ShardingSphere
-- Redisson
-- MinIO
 - ip2region
 - HuTool
 - 设计模式
@@ -113,8 +113,8 @@
 
 ### 4、加入我们
 
-1. 本地项目环境部署启动：
-2. 需求池认领功能：
-3. Fork项目，提交PR：
+1. 本地环境项目启动流程：
+2. 待办需求池功能概览：
+3. Fork贡献流程：
 
 
