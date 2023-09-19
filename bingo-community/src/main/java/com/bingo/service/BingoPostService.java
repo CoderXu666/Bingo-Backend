@@ -1,7 +1,7 @@
 package com.bingo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bingo.pojo.common.PageParam;
+import com.bingo.pojo.PageParam;
 import com.bingo.pojo.dto.community.LikeDTO;
 import com.bingo.pojo.dto.community.PostDTO;
 import com.bingo.pojo.dto.SearchDTO;

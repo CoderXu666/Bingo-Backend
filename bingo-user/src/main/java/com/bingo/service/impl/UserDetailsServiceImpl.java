@@ -1,7 +1,7 @@
 package com.bingo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.bingo.pojo.common.LoginUser;
+import com.bingo.pojo.LoginUser;
 import com.bingo.pojo.po.user.BingoUser;
 import com.bingo.store.BingoUserStore;
 import org.springframework.beans.factory.annotation.Autowired;

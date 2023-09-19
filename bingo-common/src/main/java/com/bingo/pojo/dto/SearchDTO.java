@@ -1,6 +1,6 @@
 package com.bingo.pojo.dto;
 
-import com.bingo.pojo.common.PageParam;
+import com.bingo.pojo.PageParam;
 import lombok.Data;
 
 /**

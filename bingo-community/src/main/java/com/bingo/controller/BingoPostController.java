@@ -1,7 +1,7 @@
 package com.bingo.controller;
 
 import com.bingo.enums.ResponseEnum;
-import com.bingo.pojo.common.PageParam;
+import com.bingo.pojo.PageParam;
 import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.dto.community.LikeDTO;
 import com.bingo.pojo.dto.community.PostDTO;

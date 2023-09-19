@@ -19,7 +19,7 @@ public enum ResponseEnum {
     FAIL(500, "操作失败"),
     NO_ARGS(50, "参数信息不存在，系统出现异常"),
     NO_STRATEGY_HANDLER(50, "Map中不存在当前策略类"),
-    FILE_NOT_EXIST(50, "当前文件不存在"),
+    FILE_NOT_EXIST(50, "当前上传文件不存在"),
 
 
     /**

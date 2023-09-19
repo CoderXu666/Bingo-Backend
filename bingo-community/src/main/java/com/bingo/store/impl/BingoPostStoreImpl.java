@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoPostMapper;
-import com.bingo.pojo.common.PageParam;
+import com.bingo.pojo.PageParam;
 import com.bingo.pojo.po.community.BingoPost;
 import com.bingo.store.BingoPostStore;
 import org.springframework.stereotype.Service;
