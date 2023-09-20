@@ -17,9 +17,6 @@ import java.util.Objects;
  * @Date: 2023/9/18 22:25
  * @Version 1.0
  * @Description: 自定义UserDetailsService实现类
- * -----------------------------------------------------------
- * UserDetailsService需要重新自定义：官方原版本是从缓存中查询，要改造成从DB中查询
- * UserDetails需要自定义实现类进行实现
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

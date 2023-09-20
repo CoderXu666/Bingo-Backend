@@ -5,12 +5,16 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.adapter.UserAdapter;
 import com.bingo.exception.BingoException;
 import com.bingo.mapper.BingoUserMapper;
+import com.bingo.pojo.LoginUser;
 import com.bingo.pojo.dto.user.UserDTO;
 import com.bingo.pojo.po.user.BingoUser;
 import com.bingo.pojo.resp.user.UserResp;
 import com.bingo.service.BingoUserService;
 import com.bingo.store.BingoUserStore;
-import com.bingo.utils.*;
+import com.bingo.utils.CookieUtil;
+import com.bingo.utils.IPUtil;
+import com.bingo.utils.JWTUtil;
+import com.bingo.utils.RandomUtil;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -19,6 +23,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -44,6 +51,8 @@ import java.util.concurrent.TimeUnit;
 public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser> implements BingoUserService {
     @Autowired
     private BingoUserStore userStore;
+    @Autowired
+    private AuthenticationManager authenticationManager;
     @Autowired
     private DefaultKaptcha defaultKaptcha;
     @Resource
@@ -194,9 +203,6 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
 
     /**
      * 登录功能
-     * 1.登录成功后，将token信息保存到客户端的localStorage（使用Cookie也可以）
-     * 2.请求拦截器：将localStorage中的token信息通过存入到请求头中，每次后端请求都通过拦截器校验
-     * 3.后端拦截器校验成功那就不做任何操作，校验Token失败就让前端退出登陆状态，返回到首页
      */
     @Override
     public String login(UserDTO userDTO) {
@@ -206,10 +212,10 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         String captchaKey = userDTO.getCaptchaKey();
 
         // 判断验证码是否正确
-        String captchaVal = (String) redisTemplate.opsForValue().get(captchaKey);
-        if (!captcha.equalsIgnoreCase(captchaVal)) {
-            throw new BingoException(null);
-        }
+//        String captchaVal = (String) redisTemplate.opsForValue().get(captchaKey);
+//        if (!captcha.equalsIgnoreCase(captchaVal)) {
+//            throw new BingoException(null);
+//        }
 
         // 判断用户账号是否存在
         BingoUser userInfo = userStore.findByAccountId(accountId);
@@ -217,12 +223,17 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
             throw new BingoException(null);
         }
 
-        // 判断密码是否正确
-        String encryptPassWord = AESUtil.encrypt(passWord);
-        String dbPassWord = userInfo.getPassWord();
-        if (!encryptPassWord.equals(dbPassWord)) {
-            throw new BingoException(null);
+        // AuthenticationManager进行用户认证
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(accountId, passWord);
+        Authentication authenticate = authenticationManager.authenticate(authenticationToken);
+
+        // 判断是否认证通过
+        if (Objects.isNull(authenticate)) {
+            throw new RuntimeException("登陆失败");
         }
+
+        // 返回值
+        LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
 
         // 生成Token
         Long uid = userInfo.getUid();
