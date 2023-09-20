@@ -3,9 +3,9 @@ package com.bingo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.adapter.UserAdapter;
+import com.bingo.enums.ResponseEnum;
 import com.bingo.exception.BingoException;
 import com.bingo.mapper.BingoUserMapper;
-import com.bingo.pojo.LoginUser;
 import com.bingo.pojo.dto.user.UserDTO;
 import com.bingo.pojo.po.user.BingoUser;
 import com.bingo.pojo.resp.user.UserResp;
@@ -220,26 +220,20 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         // 判断用户账号是否存在
         BingoUser userInfo = userStore.findByAccountId(accountId);
         if (ObjectUtils.isEmpty(userInfo)) {
-            throw new BingoException(null);
+            throw new BingoException(ResponseEnum.USER_NOT_EXIST);
         }
 
-        // AuthenticationManager进行用户认证
+        // 校验账户、密码是否正确（authenticate直接调用loadUserByUsername）
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(accountId, passWord);
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
-
-        // 判断是否认证通过
         if (Objects.isNull(authenticate)) {
-            throw new RuntimeException("登陆失败");
+            throw new BingoException(ResponseEnum.PASSWORD_ERROR);
         }
 
-        // 返回值
-        LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
-
         // 生成Token
-        Long uid = userInfo.getUid();
-        String token = JWTUtil.generateToken(uid);
+        String token = JWTUtil.generateToken(userInfo.getUid());
         if (StringUtils.isEmpty(token)) {
-            throw new BingoException(null);
+            throw new BingoException(ResponseEnum.TOKEN_NOT_EXIST);
         }
         return token;
     }
@@ -250,7 +244,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     @Override
     public void sendEmail(String email) {
         if (StringUtils.isEmpty(email)) {
-            throw new BingoException(null);
+            throw new BingoException(ResponseEnum.NO_ARGS);
         }
 
         // 生成邮箱验证码
