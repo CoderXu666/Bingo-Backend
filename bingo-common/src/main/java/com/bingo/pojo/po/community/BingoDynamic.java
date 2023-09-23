@@ -17,8 +17,8 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("bingo_post")
-public class BingoPost implements Serializable {
+@TableName("bingo_dynamic")
+public class BingoDynamic implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,20 +37,14 @@ public class BingoPost implements Serializable {
     /**
      * 帖子文案
      */
-    @TableField("post_font")
-    private String postFont;
+    @TableField("dynamic_font")
+    private String dynamicFont;
 
     /**
      * 帖子图片/视频链接
      */
-    @TableField("post_url")
-    private String postUrl;
-
-    /**
-     * 关联话题（#坤坤）
-     */
-    @TableField("post_topic")
-    private String postTopic;
+    @TableField("dynamic_url")
+    private String dynamicUrl;
 
     /**
      * 创建时间

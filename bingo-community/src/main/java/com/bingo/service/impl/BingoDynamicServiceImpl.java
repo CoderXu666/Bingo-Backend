@@ -8,18 +8,18 @@ import com.bingo.constant.ESConstant;
 import com.bingo.constant.MQConstant;
 import com.bingo.feign.UserFeign;
 import com.bingo.mq.KafkaProducer;
-import com.bingo.mapper.BingoPostMapper;
+import com.bingo.mapper.BingoDynamicMapper;
 import com.bingo.pojo.PageParam;
 import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.dto.community.LikeDTO;
 import com.bingo.pojo.dto.community.PostDTO;
-import com.bingo.pojo.po.community.BingoPost;
+import com.bingo.pojo.po.community.BingoDynamic;
 import com.bingo.pojo.resp.community.PostPageResp;
 import com.bingo.pojo.resp.community.PostResp;
 import com.bingo.pojo.resp.user.UserResp;
 import com.bingo.response.FeignResponse;
-import com.bingo.service.BingoPostService;
-import com.bingo.store.BingoPostStore;
+import com.bingo.service.BingoDynamicService;
+import com.bingo.store.BingoDynamicStore;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -46,9 +46,9 @@ import java.util.List;
  * @since 2023-05-13
  */
 @Service
-public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost> implements BingoPostService {
+public class BingoDynamicServiceImpl extends ServiceImpl<BingoDynamicMapper, BingoDynamic> implements BingoDynamicService {
     @Autowired
-    private BingoPostStore postStore;
+    private BingoDynamicStore postStore;
     @Autowired
     private KafkaProducer kafkaProducer;
     @Resource
@@ -63,9 +63,9 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
      * 发布帖子
      */
     @Override
-    public Boolean savePost(PostDTO postDTO) {
+    public Boolean saveDynamic(PostDTO postDTO) {
         // 保存 DB
-        BingoPost bingoPost = new BingoPost();
+        BingoDynamic bingoPost = new BingoDynamic();
         BeanUtils.copyProperties(postDTO, bingoPost);
         postStore.savePost(bingoPost);
 
@@ -80,7 +80,7 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
      * 注意：Redis里面没有 Long 类型
      */
     @Override
-    public Boolean likePost(LikeDTO likeDTO) {
+    public Boolean likeDynamic(LikeDTO likeDTO) {
         Long postId = likeDTO.getPostId();
         String likeUserId = likeDTO.getLikeUid();
 
@@ -117,7 +117,7 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
      * 根据关键字 postFont，全文搜索帖子
      */
     @Override
-    public List<PostResp> searchPost(SearchDTO searchDTO) throws IOException {
+    public List<PostResp> searchDynamic(SearchDTO searchDTO) throws IOException {
         List<Long> idList = new ArrayList<>();
         List<PostResp> resultList = new ArrayList<>();
         String content = searchDTO.getContent();
@@ -157,15 +157,15 @@ public class BingoPostServiceImpl extends ServiceImpl<BingoPostMapper, BingoPost
         PostPageResp postPageResp = new PostPageResp();
 
         // 查询帖子表（分页10条）
-        Page<BingoPost> bingoPost = postStore.pagePost(pageParam);
-        List<BingoPost> records = bingoPost.getRecords();
+        Page<BingoDynamic> bingoPost = postStore.pagePost(pageParam);
+        List<BingoDynamic> records = bingoPost.getRecords();
         if (CollectionUtils.isEmpty(records)) {
             return postPageResp;
         }
 
         // 封装账号ID
         List<Long> ids = new ArrayList<>();
-        for (BingoPost post : records) {
+        for (BingoDynamic post : records) {
             ids.add(post.getId());
         }
 

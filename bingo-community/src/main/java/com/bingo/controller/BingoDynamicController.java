@@ -8,7 +8,7 @@ import com.bingo.pojo.dto.community.PostDTO;
 import com.bingo.pojo.resp.community.PostPageResp;
 import com.bingo.pojo.resp.community.PostResp;
 import com.bingo.response.R;
-import com.bingo.service.BingoPostService;
+import com.bingo.service.BingoDynamicService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,16 +30,16 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/dynamic")
-public class BingoPostController {
+public class BingoDynamicController {
     @Autowired
-    private BingoPostService postService;
+    private BingoDynamicService dynamicService;
 
     /**
      * 发布帖子
      */
     @PostMapping("/save")
     public R savePost(@RequestBody PostDTO postDTO) {
-        postService.savePost(postDTO);
+        dynamicService.saveDynamic(postDTO);
         return R.out(ResponseEnum.SUCCESS, null);
     }
 
@@ -48,7 +48,7 @@ public class BingoPostController {
      */
     @PostMapping("/search")
     public R searchPost(@RequestBody SearchDTO searchDTO) throws IOException {
-        List<PostResp> result = postService.searchPost(searchDTO);
+        List<PostResp> result = dynamicService.searchDynamic(searchDTO);
         return R.out(ResponseEnum.SUCCESS, result);
     }
 
@@ -57,7 +57,7 @@ public class BingoPostController {
      */
     @PostMapping("/like")
     public R likePost(@RequestBody LikeDTO likeDTO) {
-        postService.likePost(likeDTO);
+        dynamicService.likeDynamic(likeDTO);
         return R.out(ResponseEnum.SUCCESS, null);
     }
 
@@ -66,7 +66,7 @@ public class BingoPostController {
      */
     @PostMapping("/list")
     public R pagePost(@RequestBody PageParam pageParam) {
-        PostPageResp postPageResp = postService.getList(pageParam);
+        PostPageResp postPageResp = dynamicService.getList(pageParam);
         return R.out(ResponseEnum.SUCCESS, postPageResp);
     }
 }

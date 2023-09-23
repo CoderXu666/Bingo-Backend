@@ -3,10 +3,10 @@ package com.bingo.store.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bingo.mapper.BingoPostMapper;
+import com.bingo.mapper.BingoDynamicMapper;
 import com.bingo.pojo.PageParam;
-import com.bingo.pojo.po.community.BingoPost;
-import com.bingo.store.BingoPostStore;
+import com.bingo.pojo.po.community.BingoDynamic;
+import com.bingo.store.BingoDynamicStore;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,12 +18,12 @@ import org.springframework.stereotype.Service;
  * @since 2023-03-04
  */
 @Service
-public class BingoPostStoreImpl extends ServiceImpl<BingoPostMapper, BingoPost> implements BingoPostStore {
+public class BingoDynamicStoreImpl extends ServiceImpl<BingoDynamicMapper, BingoDynamic> implements BingoDynamicStore {
     /**
      * 保存帖子信息
      */
     @Override
-    public boolean savePost(BingoPost bingoPost) {
+    public boolean saveDynamic(BingoDynamic bingoPost) {
         return this.save(bingoPost);
     }
 
@@ -31,11 +31,11 @@ public class BingoPostStoreImpl extends ServiceImpl<BingoPostMapper, BingoPost> 
      * 展示用户最新的帖子（分页10条）
      */
     @Override
-    public Page<BingoPost> pagePost(PageParam pageParam) {
-        QueryWrapper<BingoPost> queryWrapper = new QueryWrapper();
+    public Page<BingoDynamic> pagePost(PageParam pageParam) {
+        QueryWrapper<BingoDynamic> queryWrapper = new QueryWrapper();
         queryWrapper.orderByDesc("create_time");
-        Page<BingoPost> page = new Page<>(pageParam.getCurrent(), pageParam.getLimit());
-        Page<BingoPost> postPage = this.page(page, queryWrapper);
+        Page<BingoDynamic> page = new Page<>(pageParam.getCurrent(), pageParam.getLimit());
+        Page<BingoDynamic> postPage = this.page(page, queryWrapper);
         return postPage;
     }
 }
