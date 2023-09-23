@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: bingo-chat
   main:
     allow-bean-definition-overriding: true
   cloud:
@@ -18,7 +16,6 @@ spring:
           - data-id: bingo_kafka.yml
           - data-id: bingo_sharding_jdbc.yml
           - data-id: bingo_minio.yml
-#          - data-id: bingo_elasticsearch.yml
 
 mybatis-plus:
   configuration:
