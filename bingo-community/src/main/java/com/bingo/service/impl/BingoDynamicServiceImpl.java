@@ -67,7 +67,7 @@ public class BingoDynamicServiceImpl extends ServiceImpl<BingoDynamicMapper, Bin
         // 保存 DB
         BingoDynamic bingoPost = new BingoDynamic();
         BeanUtils.copyProperties(postDTO, bingoPost);
-        postStore.savePost(bingoPost);
+        postStore.saveDynamic(bingoPost);
 
         // 消息发送MQ，同步ES
         kafkaProducer.sendMessage(MQConstant.COMMUNITY_POST_TOPIC, JSON.toJSONString(bingoPost));

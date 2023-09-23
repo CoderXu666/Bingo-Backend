@@ -3,7 +3,7 @@ package com.bingo.consumer;
 import com.alibaba.fastjson.JSON;
 import com.bingo.constant.ESConstant;
 import com.bingo.constant.MQConstant;
-import com.bingo.pojo.po.community.BingoPost;
+import com.bingo.pojo.po.community.BingoDynamic;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
@@ -32,7 +32,7 @@ public class CommunityConsumer {
     @KafkaListener(topics = MQConstant.COMMUNITY_POST_TOPIC, groupId = MQConstant.COMMUNITY_GROUP_ID)
     public String savePost(String message) {
         try {
-            BingoPost bingoPost = JSON.parseObject(message, BingoPost.class);
+            BingoDynamic bingoPost = JSON.parseObject(message, BingoDynamic.class);
             IndexRequest request = new IndexRequest(ESConstant.POST_INDEX)
                     .id(bingoPost.getId().toString())
                     .source(JSON.toJSONString(bingoPost), XContentType.JSON);
