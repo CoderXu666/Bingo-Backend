@@ -61,20 +61,15 @@
     - Feign
     - Sentinel
     - Seata
-- SpringSecurity + JWT
 - Netty + WebSocket + WebRTC
 - ElasticSearch + Kibana + LogStash
 - MinIO
 - Kafka
 - XXL-JOB
 - ShardingSphere
+- JWT
 - ip2region
 - HuTool
-- 设计模式
-    - 适配器模式
-    - 策略模式
-    - 工厂模式
-    - ......
 
 #### 前端
 

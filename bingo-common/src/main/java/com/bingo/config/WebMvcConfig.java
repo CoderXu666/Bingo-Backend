@@ -21,10 +21,9 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @Description：前后端跨域、拦截器、JSON转换
- * @Author 徐志斌
+ * @Author: 徐志斌
+ * @CreateTime: 2023-08-29  13:43
  * -------------------------------------------------------
- * 注意：
  * 不要携带yml配置文件统一path路径，否则失效（例如：/user/captcha）
  */
 @Configuration

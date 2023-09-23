@@ -23,9 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -53,8 +50,6 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
     private BingoUserStore userStore;
     @Autowired
     private DefaultKaptcha defaultKaptcha;
-    @Autowired
-    private AuthenticationManager authenticationManager;
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
     @Resource
@@ -221,13 +216,6 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         BingoUser userInfo = userStore.findByAccountId(accountId);
         if (ObjectUtils.isEmpty(userInfo)) {
             throw new BingoException(ResponseEnum.USER_NOT_EXIST);
-        }
-
-        // 校验账户、密码是否正确（authenticate直接调用loadUserByUsername）
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(accountId, passWord);
-        Authentication authenticate = authenticationManager.authenticate(authenticationToken);
-        if (Objects.isNull(authenticate)) {
-            throw new BingoException(ResponseEnum.PASSWORD_ERROR);
         }
 
         // 生成Token

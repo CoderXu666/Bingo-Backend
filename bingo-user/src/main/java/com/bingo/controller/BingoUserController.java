@@ -58,10 +58,6 @@ public class BingoUserController {
      * 1.登录成功后，将token信息保存到客户端的localStorage（使用Cookie也可以）
      * 2.请求拦截器：将localStorage中的token信息通过存入到请求头中，每次后端请求都通过拦截器校验
      * 3.后端拦截器校验成功那就不做任何操作，校验Token失败就让前端退出登陆状态，返回到首页
-     * ------------------------------------------------------------------------------
-     * SpringSecurity：
-     * 1.自定义实现 UserDetailsService，否则默认从Spring缓存中获取用户信息
-     * 2.AuthenticationManager进行账号密码校验
      */
     @PostMapping("/login")
     public R login(@RequestBody UserDTO userDTO) throws Exception {
