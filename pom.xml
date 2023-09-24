@@ -24,25 +24,17 @@
 
     <!--依赖版本-->
     <properties>
-        <java.version>1.8</java.version>
-        <lombok.version>1.18.20</lombok.version>
         <springboot.version>2.2.4.RELEASE</springboot.version>
         <sentinel.version>1.8.0</sentinel.version>
         <mybatis.plus.version>3.0.5</mybatis.plus.version>
-        <mysql.version>8.0.16</mysql.version>
-        <redis.version>2.5.4</redis.version>
         <redisson.version>3.16.6</redisson.version>
         <xxl.job.version>2.3.1</xxl.job.version>
-        <spring-kafka.version>2.3.5.RELEASE</spring-kafka.version>
         <elasticsearch.version>7.4.2</elasticsearch.version>
-        <netty.version>4.1.45.Final</netty.version>
         <minio.version>8.0.3</minio.version>
-        <caffeine.version>2.9.3</caffeine.version>
         <hutool.version>5.8.18</hutool.version>
         <ip2region.version>2.6.3</ip2region.version>
         <sharding.version>4.0.0-RC1</sharding.version>
-        <commmons.pool.version>2.7.0</commmons.pool.version>
-        <commmons.io.version>2.6</commmons.io.version>
+        <commons.io.version>2.6</commons.io.version>
         <captcha.version>2.3.2</captcha.version>
         <jwt.version>0.9.1</jwt.version>
         <fastjson.version>1.2.83</fastjson.version>
@@ -94,7 +86,7 @@
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>${commmons.io.version}</version>
+                <version>${commons.io.version}</version>
             </dependency>
 
             <!--MinIO-->
@@ -200,12 +192,12 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
-                <version>${redis.version}</version>
+                <version>${springboot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-pool2</artifactId>
-                <version>${commmons.pool.version}</version>
+                <version>${commons-pool2.version}</version>
             </dependency>
 
             <!--JJWT-->
