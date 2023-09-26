@@ -1,6 +1,7 @@
 package com.bingo.pojo.dto.im;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @Author 徐志斌
@@ -29,4 +30,9 @@ public class ChatRecordDTO {
      * 消息内容
      */
     private String chatContent;
+
+    /**
+     * 文件内容
+     */
+    private MultipartFile file;
 }

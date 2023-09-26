@@ -39,20 +39,14 @@ public class ChatVoiceHandler extends AbstractChatStrategy {
      * 上传音频数据
      */
     @Override
-    public Boolean handleChatRecord(BingoChatSendRecord sendRecord, MultipartFile file) {
+    public Boolean handleChatRecord(BingoChatSendRecord sendRecord, MultipartFile file) throws Exception {
         if (ObjectUtils.isEmpty(file)) {
             throw new BingoException(ResponseEnum.FILE_NOT_EXIST);
         }
         // 上传文件
-        try {
-            String fileUrl = minioUtil.upload(file, MinioConstant.CHAT_VOICE_BUCKET);
-            sendRecord.setChatContent(fileUrl);
-            // TODO 音频相关数据
-            recordStore.updateChatRecord(sendRecord);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        return null;
+        String fileUrl = minioUtil.upload(file, MinioConstant.CHAT_VOICE_BUCKET);
+        sendRecord.setChatContent(fileUrl);
+        // 文件url更新到db
+        return recordStore.updateChatRecord(sendRecord);
     }
 }

@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.concurrent.CompletableFuture;
@@ -46,7 +45,7 @@ public class ChatServiceImpl implements ChatService {
      * 发送消息给用户
      */
     @Override
-    public void sendChatRecord(ChatRecordDTO msgDTO, MultipartFile file) {
+    public void sendChatRecord(ChatRecordDTO msgDTO) {
         // 保存聊天记录
         BingoChatSendRecord sendRecord = ChatRecordAdapter.buildChatRecordPO(msgDTO);
         recordStore.saveChatRecord(sendRecord);
@@ -60,7 +59,7 @@ public class ChatServiceImpl implements ChatService {
         CompletableFuture handlerFuture = CompletableFuture.runAsync(() -> {
             AbstractChatStrategy strategyHandler = StrategyChatFactory.getStrategyHandler(msgDTO.getType());
             try {
-                strategyHandler.handleChatRecord(sendRecord, file);
+                strategyHandler.handleChatRecord(sendRecord, msgDTO.getFile());
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
