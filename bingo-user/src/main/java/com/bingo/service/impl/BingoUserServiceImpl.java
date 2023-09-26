@@ -11,10 +11,7 @@ import com.bingo.pojo.po.user.BingoUser;
 import com.bingo.pojo.resp.user.UserResp;
 import com.bingo.service.BingoUserService;
 import com.bingo.store.BingoUserStore;
-import com.bingo.utils.CookieUtil;
-import com.bingo.utils.IPUtil;
-import com.bingo.utils.JWTUtil;
-import com.bingo.utils.RandomUtil;
+import com.bingo.utils.*;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -218,12 +215,14 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
             throw new BingoException(ResponseEnum.USER_NOT_EXIST);
         }
 
-        // 生成Token
-        String token = JWTUtil.generateToken(userInfo.getUid());
-        if (StringUtils.isEmpty(token)) {
-            throw new BingoException(ResponseEnum.TOKEN_NOT_EXIST);
+        // 判断密码是否正确
+        String encryptPassWord = AESUtil.encrypt(passWord);
+        if (!encryptPassWord.equals(userInfo.getPassWord())) {
+            throw new BingoException(ResponseEnum.PASSWORD_ERROR);
         }
-        return token;
+
+        // 生成Token
+        return JWTUtil.generateToken(userInfo.getUid());
     }
 
     /**

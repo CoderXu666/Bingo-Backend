@@ -27,7 +27,6 @@ public enum ResponseEnum {
      */
     /*---------------------------------USER------------------------------*/
     TOKEN_EXPIRED(5000, "用户Token已失效，请重新登录"),
-    TOKEN_NOT_EXIST(5000, "用户Token信息不存在"),
 
     USER_NOT_EXIST(5000, "未查询到当前用户相关信息"),
     USER_EXIST(5000, "当前账号已存在，换个试试"),

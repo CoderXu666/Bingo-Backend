@@ -49,9 +49,7 @@ public class ChatServiceImpl implements ChatService {
     public void sendChatRecord(ChatRecordDTO msgDTO, MultipartFile file) {
         // 保存聊天记录
         BingoChatSendRecord sendRecord = ChatRecordAdapter.buildChatRecordPO(msgDTO);
-        CompletableFuture.runAsync(() -> {
-            recordStore.saveChatRecord(sendRecord);
-        }, taskExecutor);
+        recordStore.saveChatRecord(sendRecord);
 
         // 处理聊天会话窗口
         CompletableFuture.runAsync(() -> {

@@ -140,16 +140,6 @@
             <artifactId>caffeine</artifactId>
         </dependency>
 
-        <!--SpringCache-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cache</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-        </dependency>
-
         <!--Redis-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
