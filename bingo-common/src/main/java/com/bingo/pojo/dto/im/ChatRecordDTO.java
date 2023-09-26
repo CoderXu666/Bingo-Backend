@@ -30,9 +30,4 @@ public class ChatRecordDTO {
      * 消息内容
      */
     private String chatContent;
-
-    /**
-     * 文件内容
-     */
-    private MultipartFile file;
 }

@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.bingo.adapter.ChatRecordAdapter;
 import com.bingo.config.ThreadPoolConfig;
 import com.bingo.constant.MQConstant;
+import com.bingo.enums.ResponseEnum;
+import com.bingo.exception.BingoException;
 import com.bingo.mq.KafkaProducer;
 import com.bingo.pojo.dto.im.ChatRecordDTO;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
@@ -19,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.concurrent.CompletableFuture;
@@ -45,7 +48,7 @@ public class ChatServiceImpl implements ChatService {
      * 发送消息给用户
      */
     @Override
-    public void sendChatRecord(ChatRecordDTO msgDTO) {
+    public void sendChatRecord(ChatRecordDTO msgDTO, MultipartFile file) {
         // 保存聊天记录
         BingoChatSendRecord sendRecord = ChatRecordAdapter.buildChatRecordPO(msgDTO);
         recordStore.saveChatRecord(sendRecord);
@@ -59,9 +62,9 @@ public class ChatServiceImpl implements ChatService {
         CompletableFuture handlerFuture = CompletableFuture.runAsync(() -> {
             AbstractChatStrategy strategyHandler = StrategyChatFactory.getStrategyHandler(msgDTO.getType());
             try {
-                strategyHandler.handleChatRecord(sendRecord, msgDTO.getFile());
+                strategyHandler.handleChatRecord(sendRecord, file);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                throw new BingoException(ResponseEnum.FAIL);
             }
         }, taskExecutor);
 
@@ -75,6 +78,7 @@ public class ChatServiceImpl implements ChatService {
      * 处理聊天会话窗口（未读数等.....）
      */
     public Boolean handleChatShow(Long uid, Long goalId) {
+        // 会话信息处理
         BingoChatShow uRecord = showStore.getOneRecord(uid, goalId);
         BingoChatShow goalRecord = showStore.getOneRecord(goalId, uid);
         if (ObjectUtils.isEmpty(uRecord)) {
