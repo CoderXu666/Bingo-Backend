@@ -2,7 +2,7 @@ package com.bingo.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.bingo.adapter.ChatRecordAdapter;
-import com.bingo.threadpool.ThreadPoolConfig;
+import com.bingo.threadpool.MyThreadPoolExecutor;
 import com.bingo.constant.MQConstant;
 import com.bingo.enums.ResponseEnum;
 import com.bingo.exception.BingoException;
@@ -41,7 +41,7 @@ public class ChatServiceImpl implements ChatService {
     @Autowired
     private KafkaProducer producer;
     @Autowired
-    @Qualifier(ThreadPoolConfig.CHAT_POOL_NAME)
+    @Qualifier(MyThreadPoolExecutor.CHAT_POOL_NAME)
     private ThreadPoolTaskExecutor taskExecutor;
 
     /**

@@ -32,11 +32,11 @@
 
 #### 用户管理【bingo-user】
 
-该模块用于用户基本信息，例如：用户管理、礼物相关、会员权益、账户充值、Bingo Show等.....
+该模块用于用户基本信息，例如：用户管理、礼物相关、会员权益、账户充值、真人Show等.....
 
 #### 社区广场【bingo-community】
 
-关于动态、话题、视频等；用户也可以发布、点赞、评论这类。
+关于动态、话题、视频等；用户也可以发布、点赞、评论这类。用户发布的作品有机会得到打赏。
 
 #### 聊天通讯【bingo-im】
 
@@ -45,6 +45,10 @@
 #### 狂欢派对【bingo-party】
 
 实现多人房间维度的聊天、交流、抢麦、直播、游戏等功能.....
+
+
+### 3、功能介绍
+
 
 ### 3、技术选型
 
@@ -61,8 +65,8 @@
     - Feign
     - Sentinel
     - Seata
-- Netty + WebSocket + WebRTC
-- ElasticSearch + Kibana + LogStash
+- Netty(WebSocket + WebRTC)
+- ElasticSearch(Kibana + LogStash)
 - MinIO
 - Kafka
 - XXL-JOB
@@ -87,11 +91,10 @@
 #### 运维
 
 - Linux
-- Shell
-- Nginx + LVS + KeepAlive
+- Nginx(LVS + KeepAlived)
 - Maven
 - Jenkins
-- Docker
+- Docker(Dockerfile)
 - SonarQube
 - Harbor
 - Prometheus

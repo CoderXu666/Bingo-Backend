@@ -6,6 +6,7 @@ package com.bingo.constant;
  * @Version 1.0
  * @Description: MQConstant
  */
+@Deprecated
 public class MQConstant {
     /**
      * Topic主题

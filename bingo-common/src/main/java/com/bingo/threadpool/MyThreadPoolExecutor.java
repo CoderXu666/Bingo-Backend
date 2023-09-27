@@ -1,6 +1,5 @@
 package com.bingo.threadpool;
 
-import com.bingo.threadpool.MyThreadFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +24,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 @Slf4j
 @Configuration
-public class ThreadPoolConfig implements AsyncConfigurer {
+public class MyThreadPoolExecutor implements AsyncConfigurer {
     public static final String CHAT_POOL_NAME = "CHAT_POOL_EXECUTOR";
 
     /**

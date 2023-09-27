@@ -6,6 +6,7 @@ package com.bingo.constant;
  * @Description: 对象存储信息常量
  * @Version: 1.0
  */
+@Deprecated
 public class MinioConstant {
     /**
      * Bucket桶

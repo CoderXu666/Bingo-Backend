@@ -6,6 +6,7 @@ package com.bingo.constant;
  * @Version 1.0
  * @Description: ESConstant
  */
+@Deprecated
 public class ESConstant {
     /**
      * ES索引
