@@ -1,6 +1,6 @@
-package com.bingo.factory;
+package com.bingo.threadpool;
 
-import com.bingo.exception.MyUncaughtExceptionHandler;
+import com.bingo.threadpool.MyUncaughtExceptionHandler;
 import lombok.AllArgsConstructor;
 
 import java.util.concurrent.ThreadFactory;

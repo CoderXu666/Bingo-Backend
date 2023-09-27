@@ -69,7 +69,6 @@
 - ShardingSphere
 - JWT
 - ip2region
-- HuTool
 
 #### 前端
 
@@ -82,10 +81,8 @@
 - Axios
 - node.js
 - npm
-- iconfont
 - js-cookie
 - js-audio-recorder
-- json-bigint
 
 #### 运维
 
@@ -99,7 +96,6 @@
 - Harbor
 - Prometheus
 - Grafana
-- Kubernetes（暂不考虑，服务器资源太贵....）
 
 #### 大数据
 

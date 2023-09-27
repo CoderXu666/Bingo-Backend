@@ -1,4 +1,4 @@
-package com.bingo.lock;
+package com.bingo.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Component
-public class DistributedLock {
+public class DistributedLockUtil {
     @Autowired
     private RedissonClient redissonClient;
 
@@ -24,7 +24,7 @@ public class DistributedLock {
      */
     public Boolean lock(String lockKey, Integer second) {
         redissonClient.getLock(lockKey).lock(second, TimeUnit.SECONDS);
-        log.info("------------------------Thread [{}] DistributedLock lock [{}] success--------------------------", Thread.currentThread().getName(), lockKey);
+        log.info("------------------------Thread [{}] DistributedLockUtil lock [{}] success--------------------------", Thread.currentThread().getName(), lockKey);
         return true;
     }
 
@@ -33,7 +33,7 @@ public class DistributedLock {
      */
     public Boolean unlock(String lockKey) {
         redissonClient.getLock(lockKey).unlock();
-        log.info("------------------------Thread [{}] DistributedLock unlock [{}] success------------------------", Thread.currentThread().getName(), lockKey);
+        log.info("------------------------Thread [{}] DistributedLockUtil unlock [{}] success------------------------", Thread.currentThread().getName(), lockKey);
         return true;
     }
 }

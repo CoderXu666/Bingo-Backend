@@ -1,4 +1,4 @@
-package com.bingo.mq;
+package com.bingo.kafka;
 
 import org.apache.kafka.clients.admin.*;
 import org.apache.kafka.common.KafkaFuture;

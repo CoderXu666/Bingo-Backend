@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.constant.ESConstant;
 import com.bingo.constant.MQConstant;
 import com.bingo.feign.UserFeign;
-import com.bingo.mq.KafkaProducer;
+import com.bingo.kafka.KafkaProducer;
 import com.bingo.mapper.BingoDynamicMapper;
 import com.bingo.pojo.PageParam;
 import com.bingo.pojo.dto.SearchDTO;

@@ -2,11 +2,11 @@ package com.bingo.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.bingo.adapter.ChatRecordAdapter;
-import com.bingo.config.ThreadPoolConfig;
+import com.bingo.threadpool.ThreadPoolConfig;
 import com.bingo.constant.MQConstant;
 import com.bingo.enums.ResponseEnum;
 import com.bingo.exception.BingoException;
-import com.bingo.mq.KafkaProducer;
+import com.bingo.kafka.KafkaProducer;
 import com.bingo.pojo.dto.im.ChatRecordDTO;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
 import com.bingo.pojo.po.im.BingoChatShow;

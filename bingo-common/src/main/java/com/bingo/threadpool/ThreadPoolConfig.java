@@ -1,6 +1,6 @@
-package com.bingo.config;
+package com.bingo.threadpool;
 
-import com.bingo.factory.MyThreadFactory;
+import com.bingo.threadpool.MyThreadFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
