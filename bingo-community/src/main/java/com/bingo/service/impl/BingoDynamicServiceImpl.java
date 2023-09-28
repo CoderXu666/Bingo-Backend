@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.bingo.constant.ESConstant;
 import com.bingo.constant.MQConstant;
+import com.bingo.enums.ESEnum;
 import com.bingo.feign.UserFeign;
 import com.bingo.kafka.KafkaProducer;
 import com.bingo.mapper.BingoDynamicMapper;
@@ -125,7 +125,7 @@ public class BingoDynamicServiceImpl extends ServiceImpl<BingoDynamicMapper, Bin
         Integer limit = searchDTO.getLimit();
 
         // 构建查询请求，指定查询索引
-        SearchRequest request = new SearchRequest(ESConstant.POST_INDEX);
+        SearchRequest request = new SearchRequest(ESEnum.DYNAMIC_INDEX.getIndex());
         SearchSourceBuilder builder = new SearchSourceBuilder();
         builder.query(QueryBuilders.matchQuery("postFont", content));
         builder.from(current);

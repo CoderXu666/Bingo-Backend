@@ -36,12 +36,13 @@
 
 #### 社区广场【bingo-community】
 
-关于动态、话题、视频、真人Show等；用户也可以发布、点赞、评论这类。用户发布的作品有机会得到打赏。
+关于动态、话题、视频、真人Show、搜索推荐等
+用户也可以发布、点赞、评论这些玩法。用户发布的作品有机会得到打赏。
 
 #### 聊天通讯【bingo-im】
 
 用户之间进行实时畅聊、语音、视频、斗图等功能，实时高效的IM通讯功能模块。
-支持好友之间添加、打赏、聊天、视频
+支持好友之间申请、建群、打赏、聊天、视频。
 
 #### 狂欢派对【bingo-party】
 
@@ -58,6 +59,7 @@
 - SpringBoot
 - SpringCloud
     - Nacos
+    - Ribbon
     - Gateway
     - Feign
     - Sentinel
@@ -88,7 +90,8 @@
 #### 运维
 
 - Linux
-- Nginx(LVS + KeepAlived)
+- Shell
+- Nginx(LVS + KeepAlive)
 - Maven
 - Jenkins
 - Docker(Dockerfile + DockerCompose)

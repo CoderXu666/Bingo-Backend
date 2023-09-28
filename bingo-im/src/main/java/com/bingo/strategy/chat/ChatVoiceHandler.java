@@ -1,7 +1,7 @@
 package com.bingo.strategy.chat;
 
-import com.bingo.constant.MinioConstant;
 import com.bingo.enums.ChatRecordEnum;
+import com.bingo.enums.MinioEnum;
 import com.bingo.enums.ResponseEnum;
 import com.bingo.exception.BingoException;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
@@ -44,7 +44,7 @@ public class ChatVoiceHandler extends AbstractChatStrategy {
             throw new BingoException(ResponseEnum.FILE_NOT_EXIST);
         }
         // 上传文件
-        String fileUrl = minioUtil.upload(file, MinioConstant.CHAT_VOICE_BUCKET);
+        String fileUrl = minioUtil.upload(file, MinioEnum.CHAT_VOICE_BUCKET.getBucketName());
         sendRecord.setChatContent(fileUrl);
         // 文件url更新到db
         return recordStore.updateChatRecord(sendRecord);

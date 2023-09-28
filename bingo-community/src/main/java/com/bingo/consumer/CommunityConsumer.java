@@ -1,8 +1,8 @@
 package com.bingo.consumer;
 
 import com.alibaba.fastjson.JSON;
-import com.bingo.constant.ESConstant;
 import com.bingo.constant.MQConstant;
+import com.bingo.enums.ESEnum;
 import com.bingo.pojo.po.community.BingoDynamic;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.index.IndexRequest;
@@ -33,7 +33,7 @@ public class CommunityConsumer {
     public String savePost(String message) {
         try {
             BingoDynamic bingoPost = JSON.parseObject(message, BingoDynamic.class);
-            IndexRequest request = new IndexRequest(ESConstant.POST_INDEX)
+            IndexRequest request = new IndexRequest(ESEnum.DYNAMIC_INDEX.getIndex())
                     .id(bingoPost.getId().toString())
                     .source(JSON.toJSONString(bingoPost), XContentType.JSON);
             IndexResponse response = esClient.index(request, RequestOptions.DEFAULT);

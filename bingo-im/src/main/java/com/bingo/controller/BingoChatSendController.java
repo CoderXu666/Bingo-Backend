@@ -1,7 +1,7 @@
 package com.bingo.controller;
 
 import com.bingo.annotation.RateLimiter;
-import com.bingo.constant.MinioConstant;
+import com.bingo.enums.MinioEnum;
 import com.bingo.enums.ResponseEnum;
 import com.bingo.pojo.dto.im.ChatRecordDTO;
 import com.bingo.response.R;
@@ -32,7 +32,7 @@ public class BingoChatSendController {
     // 测试接收语音文件
     @RequestMapping("/test")
     public R test(MultipartFile file) throws Exception {
-        String uploadUrl = minioUtil.upload(file, MinioConstant.CHAT_VOICE_BUCKET);
+        String uploadUrl = minioUtil.upload(file, MinioEnum.CHAT_VOICE_BUCKET.getBucketName());
         return R.out(ResponseEnum.SUCCESS, null);
     }
 }
