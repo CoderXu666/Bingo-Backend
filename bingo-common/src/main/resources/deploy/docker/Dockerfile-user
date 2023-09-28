@@ -5,7 +5,7 @@ FROM openjdk:8
 MAINTAINER 徐志斌
 
 # 镜像指定标签
-LABEL version="Bingo:1.0"
+LABEL version="Bingo:latest"
 
 # 宿主机文件 COPY 镜像
 # 说明：类似COPY，不过COPY不能自动解压文件，不能访问网络资源

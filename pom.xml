@@ -14,6 +14,7 @@
         <version>2.2.4.RELEASE</version>
     </parent>
 
+    <!--项目模块-->
     <modules>
         <module>bingo-common</module>
         <module>bingo-community</module>
@@ -40,6 +41,7 @@
         <fastjson.version>1.2.83</fastjson.version>
     </properties>
 
+    <!--依赖管理-->
     <dependencyManagement>
         <dependencies>
             <!--SpringBoot-->
@@ -110,7 +112,8 @@
                 <version>${caffeine.version}</version>
             </dependency>
 
-            <!--Nacos-->
+            <!--SpringCloud Alibaba-->
+            <!--1.Nacos-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
@@ -121,22 +124,13 @@
                 <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
                 <version>${springboot.version}</version>
             </dependency>
-
-            <!--OpenFeign-->
+            <!--2.Feign-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-openfeign</artifactId>
                 <version>${springboot.version}</version>
             </dependency>
-
-            <!--Netty-->
-            <dependency>
-                <groupId>io.netty</groupId>
-                <artifactId>netty-all</artifactId>
-                <version>${netty.version}</version>
-            </dependency>
-
-            <!--Sentinel-->
+            <!--3.Sentinel-->
             <dependency>
                 <groupId>com.alibaba.csp</groupId>
                 <artifactId>sentinel-core</artifactId>
@@ -151,6 +145,13 @@
                 <groupId>com.alibaba.csp</groupId>
                 <artifactId>sentinel-annotation-aspectj</artifactId>
                 <version>${sentinel.version}</version>
+            </dependency>
+
+            <!--Netty-->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
             </dependency>
 
             <!--XXL-JOB-->

@@ -3,6 +3,7 @@ spring:
     name: bingo-im
   profiles:
     active: dev
+
 server:
   port: 10003
   servlet:
