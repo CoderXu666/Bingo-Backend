@@ -54,7 +54,6 @@
 
 - MySQL
 - Redis
-- Redisson
 - MyBatis-Plus
 - SpringBoot
 - SpringCloud
@@ -69,6 +68,7 @@
 - MinIO
 - Kafka
 - XXL-JOB
+- Redisson
 - ShardingSphere
 - JWT
 - ip2region
@@ -87,11 +87,12 @@
 - js-cookie
 - js-audio-recorder
 
-#### 运维
+#### 运维部署
 
 - Linux
 - Shell
 - Nginx(LVS + KeepAlive)
+- 域名 + SSL证书
 - Maven
 - Jenkins
 - Docker(Dockerfile + DockerCompose)
