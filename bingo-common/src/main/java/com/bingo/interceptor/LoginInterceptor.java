@@ -22,7 +22,7 @@ import java.util.Map;
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
     /**
-     * 请求到达Controller前
+     * 请求到达 Controller 前
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -41,21 +41,13 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         // 检验 Token 可用
         Map<String, Object> map = JWTUtil.resolveToken(token);
-        map.put("ip", IPUtil.getIpAddress(request));
         RequestContextHolder.set(map);
         log.info("-------------------------登录Token校验通过：SUCCESS--------------------------");
         return true;
     }
 
     /**
-     * 调用Controller后，DispatcherServlet 渲染视图之前
-     */
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-    }
-
-    /**
-     * DispatcherServlet 渲染视图后
+     * Controller结束后
      */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
