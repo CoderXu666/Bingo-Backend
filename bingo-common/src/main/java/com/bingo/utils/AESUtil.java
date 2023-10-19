@@ -31,7 +31,7 @@ public class AESUtil {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding"); // "算法/模式/补码方式"
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
             byte[] encrypted = cipher.doFinal(sSrc.getBytes("utf-8"));
-            return new org.apache.tomcat.util.codec.binary.Base64().encodeToString(encrypted); // 此处使用BASE64做转码功能，同时能起到2次加密的作用。
+            return new Base64().encodeToString(encrypted); // 此处使用BASE64做转码功能，同时能起到2次加密的作用。
         } catch (Exception e) {
             log.error("===============AES加密失败：{}===============", e.getMessage());
             return null;
@@ -57,11 +57,11 @@ public class AESUtil {
                 String originalString = new String(original, "utf-8");
                 return originalString;
             } catch (Exception e) {
-                System.out.println(e.toString());
+                log.error("===============AES解密失败：{}===============", e.getMessage());
                 return null;
             }
         } catch (Exception e) {
-            log.error("AES解密失败：{}", e.getMessage());
+            log.error("=====================AES解密失败：{}======================", e.getMessage());
             return null;
         }
     }
