@@ -222,7 +222,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
         }
 
         // 生成Token
-        return JWTUtil.generateToken(userInfo.getUid());
+        return JwtUtil.generateToken(userInfo.getUid());
     }
 
     /**
@@ -255,7 +255,7 @@ public class BingoUserServiceImpl extends ServiceImpl<BingoUserMapper, BingoUser
      */
     @Override
     public BingoUser resolveToken(String token) {
-        Map<String, Object> map = JWTUtil.resolveToken(token);
+        Map<String, Object> map = JwtUtil.resolveToken(token);
         Long uid = (Long) map.get("uid");
         BingoUser userInfo = userStore.findById(uid);
         if (ObjectUtils.isEmpty(userInfo)) {

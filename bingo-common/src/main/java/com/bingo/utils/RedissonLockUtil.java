@@ -31,6 +31,8 @@ public class RedissonLockUtil {
                     Thread.currentThread().getName(), lockKey);
             return true;
         } catch (Exception e) {
+            log.error("=================Redisson获取失败！线程：[{}]，lockKey：[{}]================",
+                    Thread.currentThread().getName(), lockKey);
             return false;
         }
     }
@@ -46,6 +48,8 @@ public class RedissonLockUtil {
                     Thread.currentThread().getName(), lockKey);
             return true;
         } catch (Exception e) {
+            log.error("=================Redisson释放锁失败！线程：[{}]，lockKey：[{}]================",
+                    Thread.currentThread().getName(), lockKey);
             return false;
         }
     }

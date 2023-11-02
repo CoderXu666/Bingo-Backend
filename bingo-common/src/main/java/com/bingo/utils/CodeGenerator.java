@@ -1,12 +1,16 @@
 package com.bingo.utils;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+
+import java.util.Arrays;
 
 /**
  * @Author 徐志斌
@@ -59,6 +63,11 @@ public class CodeGenerator {
         strategyConfig.setControllerMappingHyphenStyle(false);
         strategyConfig.setLogicDeleteFieldName("deleted");
         strategyConfig.setEntityLombokModel(true);
+        // 自动填充
+        TableFill field1 = new TableFill("create_time", FieldFill.INSERT);
+        TableFill field2 = new TableFill("update_time", FieldFill.UPDATE);
+        TableFill field3 = new TableFill("deleted", FieldFill.INSERT);
+        strategyConfig.setTableFillList(Arrays.asList(field1, field2, field3));
         autoGenerator.setStrategy(strategyConfig);
         autoGenerator.execute();
     }

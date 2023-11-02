@@ -1,12 +1,10 @@
 package com.bingo.interceptor;
 
-import com.bingo.context.RequestContextHolder;
-import com.bingo.utils.IPUtil;
-import com.bingo.utils.JWTUtil;
+import com.bingo.utils.RequestContextUtil;
+import com.bingo.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,15 +32,14 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         // 校验 Token 不可用
         String token = request.getHeader("token");
-        if (!JWTUtil.checkToken(token)) {
+        if (!JwtUtil.checkToken(token)) {
             log.info("-------------------------登录Token已过期：FAIL-------------------------");
             return false;
         }
 
         // 检验 Token 可用
-        Map<String, Object> map = JWTUtil.resolveToken(token);
-        RequestContextHolder.set(map);
-        log.info("-------------------------登录Token校验通过：SUCCESS--------------------------");
+        Map<String, Object> map = JwtUtil.resolveToken(token);
+        RequestContextUtil.set(map);
         return true;
     }
 
@@ -50,7 +47,7 @@ public class LoginInterceptor implements HandlerInterceptor {
      * Controller结束后
      */
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        RequestContextHolder.remove();
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+        RequestContextUtil.remove();
     }
 }

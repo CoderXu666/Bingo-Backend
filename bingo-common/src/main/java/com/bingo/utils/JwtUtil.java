@@ -14,9 +14,9 @@ import java.util.Map;
  * @Author 徐志斌
  * @Date: 2023/5/8 21:46
  * @Version 1.0
- * @Description: JWTUtil
+ * @Description: JwtUtil
  */
-public class JWTUtil {
+public class JwtUtil {
     public static final long EXPIRE = 86400000;
     public static final String JWT_SECRET = "Bingo_XuZhiBin_666";
 
