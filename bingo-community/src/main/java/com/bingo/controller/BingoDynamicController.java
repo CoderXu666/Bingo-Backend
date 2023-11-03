@@ -1,7 +1,7 @@
 package com.bingo.controller;
 
 import com.bingo.enums.ResponseEnum;
-import com.bingo.pojo.PageParam;
+import com.bingo.pojo.dto.PageDTO;
 import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.dto.community.LikeDTO;
 import com.bingo.pojo.dto.community.PostDTO;
@@ -65,7 +65,7 @@ public class BingoDynamicController {
      * 展示用户最新的帖子（分页10条）
      */
     @PostMapping("/list")
-    public R pagePost(@RequestBody PageParam pageParam) {
+    public R pagePost(@RequestBody PageDTO pageParam) {
         PostPageResp postPageResp = dynamicService.getList(pageParam);
         return R.out(ResponseEnum.SUCCESS, postPageResp);
     }

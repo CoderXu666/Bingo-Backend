@@ -1,4 +1,4 @@
-package com.bingo.pojo;
+package com.bingo.pojo.dto;
 
 import lombok.Data;
 
@@ -6,10 +6,10 @@ import lombok.Data;
  * @Author 徐志斌
  * @Date: 2023/6/4 20:24
  * @Version 1.0
- * @Description: PageParam
+ * @Description: PageDTO
  */
 @Data
-public class PageParam {
+public class PageDTO {
     /**
      * 起始页
      */

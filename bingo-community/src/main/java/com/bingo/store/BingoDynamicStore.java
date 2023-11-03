@@ -2,7 +2,7 @@ package com.bingo.store;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bingo.pojo.PageParam;
+import com.bingo.pojo.dto.PageDTO;
 import com.bingo.pojo.po.community.BingoDynamic;
 
 /**
@@ -17,5 +17,5 @@ public interface BingoDynamicStore extends IService<BingoDynamic> {
 
     boolean saveDynamic(BingoDynamic bingoPost);
 
-    Page<BingoDynamic> pagePost(PageParam pageParam);
+    Page<BingoDynamic> pagePost(PageDTO pageParam);
 }

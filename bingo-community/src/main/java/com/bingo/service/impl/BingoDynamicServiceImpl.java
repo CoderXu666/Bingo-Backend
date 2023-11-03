@@ -9,7 +9,7 @@ import com.bingo.enums.ESEnum;
 import com.bingo.feign.UserFeign;
 import com.bingo.kafka.KafkaProducer;
 import com.bingo.mapper.BingoDynamicMapper;
-import com.bingo.pojo.PageParam;
+import com.bingo.pojo.dto.PageDTO;
 import com.bingo.pojo.dto.SearchDTO;
 import com.bingo.pojo.dto.community.LikeDTO;
 import com.bingo.pojo.dto.community.PostDTO;
@@ -153,7 +153,7 @@ public class BingoDynamicServiceImpl extends ServiceImpl<BingoDynamicMapper, Bin
      * 展示用户最新的帖子（分页10条）
      */
     @Override
-    public PostPageResp getList(PageParam pageParam) {
+    public PostPageResp getList(PageDTO pageParam) {
         PostPageResp postPageResp = new PostPageResp();
 
         // 查询帖子表（分页10条）

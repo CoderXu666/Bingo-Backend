@@ -1,6 +1,5 @@
 package com.bingo.pojo.dto;
 
-import com.bingo.pojo.PageParam;
 import lombok.Data;
 
 /**
@@ -10,7 +9,7 @@ import lombok.Data;
  * @Description: SearchDTO
  */
 @Data
-public class SearchDTO extends PageParam {
+public class SearchDTO extends PageDTO {
     /**
      * 内容类型
      */

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bingo.mapper.BingoDynamicMapper;
-import com.bingo.pojo.PageParam;
+import com.bingo.pojo.dto.PageDTO;
 import com.bingo.pojo.po.community.BingoDynamic;
 import com.bingo.store.BingoDynamicStore;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class BingoDynamicStoreImpl extends ServiceImpl<BingoDynamicMapper, Bingo
      * 展示用户最新的帖子（分页10条）
      */
     @Override
-    public Page<BingoDynamic> pagePost(PageParam pageParam) {
+    public Page<BingoDynamic> pagePost(PageDTO pageParam) {
         QueryWrapper<BingoDynamic> queryWrapper = new QueryWrapper();
         queryWrapper.orderByDesc("create_time");
         Page<BingoDynamic> page = new Page<>(pageParam.getCurrent(), pageParam.getLimit());

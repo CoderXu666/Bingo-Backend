@@ -1,7 +1,7 @@
 package com.bingo.interceptor;
 
-import com.bingo.utils.RequestContextUtil;
 import com.bingo.utils.JwtUtil;
+import com.bingo.utils.RequestContextUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -23,7 +23,7 @@ public class LoginInterceptor implements HandlerInterceptor {
      * 请求到达 Controller 前
      */
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         // POST请求的 OPTIONS 预请求直接通过
         if (request.getMethod().equals("OPTIONS")) {
             response.setStatus(HttpServletResponse.SC_OK);
