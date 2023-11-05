@@ -1,8 +1,6 @@
 spring:
   main:
-    # 允许覆盖数据源
     allow-bean-definition-overriding: true
-  # 配置文件上传大小限制
   servlet:
     multipart:
       max-file-size: 100MB

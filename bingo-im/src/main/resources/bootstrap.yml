@@ -7,4 +7,4 @@ spring:
 server:
   port: 10003
   servlet:
-    context-path: /im
+    context-path: /api

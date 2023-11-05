@@ -7,4 +7,4 @@ spring:
 server:
   port: 10002
   servlet:
-    context-path: /community
+    context-path: /api

@@ -28,8 +28,8 @@ import java.util.List;
  * @since 2023-03-01
  */
 @Slf4j
-@RestController
-public class BingoUserController {
+@RestController("/user")
+public class UserController {
     @Autowired
     private BingoUserService userService;
 
