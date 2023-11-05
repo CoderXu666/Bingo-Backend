@@ -5,7 +5,7 @@ import com.bingo.annotation.RateLimiter;
 import com.bingo.enums.ResponseEnum;
 import com.bingo.pojo.dto.user.UserDTO;
 import com.bingo.pojo.po.user.BingoUser;
-import com.bingo.pojo.resp.user.UserResp;
+import com.bingo.pojo.vo.user.UserResp;
 import com.bingo.response.R;
 import com.bingo.service.BingoUserService;
 import lombok.extern.slf4j.Slf4j;

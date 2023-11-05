@@ -1,12 +1,11 @@
-package com.bingo.pojo.resp.community;
+package com.bingo.pojo.vo.community;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class PostPageResp {
-
+public class BingoTopicResp {
     /**
      * 用户id
      */
@@ -23,34 +22,34 @@ public class PostPageResp {
     private String userName;
 
     /**
-     * 帖子文案
+     * 话题内容
      */
-    private String postFont;
+    private String topicContent;
 
     /**
-     * 帖子图片/视频链接
+     * 话题图片
      */
-    private String postUrl;
+    private String topicPicture;
 
     /**
-     * 关联话题（#坤坤）
+     * 话题标签
      */
-    private String postTopic;
+    private String topicTag;
 
     /**
-     * 点赞数
+     * 话题点赞数
      */
-    private Long likeCount;
+    private Integer likeCount;
 
     /**
-     * 评论数
+     * 话题转发数
      */
-    private Long commentCount;
+    private Integer forwardCount;
 
     /**
-     * 转发数
+     * 话题评论数
      */
-    private Long forwardCount;
+    private Integer commentCount;
 
     /**
      * 创建时间
