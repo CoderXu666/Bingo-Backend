@@ -4,7 +4,7 @@ package com.bingo.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bingo.pojo.dto.community.TopicDTO;
 import com.bingo.pojo.po.community.BingoTopic;
-import com.bingo.pojo.resp.community.BingoTopicResp;
+import com.bingo.pojo.vo.community.BingoTopicResp;
 
 /**
  * <p>

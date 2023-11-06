@@ -37,8 +37,8 @@ public class BingoUserApplication implements CommandLineRunner {
     public void run(String... args) {
         String applicationName = environment.getProperty("spring.application.name");
         String serverPort = environment.getProperty("server.port");
-        log.info("----------------------------开发者平台服务名称：{}---------------", applicationName);
-        log.info("----------------------------开发者平台服务端口：{}-----------------------", serverPort);
-        log.info("----------------------------开发者平台服务【海外】启动成功......-----------------------");
+        log.info("----------------------------【Bingo】用户服务名称：{}---------------", applicationName);
+        log.info("----------------------------【Bingo】用户服务端口：{}-----------------------", serverPort);
+        log.info("----------------------------【Bingo】用户服务启动成功......-----------------------");
     }
 }

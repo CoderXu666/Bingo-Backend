@@ -8,7 +8,7 @@ import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoFollowRecordMapper;
 import com.bingo.pojo.po.community.BingoFollowLog;
 import com.bingo.pojo.po.community.BingoFollowRecord;
-import com.bingo.pojo.resp.user.UserResp;
+import com.bingo.pojo.vo.user.UserResp;
 import com.bingo.service.BingoFollowRecordService;
 import com.bingo.store.BingoFollowLogStore;
 import com.bingo.store.BingoFollowRecordStore;

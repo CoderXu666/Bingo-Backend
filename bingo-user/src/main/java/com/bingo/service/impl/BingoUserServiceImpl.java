@@ -8,7 +8,7 @@ import com.bingo.exception.BingoException;
 import com.bingo.mapper.BingoUserMapper;
 import com.bingo.pojo.dto.user.UserDTO;
 import com.bingo.pojo.po.user.BingoUser;
-import com.bingo.pojo.resp.user.UserResp;
+import com.bingo.pojo.vo.user.UserResp;
 import com.bingo.service.BingoUserService;
 import com.bingo.store.BingoUserStore;
 import com.bingo.utils.*;

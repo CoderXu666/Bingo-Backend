@@ -9,7 +9,7 @@ import com.bingo.feign.UserFeign;
 import com.bingo.mapper.BingoChatShowMapper;
 import com.bingo.pojo.po.im.BingoChatSendRecord;
 import com.bingo.pojo.po.im.BingoChatShow;
-import com.bingo.pojo.resp.user.UserResp;
+import com.bingo.pojo.vo.user.UserResp;
 import com.bingo.service.BingoChatShowService;
 import com.bingo.store.BingoChatSendRecordStore;
 import com.bingo.store.BingoChatShowStore;
