@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -50,13 +50,13 @@ public class BingoDynamic implements Serializable {
      * 创建时间
      */
     @TableField("create_time")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
      * 修改时间
      */
     @TableField("update_time")
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     /**
      * 删除标识（0未删除、1已删除）

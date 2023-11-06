@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -58,7 +58,7 @@ public class BingoChatShow implements Serializable {
      * 最新接收时间（显示排序）
      */
     @TableField("receive_time")
-    private Date receiveTime;
+    private LocalDateTime receiveTime;
 
     /**
      * 删除标识
