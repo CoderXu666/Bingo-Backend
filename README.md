@@ -47,6 +47,7 @@
 #### 狂欢派对【bingo-party】
 
 实现多人房间维度的聊天、交流、抢麦、直播、游戏等功能.....
+![img.png](bingo-common/src/main/resources/img/img.png)
 
 ### 3、技术选型
 
@@ -72,6 +73,7 @@
 - ShardingSphere
 - JWT
 - ip2region
+- 高德地图SDK
 
 #### 前端
 
@@ -112,8 +114,9 @@
 3. Fork贡献流程：
 
 ### 5、TODO
+
 1. 模块进一步拆分
-2. 技术栈整体升级
+2. 技术栈整体版本升级
 3. IM语音功能开发
 4. 参数校验抽取DTO
 5. Store层查询优雅优化
