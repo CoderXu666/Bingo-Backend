@@ -63,7 +63,6 @@ public class CodeGenerator {
         strategyConfig.setControllerMappingHyphenStyle(false);
         strategyConfig.setLogicDeleteFieldName("deleted");
         strategyConfig.setEntityLombokModel(true);
-        // 自动填充
         TableFill field1 = new TableFill("create_time", FieldFill.INSERT);
         TableFill field2 = new TableFill("update_time", FieldFill.UPDATE);
         TableFill field3 = new TableFill("deleted", FieldFill.INSERT);

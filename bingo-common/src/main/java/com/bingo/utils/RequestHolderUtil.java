@@ -8,7 +8,7 @@ import java.util.Map;
  * @Description: 请求全局上下文
  * @Version: 1.0
  */
-public class RequestContextUtil {
+public class RequestHolderUtil {
     private static final ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<>();
 
     /**

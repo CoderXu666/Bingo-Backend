@@ -88,7 +88,6 @@ public class ChatServiceImpl implements ChatService {
         }
         // 更新未读数量
         uRecord.setUnreadCount(uRecord.getUnreadCount() + 1);
-        uRecord.setReceiveTime(new Date());
         return showStore.updateRecordById(uRecord);
     }
 }

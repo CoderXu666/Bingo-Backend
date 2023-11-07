@@ -1,7 +1,7 @@
 package com.bingo.interceptor;
 
 import com.bingo.utils.JwtUtil;
-import com.bingo.utils.RequestContextUtil;
+import com.bingo.utils.RequestHolderUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -39,7 +39,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         // 检验 Token 可用
         Map<String, Object> map = JwtUtil.resolveToken(token);
-        RequestContextUtil.set(map);
+        RequestHolderUtil.set(map);
         return true;
     }
 
@@ -48,6 +48,6 @@ public class LoginInterceptor implements HandlerInterceptor {
      */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        RequestContextUtil.remove();
+        RequestHolderUtil.remove();
     }
 }

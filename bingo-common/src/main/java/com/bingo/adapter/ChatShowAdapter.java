@@ -2,8 +2,6 @@ package com.bingo.adapter;
 
 import com.bingo.pojo.po.im.BingoChatShow;
 
-import java.util.Date;
-
 /**
  * @Author: 徐志斌
  * @CreateTime: 2023-09-08  16:08
@@ -17,7 +15,6 @@ public class ChatShowAdapter {
                 .goalId(goalId)
                 .chatType(0)
                 .unreadCount(0)
-                .receiveTime(new Date())
                 .build();
     }
 }
