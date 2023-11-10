@@ -11,7 +11,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.4.RELEASE</version>
+        <version>2.7.9</version>
     </parent>
 
     <!--项目模块-->
@@ -25,7 +25,7 @@
 
     <!--依赖版本-->
     <properties>
-        <springboot.version>2.2.4.RELEASE</springboot.version>
+        <springboot.version>2.7.9</springboot.version>
         <sentinel.version>1.8.0</sentinel.version>
         <mybatis.plus.version>3.0.5</mybatis.plus.version>
         <redisson.version>3.16.6</redisson.version>
@@ -48,7 +48,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
-                <version>${springboot.version}</version>
+                <version>2.7.9</version>
             </dependency>
 
             <!--Redisson-->
@@ -76,7 +76,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-mail</artifactId>
-                <version>${springboot.version}</version>
+                <version>2.7.9</version>
             </dependency>
 
             <!--ip2region-->
@@ -113,39 +113,39 @@
             </dependency>
 
             <!--SpringCloud Alibaba-->
-            <!--1.Nacos-->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-                <version>${springboot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-                <version>${springboot.version}</version>
-            </dependency>
-            <!--2.Feign-->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-openfeign</artifactId>
-                <version>${springboot.version}</version>
-            </dependency>
-            <!--3.Sentinel-->
-            <dependency>
-                <groupId>com.alibaba.csp</groupId>
-                <artifactId>sentinel-core</artifactId>
-                <version>${sentinel.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.csp</groupId>
-                <artifactId>sentinel-transport-simple-http</artifactId>
-                <version>${sentinel.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.csp</groupId>
-                <artifactId>sentinel-annotation-aspectj</artifactId>
-                <version>${sentinel.version}</version>
-            </dependency>
+<!--            &lt;!&ndash;1.Nacos&ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>com.alibaba.cloud</groupId>-->
+<!--                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
+<!--                <version>3.0.0</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>com.alibaba.cloud</groupId>-->
+<!--                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
+<!--                <version>3.0.0</version>-->
+<!--            </dependency>-->
+<!--            &lt;!&ndash;2.Feign&ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.cloud</groupId>-->
+<!--                <artifactId>spring-cloud-starter-openfeign</artifactId>-->
+<!--                <version>3.0.0</version>-->
+<!--            </dependency>-->
+<!--            &lt;!&ndash;3.Sentinel&ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>com.alibaba.csp</groupId>-->
+<!--                <artifactId>sentinel-core</artifactId>-->
+<!--                <version>${sentinel.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>com.alibaba.csp</groupId>-->
+<!--                <artifactId>sentinel-transport-simple-http</artifactId>-->
+<!--                <version>${sentinel.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>com.alibaba.csp</groupId>-->
+<!--                <artifactId>sentinel-annotation-aspectj</artifactId>-->
+<!--                <version>${sentinel.version}</version>-->
+<!--            </dependency>-->
 
             <!--Netty-->
             <dependency>
@@ -193,7 +193,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
-                <version>${springboot.version}</version>
+                <version>2.7.9</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>

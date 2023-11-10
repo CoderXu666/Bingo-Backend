@@ -7,8 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.core.env.Environment;
 
 import java.util.TimeZone;
@@ -20,8 +18,8 @@ import java.util.TimeZone;
  */
 @Slf4j
 @EnableCaching
-@EnableFeignClients
-@EnableDiscoveryClient
+//@EnableFeignClients
+//@EnableDiscoveryClient
 @MapperScan("com.bingo.mapper")
 @SpringBootApplication
 public class BingoUserApplication implements CommandLineRunner {
